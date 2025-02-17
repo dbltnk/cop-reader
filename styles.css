@@ -1,0 +1,299 @@
+/* Custom styles for EU AI Act Code of Practice */
+
+/* Base styles */
+.glossary-term {
+    cursor: help;
+    border-bottom: 1px dotted #666;
+    font-style: italic;
+    text-decoration: none;
+    color: inherit;
+}
+
+.glossary-ref {
+    font-size: 0.7em;
+    vertical-align: super;
+    color: #666;
+    margin-left: 2px;
+}
+
+/* Tooltip styles */
+.glossary-tooltip {
+    position: absolute;
+    z-index: 1000;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1rem;
+    width: 300px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    font-size: 0.9em;
+    line-height: 1.4;
+    transition: opacity 0.2s ease;
+}
+
+.glossary-tooltip-header {
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.glossary-tooltip-term {
+    font-weight: 600;
+    margin: 0;
+}
+
+.glossary-tooltip-content {
+    margin-top: 0.5rem;
+}
+
+@media (min-width: 1024px) {
+    .glossary-tooltip {
+        position: fixed;
+        right: 0;
+        width: 350px;
+        margin-right: 1rem;
+    }
+}
+
+.glossary-tooltip.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Glossary list numbering */
+.glossary-list {
+    counter-reset: glossary-counter;
+}
+
+.glossary-list dt {
+    counter-increment: glossary-counter;
+}
+
+.glossary-list dt::before {
+    content: counter(glossary-counter) ". ";
+    font-weight: normal;
+    color: #666;
+}
+
+/* Box styles */
+.legal-text,
+.info-box,
+.explanatory-box,
+.disclaimer-box {
+    margin: 3rem auto;
+    padding: 1.5rem;
+    border-radius: 4px;
+    max-width: 800px;
+    width: 90%;
+}
+
+.disclaimer-box {
+    background-color: #fff3e0;
+    border-left: 4px solid #f57c00;
+}
+
+.disclaimer-box p {
+    margin: 0 0 1rem 0;
+    line-height: 1.5;
+}
+
+.disclaimer-box strong {
+    color: #d32f2f;
+}
+
+.disclaimer-box ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.disclaimer-box li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.disclaimer-box a {
+    color: #0277bd;
+    text-decoration: none;
+}
+
+.disclaimer-box a:hover {
+    text-decoration: underline;
+}
+
+.disclaimer-box footer {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.legal-text {
+    background-color: #f8f9fa;
+    border-left: 4px solid #495057;
+}
+
+.info-box {
+    background-color: #e7f5ff;
+    border-left: 4px solid #1971c2;
+}
+
+.explanatory-box {
+    background-color: #fff9db;
+    border-left: 4px solid #f59f00;
+}
+
+/* Box headers */
+.legal-text h4,
+.info-box h4,
+.explanatory-box h4,
+.disclaimer-box h4 {
+    margin-top: 0;
+    font-weight: 600;
+}
+
+/* Lists */
+.kpi-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.kpi-list li {
+    margin-bottom: 1rem;
+}
+
+.kpi-target {
+    color: #666;
+    font-style: italic;
+}
+
+.whereas-list {
+    list-style: lower-alpha;
+    padding-left: 2rem;
+}
+
+/* Glossary styles */
+.glossary {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #ddd;
+}
+
+.glossary h2 {
+    margin-bottom: 2rem;
+}
+
+.glossary-list {
+    list-style: none;
+    padding: 0;
+}
+
+.glossary-list dt {
+    font-weight: 600;
+    margin-top: 1.5rem;
+}
+
+.glossary-list dd {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    color: #555;
+}
+
+.glossary-anchor {
+    text-decoration: none;
+    color: inherit;
+}
+
+.glossary-anchor:hover {
+    text-decoration: underline;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+    }
+
+    h1,
+    h2,
+    h3 {
+        color: #ffffff;
+    }
+
+    .sidenote,
+    .marginnote {
+        color: #b0b0b0;
+    }
+
+    /* Dark mode box styles */
+    .disclaimer-box {
+        background-color: #2a2510;
+        border-left-color: #b35900;
+    }
+
+    .disclaimer-box footer {
+        color: #999;
+    }
+
+    .legal-text {
+        background-color: #2a2a2a;
+        border-left-color: #666;
+    }
+
+    .info-box {
+        background-color: #1a2a3a;
+        border-left-color: #2b5a8f;
+    }
+
+    .explanatory-box {
+        background-color: #2a2a1a;
+        border-left-color: #8f7a2b;
+    }
+
+    /* Dark mode text */
+    .kpi-target {
+        color: #999;
+    }
+
+    /* Dark mode glossary */
+    .glossary {
+        border-top-color: #333;
+    }
+
+    .glossary-list dd {
+        color: #aaa;
+    }
+
+    .glossary-tooltip {
+        background: #2a2a2a;
+        border-color: #444;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .glossary-ref {
+        color: #999;
+    }
+
+    .glossary-tooltip-header {
+        border-bottom-color: #333;
+    }
+
+    .glossary-tooltip-link {
+        color: #999;
+    }
+
+    .glossary-tooltip-link:hover {
+        color: #ccc;
+    }
+
+    .glossary-list dt::before {
+        color: #999;
+    }
+
+    .disclaimer-box strong {
+        color: #ff5252;
+    }
+
+    .disclaimer-box a {
+        color: #4fc3f7;
+    }
+}
