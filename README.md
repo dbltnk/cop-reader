@@ -14,12 +14,12 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [x] Convert the official PDF to HTML
 - [x] Find a good default template for accessible text rendering 
 - [x] Client-side scipting for accessibility and usability features (below)
-- [ ] Host static site on GitHub pages
+- [x] Host static site on GitHub pages
 - [ ] Human and automated QA to prevent any differences to the official PDF
 - [x] Proper credit for https://github.com/edwardtufte/tufte-css/blob/gh-pages/LICENSE
 
 ## Features:
-- [~] Disclaimer & contribution guide
+- [x] Disclaimer & contribution guide
 - [~] Responsive on any device from mobile phones to wide screen monitors
 - [~] Amazing text rendering that is a pleasure to read
 - [x] Table of contents in a side bar left (desktop) or menu (mobile)

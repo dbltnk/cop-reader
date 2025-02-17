@@ -98,8 +98,8 @@
 }
 
 .disclaimer-box {
-    background-color: #fff3e0;
-    border-left: 4px solid #f57c00;
+    background-color: #ffebee;
+    border-left: 4px solid #d32f2f;
 }
 
 .disclaimer-box p {
@@ -402,8 +402,8 @@ body.dark-mode h5:hover {
 
     /* Dark mode box styles */
     .disclaimer-box {
-        background-color: #2a2510;
-        border-left-color: #b35900;
+        background-color: #2a1a1a;
+        border-left-color: #d32f2f;
     }
 
     .disclaimer-box footer {
@@ -1290,8 +1290,8 @@ body.light-mode .explanatory-box {
 }
 
 body.light-mode .disclaimer-box {
-    background-color: #fff3e0;
-    border-left: 4px solid #f57c00;
+    background-color: #ffebee;
+    border-left: 4px solid #d32f2f;
 }
 
 body.light-mode .disclaimer-box strong {
