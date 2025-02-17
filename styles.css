@@ -563,7 +563,7 @@ article {
     position: fixed;
     right: 0;
     top: 0;
-    width: 300px;
+    width: 375px;
     height: 100vh;
     background: #fff;
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
@@ -623,7 +623,7 @@ article {
     }
 
     article {
-        margin-right: 300px;
+        margin-right: 375px;
     }
 
     .nav-toggle {
@@ -638,7 +638,7 @@ article {
     }
 
     .side-nav {
-        width: min(300px, 85vw);
+        width: min(375px, 90vw);
     }
 }
 
@@ -647,6 +647,7 @@ article {
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+    font-size: 0.9rem;
 }
 
 .nav-content::-webkit-scrollbar {
@@ -663,14 +664,7 @@ article {
 }
 
 .nav-content h3 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    position: sticky;
-    top: 0;
-    background: #fff;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #eee;
-    z-index: 1;
+    display: none;
 }
 
 .nav-content ul {
@@ -680,23 +674,45 @@ article {
 }
 
 .nav-content ul ul {
-    padding-left: 1.5rem;
-    margin-bottom: 0.5rem;
+    padding-left: 0.8rem;
+    margin-bottom: 0.2rem;
 }
 
 .nav-content li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
+    line-height: 1.2;
 }
 
 .nav-content a {
     color: inherit;
     text-decoration: none;
     display: block;
-    padding: 0.3rem 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    font-size: 0.9rem;
 }
 
 .nav-content a:hover {
     text-decoration: underline;
+}
+
+/* Adjust nested items to be slightly smaller but still accessible */
+.nav-content ul ul a {
+    min-height: 36px;
+    padding-left: 0.8rem;
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 760px) {
+    .nav-content a {
+        min-height: 44px;
+    }
+
+    .nav-content ul ul a {
+        min-height: 44px;
+    }
 }
 
 /* Dark mode navigation */
@@ -753,7 +769,7 @@ article {
     background: #fff;
     font-size: 0.9rem;
     height: 2rem;
-    flex: 1;
+    flex: 0.67;
 }
 
 .close-nav {
@@ -853,6 +869,14 @@ body.dark-mode .theme-control select {
         height: 2.8rem;
         font-size: 1.2rem;
     }
+
+    .nav-content a {
+        padding: 0.5rem 0;
+    }
+
+    .nav-content li {
+        margin-bottom: 0.3rem;
+    }
 }
 
 /* Ultra-wide screen optimizations */
@@ -861,7 +885,7 @@ body.dark-mode .theme-control select {
         width: 87.5%;
         max-width: 1400px;
         margin: 0 auto;
-        margin-right: 350px;
+        margin-right: 425px;
     }
 
     .glossary h2,
