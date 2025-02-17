@@ -29,89 +29,45 @@ document.addEventListener('DOMContentLoaded', () => {
         const navList = document.createElement('ul');
         const mainContent = document.querySelector('.main-content');
 
-        // Get all main headlines (h2) and create navigation items for them
-        const mainHeadings = mainContent.querySelectorAll('h2');
-        mainHeadings.forEach(heading => {
+        // Get all headings H2-H4
+        const headings = mainContent.querySelectorAll('h2, h3, h4');
+        let currentH2List = null;
+        let currentH3List = null;
+
+        headings.forEach(heading => {
             // Skip if heading is inside a box
             if (heading.closest('.info-box, .kpi-box, .explanatory-box, .legal-text, .disclaimer-box')) {
                 return;
             }
 
-            // Skip TRANSPARENCY and COPYRIGHT headlines
             const headingText = heading.textContent.trim();
-            if (headingText === 'TRANSPARENCY' || headingText === 'COPYRIGHT') {
-                return;
-            }
-
             const headingId = headingText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
             heading.id = headingId;
 
-            const li = document.createElement('li');
             const link = document.createElement('a');
             link.href = `#${headingId}`;
             link.textContent = headingText;
+
+            const li = document.createElement('li');
             li.appendChild(link);
 
-            // If this is a section that might contain Commitments/Measures, prepare for sub-items
-            if (headingText.includes('COMMITMENTS')) {
+            // Add to appropriate level of navigation
+            if (heading.tagName === 'H2') {
                 const subList = document.createElement('ul');
                 li.appendChild(subList);
+                currentH2List = subList;
+                currentH3List = null;
+                navList.appendChild(li);
+            } else if (heading.tagName === 'H3' && currentH2List) {
+                const subList = document.createElement('ul');
+                li.appendChild(subList);
+                currentH3List = subList;
+                currentH2List.appendChild(li);
+            } else if (heading.tagName === 'H4' && currentH3List) {
+                currentH3List.appendChild(li);
             }
 
-            navList.appendChild(li);
             observer.observe(heading);
-        });
-
-        // Add Commitments and Measures as sub-items
-        const headings = mainContent.querySelectorAll('h2, h3, h4');
-        let currentCommitmentList = null;
-
-        headings.forEach(heading => {
-            // Skip headings inside boxes and KPI sections
-            if (heading.closest('.info-box, .kpi-box, .explanatory-box, .legal-text, .disclaimer-box')) {
-                return;
-            }
-
-            // Skip KPI sections and other unwanted headers
-            if (heading.textContent.toLowerCase().includes('kpi') ||
-                heading.textContent.toLowerCase().includes('performance indicator') ||
-                heading.textContent.toLowerCase().includes('whereas')) {
-                return;
-            }
-
-            const headingText = heading.textContent.trim();
-
-            // Only process Commitments and Measures
-            if (headingText.startsWith('Commitment') || headingText.startsWith('Measure')) {
-                const headingId = headingText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-                heading.id = headingId;
-                const link = document.createElement('a');
-                link.href = `#${headingId}`;
-                link.textContent = headingText;
-
-                if (headingText.startsWith('Commitment')) {
-                    // Find the parent COMMITMENTS section's list
-                    const commitmentsSection = navList.querySelector('li a[href="#ii-commitments-by-providers-of-general-purpose-ai-models"]');
-                    if (commitmentsSection) {
-                        let subList = commitmentsSection.nextElementSibling;
-                        if (!subList || !subList.tagName === 'UL') {
-                            subList = document.createElement('ul');
-                            commitmentsSection.parentElement.appendChild(subList);
-                        }
-                        currentCommitmentList = document.createElement('ul');
-                        const li = document.createElement('li');
-                        li.appendChild(link);
-                        li.appendChild(currentCommitmentList);
-                        subList.appendChild(li);
-                    }
-                } else if (headingText.startsWith('Measure') && currentCommitmentList) {
-                    const measureLi = document.createElement('li');
-                    measureLi.appendChild(link);
-                    currentCommitmentList.appendChild(measureLi);
-                }
-
-                observer.observe(heading);
-            }
         });
 
         // Add Glossary link if it exists
