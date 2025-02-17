@@ -1394,7 +1394,370 @@
                     deployment decisions.</p>
             </div>
 
-            <h3>Commitment 6. Risk Identification</h3>
+            <h3>Commitment 6. Risk assessment and mitigation along the model lifecycle</h3>
+            <p>To fulfil their obligations under Article 55(1) AI Act, Signatories commit to assessing and mitigating
+                systemic risks during the entire lifecycle of their general-purpose AI model with systemic risk and to
+                performing a risk management process (risk identification, analysis, evaluation, and potentially
+                mitigation as well as assessment of residual risk) at the key points of the model lifecycle listed
+                below. At different stages of the model lifecycle, the risk management process may involve different
+                risk assessment methods and different mitigations, as specified below.</p>
+
+            <p>In order to satisfy Commitment 6:</p>
+
+            <h4>Measure 6.1. Before training</h4>
+            <p>Potentially during the design and prototyping phases, but at the latest before starting a final training
+                run for a general-purpose AI model with systemic risk, Signatories commit to assessing and potentially
+                mitigating systemic risks with a focus on preparation, forecasting and security mitigations. In
+                particular, Signatories commit to having developed and prepared the implementation of a Framework before
+                starting a final training run. Signatories commit to ensuring model evaluators (internal and external,
+                where appropriate as per Measure 16.1) are ready for timely and rigorous model evaluations (this
+                includes model evaluations having been designed and tested, and model evaluators having been informed of
+                any upcoming model evaluations so that they are able to undertake these model evaluations in time).</p>
+
+            <h4>Measure 6.2. During training</h4>
+            <p>During training and post-training enhancements (e.g. fine-tuning, reinforcement learning, or similar
+                methods, but only when done by the model provider themselves or on their behalf), Signatories commit to
+                assessing and potentially mitigating systemic risks at pre-defined milestones at which the model could
+                potentially become significantly more capable (for example, this could be every two- to four-fold
+                increase in effective compute and may be coarser in early training and more common towards later stages
+                of training). Signatories commit to collecting additional evidence before crossing the next milestones,
+                if previous risk assessment results suggest the model is approaching high tiers of risk and might cross
+                them before the next milestone.</p>
+
+            <h4>Measure 6.3. Before deployment</h4>
+            <p>Before deploying a general-purpose AI model with systemic risk (internally or externally), Signatories
+                commit to assessing and potentially mitigating systemic risks, with a focus on model evaluations and
+                safety mitigations. They commit to ensuring collected evidence has been reviewed as appropriate (see
+                Commitments 14—16) and is fully documented as part of a Model Report (cf. Commitment 5).</p>
+
+            <h4>Measure 6.4. During deployment</h4>
+            <p>During the deployment of a general-purpose AI model with systemic risk (internally and externally),
+                Signatories commit to periodically assessing and potentially mitigating systemic risks, to account for
+                data drift, advancements in the science of model evaluations, insights from incidents, as well as
+                post-market monitoring and additional information gained.</p>
+
+            <p>Signatories commit to doing so at pre-defined milestones, at least every six months, or earlier if they
+                perceive a major change of (internal and/or external) circumstances (such as, for example, serious
+                incidents from this model or similar models) or have major reasons to doubt the validity of previous
+                risk assessment results (for example, they discover a flaw in a model evaluation that might have led to
+                significantly different results that would have led to the Signatory making different mitigation,
+                development or deployment decisions), as well as major breakthroughs in the science of model
+                evaluations.</p>
+
+            <div class="kpi-box">
+                <h5>Potential Key Performance Indicators</h5>
+                <ul class="kpi-list">
+                    <li><span class="kpi-target">KPI 6.4.1:</span> Percentage of evaluations re-run at a 6-monthly
+                        frequency, which are relevant for the highest risk tier (target: 100%).</li>
+                    <li><span class="kpi-target">KPI 6.4.2:</span> Percentage of evaluations re-run at a 6-month
+                        frequency, which are relevant for lower risk tiers (target: 50%).</li>
+                </ul>
+            </div>
+
+            <h4>Measure 6.5. After retirement</h4>
+            <p>Signatories may cease to assess and mitigate systemic risks for general-purpose AI models with systemic
+                risk which are retired (i.e. no longer made available on the market). However, Signatories commit to
+                upholding the security mitigations put in place for general-purpose AI models (see Commitment 12) if
+                they are still classified as general-purpose AI models with systemic risk under the AI Act. Signatories
+                that are providers of open-source models commit to continuing to use appropriate post-deployment
+                monitoring methods.</p>
+
+            <div class="explanatory-box">
+                <h4>Explanation of changes to Commitment 6 (Risk management throughout the model lifecycle)</h4>
+                <p>This section introduces key changes aimed at ensuring that evaluations and mitigations occur when
+                    necessary and as defined in other parts of the Code, especially clearly specifying milestones beyond
+                    the generic "continuous". We also made sure to not require additional documentation creation and
+                    updates when not necessary. We also added a Measure to better specify what happens after a model is
+                    retired.</p>
+            </div>
+
+            <h2>RISK ASSESSMENT FOR PROVIDERS OF GENERAL-PURPOSE AI MODELS WITH SYSTEMIC RISK</h2>
+            <p>Risk assessment here refers to the process of risk identification, risk analysis, and risk evaluation. It
+                will be conducted systematically, iteratively, and collaboratively, drawing on the knowledge and views
+                of multiple experts and stakeholders, and it may look different for different types of systemic risks.
+                It will use the best available information and rigorous techniques, supplemented by further enquiry as
+                necessary.</p>
+
+            <h3>Commitment 7. Risk identification</h3>
+            <p>In order to fulfil their obligations under Article 55(1) AI Act, Signatories commit to identifying
+                systemic risks from their general-purpose AI models with systemic risk. For this purpose, they commit to
+                including the selected systemic risks from Section 3.2 as well as to referring to and using the
+                considerations in Section 3.1 as a (non-exhaustive) basis on which to include additional systemic risks.
+            </p>
+
+            <p>Signatories are encouraged to use additional criteria for identification, and to consider other risks.
+                For this purpose, they are invited to draw from the additional risks in Section 3.3 and to include
+                external experts and relevant stakeholders (e.g. civil society, academia and governments) in the
+                process, with a best-effort to engage a diverse range of voices.</p>
+
+            <p>Signatories commit to developing risk tiers (see Measure 4.2) for each identified risk and to using the
+                identified systemic risks in their risk analysis.</p>
+
+            <h3>Commitment 8. Risk analysis</h3>
+            <p>In order to fulfil their obligations under Article 55(1) AI Act, Signatories commit to carrying out a
+                rigorous analysis of the systemic risks identified.</p>
+
+            <p>In order to satisfy Commitment 8:</p>
+
+            <h4>Measure 8.1. Methodologies</h4>
+            <p>Signatories will use rigorous risk analysis methodologies such as risk modelling (also known as threat
+                modelling) (a) to identify the pathways (series of interconnected events, conditions, or factors that
+                lead to the manifestation of risks) by which the development and deployment of their general-purpose AI
+                model with systemic risk could produce the systemic risks identified, and (b) identify the sources of
+                such risk. For this purpose, Signatories may consider the sources of risk in Section 3.4, including
+                model capabilities, model propensities, model affordances, and deployment context.</p>
+
+            <p>Risk analysis may be undertaken with varying degrees of detail and complexity, depending on the risk that
+                may be posed by the relevant general-purpose AI model with systemic risk. Analysis techniques may be
+                qualitative, quantitative, or a combination of these, depending on the circumstances and intended use.
+                Such analysis techniques will be state-of-the-art, such as by drawing from existing standards, in
+                particular European harmonized standards, or recognised best practices in risk management provided that
+                those methodologies are aligned with the definitions, logic, and regulatory objectives of the AI Act.
+            </p>
+
+            <h4>Measure 8.2. Risk Estimation</h4>
+            <p>Signatories commit to estimating the level of risk for the systemic risks identified in Commitment 7.
+                Risk estimation techniques will be rigorous, and can be quantitative as well as qualitative, as
+                appropriate (e.g. depending on the systemic risk). Examples of such techniques will be drawn from
+                existing standards or recognised best practices in risk management which are aligned with the
+                definitions, logic, and regulatory objectives of the AI Act. Risk estimation techniques will include but
+                not be limited to those expressed in Commitment 10. Risk estimates will build on evidence gained from
+                serious incident reporting (Commitment 17) and monitoring (e.g. post-deployment monitoring as detailed
+                in Measure 10.12).</p>
+
+            <h3>Commitment 9. Risk evaluation</h3>
+            <p>In order to fulfil their obligations under Article 55(1) AI Act, Signatories commit to comparing the
+                results of risk analysis (Commitment 8) to the pre-defined risk tiers (Measure 4.2) to assess the level
+                of risk. At a minimum, this will entail assessing whether the level of risk is acceptable. This will
+                also include an assessment of the residual risk posed by the model, after mitigations have been applied.
+            </p>
+
+            <div class="explanatory-box">
+                <h4>Explanation of changes to Commitments 7—9 (Risk identification, analysis and evaluation)</h4>
+                <p>Our primary goal for this draft was to ensure that the Measures align closely with existing standards
+                    in risk management. At the same time, we aim to avoid prescribing an overly fixed process that is
+                    not suitable for the unique challenges presented by general-purpose AI models with systemic risk.
+                    Providers have full flexibility in adapting to changes in best practices as those become available.
+                    This was written in conjunction with Measure 4.2 (Risk tiers) to ensure that the risk analysis can
+                    very concretely inform both the depth of model evaluations, as well as allowing and supporting
+                    informed decision-making on mitigations.</p>
+            </div>
+
+            <h3>Commitment 10. Evidence collection</h3>
+            <p>In order to fulfil their obligations under Article 55(1) AI Act, Signatories commit to conducting a
+                thorough process of evidence collection on the specific systemic risks presented by their
+                general-purpose AI models with systemic risk during the full lifecycle of the development and deployment
+                of their general-purpose AI models with systemic risk, at least at the stages outlined in Commitment 6.
+            </p>
+
+            <p>Signatories commit to making use of a range of methods including model-independent evidence and
+                state-of-the-art evaluations to investigate risks, model capabilities, model propensities, model
+                affordances, as well as the deployment context and effects of their models.</p>
+
+            <p>The depth of evidence collection will be proportional to the tier of risk being assessed and to the
+                uncertainty about how much risk a given model adds. Signatories may start evidence collection for a risk
+                with less resource-intensive methods (e.g. literature reviews or running open benchmarks) and follow-up
+                with more thorough evaluations (e.g. agentic evaluations or uplift studies) to focus their evidence
+                collection efforts according to their risk priorities.</p>
+
+            <p>Signatories are encouraged to use existing knowledge about the behaviour of similar models to reduce the
+                depth of model evaluation needed. Similar models are models where the combination of model architecture,
+                training process, training data size and quality, training compute used, modalities, capabilities
+                (measured by general performance benchmarks), their integration into scaffolding, and their deployment
+                context, as well as their safety mitigations, all match so closely that the majority of AI safety
+                researchers would expect these models to have a very similar risk profile. If in doubt, this can be
+                verified by querying the AI Office.</p>
+
+            <p>In order to satisfy Commitment 10:</p>
+
+            <h4>Measure 10.1. Model-independent evidence</h4>
+            <p>Where applicable to their general-purpose AI models with systemic risk, Signatories commit to collecting
+                model-independent evidence (i.e. evidence that can be collected without having access to a specific
+                model) which is relevant to the systemic risks presented by their model. This will be done using the
+                most appropriate methods for each risk, considering, for example: literature reviews; market analyses
+                (i.e. the capabilities of other released models); historical incident data; forecasting of general
+                trends (for example algorithmic efficiency, compute use, data availability, and energy use); as well as
+                participatory methods investigating, for example, the effects of general-purpose AI models with systemic
+                risk on natural persons located in the EU, including vulnerable groups.</p>
+
+            <div class="kpi-box">
+                <h5>Potential Key Performance Indicator</h5>
+                <ul class="kpi-list">
+                    <li><span class="kpi-target">KPI 10.1.1:</span> Average number of model-independent forms of
+                        evidence for the highest risk tier used in a Model Report (target: 2).</li>
+                </ul>
+            </div>
+
+            <h4>Measure 10.2. State-of-the-art model evaluations</h4>
+            <p>Signatories commit to ensuring that state-of-the-art model evaluations are run to adequately assess
+                systemic risks and the capabilities and limitations of their general-purpose AI models with systemic
+                risk, using a range of suitable methodologies (for example Q&A sets, benchmarks, red-teaming and other
+                methods of adversarial testing, human uplift studies, model organisms, simulations, and proxy
+                evaluations for classified materials).</p>
+
+            <p>State-of-the-art here means model evaluation methods which would be accepted by the majority of AI safety
+                researchers to be amongst the best indicators of a model's capabilities, propensities or effects, taking
+                into account the best of both internally available as well as externally documented and reproduceable
+                methods. While SME Signatories are encouraged to focus on making use of existing methods (i.e. running
+                open-source evaluations), non-SME Signatories commit to actively striving to also improve on publicly
+                available methods.</p>
+
+            <p>Methods that are not state-of-the-art include, for example, saturated benchmarks, or any methods listed
+                by the AI Office as not having high enough scientific rigour (see Measure 10.3). Signatories commit to
+                periodically (at least every 6 months) reviewing the effectiveness of their model evaluations and
+                updating or deprecating model evaluations that have been shown to not be effective or state-of-the-art
+                anymore, aiming to focus their efforts on high-signal model evaluations.</p>
+
+            <p>Such model evaluations will be run at the most appropriate times for each risk during the lifecycle of a
+                general-purpose AI model with systemic risk (at minimum at the stages outlined in Commitment 6), by
+                evaluators (internal and/or external) suitable for the relevant risk. Each model evaluation will target
+                at least one relevant risk and take into account the pathways to harm and model capabilities,
+                propensities or effects it is providing evidence for, making those testable and quantifiable, using
+                relevant scenarios and appropriate environments for the model evaluation.</p>
+
+            <div class="kpi-box">
+                <h5>Potential Key Performance Indicators</h5>
+                <ul class="kpi-list">
+                    <li><span class="kpi-target">KPI 10.3.1:</span> Percentage of model evaluations used as evidence in
+                        a Model Report which show high internal and external validity (target: 75%).</li>
+                    <li><span class="kpi-target">KPI 10.3.2:</span> Percentage of model evaluations used as evidence for
+                        highest risk tier in a Model Report which have been reproduced (target: 50%).</li>
+                    <li><span class="kpi-target">KPI 10.3.3:</span> Percentage of model evaluations used as evidence in
+                        a Model Report which are fully portable (target for non-SMEs: 25%, target for SMEs: 0%).</li>
+                    <li><span class="kpi-target">KPI 10.3.4:</span> Percentage of model evaluations used as evidence in
+                        a Model Report where uncertainty is reported (target: 100%).</li>
+                </ul>
+            </div>
+
+            <h4>Measure 10.4. Model elicitation</h4>
+            <p>Signatories commit to ensuring that evaluations of general-purpose AI models with systemic risk are being
+                run with a state-of-the-art level of model elicitation, to appropriately elicit the capabilities,
+                propensities and effects of a model under evaluation, minimise the risk of under-estimation, and match
+                the realistic elicitation capabilities of potential misuse actors. This could include, for example,
+                fine-tuning, prompt engineering, scaffolding (including tool use), using logits access, the ability to
+                disable safeguards, or the use of base models or helpful-only models.</p>
+
+            <p>A state-of-the-art level of model elicitation is assumed when the combination of elicitation techniques
+                used matches the best-known combination of techniques for the evaluated model, or comparable models,
+                taking into account the best of both internally used, as well as externally documented and reproduceable
+                techniques. Signatories commit to striving to use methods that minimise the risk of strategic model
+                underperformance on an evaluation (i.e. sandbagging or strategic deception).</p>
+
+            <p>This requires providing evaluators with adequate compute budgets, to allow for long enough evaluation
+                runs, parallel execution, re-runs, as well as appropriate staffing and engineering budgets to inspect
+                results closely to, for example, identify software bugs or model refusals which might lead to
+                artificially lowered estimates. For the most severe risks identified, Signatories commit to roughly
+                matching the elicitation efforts spent on their leading non-safety research projects. They may
+                proportionally reduce these efforts for lower levels of risk.</p>
+
+            <p>In addition, Signatories commit to ensuring that elicitation methods with an increased risk profile (e.g.
+                they make models better at harmful capabilities or increase harmful propensities) are matched with
+                increased security measures (see Measure 12.2), to prevent proliferation risks or harmful actions by the
+                elicited model.</p>
+
+            <div class="kpi-box">
+                <h5>Potential Key Performance Indicators</h5>
+                <ul class="kpi-list">
+                    <li><span class="kpi-target">KPI 10.4.1:</span> Average percentage of engineering hours spent on
+                        model elicitation for model evaluations used as evidence for the highest risk tiers as compared
+                        to the largest internal non-safety project (target: 75%).</li>
+                    <li><span class="kpi-target">KPI 10.4.2:</span> Average percentage of engineering hours spent on
+                        model elicitation for model evaluations used as evidence for lower risk tiers as compared to the
+                        largest internal non-safety project (target: 33%).</li>
+                </ul>
+            </div>
+
+            <h4>Measure 10.5. Models as part of systems</h4>
+            <p>Signatories commit to ensuring that model evaluations can assess the capabilities and limitations of a
+                general-purpose AI model with systemic risk when integrated into an AI system. Signatories planning to
+                use or integrate a general-purpose AI model with systemic risk into an AI system themselves will ensure
+                that their model evaluations consider this future deployment situation, when relevant to the risk being
+                assessed, and evaluate the model accordingly (for example by evaluating it using the same kind of
+                scaffolding or tooling). If the deployment environment changes in a major way from what was originally
+                used for assessment, they will take this into account and trigger a (partial or complete) model
+                re-evaluation as defined in Measure 6.3.</p>
+
+            <p>Where Signatories do not use or integrate the general-purpose AI model in any AI system themselves (for
+                example, through sole open-source release or sole B2B licensing), they will enforce their licensing
+                terms to ensure that the licensee evaluates the model within an AI system representative of the AI
+                system which they plan to use or deploy it in. This evaluation will be conducted to the same standard of
+                rigour that the Signatory is applying to this model, particularly when assessing the highest risk tiers
+                and considering the resources of the licensee. Signatories may provide licensees with the required
+                scientific information and tooling needed for this model evaluation (see Measures 10.3 and 10.8).</p>
+
+            <h4>Measure 10.6. Representative model evaluations & generalisation</h4>
+            <p>Signatories commit to ensuring that model evaluations match the expected usage context of a model. For
+                example, language-based evaluations of multilingual models may focus not only on English but will take
+                into account major European languages (or other languages the model is claimed to support), as much as
+                this is relevant to the risk being assessed (some risks are based on capabilities that might be best
+                evaluated in English, i.e. those based on programming capabilities). Signatories commit to doing so not
+                just for text but for all modalities supported by a model. For other modalities, representation might be
+                measured in different categories than languages (e.g. image representations).</p>
+
+            <p>To facilitate this, Signatories are encouraged to make use of participatory methods involving expert or
+                lay representatives of civil society, academia, and other relevant stakeholders, where this is
+                appropriate for the risk being assessed. Where relevant stakeholders (e.g. those who are affected) are
+                not available, Signatories commit to aiming to identify the best representatives who can represent their
+                interests and consult them in the evidence gathering processes.</p>
+
+            <h4>Measure 10.7. Exploratory work</h4>
+            <p>Signatories commit to ensuring that exploratory work, appropriate to the size of their organisation and
+                the risk being assessed, is done on their general-purpose AI models with systemic risk, such as
+                exploratory research or open-ended red teaming (especially including the perspectives of civil society
+                and other affected stakeholders). They commit to not restricting themselves only to evidence collection
+                for known capabilities, but also to striving to assess risks from emerging capabilities, propensities,
+                or effects through these methods.</p>
+
+            <div class="kpi-box">
+                <h5>Potential Key Performance Indicator</h5>
+                <ul class="kpi-list">
+                    <li><span class="kpi-target">KPI 10.7.1:</span> Percentage of internal staff hours spent on
+                        exploratory safety research as part of all research hours (target for non-SMEs: 10%, target for
+                        SMEs and/or providers who exclusively release open-source models: 0%).</li>
+                </ul>
+            </div>
+
+            <h4>Measure 10.8. Sharing tools & best practices</h4>
+            <p>Signatories commit to making state-of-the-art evidence collection best practices widely accessible to
+                relevant actors in the AI ecosystem. They commit to also striving to make model evaluation tools
+                available, where appropriate, especially for other model providers and third-party evaluators.
+                Especially where Signatories have already developed significant in-house tooling and experience, they
+                commit to aiming to share their expertise with SMEs and newer model providers.</p>
+
+            <p>Where appropriate, they may also share some model evaluation data (inputs and outputs), to further the
+                safety work of other parties, but applying additional caution to model evaluation data that has high
+                proliferation risks (i.e. the test set could become a training set for a misuse actor) or where it would
+                threaten scientific rigour (i.e. leaking test data into training sets or fully releasing currently
+                active held-out test sets). Where appropriate, these considerations will be documented in the Model
+                Report. Signatories may also limit the sharing of information to protect public security, and
+                commercially sensitive information, where these interests outweigh the safety benefit.</p>
+
+            <p>Signatories commit to ensuring that sharing the above will not come at the expense of their capacity to
+                do safety research in the first place. They will consider hiring or assigning additional engineering and
+                support staff to research teams to facilitate this work, while keeping the workload of existing safety
+                researchers the same.</p>
+
+            <p>If this process is not (yet) facilitated by the AI Office or other public organisations designated by the
+                AI Office (e.g. the international network of AI Safety Institutes), Signatories are encouraged to
+                facilitate this sharing via industry organisations, but will ensure that there is no strict membership
+                requirement or other restrictions which lead to the exclusion of potential competitors.</p>
+
+            <div class="kpi-box">
+                <h5>Potential Key Performance Indicators</h5>
+                <ul class="kpi-list">
+                    <li><span class="kpi-target">KPI 10.8.1:</span> Number of relevant parties with whom evidence
+                        collection best practice guidance has been shared (target for non-SMEs: 10, target for SMEs: 0).
+                    </li>
+                    <li><span class="kpi-target">KPI 10.8.2:</span> Number of new model evaluation tools that have been
+                        shared with at least 5 other providers or evaluators (target for non-SMEs: 3, target for SMEs
+                        and providers who substantially release open-source models: 0).</li>
+                </ul>
+            </div>
+
+            <h4>Measure 10.9. Qualified model evaluators and evaluation access</h4>
+            <p>Signatories commit to ensuring that model evaluation teams possess the necessary qualifications for their
+                work. This requires not only competence in machine learning but also access to the relevant domain
+                expertise necessary to evaluate risks and other related aspects effectively.</p>
 
         </section>
 
