@@ -33,11 +33,11 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [ ] Full support for [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/)
 
 ## Known issues:
-- [ ] Glossary hover is not visible on mobile devices
+- [~] Glossary hover is not visible on mobile devices
 
 ## Unsorted notes:
 - [ ] Longer lines
-- [ ] Collapsable shortcuts, see more ToC
+- [x] Collapsable shortcuts, see more ToC
 - [ ] Nav items closer togethet
 - [ ] ToC text formatting
 - [ ] ToC titles too long, truncate?
@@ -47,7 +47,7 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [ ] Collapsable nav items?
 - [ ] Collapse them by default
 - [ ] Anchor links, click to copy & share!
-- [ ] Ahh headlines need to obey line width
+- [ ] All headlines need to obey line width
 - [ ] More space between list items, UL and OL
 - [ ] Make boxes more unique
 - [ ] Add characters / custom icons to boxes
@@ -78,3 +78,4 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [ ] Check for and remove footnotes
 - [ ] Icons: Talking chairs, lawyercat
 - [ ] R.: Fonts, colors
+- [ ] signatur break points not optimal

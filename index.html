@@ -31,13 +31,20 @@
                 </div>
             </div>
             <div class="keyboard-shortcuts" aria-label="Keyboard shortcuts">
-                <h4>Keyboard Shortcuts</h4>
-                <ul>
-                    <li><kbd>↑</kbd>/<kbd>↓</kbd> Navigate headlines</li>
-                    <li><kbd>←</kbd>/<kbd>→</kbd> Navigate commitments</li>
-                    <li><kbd>1</kbd>To top<kbd>2</kbd>To glossary</li>
-                    <li><kbd>3</kbd>To recitals<kbd>4</kbd>Toggle all recitals</li>
-                </ul>
+                <div class="keyboard-shortcuts-header">
+                    <h4>Keyboard Shortcuts</h4>
+                    <button class="collapse-toggle" aria-expanded="true" aria-controls="keyboard-shortcuts-content">
+                        <span class="collapse-arrow" aria-hidden="true">▲</span>
+                    </button>
+                </div>
+                <div id="keyboard-shortcuts-content" class="keyboard-shortcuts-content">
+                    <ul>
+                        <li><kbd>↑</kbd>/<kbd>↓</kbd> Navigate headlines</li>
+                        <li><kbd>←</kbd>/<kbd>→</kbd> Navigate commitments</li>
+                        <li><kbd>1</kbd>To top<kbd>2</kbd>To glossary</li>
+                        <li><kbd>3</kbd>To recitals<kbd>4</kbd>Toggle all recitals</li>
+                    </ul>
+                </div>
             </div>
             <div id="nav-content" class="nav-content">
             </div>

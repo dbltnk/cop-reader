@@ -812,4 +812,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
     document.head.appendChild(style);
+});
+
+// Keyboard shortcuts collapse functionality
+const collapseToggle = document.querySelector('.collapse-toggle');
+const shortcutsContent = document.getElementById('keyboard-shortcuts-content');
+
+// Load saved state
+const isExpanded = localStorage.getItem('keyboardShortcutsExpanded') !== 'false';
+collapseToggle.setAttribute('aria-expanded', isExpanded);
+shortcutsContent.classList.toggle('collapsed', !isExpanded);
+
+collapseToggle.addEventListener('click', () => {
+    const isCurrentlyExpanded = collapseToggle.getAttribute('aria-expanded') === 'true';
+    const newExpandedState = !isCurrentlyExpanded;
+
+    collapseToggle.setAttribute('aria-expanded', newExpandedState);
+    shortcutsContent.classList.toggle('collapsed', !newExpandedState);
+
+    // Save state
+    localStorage.setItem('keyboardShortcutsExpanded', newExpandedState);
+
+    // Announce to screen readers
+    const announcement = document.createElement('div');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.setAttribute('class', 'sr-only');
+    announcement.textContent = `Keyboard shortcuts ${newExpandedState ? 'expanded' : 'collapsed'}`;
+    document.body.appendChild(announcement);
+    setTimeout(() => announcement.remove(), 1000);
 }); 

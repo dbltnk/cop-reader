@@ -1345,9 +1345,56 @@ body.dark-mode .kpi-box .kpi-target {
     flex-shrink: 0;
 }
 
-.keyboard-shortcuts h4 {
+.keyboard-shortcuts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 0 0 0.8rem 0;
+}
+
+.keyboard-shortcuts-header h4 {
+    margin: 0;
     font-size: 0.9rem;
+}
+
+.collapse-toggle {
+    background: none;
+    border: none;
+    padding: 0.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.collapse-toggle:hover {
+    opacity: 1;
+}
+
+.collapse-arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    font-size: 0.8rem;
+}
+
+.collapse-toggle[aria-expanded="false"] .collapse-arrow {
+    transform: rotate(180deg);
+}
+
+.keyboard-shortcuts-content {
+    transition: max-height 0.3s ease, opacity 0.2s ease;
+    max-height: 200px;
+    opacity: 1;
+    overflow: hidden;
+}
+
+.keyboard-shortcuts-content.collapsed {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
 }
 
 .keyboard-shortcuts ul {
