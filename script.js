@@ -6,6 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.querySelector('.main-content');
     const mediaQuery = window.matchMedia('(min-width: 1024px)');
 
+    // Navigation text mapping
+    const navTextMap = {
+        'Opening statement by the Chairs and Vice-Chairs': 'Opening statement',
+        'Key features of the development process of the Code include:': 'CoP development process',
+        'Drafting plan, principles, and assumptions': 'Drafting plan',
+        'Below are some high-level principles we follow when drafting the Code:': 'Drafting principles',
+        'The Objectives of the Code are as follows:': 'Objectives'
+    };
+
     // Highlight current section in navigation
     const observerCallback = (entries) => {
         entries.forEach(entry => {
@@ -49,7 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const li = document.createElement('li');
             const link = document.createElement('a');
             link.href = `#${headingId}`;
-            link.textContent = headingText;
+            // Use mapped text if available, otherwise use original text
+            link.textContent = navTextMap[headingText] || headingText;
             li.appendChild(link);
 
             // Create a sublist for this section
@@ -79,13 +89,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         const subLi = document.createElement('li');
                         const subLink = document.createElement('a');
                         subLink.href = `#${subHeadingId}`;
-                        subLink.textContent = subHeadingText;
+                        // Use mapped text if available, otherwise use original text
+                        subLink.textContent = navTextMap[subHeadingText] || subHeadingText;
                         subLi.appendChild(subLink);
 
                         // For Commitments, create a nested sublist
                         if (subHeadingText.startsWith('Commitment')) {
                             const measuresList = document.createElement('ul');
                             subLi.appendChild(measuresList);
+
+                            // Abbreviate commitment text for navigation
+                            const commitmentNumber = subHeadingText.match(/Commitment (\d+)/);
+                            if (commitmentNumber) {
+                                const restOfText = subHeadingText.replace(/Commitment \d+[:.]\s*/, '');
+                                subLink.textContent = `C${commitmentNumber[1]} - ${restOfText}`;
+                            }
 
                             // Look ahead for measures
                             let measureNode = currentNode.nextElementSibling;
@@ -100,7 +118,16 @@ document.addEventListener('DOMContentLoaded', () => {
                                         const measureLi = document.createElement('li');
                                         const measureLink = document.createElement('a');
                                         measureLink.href = `#${measureId}`;
-                                        measureLink.textContent = measureText;
+
+                                        // Abbreviate measure text for navigation
+                                        const measureNumber = measureText.match(/Measure (\d+\.\d+)/);
+                                        if (measureNumber) {
+                                            const restOfText = measureText.replace(/Measure \d+\.\d+[:.]\s*/, '');
+                                            measureLink.textContent = `M${measureNumber[1]} - ${restOfText}`;
+                                        } else {
+                                            measureLink.textContent = measureText;
+                                        }
+
                                         measureLi.appendChild(measureLink);
                                         measuresList.appendChild(measureLi);
 
