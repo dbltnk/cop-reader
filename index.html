@@ -3,20 +3,20 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
     <title>EU AI Act Code of Practice</title>
     <link rel="stylesheet" href="https://edwardtufte.github.io/tufte-css/tufte.css" />
     <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-    <article>
+    <article role="main">
         <h1>EU AI Act Code of Practice</h1>
 
-        <section class="main-content">
+        <section class="main-content" aria-label="Main content">
             <p class="subtitle">Second Draft of the General-Purpose AI Code of Practice</p>
 
-            <div class="disclaimer-box">
+            <div class="disclaimer-box" role="complementary" aria-label="Important disclaimer">
                 <h4>IMPORTANT DISCLAIMER & HOW TO CONTRIBUTE</h4>
                 <p>This is a free, best-effort service to make the EU AI Act <a href="#term-code"
                         class="glossary-term">Code</a> of Practice more accessible to stakeholders. While we strive
@@ -37,11 +37,15 @@
 
             <h2>Commitment 21. Public transparency</h2>
 
-            <div class="recital">
-                <h4>Recital</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat.</p>
+            <div class="recital" role="region" aria-expanded="true">
+                <h4 role="button" tabindex="0" aria-controls="recital-content">Recital</h4>
+                <div id="recital-content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut
+                        aliquip ex ea commodo consequat.</p>
+                </div>
             </div>
 
             <p>Signatories commit to offering appropriate public transparency with the aim of aiding the wider
@@ -49,11 +53,14 @@
                 risks stemming from general-purpose AI models, especially in
                 light of the nascency of the science of assessing and mitigating systemic risks.</p>
 
-            <div class="recital">
-                <h4>Recital</h4>
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                    anim id est laborum.</p>
+            <div class="recital" role="region" aria-expanded="true">
+                <h4 role="button" tabindex="0" aria-controls="recital-content">Recital</h4>
+                <div id="recital-content">
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit
+                        anim id est laborum.</p>
+                </div>
             </div>
 
             <p>At a minimum, Signatories commit to publishing their Framework and their Model Reports or similar
@@ -63,7 +70,7 @@
                 disproportionate to the societal benefit.</p>
 
             <!-- Example of Legal Text Box -->
-            <div class="legal-text">
+            <div class="legal-text" role="complementary" aria-label="Legal text">
                 <h4>LEGAL TEXT</h4>
                 <p>Article 55(1), point (a) AI Act: "Providers of general-purpose AI models shall draw up and keep
                     up-to-date the technical <a href="#term-documentation" class="glossary-term">documentation</a> of
@@ -94,15 +101,17 @@
                 </li>
             </ul>
 
-            <div class="recital">
-                <h4>Recital</h4>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                    dicta sunt explicabo.</p>
+            <div class="recital" role="region" aria-expanded="true">
+                <h4 role="button" tabindex="0" aria-controls="recital-content">Recital</h4>
+                <div id="recital-content">
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                        dicta sunt explicabo.</p>
+                </div>
             </div>
 
             <!-- Example of Information Box -->
-            <div class="info-box">
+            <div class="info-box" role="complementary" aria-label="Information from AI office">
                 <h4>INFORMATION BOX FROM THE AI OFFICE</h4>
                 <p>Article 56 AI Act states that the <a href="#term-code" class="glossary-term">Code</a> will include
                     the "identification of the type and nature of the
@@ -127,7 +136,7 @@
             </ol>
 
             <!-- Example of Explanatory Box -->
-            <div class="explanatory-box">
+            <div class="explanatory-box" role="complementary" aria-label="Explanation of changes">
                 <h4>Explanation of changes to Commitment 21:</h4>
                 <p>This Commitment was revised following provider feedback that publishing Model Reports was overly
                     burdensome and goes beyond the requirements of the AI Act. To address concerns, we eased disclosure
@@ -147,7 +156,7 @@
         </section>
 
         <!-- Glossary Section -->
-        <section class="glossary" id="glossary">
+        <section class="glossary" id="glossary" role="complementary" aria-label="Glossary">
             <h2>Glossary of Terms</h2>
             <dl class="glossary-list">
                 <dt id="term-documentation">documentation</dt>
@@ -173,7 +182,7 @@
         </section>
 
         <!-- Full Recitals Section -->
-        <section class="recitals-full" id="recitals">
+        <section class="recitals-full" id="recitals" role="complementary" aria-label="Full recitals">
             <h2>Recitals</h2>
         </section>
     </article>

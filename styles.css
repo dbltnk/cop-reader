@@ -400,6 +400,14 @@ article {
 
 /* For smaller screens */
 @media (max-width: 760px) {
+    body {
+        padding: 1rem;
+    }
+
+    article {
+        max-width: 100%;
+        padding: 0;
+    }
 
     .glossary h2,
     .glossary-list,
@@ -410,6 +418,134 @@ article {
     .info-box,
     .explanatory-box,
     .disclaimer-box {
-        width: 85%;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 1rem;
+    }
+
+    .glossary-tooltip {
+        position: fixed;
+        left: 5% !important;
+        right: 5% !important;
+        width: 90% !important;
+        max-width: none;
+        bottom: 1rem;
+        top: auto !important;
+    }
+}
+
+@media (min-width: 1600px) {
+    article {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .glossary h2,
+    .glossary-list,
+    .recitals-full h2,
+    .recital,
+    .recitals-full .recital,
+    .legal-text,
+    .info-box,
+    .explanatory-box,
+    .disclaimer-box {
+        width: 65%;
+    }
+
+    .glossary-tooltip {
+        max-width: 400px;
+    }
+}
+
+/* Ensure text remains readable */
+@media (max-width: 400px) {
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    h3 {
+        font-size: 1.3em;
+    }
+
+    h4 {
+        font-size: 1.1em;
+    }
+}
+
+/* Responsive layout improvements */
+@media (min-width: 761px) and (max-width: 1599px) {
+    article {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .glossary h2,
+    .glossary-list,
+    .recitals-full h2,
+    .recital,
+    .recitals-full .recital,
+    .legal-text,
+    .info-box,
+    .explanatory-box,
+    .disclaimer-box {
+        width: 75%;
+    }
+}
+
+/* Landscape mobile handling */
+@media (max-width: 760px) and (orientation: landscape) {
+    .glossary-tooltip {
+        max-height: 60vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Touch target improvements */
+@media (max-width: 760px) {
+
+    /* Ensure touch targets are large enough */
+    .recital h4,
+    .glossary-term,
+    a {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    /* Add spacing between touch targets */
+    .glossary-list dt {
+        margin-top: 2rem;
+    }
+
+    li {
+        margin-bottom: 0.8rem;
+    }
+}
+
+/* Extreme text zoom support */
+@media screen and (max-width: 760px) and (max-resolution: 150dpi) {
+    body {
+        font-size: max(16px, 1em);
+        word-wrap: break-word;
+    }
+
+    article {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+        hyphens: auto;
     }
 }
