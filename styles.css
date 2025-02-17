@@ -89,7 +89,8 @@
 .legal-text,
 .info-box,
 .explanatory-box,
-.disclaimer-box {
+.disclaimer-box,
+.kpi-box {
     margin: 3rem 0;
     padding: 1.5rem;
     border-radius: 4px;
@@ -702,7 +703,8 @@ body.dark-mode .recital-link:hover {
     .legal-text,
     .info-box,
     .explanatory-box,
-    .disclaimer-box {
+    .disclaimer-box,
+    .kpi-box {
         width: 100%;
         margin-left: 0;
         margin-right: 0;
@@ -789,7 +791,8 @@ body.dark-mode .recital-link:hover {
     .legal-text,
     .info-box,
     .explanatory-box,
-    .disclaimer-box {
+    .disclaimer-box,
+    .kpi-box {
         width: 65%;
     }
 
@@ -838,7 +841,8 @@ body.dark-mode .recital-link:hover {
     .legal-text,
     .info-box,
     .explanatory-box,
-    .disclaimer-box {
+    .disclaimer-box,
+    .kpi-box {
         width: 55%;
     }
 }
@@ -1229,7 +1233,8 @@ body.dark-mode .theme-control select {
     .legal-text,
     .info-box,
     .explanatory-box,
-    .disclaimer-box {
+    .disclaimer-box,
+    .kpi-box {
         width: 55%;
     }
 
@@ -1390,18 +1395,14 @@ body.light-mode .nav-label {
 }
 
 .kpi-box {
-    background-color: #f8f9fa;
-    border-left: 4px solid #28a745;
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 4px;
-    max-width: 650px;
+    background-color: #e8f5e9;
+    border-left: 4px solid #2e7d32;
 }
 
 .kpi-box h5 {
-    color: #28a745;
     margin-top: 0;
-    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: inherit;
 }
 
 .kpi-box .kpi-list {
@@ -1411,54 +1412,95 @@ body.light-mode .nav-label {
 }
 
 .kpi-box .kpi-list li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
 }
 
 .kpi-box .kpi-target {
-    color: #28a745;
+    color: inherit;
     font-weight: 500;
 }
 
-/* Dark mode styles for KPI box */
+/* Dark mode box styles */
 @media (prefers-color-scheme: dark) {
     .kpi-box {
-        background-color: #1a1a1a;
-        border-left-color: #2ecc71;
+        background-color: #1a2e1a;
+        border-left-color: #4caf50;
     }
 
     .kpi-box h5 {
-        color: #2ecc71;
+        color: inherit;
     }
 
     .kpi-box .kpi-target {
-        color: #2ecc71;
+        color: inherit;
     }
 }
 
+/* Light mode */
 body.light-mode .kpi-box {
-    background-color: #f8f9fa;
-    border-left-color: #28a745;
+    background-color: #e8f5e9;
+    border-left: 4px solid #2e7d32;
 }
 
 body.light-mode .kpi-box h5 {
-    color: #28a745;
+    color: inherit;
 }
 
 body.light-mode .kpi-box .kpi-target {
-    color: #28a745;
+    color: inherit;
 }
 
+/* Dark mode */
 body.dark-mode .kpi-box {
-    background-color: #1a1a1a;
-    border-left-color: #2ecc71;
+    background-color: #1a2e1a;
+    border-left-color: #4caf50;
 }
 
 body.dark-mode .kpi-box h5 {
-    color: #2ecc71;
+    color: inherit;
 }
 
 body.dark-mode .kpi-box .kpi-target {
-    color: #2ecc71;
+    color: inherit;
+}
+
+/* Mobile-optimized styles */
+@media (hover: none) and (pointer: coarse),
+(max-width: 760px) {
+
+    .glossary h2,
+    .glossary-list,
+    .recitals-full h2,
+    .recital,
+    .recitals-full .recital,
+    .legal-text,
+    .info-box,
+    .explanatory-box,
+    .disclaimer-box,
+    .kpi-box {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 1rem;
+    }
+}
+
+/* Ultra-wide screen optimizations */
+@media (min-width: 1600px) {
+
+    .glossary h2,
+    .glossary-list,
+    .recitals-full h2,
+    .recital,
+    .recitals-full .recital,
+    .legal-text,
+    .info-box,
+    .explanatory-box,
+    .disclaimer-box,
+    .kpi-box {
+        width: 65%;
+    }
 }
 
 /* Keyboard shortcuts styles */

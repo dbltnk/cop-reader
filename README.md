@@ -61,7 +61,7 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [ ] Equalize distance between left and box and box and nav bar
 - [ ] KPI box goes too wide
 - [ ] Accessibility text color contrast check
-- [ ] Boxes similar styles, too different, KPI vs yellow one
+- [x] Boxes similar styles, too different, KPI vs yellow one
 - [ ] Replace emojis with icons, lucide.dev
 - [ ] Style the flowcharts
 - [ ] Icons for commitments and measures?
