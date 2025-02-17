@@ -1,3 +1,23 @@
+// Function to detect if the device is a mobile device
+function isMobileDevice() {
+    // Primary check: User Agent for mobile devices
+    const userAgentCheck = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    // Secondary check: Touch capability
+    const touchCheck = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+    // Tertiary check: Screen size
+    const screenCheck = window.matchMedia('(max-width: 760px)').matches;
+
+    // Additional check: pointer type (if supported)
+    const pointerCheck = window.matchMedia?.('(pointer: coarse)').matches;
+
+    // Consider a device mobile if:
+    // 1. It's identified as a mobile device by user agent OR
+    // 2. It has touch capabilities AND either has a coarse pointer or small screen
+    return userAgentCheck || (touchCheck && (pointerCheck || screenCheck));
+}
+
 // Navigation functionality
 document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('.side-nav');
@@ -296,6 +316,12 @@ document.addEventListener('DOMContentLoaded', () => {
             wasDesktop = e.matches;
         }
     });
+
+    // Hide keyboard shortcuts on mobile
+    const keyboardShortcuts = document.querySelector('.keyboard-shortcuts');
+    if (isMobileDevice()) {
+        keyboardShortcuts.style.display = 'none';
+    }
 });
 
 // Dark mode functionality
@@ -517,26 +543,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.querySelector('.main-content');
     autoTagGlossaryTerms(mainContent);
 
-    // Function to detect if the device is a mobile device
-    function isMobileDevice() {
-        // Primary check: User Agent for mobile devices
-        const userAgentCheck = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-        // Secondary check: Touch capability
-        const touchCheck = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
-        // Tertiary check: Screen size (as a fallback)
-        const screenCheck = window.matchMedia('(max-width: 760px)').matches;
-
-        // Additional check: pointer type (if supported)
-        const pointerCheck = window.matchMedia?.('(pointer: coarse)').matches;
-
-        // Consider a device mobile if:
-        // 1. It's identified as a mobile device by user agent OR
-        // 2. It has touch capabilities AND either has a coarse pointer or small screen
-        return userAgentCheck || (touchCheck && (pointerCheck || screenCheck));
-    }
-
     // Function to add event listeners to glossary terms
     function addGlossaryTermListeners() {
         const allGlossaryTerms = document.querySelectorAll('.glossary-term');
@@ -545,15 +551,13 @@ document.addEventListener('DOMContentLoaded', () => {
         allGlossaryTerms.forEach(term => {
             if (isDeviceMobile) {
                 // Mobile-only tap handler
-                term.addEventListener('click', (e) => {
+                term.addEventListener('touchend', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    if (currentTerm === term) {
-                        hideTooltip();
-                    } else {
-                        showTooltip(term);
-                    }
-                });
+
+                    // Always show tooltip on mobile tap
+                    showTooltip(term);
+                }, { passive: false });
             } else {
                 // Desktop-only click and hover handlers
                 term.addEventListener('click', (e) => {

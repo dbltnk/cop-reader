@@ -681,6 +681,10 @@ body.dark-mode .recital-link:hover {
 /* Mobile-optimized styles */
 @media (hover: none) and (pointer: coarse),
 (max-width: 760px) {
+    .keyboard-shortcuts {
+        display: none !important;
+    }
+
     body {
         padding: 1rem;
     }
