@@ -228,16 +228,43 @@ body.dark-mode h5 {
     padding-top: 2rem;
 }
 
-h2,
-h3,
-h4,
-h5 {
+/* Base headline styles - only apply width constraint when NOT in a box */
+h2:not(.legal-text *, .info-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *),
+h3:not(.legal-text *, .info-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *),
+h4:not(.legal-text *, .info-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *),
+h5:not(.legal-text *, .info-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *) {
     width: 55%;
     line-height: 1.4;
     margin-top: 2.5rem;
     margin-bottom: 1.5rem;
     cursor: pointer;
     transition: color 0.2s ease;
+}
+
+/* Box headlines - ensure they take full width */
+.legal-text h2,
+.legal-text h3,
+.legal-text h4,
+.legal-text h5,
+.info-box h2,
+.info-box h3,
+.info-box h4,
+.info-box h5,
+.explanatory-box h2,
+.explanatory-box h3,
+.explanatory-box h4,
+.explanatory-box h5,
+.disclaimer-box h2,
+.disclaimer-box h3,
+.disclaimer-box h4,
+.disclaimer-box h5,
+.kpi-box h2,
+.kpi-box h3,
+.kpi-box h4,
+.kpi-box h5 {
+    width: 100% !important;
+    margin-right: 2rem;
+    line-height: 1.4;
 }
 
 .anchor-link {
