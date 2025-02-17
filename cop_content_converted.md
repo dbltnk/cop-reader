@@ -5,8 +5,11 @@ As the Chairs and Vice-Chairs of the four Working Groups, we hereby present the 
 We would like to emphasise that the second draft remains a work-in-progress. Given the short timeframe between receiving feedback on the first draft and publishing this second draft, we have focused primarily on providing clarifications, adding essential details, and refining our approach to proportionality.
 Incorporation of specific feedback at this stage does not guarantee its inclusion in the final Code – we will have more time to carefully discuss and evaluate various Commitments and Measures before the third draft, and significant updates will likely occur. Conversely, where certain elements remain unchanged in this draft, this does not indicate permanence – we simply may not have addressed these aspects yet.
 
-This second draft of the Code addresses key considerations for providers of general-purpose AI models and providers of general-purpose AI models with systemic risk when complying with Chapter V of the AI Act, through four Working Groups working in close collaboration: 
- • Working Group 1: Transparency and copyright-related rules • Working Group 2: Risk assessment for systemic risk • Working Group 3: Technical risk mitigation for systemic risk • Working Group 4: Governance risk mitigation for systemic risk 
+This second draft of the Code addresses key considerations for providers of general-purpose AI models and providers of general-purpose AI models with systemic risk when complying with Chapter V of the AI Act, through four Working Groups working in close collaboration:
+- Working Group 1: Transparency and copyright-related rules
+- Working Group 2: Risk assessment for systemic risk
+- Working Group 3: Technical risk mitigation for systemic risk
+- Working Group 4: Governance risk mitigation for systemic risk 
 Working Group 1 Transparency applies to all general-purpose AI models, except for those that are released under a free and open-source licence satisfying the conditions specified in Article 53(2) AI Act and not classified as general-purpose AI models with systemic risk. Working Group 1 Copyright applies to all general-purpose AI models. Working Groups 2, 3, and 4, along with the corresponding Section III only apply to providers of general-purpose AI models classified as general-purpose AI models with systemic risk based on Article 51 AI Act.
 
 Following a thorough review of the feedback received by stakeholders on the first draft, we have refined Commitments and Measures and expanded the Code's provisions while maintaining its Objectives. We present this second draft as a foundation for further development. The next draft will draw on your feedback provided via the EU survey, in provider workshops, and in Working Group meetings. Thus far, we have found your feedback extremely helpful, resulting in substantial changes. We therefore encourage stakeholders to continue providing comprehensive feedback on all aspects of the Code, including both new and unchanged elements. Your feedback will help shape the final version of the Code, which will play a crucial role in guiding the future of general-purpose AI model development and deployment.
@@ -21,9 +24,14 @@ In formulating this second draft, we have been principally guided by the provisi
 
 Like the first draft, this document is the result of a collaborative effort involving hundreds of participants from across industry, academia, and civil society. It has been informed by feedback received in response to the first draft, which has been insightful and instructive in our drafting process. We continue to be informed by the evolving literature on AI governance, international approaches (as specified in Article 56(1) AI Act), Union law codes of practice (such as the Code of Practice on Disinformation), industry best practice, and the expertise and experience of providers and Working Group members.
 
-Key features of the development process of the Code include: 
- • Drafted by Chairs and Vice-Chairs who were selected by the AI Office for their expertise, experience, independence (including absence of financial interests), and to ensure gender and geographic diversity.
- • A multi-stakeholder consultation which closed in September and received 427 submissions • A multi-stakeholder survey on the first draft of the Code which received 354 submissions, with more surveys to come • Organisational support and legal advice from the AI Office • Provider workshops led by Chairs and Vice-Chairs • Four specialised Working Group meetings led by Chairs and Vice-Chairs • Meetings with representatives from EU Member States in the AI Board and from the European Parliament Additional time for consultation and deliberation – both externally and internally – will be needed to refine and improve the current draft. As a group of independent Chairs and Vice-Chairs, we strive to make this process as transparent and accessible to stakeholders as possible, aiming to share our work and our thinking as early as possible, while taking sufficient time to coordinate and discuss key questions within Working Groups. We count on your continued engaged collaboration and constructive criticism.
+Key features of the development process of the Code include:
+- Drafted by Chairs and Vice-Chairs who were selected by the AI Office for their expertise, experience, independence (including absence of financial interests), and to ensure gender and geographic diversity.
+- A multi-stakeholder consultation which closed in September and received 427 submissions
+- A multi-stakeholder survey on the first draft of the Code which received 354 submissions, with more surveys to come
+- Organisational support and legal advice from the AI Office
+- Provider workshops led by Chairs and Vice-Chairs
+- Four specialised Working Group meetings led by Chairs and Vice-Chairs
+- Meetings with representatives from EU Member States in the AI Board and from the European Parliament Additional time for consultation and deliberation – both externally and internally – will be needed to refine and improve the current draft. As a group of independent Chairs and Vice-Chairs, we strive to make this process as transparent and accessible to stakeholders as possible, aiming to share our work and our thinking as early as possible, while taking sufficient time to coordinate and discuss key questions within Working Groups. We count on your continued engaged collaboration and constructive criticism.
 
 Finally, we wish to highlight that, at this stage in the drafting process, one of our central priorities has been to clearly communicate our motivations and reasoning regarding the issues we are addressing. Many of these issues are nuanced and complex, and we aim to convey them transparently through the draft text of the Code. Further, we used our time mainly to refine Commitments, Measures, and KPIs, rather than ensuring all the parts of the Code seamlessly fit together and are easy to understand. We will work to improve these aspects in subsequent iterations to strengthen the Code.
 
@@ -94,7 +102,17 @@ TABLE REMOVED
 Appendix: Essential elements of an Acceptable Use Policy 
 An Acceptable Use Policy (AUP) is defined as guidelines to users on what is and is not considered acceptable use.
 
-Essential elements of an AUP are: • A purpose statement explaining why the AUP exists; • The scope defining who the policy applies to and what resources it covers; • Main intended uses and users; • Acceptable uses, listing activities and tasks that are allowed, including high-risk AI uses (within the meaning of Article 6 AI Act in conjunction with Annex I and III AI Act), if any, that the model is intended to be integrated into; • Unacceptable uses, detailing forbidden actions (beyond those prohibited by Article 5 AI Act); • Security measures containing a description of the security protocols that the users of the model must follow; • If any monitoring of the use of their model is performed by the provider, an explanation of how the monitoring occurs and its impact on users’ privacy and confidentiality of users’ business information; • Warning processes and criteria for suspension or withdrawal of user privileges for not adhering to the AUP; • Criteria for terminating user accounts and reference to applicable law and regulations for enforcement; • Acknowledgement from users that they have read, understood, and agreed to comply with the AUP.
+Essential elements of an AUP are:
+- A purpose statement explaining why the AUP exists;
+- The scope defining who the policy applies to and what resources it covers;
+- Main intended uses and users;
+- Acceptable uses, listing activities and tasks that are allowed, including high-risk AI uses (within the meaning of Article 6 AI Act in conjunction with Annex I and III AI Act), if any, that the model is intended to be integrated into;
+- Unacceptable uses, detailing forbidden actions (beyond those prohibited by Article 5 AI Act);
+- Security measures containing a description of the security protocols that the users of the model must follow;
+- If any monitoring of the use of their model is performed by the provider, an explanation of how the monitoring occurs and its impact on users’ privacy and confidentiality of users’ business information;
+- Warning processes and criteria for suspension or withdrawal of user privileges for not adhering to the AUP;
+- Criteria for terminating user accounts and reference to applicable law and regulations for enforcement;
+- Acknowledgement from users that they have read, understood, and agreed to comply with the AUP.
 
 COPYRIGHT Whereas: 
  a) Signatories recognise that general-purpose AI models and in particular large generative AI models – capable of generating text, images, and other content – present unique innovation opportunities but also challenges to artists, authors, and other creators, and to the way their creative content is created, distributed, used, and consumed (Recital 105 AI Act). They further recognise that any use of copyright protected content requires the authorisation of the rightsholder(s) concerned unless relevant copyright exceptions and limitations apply (see Recital 105 AI Act).
@@ -111,52 +129,62 @@ the size of the provider and allow simplified ways of compliance for SMEs, inclu
 Commitment 2. Copyright policy In order to fulfil the obligation to put in place a policy to comply with Union law on copyright and related rights, and in particular to identify and comply with, including through state-of-the-art technologies, a reservation of rights expressed pursuant to Article 4(3) of Directive (EU) 2019/790 pursuant to Article 53(1), point (c) AI Act, Signatories commit to adopting the following measures: 
 Measure 2.1: Draw up and implement an internal copyright policy Signatories commit to drawing up, keeping up-to-date, and implementing an internal policy to comply with Union law on copyright and related rights in accordance with the commitments of this Code, applicable to all phases of the development of a general-purpose AI model, including data collection, training, testing, and placing on the market, until a general-purpose AI model is definitively withdrawn from the Union market. Signatories commit to assigning responsibilities within their organisation for the implementation and overseeing of this policy.
 
-Key Performance Indicators • KPI 2.1.1: A single document approved by the Signatory that sets out the internal copyright policy.
- • KPI 2.1.2: Documentation of changes to the copyright policy (versioning).
- • KPI 2.1.3: Identification of the internal unit/person(s) responsible for the implementation and overseeing of the copyright policy. This KPI does not apply to SMEs.
+Key Performance Indicators
+- KPI 2.1.1: A single document approved by the Signatory that sets out the internal copyright policy.
+- KPI 2.1.2: Documentation of changes to the copyright policy (versioning).
+- KPI 2.1.3: Identification of the internal unit/person(s) responsible for the implementation and overseeing of the copyright policy. This KPI does not apply to SMEs.
 
 Measure 2.2: Publish a summary of the internal copyright policy In order to provide public transparency about their policy to comply with Union copyright law, Signatories commit to making publicly available and keeping up to date a summary of their internal copyright policy, without prejudice to the need to observe and protect intellectual property rights and confidential business information or trade secrets in accordance with Union and national law.3 
-Key Performance Indicator • KPI 2.2.1: Summary of the up-to-date internal copyright policy published on Signatory’s website.
+Key Performance Indicator
+- KPI 2.2.1: Summary of the up-to-date internal copyright policy published on Signatory’s website.
 
 3 To be streamlined with the AI Office’s template according to Article 53(1), point (d) AI Act.
 
 Measure 2.3: Make reasonable efforts to assess the copyright compliance of third-party datasets Signatories commit to undertaking a copyright due diligence when entering into an agreement with a third party when acquiring datasets for the purpose of the training of a general-purpose AI model. Signatories commit to making reasonable and proportionate efforts to obtain assurances from a third party about its compliance with Union law on copyright and related rights regarding a private, non-publicly accessible dataset, covering the following issues: the copyright status of data contained in the dataset, lawful access to such copyright-protected content, compliance with the limits of applicable exceptions or limitations, in particular Articles 3 and 4 of Directive (EU) 2019/790. Signatories commit to making reasonable and proportionate efforts to examine the plausibility of these assurances. In the absence of sufficient assurances, in particular in relation to publicly accessible datasets, Signatories commit to making reasonable and proportionate efforts to assess, on the basis of the description of the dataset and an analysis of random samples contained in the dataset, whether the dataset has been collected in compliance with Union law on copyright and related rights. This measure does not imply a commitment to verify or proceed to a work-by- work assessment of those datasets in terms of copyright compliance.
 
-Key Performance Indicators • KPI 2.3.1: Documentation of all assurances obtained in accordance with this Measure.
- • KPI 2.3.2: Documentation of Signatory’s copyright compliance assessments. This KPI does not apply to SMEs.
+Key Performance Indicators
+- KPI 2.3.1: Documentation of all assurances obtained in accordance with this Measure.
+- KPI 2.3.2: Documentation of Signatory’s copyright compliance assessments. This KPI does not apply to SMEs.
 
 Measure 2.4: Ensure lawful access to copyright-protected content If Signatories engage in text and data mining according to Article 2(2) of Directive (EU) 2019/790 for the training of their general-purpose AI models, they commit to making reasonable and proportionate efforts to ensure that they have lawful access to copyright-protected content in accordance with Article 4(1) of Directive (EU) 2019/790.
 
-Key Performance Indicator • KPI 2.4.1: Documentation of the measures taken by the Signatory to ensure lawful access to copyright-protected content. This KPI does not apply to SMEs.
+Key Performance Indicator
+- KPI 2.4.1: Documentation of the measures taken by the Signatory to ensure lawful access to copyright-protected content. This KPI does not apply to SMEs.
 
 Measures 2.5: Do not crawl websites making available copyright-infringing content Signatories commit to taking reasonable and proportionate measures to exclude widely known websites that make available to the public copyright-infringing content on a commercial scale and have no substantial legitimate uses (“piracy websites”4) from crawling activities for the training of their general-purpose AI models. Signatories are encouraged to take into account, as appropriate, relevant exclusion lists published by public authorities in the European Union and the European Economic Area and in the jurisdictions where they are established.
 
 4 Cf. the definition of a pirate website in "WIPO Advisory Committee on Enforcement, The building respect for intellectual property database project”, WIPO/ACE/14/9, para 2 (June 18, 2019).
  
-Key Performance Indicator • KPI 2.5.1: Documentation of the list of piracy websites excluded from crawling. This KPI does not apply to SMEs.
+Key Performance Indicator
+- KPI 2.5.1: Documentation of the list of piracy websites excluded from crawling. This KPI does not apply to SMEs.
 
 Measure 2.6: Respect Robot Exclusion Protocol If Signatories engage in text and data mining according to Article 2(2) of Directive (EU) 2019/790 for the training of their general-purpose AI models, they commit, as a minimum measure to identify and comply with, including through state-of-the-art technologies, a reservation of rights expressed pursuant to Article 4(3) of Directive (EU) 2019/790, to employing web-crawlers that read and follow instructions expressed in accordance with the Robot Exclusion Protocol (robots.txt), as specified in the Internet Engineering Task Force (IETF) Request for Comments No. 9309. Signatories that also provide an online search engine as defined in Article 3(j) Regulation (EU) 2022/2065 or control such a provider are encouraged to take appropriate measures to ensure that the exclusion of a web-crawler that collects data for the training of general-purpose AI models pursuant to the Robot Exclusion Protocol does not negatively affect the findability of the content in their search engine.5 
-Key Performance Indicator • KPI 2.6.1: The name of any new or modified crawler as well as the purpose of each crawler are specified in the copyright policy.
+Key Performance Indicator
+- KPI 2.6.1: The name of any new or modified crawler as well as the purpose of each crawler are specified in the copyright policy.
 
 Measure 2.7: Identify and comply with other appropriate expressions of rights reservations Signatories commit to making best efforts that are proportionate to their size and capacities in accordance with widely used industry standards to identify and comply with, including through state-of-the-art technologies, other machine-readable means to appropriately express a rights reservation at source or work level pursuant to Article 4(3) of Directive (EU) 2019/790 in the case of content made publicly available online. This commitment is without prejudice to the right of affected rightsholders to expressly reserve the use of lawfully accessible works and other subject matter for the purposes of text and data mining in any appropriate manner pursuant to Article 4(3) of Directive 2019/790/EU.
 
 In due consideration of relevant international and European standard-setting processes, Signatories are encouraged to support relevant standardisation efforts and engage on voluntary basis in bona fide discussions with other relevant stakeholders, including rightsholders, with the aim to develop interoperable machine-readable standards to express a rights reservation pursuant to Article 4(3) of Directive (EU) 2019/790 and to identify and comply with such rights reservation standards.
 
-Key Performance Indicators • KPI 2.7.1: List of other solutions for expressions of rights reservations honoured by the Signatory is provided in the copyright policy, including information on the period of time as of which these solutions have been honoured by the Signatory.
+Key Performance Indicators
+- KPI 2.7.1: List of other solutions for expressions of rights reservations honoured by the Signatory is provided in the copyright policy, including information on the period of time as of which these solutions have been honoured by the Signatory.
 
 5 Recital 18, Dir. (EU) 2019/790: “Other uses should not be affected by the reservation of rights for the purposes of text and data 
-mining.” 
- • KPI 2.7.2: Documentation of relevant standard-setting meetings attended by the Signatory. This KPI does not apply to SMEs.
+mining.”
+- KPI 2.7.2: Documentation of relevant standard-setting meetings attended by the Signatory. This KPI does not apply to SMEs.
 
 Measure 2.8: Publish information on rights reservation compliance Signatories commit to making public adequate information about the measures they adopt to identify and comply with rights reservations expressed pursuant to Article 4(3) of Directive (EU) 2019/790. That information includes, at a minimum, the name of all crawlers used by the Signatories or on their behalf for the collection of data for the training of a general-purpose AI model and the robots.txt features of those crawlers that are relevant for the expression of a rights reservation. Signatories commit to taking reasonable measures to enable affected rightsholders to obtain this information, for example by syndicating a web feed that covers every update of the website informing about the rights reservation compliance.6 
-Key Performance Indicator • KPI 2.8.1: Information about the measures adopted to respect the reservation of rights made public on the website of the Signatory.7 
+Key Performance Indicator
+- KPI 2.8.1: Information about the measures adopted to respect the reservation of rights made public on the website of the Signatory.7 
 Measure 2.9: Prevent copyright-related overfitting Signatories that train a generative general-purpose AI model that will allow for the flexible generation of content, such as in the form of text, audio, images or video,8 commit to making best efforts to prevent an overfitting of their general-purpose AI model in order to mitigate the risk that a downstream AI system, into which the general-purpose AI model is integrated, generates copyright infringing output that is identical or recognisably similar to protected works used in the training stage. This commitment applies irrespective of whether a Signatory vertically integrates the model into its own AI system(s) or whether the model is provided to another entity based on contractual relations.
 
-Key Performance Indicator • KPI 2.9.1: Documentation of the measures taken by the Signatory to avoid overfitting in the copyright policy. This KPI does not apply to SMEs.
+Key Performance Indicator
+- KPI 2.9.1: Documentation of the measures taken by the Signatory to avoid overfitting in the copyright policy. This KPI does not apply to SMEs.
 
 Measure 2.10: Prohibit copyright-infringing uses of the model In order to further mitigate the risk that a downstream AI system, into which a generative general-purpose AI model is integrated, generates copyright infringing output, Signatories commit to prohibiting copyright- infringing uses of their model in their acceptable use policy, terms and conditions, or other equivalent documents.
 
-Key Performance Indicator • KPI 2.10.1: Acceptable use policy, terms and conditions, or other equivalent documents include a prohibition of copyright-infringing uses.
+Key Performance Indicator
+- KPI 2.10.1: Acceptable use policy, terms and conditions, or other equivalent documents include a prohibition of copyright-infringing uses.
 
 6 To be streamlined with the AI Office’s template according to Article 53(1), point (d) AI Act.
 7 To be streamlined with the AI Office’s template according to Article 53(1), point (d) AI Act.
@@ -166,8 +194,9 @@ Measure 2.11: Designate a point of contact Signatories commit to designating a p
 
 Signatories commit to enabling affected rightsholders to lodge, by electronic means, sufficiently precise and adequately substantiated complaints concerning the unauthorised use of their specific works or other protected subject matter for the training of a general-purpose AI model, where no relevant exception under Union law applies. Signatories may adopt appropriate measures to prevent the frequent submission of complaints that are manifestly unfounded. The commitment to enable rightsholders to lodge complaints does not apply to SMEs.
 
-Key Performance Indicators • KPI 2.11.1: Designation of the point of contact and publication of adequate and easily accessible information about the point of contact.
- • KPI 2.11.2: Internal process to adequately handle copyright-related complaints specified in the copyright policy. Publication of the possibility to lodge copyright-related complaints on the website of the Signatory. This KPI does not apply to SMEs.
+Key Performance Indicators
+- KPI 2.11.1: Designation of the point of contact and publication of adequate and easily accessible information about the point of contact.
+- KPI 2.11.2: Internal process to adequately handle copyright-related complaints specified in the copyright policy. Publication of the possibility to lodge copyright-related complaints on the website of the Signatory. This KPI does not apply to SMEs.
 
 III. COMMITMENTS BY PROVIDERS OF GENERAL- PURPOSE AI MODELS WITH SYSTEMIC RISK 
  EXPLANATORY BOX 
@@ -219,41 +248,72 @@ In order to fulfil their obligations under Article 55(1) AI Act, Signatories com
 
 3.1. Considerations for the identification of systemic risks The following considerations were used to identify the systemic risks listed in Measure 3.2. Signatories are encouraged to use these considerations for the identification of systemic risks, as well as other considerations which they deem relevant, to identify other systemic risks beyond the selected systemic risks in Measure 3.2., as specified in Commitment 7.
 
-Considerations based on Article 3(65) AI Act: 
- • Specific to high-impact capabilities of general-purpose AI models • Significant impact • Due to reach, or due to actual or reasonably foreseeable negative effects on public health, safety, public security, fundamental rights, or the society as a whole.
+Considerations based on Article 3(65) AI Act:
+- Specific to high-impact capabilities of general-purpose AI models
+- Significant impact
+- Due to reach, or due to actual or reasonably foreseeable negative effects on public health, safety, public security, fundamental rights, or the society as a whole.
 
-Considerations based on the nature of risks: 
- • High velocity. Resulting harm can materialise rapidly, potentially outpacing existing mitigations and decision-making systems.
- • Compounding or cascading. Resulting in a compounding or cascading course of events that may permeate multiple layers of systems or of society.
- • Irreversibility. Resulting harm is impossible or very difficult to reverse.
- • Asymmetric impact. Small groups of actors or a small number of causative events may have significant impact.
+Considerations based on the nature of risks:
+- High velocity. Resulting harm can materialise rapidly, potentially outpacing existing mitigations and decision-making systems.
+- Compounding or cascading. Resulting in a compounding or cascading course of events that may permeate multiple layers of systems or of society.
+- Irreversibility. Resulting harm is impossible or very difficult to reverse.
+- Asymmetric impact. Small groups of actors or a small number of causative events may have significant impact.
 
-Practice-oriented considerations: 
- • Coverage. The risk is sufficiently recognised in major international frameworks and guidance, such as the a) Hiroshima Process International Code of Conduct for Organizations Developing Advanced AI Systems, b) International scientific report on the safety of advanced AI: interim report, c) United Nations High-Level Advisory Body on Artificial Intelligence interim report, d) OECD: Assessing potential future artificial intelligence risks, benefits and policy imperatives.
- • Assessable at the level of model providers. Assessment methods exist or can reasonably be developed, and risk can be meaningfully assessed at the level of model providers. In select cases, only risk assessment might be feasible at the level of model providers, while risk mitigation might not be feasible at the level of model providers.
- • Established practice. Existing work by some general-purpose AI model providers, the scientific community or other entities has demonstrated that aspects of the risk can be assessed.
+Practice-oriented considerations:
+- Coverage. The risk is sufficiently recognised in major international frameworks and guidance, such as the a) Hiroshima Process International Code of Conduct for Organizations Developing Advanced AI Systems, b) International scientific report on the safety of advanced AI: interim report, c) United Nations High-Level Advisory Body on Artificial Intelligence interim report, d) OECD: Assessing potential future artificial intelligence risks, benefits and policy imperatives.
+- Assessable at the level of model providers. Assessment methods exist or can reasonably be developed, and risk can be meaningfully assessed at the level of model providers. In select cases, only risk assessment might be feasible at the level of model providers, while risk mitigation might not be feasible at the level of model providers.
+- Established practice. Existing work by some general-purpose AI model providers, the scientific community or other entities has demonstrated that aspects of the risk can be assessed.
 
-3.2. Selected Systemic Risks Signatories commit to treating the following as systemic risks and including them in their process of risk identification outlined in Commitment 7: 
- • Cyber offence: Risks related to offensive cyber capabilities that could enable large-scale sophisticated cyber-attacks, including on critical systems (e.g. critical infrastructure). This includes, for example, automated vulnerability discovery, exploit generation, and attack scaling.
- • Chemical, biological, radiological and nuclear risks: Risks of enabling chemical, biological, radiological, and nuclear weapons attacks. This includes, for example, significantly lowering the barriers of entry for malicious actors in the development, design, acquisition, and use of weapons.
+3.2. Selected Systemic Risks Signatories commit to treating the following as systemic risks and including them in their process of risk identification outlined in Commitment 7:
+- Cyber offence: Risks related to offensive cyber capabilities that could enable large-scale sophisticated cyber-attacks, including on critical systems (e.g. critical infrastructure). This includes, for example, automated vulnerability discovery, exploit generation, and attack scaling.
+- Chemical, biological, radiological and nuclear risks: Risks of enabling chemical, biological, radiological, and nuclear weapons attacks. This includes, for example, significantly lowering the barriers of entry for malicious actors in the development, design, acquisition, and use of weapons.
  Note: This is without prejudice to legitimate scientific research and beneficial applications in related domains.
- • Large-scale, harmful manipulation: The facilitation of large-scale manipulation with risks to fundamental rights or democratic values, specific to high-impact capabilities of models such as autonomy, persuasion, and manipulation. This includes, for example, large-scale election interference, and coordinated and sophisticated manipulation campaigns leading to harmful distortions of public discourse, knowledge and behaviour.
- • Large-scale, illegal discrimination: Risks from model propensities causing large-scale illegal discrimination. This includes, for example, widespread use of models in high-stakes automated decision systems that can lead to illegal discrimination of large numbers of people; use of models for building downstream applications, potentially transferring illegal discriminatory patterns to many downstream systems. Note: This risk category does not encompass the lawful exercise of freedom of expression and information, or freedom of the arts and sciences. Note: This risk category does not include the intentional misuse of models.
- • Loss of human oversight: Issues related to the inability to oversee and control powerful autonomous general-purpose AI that may as a result pose threats to public safety, or that may lead to the realisation of other systemic risks. This includes, for example, model behaviours such as evading human oversight and tendency to “deceive”, and “automated AI research and development” model capabilities that could greatly accelerate AI research and development, potentially leading to unpredictable developments of general-purpose AI models with systemic risk.
+- Large-scale, harmful manipulation: The facilitation of large-scale manipulation with risks to fundamental rights or democratic values, specific to high-impact capabilities of models such as autonomy, persuasion, and manipulation. This includes, for example, large-scale election interference, and coordinated and sophisticated manipulation campaigns leading to harmful distortions of public discourse, knowledge and behaviour.
+- Large-scale, illegal discrimination: Risks from model propensities causing large-scale illegal discrimination. This includes, for example, widespread use of models in high-stakes automated decision systems that can lead to illegal discrimination of large numbers of people; use of models for building downstream applications, potentially transferring illegal discriminatory patterns to many downstream systems. Note: This risk category does not encompass the lawful exercise of freedom of expression and information, or freedom of the arts and sciences. Note: This risk category does not include the intentional misuse of models.
+- Loss of human oversight: Issues related to the inability to oversee and control powerful autonomous general-purpose AI that may as a result pose threats to public safety, or that may lead to the realisation of other systemic risks. This includes, for example, model behaviours such as evading human oversight and tendency to “deceive”, and “automated AI research and development” model capabilities that could greatly accelerate AI research and development, potentially leading to unpredictable developments of general-purpose AI models with systemic risk.
 
-3.3 Additional risks for consideration Signatories commit to considering the following risks when identifying additional systemic risks, as outlined in Commitment 7: 
-• Risks related to infrastructure and system reliability, such as major accidents, harm caused by model malfunction or bias, interference with critical infrastructure, harm from model control of physical systems, and single points of failures due to system-wide reliance on a small number of models.
-• Risks related to fundamental rights, such as privacy infringements and surveillance, as well as the generation and spread of illegal or otherwise harmful content including child sexual abuse material and non-consensual intimate images.
-• Any other risks with large-scale negative effects on fundamental rights, public health and safety, democratic processes, public security, economic stability, the environment and non-human welfare, or human agency.
+3.3 Additional risks for consideration Signatories commit to considering the following risks when identifying additional systemic risks, as outlined in Commitment 7:
+- Risks related to infrastructure and system reliability, such as major accidents, harm caused by model malfunction or bias, interference with critical infrastructure, harm from model control of physical systems, and single points of failures due to system-wide reliance on a small number of models.
+- Risks related to fundamental rights, such as privacy infringements and surveillance, as well as the generation and spread of illegal or otherwise harmful content including child sexual abuse material and non-consensual intimate images.
+- Any other risks with large-scale negative effects on fundamental rights, public health and safety, democratic processes, public security, economic stability, the environment and non-human welfare, or human agency.
 
 3.4. Sources of systemic risks Sources of risks are elements (e.g. events, components, actors and their intentions or activities) that alone or in combination give rise to risks (e.g. model theft or widespread cyber vulnerabilities). Signatories commit to considering the following sources of risk in their risk analysis as detailed in Commitment 8.
 
-3.4.1. Model capabilities Signatories commit to considering the following capabilities, which are model capabilities that may cause systemic risks, when analysing the systemic risks identified, as outlined in Commitment 8: • Cyber-offensive capabilities, Chemical, Biological, Radiological and Nuclear (CBRN) capabilities, and other weapon acquisition or proliferation capabilities • Autonomy, scalability, adaptability to learn new tasks • Self-replication, self-improvement, and ability to train and develop itself or other models • Persuasion and manipulation • Long-horizon planning, forecasting, and strategising • Self-reasoning (a model’s ability to reason about and modify the environment – including its own implementation – including the ability to self-modify) • Automated AI research and development.
+3.4.1. Model capabilities Signatories commit to considering the following capabilities, which are model capabilities that may cause systemic risks, when analysing the systemic risks identified, as outlined in Commitment 8:
+- Cyber-offensive capabilities, Chemical, Biological, Radiological and Nuclear (CBRN) capabilities, and other weapon acquisition or proliferation capabilities
+- Autonomy, scalability, adaptability to learn new tasks
+- Self-replication, self-improvement, and ability to train and develop itself or other models
+- Persuasion and manipulation
+- Long-horizon planning, forecasting, and strategising
+- Self-reasoning (a model’s ability to reason about and modify the environment – including its own implementation – including the ability to self-modify)
+- Automated AI research and development.
 
 It is important to clarify that many of the above capabilities are also important for enabling beneficial uses, and that a model showing these capabilities does not necessarily mean that the model poses systemic risk.
 
-3.4.2 Model propensities Signatories commit to considering the following model propensities, which are model characteristics beyond capabilities that may cause systemic risk, when analysing the systemic risks identified, as outlined in Commitment 8. These encompass inclinations or tendencies of a model to exhibit some behaviors or patterns, and include: • Misalignment with human intent and values • Tendency to “deceive” • Discriminatory bias • Tendency to "hallucinate” • Lack of reliability and security • Lawlessness, i.e. acting without reasonable regard to legal duties that would be imposed on similarly situated persons, or without reasonable regard to the legally protected interests of affected persons • “Goal-pursuing”, resistance to goal modification, and “power-seeking” • “Colluding” with other AI models/systems • Mis-coordination or conflict with other AI models/systems 
-3.4.3 Model affordances and deployment context These are factors beyond model capabilities and propensities that may influence the systemic risks posed by the model. They encompass specific inputs, configurations, and contextual elements of a general- purpose AI model with systemic risk. These include: • Access to tools (including other models), computational power (e.g. increasing speed of operations) and physical systems and infrastructure (e.g. critical infrastructure) • Modalities (e.g., text, images, audio, video, including novel and combined modalities) • Release and distribution strategies • Level of human oversight (e.g. degree of autonomy of the model) • Potential to remove guardrails • Model exfiltration (e.g. model leakage/theft) • Number of business users and number of end-users • Offence-defence balance, including the potential number, capacity, and willingness of bad actors to misuse the model • Societal and environmental vulnerability (e.g. from affecting vulnerable groups to extensive resource exploitation) • Lack of explainability or transparency • Technology readiness (i.e. how mature a technology is within a given application context) • Interactions with other AI models or systems • Model limitations, inadequacies, or potential failures 
+3.4.2 Model propensities Signatories commit to considering the following model propensities, which are model characteristics beyond capabilities that may cause systemic risk, when analysing the systemic risks identified, as outlined in Commitment 8. These encompass inclinations or tendencies of a model to exhibit some behaviors or patterns, and include:
+- Misalignment with human intent and values
+- Tendency to “deceive”
+- Discriminatory bias
+- Tendency to "hallucinate”
+- Lack of reliability and security
+- Lawlessness, i.e. acting without reasonable regard to legal duties that would be imposed on similarly situated persons, or without reasonable regard to the legally protected interests of affected persons
+- “Goal-pursuing”, resistance to goal modification, and “power-seeking”
+- “Colluding” with other AI models/systems
+- Mis-coordination or conflict with other AI models/systems 
+3.4.3 Model affordances and deployment context These are factors beyond model capabilities and propensities that may influence the systemic risks posed by the model. They encompass specific inputs, configurations, and contextual elements of a general- purpose AI model with systemic risk. These include:
+- Access to tools (including other models), computational power (e.g. increasing speed of operations) and physical systems and infrastructure (e.g. critical infrastructure)
+- Modalities (e.g., text, images, audio, video, including novel and combined modalities)
+- Release and distribution strategies
+- Level of human oversight (e.g. degree of autonomy of the model)
+- Potential to remove guardrails
+- Model exfiltration (e.g. model leakage/theft)
+- Number of business users and number of end-users
+- Offence-defence balance, including the potential number, capacity, and willingness of bad actors to misuse the model
+- Societal and environmental vulnerability (e.g. from affecting vulnerable groups to extensive resource exploitation)
+- Lack of explainability or transparency
+- Technology readiness (i.e. how mature a technology is within a given application context)
+- Interactions with other AI models or systems
+- Model limitations, inadequacies, or potential failures 
  Explanation of changes to Commitment 3 (Taxonomy): Our main change for this section of the draft was to include the considerations that we used to create this taxonomy (and which we suggest as a first basis for risk identification at the Signatories). We have aimed to clearly indicate selected systemic risks which will form the immediate basis for risk identification, while allowing significant flexibility to identify additional risks and sources of risk as they emerge or become more defined and actionable. We have also clarified that model capabilities are not risks in themselves, but that they should be considered for risk analysis.
 
 Commitment 4. Safety and Security Framework In order to fulfil their obligations under Article 55(1) AI Act, Signatories commit to adopting, implementing, and making available to the AI Office a Safety and Security Framework (also referred to as the Framework). The Framework will apply to all general-purpose AI models with systemic risk that a Signatory develops or deploys. The Framework will detail the risk management policies that the Signatory adheres to in order to assess and mitigate systemic risks from their general-purpose AI models. The Framework will follow AI Office guidance where available. The procedures described in the Framework will be proportional to the systemic risks (see Measure 4.2) stemming from the development and deployment of general-purpose AI models with systemic risk.
@@ -267,11 +327,13 @@ In the outline below, we provide potential section headers and the Commitments a
 In order to satisfy Commitment 4: 
 Measure 4.1. Procedures Signatories commit to systematically documenting in their Framework the actions, decisions, and procedures adopted to comply with Commitments 6—21.
 
-Potential Key Performance Indicator • KPI 4.1.1: Percentage of Commitments 6—21 that have procedures detailed in the Framework (target: 100%).
+Potential Key Performance Indicator
+- KPI 4.1.1: Percentage of Commitments 6—21 that have procedures detailed in the Framework (target: 100%).
 
 Measure 4.2. Risk tiers Signatories commit to describing and justifying risk tiers in their Framework for each systemic risk they identify as per Commitment 6. Such tiers will form the basis for their risk assessment (Commitments 7— 10) and risk mitigation decisions (Commitments 11—12). These tiers may be defined in different terms, for example, in terms of model capabilities, harmful scenarios, expected harm, expected scale and type of use of the model, or combinations thereof.
 
-Potential Key Performance Indicator • KPI 4.2.1: Percentage of identified risks that have an unacceptable risk tier defined, with an explanation of how they were chosen (target: 100%).
+Potential Key Performance Indicator
+- KPI 4.2.1: Percentage of identified risks that have an unacceptable risk tier defined, with an explanation of how they were chosen (target: 100%).
 
 At minimum, each identified risk will include a tier at which the level of risk would be considered unacceptable, potentially in the absence of appropriate safety and security mitigations (cf. Commitments 11—12). Such tiers of unacceptable risk will be accompanied by a justification of how they were chosen.
 Where possible, tiers will be clearly defined on a fixed and comparable scale across Signatories. To that end, the choice of tiers will align with best practice and international approaches, and follow AI Office guidance where available, including but not limited to the choice of unacceptable level of risk.
@@ -279,11 +341,13 @@ Where possible, tiers will be clearly defined on a fixed and comparable scale ac
 Measure 4.3. Mapping risk tiers to mitigations Signatories commit to describing and justifying, for each tier and with a level of detail possible given the state of the science and without undermining their effectiveness, technical risk mitigations (cf.
 Commitments 11—12) that are intended to reduce risk associated with the tier. For example, mitigations could be implemented once a model reaches a risk tier, or mitigations could be implemented to prevent a model from reaching a risk tier. For unacceptable risk tiers, the Framework will also justify why the Signatory expects the mitigations to reduce risk to acceptable levels, accounting for a margin of safety. The Framework will also describe the likely limitations of the mitigations, such as conditions under which they can be expected to fail, and where appropriate state that mitigations to manage systemic risk do not yet exist for a given risk tier.
 
-Potential Key Performance Indicator • KPI 4.3.1: Percentage of risk tiers that have described mitigations or a statement that such mitigations do not yet exist (target: 100%).
+Potential Key Performance Indicator
+- KPI 4.3.1: Percentage of risk tiers that have described mitigations or a statement that such mitigations do not yet exist (target: 100%).
 
 Measure 4.4. Forecasting Signatories commit to including in their Framework best-effort estimates of timelines for when they expect to develop a model that reaches each risk tier of Measure 4.2 that they have not yet reached, including uncertainty about these estimates. Estimates need not contain forecasts about concrete dates but may be given, for example, as ranges or probability distributions over different scenarios and timelines, where appropriate. The Framework will also describe intermediary milestones, such as changes in certain quantitative indicators that a Signatory expects to see before a model reaches such risk tiers.
 
-Potential Key Performance Indicator • KPI 4.4.1: Percentage of risk tiers not yet reached by the Signatory that have best-effort estimates of timelines (target: 100%).
+Potential Key Performance Indicator
+- KPI 4.4.1: Percentage of risk tiers not yet reached by the Signatory that have best-effort estimates of timelines (target: 100%).
 
 Measure 4.5. Serious incident response readiness Signatories commit to including in their Framework processes for responding to serious incidents (cf.
 Commitment 17), including pre-defining corrective measures that may be taken in response to serious incidents, along with an explanation of when they may be taken.
@@ -301,8 +365,9 @@ Measure 5.2. Results of risk assessment and mitigation Signatories commit to inc
 Commitment 11—12), describe the mitigations implemented, and discuss their limitations. Consistent with Measure 9.3, a Model Report will document and explain deviations from rigour in risk assessment.
 Consistent with Measure 16.1, a Model Report will describe whether and how external expert assessments informed a decision to place the model on the market, such as through assessment of risks.
 
-Potential Key Performance Indicators • KPI 5.2.1: Percentage of identified systemic risks for which the Model Report compares the assessed risk of the model both with and without safety and security mitigations (target: 100%).
- • KPI 5.2.2: Percentage of documented deviations from rigour in risk assessment that include a detailed technical description and assessment of the potential impact on the integrity of results.
+Potential Key Performance Indicators
+- KPI 5.2.1: Percentage of identified systemic risks for which the Model Report compares the assessed risk of the model both with and without safety and security mitigations (target: 100%).
+- KPI 5.2.2: Percentage of documented deviations from rigour in risk assessment that include a detailed technical description and assessment of the potential impact on the integrity of results.
 
 Measure 5.3. Reasoning for deployment decisions Signatories commit to including in any Model Report the reasoning and information used to justify a deployment decision, consistent with Commitment 13. To this effect, a Model Report will include a clear chain of reasoning between the evidence provided in the Model Report and the safety and security claim(s) that the Signatory uses to justify a deployment decision. Further, the Model Report will state conditions under which its conclusions would no longer hold. As a potential example of justifying a deployment decision, a Signatory could demonstrate that mitigations reduce the risk of the model below the unacceptable risk tier. Signatories are also encouraged to consider potential benefits that may arise from deployment of a model.
 
@@ -329,8 +394,9 @@ Measure 6.4. During deployment During the deployment of a general-purpose AI mod
 
 Signatories commit to doing so at pre-defined milestones, at least every six months, or earlier if they perceive a major change of (internal and/or external) circumstances (such as, for example, serious incidents from this model or similar models) or have major reasons to doubt the validity of previous risk assessment results (for example, they discover a flaw in a model evaluation that might have led to significantly different results that would have led to the Signatory making different mitigation, development or deployment decisions), as well as major breakthroughs in the science of model evaluations.
 
-Potential Key Performance Indicators • KPI 6.4.1: Percentage of evaluations re-run at a 6-monthly frequency, which are relevant for the highest risk tier (target: 100%).
- • KPI 6.4.2: Percentage of evaluations re-run at a 6-month frequency, which are relevant for lower risk tiers (target: 50%).
+Potential Key Performance Indicators
+- KPI 6.4.1: Percentage of evaluations re-run at a 6-monthly frequency, which are relevant for the highest risk tier (target: 100%).
+- KPI 6.4.2: Percentage of evaluations re-run at a 6-month frequency, which are relevant for lower risk tiers (target: 50%).
 
 Measure 6.5. After retirement Signatories may cease to assess and mitigate systemic risks for general-purpose AI models with systemic risk which are retired (i.e. no longer made available on the market). However, Signatories commit to upholding the security mitigations put in place for general-purpose AI models (see Commitment 12) if they are still classified as general-purpose AI models with systemic risk under the AI Act. Signatories that are providers of open-source models commit to continuing to use appropriate post-deployment monitoring methods.
 
@@ -375,7 +441,8 @@ Signatories are encouraged to use existing knowledge about the behaviour of simi
 In order to satisfy Commitment 10: 
 Measure 10.1. Model-independent evidence Where applicable to their general-purpose AI models with systemic risk, Signatories commit to collecting model-independent evidence (i.e. evidence that can be collected without having access to a specific model) which is relevant to the systemic risks presented by their model. This will be done using the most appropriate methods for each risk, considering, for example: literature reviews; market analyses (i.e. the capabilities of other released models); historical incident data; forecasting of general trends (for example algorithmic efficiency, compute use, data availability, and energy use); as well as participatory methods investigating, for example, the effects of general-purpose AI models with systemic risk on natural persons located in the EU, including vulnerable groups.
 
-Potential Key Performance Indicator • KPI 10.1.1: Average number of model-independent forms of evidence for the highest risk tier used in a Model Report (target: 2).
+Potential Key Performance Indicator
+- KPI 10.1.1: Average number of model-independent forms of evidence for the highest risk tier used in a Model Report (target: 2).
 
 Measure 10.2. State-of-the-art model evaluations Signatories commit to ensuring that state-of-the-art model evaluations are run to adequately assess systemic risks and the capabilities and limitations of their general-purpose AI models with systemic risk, using a range of suitable methodologies (for example Q&A sets, benchmarks, red-teaming and other methods of adversarial testing, human uplift studies, model organisms, simulations, and proxy evaluations for classified materials).
 
@@ -388,8 +455,9 @@ or deprecating model evaluations that have been shown to not be effective or sta
 
 Such model evaluations will be run at the most appropriate times for each risk during the lifecycle of a general-purpose AI model with systemic risk (at minimum at the stages outlined in Commitment 6), by evaluators (internal and/or external) suitable for the relevant risk. Each model evaluation will target at least one relevant risk and take into account the pathways to harm and model capabilities, propensities or effects it is providing evidence for, making those testable and quantifiable, using relevant scenarios and appropriate environments for the model evaluation.
 
-Potential Key Performance Indicators • KPI 10.2.1 Percentage of evaluations for the highest risk tier used in a Model Report which are considered state-of-the-art (target: 80%).
- • KPI 10.2.2 Percentage of evaluations for lower risk tier(s) used in a Model Report which are considered state-of-the-art (target: 50%).
+Potential Key Performance Indicators
+- KPI 10.2.1 Percentage of evaluations for the highest risk tier used in a Model Report which are considered state-of-the-art (target: 80%).
+- KPI 10.2.2 Percentage of evaluations for lower risk tier(s) used in a Model Report which are considered state-of-the-art (target: 50%).
 
 Measure 10.3. Rigorous model evaluations Signatories commit to ensuring the execution of model evaluations with high scientific and technical rigour, defined as model evaluations having high internal validity and external validity, as well as appropriate levels of reproducibility and portability. Signatories may deviate from this level of rigour where appropriate, for example to facilitate preliminary and exploratory research, documenting these deviations in their Model Reports.
 
@@ -406,10 +474,11 @@ Portability refers to the ability of other researchers and engineers to consiste
 
 In addition, Signatories commit to reporting the level of uncertainty in their results and the limitations of the methods used. Ultimately, from the combination of these measures, the Signatories aim to adhere to the quality standards of scientific peer review in machine learning and the natural and social sciences, aiming to have key results for the most severe risks reviewed as thoroughly as expected from a submission to a major machine learning conference or journal.
 
-Potential Key Performance Indicators • KPI 10.3.1: Percentage of model evaluations used as evidence in a Model Report which show high internal and external validity (target: 75%).
- • KPI 10.3.2: Percentage of model evaluations used as evidence for highest risk tier in a Model Report which have been reproduced (target: 50%).
- • KPI 10.3.3: Percentage of model evaluations used as evidence in a Model Report which are fully portable (target for non-SMEs: 25%, target for SMEs: 0%).
- • KPI 10.3.4: Percentage of model evaluations used as evidence in a Model Report where uncertainty is reported (target: 100%).
+Potential Key Performance Indicators
+- KPI 10.3.1: Percentage of model evaluations used as evidence in a Model Report which show high internal and external validity (target: 75%).
+- KPI 10.3.2: Percentage of model evaluations used as evidence for highest risk tier in a Model Report which have been reproduced (target: 50%).
+- KPI 10.3.3: Percentage of model evaluations used as evidence in a Model Report which are fully portable (target for non-SMEs: 25%, target for SMEs: 0%).
+- KPI 10.3.4: Percentage of model evaluations used as evidence in a Model Report where uncertainty is reported (target: 100%).
 
 Measure 10.4. Model elicitation Signatories commit to ensuring that evaluations of general-purpose AI models with systemic risk are being run with a state-of-the-art level of model elicitation, to appropriately elicit the capabilities, propensities and effects of a model under evaluation, minimise the risk of under-estimation, and match the realistic elicitation capabilities of potential misuse actors. This could include, for example, fine-tuning, prompt engineering, scaffolding (including tool use), using logits access, the ability to disable safeguards, or the use of base models or helpful-only models.
 
@@ -421,8 +490,9 @@ efforts spent on their leading non-safety research projects. They may proportion
 
 In addition, Signatories commit to ensuring that elicitation methods with an increased risk profile (e.g. they make models better at harmful capabilities or increase harmful propensities) are matched with increased security measures (see Measure 12.2), to prevent proliferation risks or harmful actions by the elicited model.
 
-Potential Key Performance Indicators • KPI 10.4.1: Average percentage of engineering hours spent on model elicitation for model evaluations used as evidence for the highest risk tiers as compared to the largest internal non-safety project (target: 75%).
- • KPI 10.4.2: Average percentage of engineering hours spent on model elicitation for model evaluations used as evidence for lower risk tiers as compared to the largest internal non-safety project (target: 33%).
+Potential Key Performance Indicators
+- KPI 10.4.1: Average percentage of engineering hours spent on model elicitation for model evaluations used as evidence for the highest risk tiers as compared to the largest internal non-safety project (target: 75%).
+- KPI 10.4.2: Average percentage of engineering hours spent on model elicitation for model evaluations used as evidence for lower risk tiers as compared to the largest internal non-safety project (target: 33%).
 
 Measure 10.5. Models as part of systems Signatories commit to ensuring that model evaluations can assess the capabilities and limitations of a general-purpose AI model with systemic risk when integrated into an AI system. Signatories planning to use or integrate a general-purpose AI model with systemic risk into an AI system themselves will ensure that their model evaluations consider this future deployment situation, when relevant to the risk being assessed, and evaluate the model accordingly (for example by evaluating it using the same kind of scaffolding or tooling). If the deployment environment changes in a major way from what was originally used for assessment, they will take this into account and trigger a (partial or complete) model re-evaluation as defined in Measure 6.3.
 
@@ -435,7 +505,8 @@ To facilitate this, Signatories are encouraged to make use of participatory meth
 
 Measure 10.7. Exploratory work Signatories commit to ensuring that exploratory work, appropriate to the size of their organisation and the risk being assessed, is done on their general-purpose AI models with systemic risk, such as exploratory research or open-ended red teaming (especially including the perspectives of civil society and other affected stakeholders). They commit to not restricting themselves only to evidence collection for known capabilities, but also to striving to assess risks from emerging capabilities, propensities, or effects through these methods.
 
-Potential Key Performance Indicator • KPI 10.7.1: Percentage of internal staff hours spent on exploratory safety research as part of all research hours (target for non-SMEs: 10%, target for SMEs and/or providers who exclusively release open-source models: 0%).
+Potential Key Performance Indicator
+- KPI 10.7.1: Percentage of internal staff hours spent on exploratory safety research as part of all research hours (target for non-SMEs: 10%, target for SMEs and/or providers who exclusively release open-source models: 0%).
 
 Measure 10.8. Sharing tools & best practices Signatories commit to making state-of-the-art evidence collection best practices widely accessible to relevant actors in the AI ecosystem. They commit to also striving to make model evaluation tools available, where appropriate, especially for other model providers and third-party evaluators. Especially where Signatories have already developed significant in-house tooling and experience, they commit to aiming to share their expertise with SMEs and newer model providers.
 
@@ -447,8 +518,9 @@ Signatories commit to ensuring that sharing the above will not come at the expen
 If this process is not (yet) facilitated by the AI Office or other public organisations designated by the AI Office (e.g. the international network of AI Safety Institutes), Signatories are encouraged to facilitate this sharing via industry organisations, but will ensure that there is no strict membership requirement or other restrictions which lead to the exclusion of potential competitors.
 
  
-Potential Key Performance Indicators • KPI 10.8.1: Number of relevant parties with whom evidence collection best practice guidance has been shared (target for non-SMEs: 10, target for SMEs: 0).
- • KPI 10.8.2: Number of new model evaluation tools that have been shared with at least 5 other providers or evaluators (target for non-SMEs: 3, target for SMEs and providers who substantially release open-source models: 0).
+Potential Key Performance Indicators
+- KPI 10.8.1: Number of relevant parties with whom evidence collection best practice guidance has been shared (target for non-SMEs: 10, target for SMEs: 0).
+- KPI 10.8.2: Number of new model evaluation tools that have been shared with at least 5 other providers or evaluators (target for non-SMEs: 3, target for SMEs and providers who substantially release open-source models: 0).
 
 Measure 10.9. Qualified model evaluators and evaluation access Signatories commit to ensuring that model evaluation teams possess the necessary qualifications for their work. This requires not only competence in machine learning but also access to the relevant domain expertise necessary to evaluate risks and other related aspects effectively.
 
@@ -460,7 +532,8 @@ Measure 10.10 Safety margins When Signatories use model evaluation results to in
 
 Measure 10.11 Forecast-ready model evaluations Signatories are encouraged to make key model evaluations for the most severe risks more ‘forecast-ready’ over time, for example by running ‘scaling law experiments’ that intend to give predictions for when future models might be showing dangerous capabilities.
 
-Potential Key Performance Indicators • KPI 10.11.1: Percentage of evaluations used as evidence in Model Report, which allow for some level of forecasting (target: 10%).
+Potential Key Performance Indicators
+- KPI 10.11.1: Percentage of evaluations used as evidence in Model Report, which allow for some level of forecasting (target: 10%).
 
 Measure 10.12 Post-deployment monitoring Signatories commit to conducting post-deployment monitoring for systemic risks at the highest risk tier and may conduct it for lower risk tiers as well. This includes, but is not limited to, the collection of relevant model-independent evidence defined in Measure 10.1.
 
@@ -474,9 +547,10 @@ Signatories who are providers of closed-source models, deployed via an API, are 
 
 In addition, and especially where the above methods are not available and Signatories do not have access to enough relevant information via other means, Signatories commit to making use of, and enforcing, license agreements with downstream model deployers and users, which require those licensees to share – in a privacy preserving way – key evidence about systemic risks investigated by the Signatory. For end users who are natural persons signatories may allow those end users to opt in to sharing similar relevant information, ensuring the preservation of user privacy and avoidance of transmitting sensitive data in accordance with EU laws and regulations.
 
-Potential Key Performance Indicators • KPI 10.12.1: Percentage of risks at the highest risk tiers for which evidence is being collected using at least three forms of post-deployment monitoring (target: 75%).
- • KPI 10.12.2: Percentage of risks at lower risk tiers for which evidence is being collected using at least one form of post-deployment monitoring (target: 50%).
- • KPI 10.12.3 Percentage of licensees who report actionable evidence collected for the highest risk tiers (target: 50%).
+Potential Key Performance Indicators
+- KPI 10.12.1: Percentage of risks at the highest risk tiers for which evidence is being collected using at least three forms of post-deployment monitoring (target: 75%).
+- KPI 10.12.2: Percentage of risks at lower risk tiers for which evidence is being collected using at least one form of post-deployment monitoring (target: 50%).
+- KPI 10.12.3 Percentage of licensees who report actionable evidence collected for the highest risk tiers (target: 50%).
 
  
  Explanation of changes to Commitment 10 (Evidence collection): Most changes in this section were based on requests for clarifications on how certain key terms (such as “scientific rigour” or “state-of-the- art model evaluations”) will be defined.
@@ -518,18 +592,21 @@ Measure 12.4. Interfaces and access control to model weights Signatories commit 
 These measures will be in line with technical standards such as NIST SP 800-171, INCITS 359-2004, and NIST 800-53.
 
  
-Potential Key Performance Indicator • KPI 12.4.1: Percentage of defined interfaces and access points to unreleased model weights and associated assets that have implemented the specified security controls (target: 100%).
+Potential Key Performance Indicator
+- KPI 12.4.1: Percentage of defined interfaces and access points to unreleased model weights and associated assets that have implemented the specified security controls (target: 100%).
 
 Measure 12.5. Insider threats Signatories commit to implementing measures to screen for and protect against insider threats. This will include, but is not limited to: (a) background checks on employees and contractors that have or might reasonably obtain access to unreleased model weights, associated assets, or systems that control the storage or use of unreleased model weights; and (b) the provision of training on recognising and reporting insider threats.
 These measures will align with technical standards such as NIST 800-53 (PM-12, PS-3).
 
 Measure 12.6. Regime of applicability Signatories commit to ensuring that the security measures in Measures 12.1—12.5 apply to all versions and copies of unreleased model weights and associated assets for general-purpose AI models with systemic risk throughout their lifecycle, from before training until any secure deletion of model weights or open releasing of them.
 
-Potential Key Performance Indicator • KPI 12.6.1: Percentage of copies and versions of unreleased model weights that have the security mitigations in Measures 12.1.–12.5. applied (target: 100%).
+Potential Key Performance Indicator
+- KPI 12.6.1: Percentage of copies and versions of unreleased model weights that have the security mitigations in Measures 12.1.–12.5. applied (target: 100%).
 
 Measure 12.7. Limited disclosure Signatories commit to ensuring that any publicly available copy of the Framework or the Model Report only discloses security mitigations in Measures 12.1—12.5 to a level of detail that does not undermine the effectiveness of the security mitigations and is consistent with publicly available details about such mitigations.
 
-Potential Key Performance Indicator • KPI 12.6.1: Percentage of copies and versions of unreleased model weights that have the security mitigations in Measures 12.1.–12.5. applied (target: 100%) 
+Potential Key Performance Indicator
+- KPI 12.6.1: Percentage of copies and versions of unreleased model weights that have the security mitigations in Measures 12.1.–12.5. applied (target: 100%) 
 Explanation of changes to Commitment 12: Previously, safety and security mitigations were covered by a single joint ‘Measure 12’; in this draft, they are split into Commitments 11 and 12. In response to feedback about making mitigations more concrete, we specify a level of security mitigations that we believe to be appropriate for Signatories. We anticipate feedback on this level of security mitigation.
 
 Commitment 13. Development and deployment decisions In order to fulfil their obligations under Article 55(1), points (b) and (d) AI Act, Signatories commit to mitigating residual risks where safety and security mitigations are insufficient. To do so, Signatories 
@@ -559,15 +636,16 @@ This includes allocating appropriate levels of responsibility and resources in l
 
 Signatories are encouraged to promote a healthy risk culture, including setting the tone from the top, allowing effective communication and challenge, and appropriate incentives to discourage excessive risk- taking, including rewards for cautious behaviour and internal flagging of risks.
 
-Potential Key Performance Indicators • KPI 14.1: The management body in its management function o For SMEs: A specific individual in the executive team is allocated responsibility for the organisation’s risk management efforts. This individual will have sufficient staffing, time, and support to carry out their duties.
+Potential Key Performance Indicators
+- KPI 14.1: The management body in its management function o For SMEs: A specific individual in the executive team is allocated responsibility for the organisation’s risk management efforts. This individual will have sufficient staffing, time, and support to carry out their duties.
  o For non-SMEs: In line with the Three Lines model (see e.g. Institute of Internal Auditors, 2024), the Signatory has appointed a Chief Risk Officer (or equivalent), who supports and oversees the Signatory’s systemic risk management efforts. The Chief Risk Officer is supported by a sufficiently well-staffed risk function.
- • KPI 14.2: The management body in its supervisory function o Specific individuals, such as in a risk or audit committee, have been given responsibility and adequate resources to oversee the organisation’s management of systemic risk. This could be achieved through an external audit report provided to the relevant individuals.
+- KPI 14.2: The management body in its supervisory function o Specific individuals, such as in a risk or audit committee, have been given responsibility and adequate resources to oversee the organisation’s management of systemic risk. This could be achieved through an external audit report provided to the relevant individuals.
  o The management body in its supervisory functions, or a suitable subset thereof, is given access to the information they need to oversee the organisation’s systemic risk management, including, at minimum, all the information that the Signatory documents with 
  
  the purpose of providing it to the AI Office or national competent authorities upon request (see Commitments 1 and 20).
  o For SMEs: A subset of the management body in its supervisory function is allocated responsibility for overseeing the organisation’s risk management efforts and provided sufficient resources to carry out their task.
  o For non-SMEs: In line with the Three Lines model (see e.g. Institute of Internal Auditors, 2024), a subset of the management body’s supervisory function is allocated responsibility for and is sufficiently resourced for overseeing the organisation’s systemic risk management efforts, for example by establishing an audit or risk committee. These individuals are supported by an internal audit function that reports directly to them, so as to provide them with independent evidence of the organisation’s compliance and risk management efforts.
- • KPI 14.3: The adherence and adequacy assessment (as per Commitment 15) concludes that appropriate levels of responsibility and resources have been allocated across the organisation, to assess and proportionally mitigate systemic risk.
+- KPI 14.3: The adherence and adequacy assessment (as per Commitment 15) concludes that appropriate levels of responsibility and resources have been allocated across the organisation, to assess and proportionally mitigate systemic risk.
 
  Explanation of changes to Commitment 14: In response to stakeholder feedback, the language has been refined to accommodate different organisational structures, in acknowledgement of the fact that responsibility may be divided across various levels. The term ‘management body,’ in line with established usage, for example in the Digital Services Act Article 41, has been adopted. Measures have been consolidated into a single Commitment to make the framework adaptable to different governance models, including those without distinct board and executive functions. In addition, new KPIs and voluntary measures have been introduced to address stakeholder suggestions for robust oversight measures, such as internal audit functions and fostering a healthy risk culture.
 
@@ -579,13 +657,22 @@ Signatories commit to conducting an adherence assessment of general-purpose AI m
 These assessments may be carried out by the Signatories’ own staff (for example through an internal audit function, where applicable) or by external parties (as per Measure 16.1). Both the adherence and adequacy assessments will be reported to the management body in its supervisory function. The thoroughness of the reviews will be proportional to the possible systemic risk posed by the model in question.
 
  
-The adequacy assessment will consider best practices, relevant research and state-of-the-art science, serious incident reports, and potential external expertise. It will cover the following questions, supported with sufficient evidence: • Does the Framework address all components outlined in Commitment 4 with sufficient detail to evaluate its effectiveness? Is the Framework otherwise consistent with the Code? • Does the Framework adequately account for uncertainty in future developments, as well as in the effectiveness in risk assessment and mitigation techniques? • Is there strong reason to believe that the Framework will be adhered to over the next nine months? For example, does the Framework appear adequate for models planned to be placed on the market within this period? • Are the policies, resources, and mitigations in the Framework still proportional to the complexity and scale of the systemic risks posed by the organisation’s models which are planned to be placed on the market within the next nine months? 
-An adherence assessment should be conducted six months after putting a model on the market and cover the following questions, supported by sufficient evidence: • Did the general-purpose AI model with systemic risk adhere to the relevant Framework? • Did the relevant Model Reports adhere to the Framework? Did the Model Reports provide sufficient evidence to assess compliance with the Framework? • Have post-market mitigations and assessments been implemented in accordance with the Model Report? • Were any new risks documented in the Model Reports that were not previously identified in the Framework? 
-Potential Key Performance Indicators • KPI 15.1: Adequacy and adherence assessments are conducted every six months.
- • KPI 15.2: Adequacy and adherence assessments yield a positive result.
- • KPI 15.3: Concerns identified during the adequacy and adherence assessments are addressed before the model is placed on the market or before the next scheduled adequacy and adherence assessment, whichever comes first.
- • KPI 15.4: An external auditor provides an adherence or adequacy assessment with a positive result.
- • KPI 15.5: The Framework is comparable in rigor, breadth, and depth to Frameworks used by other providers of general-purpose AI models with systemic risk with similar risk profiles.
+The adequacy assessment will consider best practices, relevant research and state-of-the-art science, serious incident reports, and potential external expertise. It will cover the following questions, supported with sufficient evidence:
+- Does the Framework address all components outlined in Commitment 4 with sufficient detail to evaluate its effectiveness? Is the Framework otherwise consistent with the Code?
+- Does the Framework adequately account for uncertainty in future developments, as well as in the effectiveness in risk assessment and mitigation techniques?
+- Is there strong reason to believe that the Framework will be adhered to over the next nine months? For example, does the Framework appear adequate for models planned to be placed on the market within this period?
+- Are the policies, resources, and mitigations in the Framework still proportional to the complexity and scale of the systemic risks posed by the organisation’s models which are planned to be placed on the market within the next nine months? 
+An adherence assessment should be conducted six months after putting a model on the market and cover the following questions, supported by sufficient evidence:
+- Did the general-purpose AI model with systemic risk adhere to the relevant Framework?
+- Did the relevant Model Reports adhere to the Framework? Did the Model Reports provide sufficient evidence to assess compliance with the Framework?
+- Have post-market mitigations and assessments been implemented in accordance with the Model Report?
+- Were any new risks documented in the Model Reports that were not previously identified in the Framework? 
+Potential Key Performance Indicators
+- KPI 15.1: Adequacy and adherence assessments are conducted every six months.
+- KPI 15.2: Adequacy and adherence assessments yield a positive result.
+- KPI 15.3: Concerns identified during the adequacy and adherence assessments are addressed before the model is placed on the market or before the next scheduled adequacy and adherence assessment, whichever comes first.
+- KPI 15.4: An external auditor provides an adherence or adequacy assessment with a positive result.
+- KPI 15.5: The Framework is comparable in rigor, breadth, and depth to Frameworks used by other providers of general-purpose AI models with systemic risk with similar risk profiles.
 
  Explanation of changes to Commitment 15: In response to stakeholder feedback, the provisions regarding adherence and adequacy assessments have been expanded to clarify their scope, methodology, and timing. These adjustments are not intended to establish new standards for the Framework or Model Report, but rather to confirm that existing frameworks and reports remain consistent with the Code and that evidence is collected to support their ongoing alignment. The purpose of the adequacy assessment is to help Signatories identify in what ways, if any, their current practices are insufficient, giving them time to adjust during the development of the model.
 
@@ -594,10 +681,10 @@ Commitment 16. External risk assessment To fulfil their obligations under Articl
 
 In order to satisfy Commitment 16: 
 Measure 16.1 Before market placement 
-Signatories commit to having qualified external assessors conduct relevant parts of risk assessment pursuant to Commitments 6—10 before market placement (as per Measures 6.2 and 6.3) for their general-purpose AI model with systemic risk. This commitment is limited to a subset of the systemic risks identified according to Commitment 7, for which the following applies: 
- • The provider cannot provide sufficient evidence that the model does not pose additional risk beyond that of general-purpose AI models with systemic risk already on the EU market, for example due to novel model capabilities or differences in implemented mitigations (similarity to a model already on the EU market, as defined in Commitment 10, would constitute such evidence); 
- or 
- • the Signatory has insufficient relevant internal expertise or information to effectively conduct the risk assessment (such as those assessments requiring sensitive national security-relevant information).
+Signatories commit to having qualified external assessors conduct relevant parts of risk assessment pursuant to Commitments 6—10 before market placement (as per Measures 6.2 and 6.3) for their general-purpose AI model with systemic risk. This commitment is limited to a subset of the systemic risks identified according to Commitment 7, for which the following applies:
+- The provider cannot provide sufficient evidence that the model does not pose additional risk beyond that of general-purpose AI models with systemic risk already on the EU market, for example due to novel model capabilities or differences in implemented mitigations (similarity to a model already on the EU market, as defined in Commitment 10, would constitute such evidence); 
+ or
+- the Signatory has insufficient relevant internal expertise or information to effectively conduct the risk assessment (such as those assessments requiring sensitive national security-relevant information).
 
 Signatories commit to including an explanation of whether the above criteria have been met in their Model Report. If the criteria above are met, but Signatories fail to identify qualified external assessors, as per the criteria below after a good faith effort (including early search efforts and, if a qualified assessor is found, early notification of external evaluators as per Measure 6.1), they commit to relying on internal assessments and providing a justification of the lack of external assessment in their Model Report.
 
@@ -605,10 +692,11 @@ Signatories are encouraged to involve qualified external assessors in holistical
 
 Signatories commit to taking information gathered via external assessments, where available, into account when deciding to place a model on the market and including such assessments in their Model Report. If Signatories disagree with any recommendations or conclusions reached by external assessors, they commit to specifying their disagreement in the Model Report.
 
-Assessments may be conducted by the AI Office or other qualified external assessors, including government bodies, that have been recognised by the AI Office or meet the criteria below: 
- • have significant domain expertise for the risk domain(s) or risk model(s) they are evaluating for, 
- 
- • are technically skilled and experienced in conducting model evaluations, if relevant, • have internal and external information security protocols in place, sufficient for the level and type of access granted, • have sufficient levels of independence from the provider, including safeguards such as contractual provisions ensuring impartiality in their results, including appropriate conflict of interest policies.
+Assessments may be conducted by the AI Office or other qualified external assessors, including government bodies, that have been recognised by the AI Office or meet the criteria below:
+- have significant domain expertise for the risk domain(s) or risk model(s) they are evaluating for,
+- are technically skilled and experienced in conducting model evaluations, if relevant,
+- have internal and external information security protocols in place, sufficient for the level and type of access granted,
+- have sufficient levels of independence from the provider, including safeguards such as contractual provisions ensuring impartiality in their results, including appropriate conflict of interest policies.
 
 Where Signatories do involve external assessors, they commit to including a justification of their evaluator choice in their Model Report, based on the qualification criteria outlined above. A justification is not required where the external assessors have been recognised by the AI Office, where applicable.
 
@@ -633,13 +721,13 @@ Signatories are further encouraged to use such evidence to fulfil Commitments 6.
 Signatories are encouraged to actively incentivise external assessment after market placement, such as via bug bounty programs.
 
  
-Potential Key Performance Indicators 
- • KPI 16.2.1: The Signatory has documented and implemented/published secure and non-restrictive access protocols for external assessors, including rules of engagement, principles for responsible disclosure, and reporting requirements.
- • KPI 16.2.2: The Signatory has established bug bounty programs with clear success criteria, financial or compute-based rewards, as well as appropriate guarantees of non-retaliation.
- • KPI 16.2.3: Independent external assessors, under Measure 16.2, receive access to deployed models within 30 days of a formal request, barring exceptional circumstances.
- • KPI 16.2.4: The Signatory has documented a policy that permits external assessors to publish findings after the 60-day notification period, provided the findings adhere to the responsible disclosure framework.
- • KPI 16.2.5: The Signatory has included all independent test results in their Model Report.
- • KPI 16.2.6: The Signatory has adopted a safe harbour policy to protect external assessors from legal or financial consequences when acting in good faith and in compliance with the rules of engagement.
+Potential Key Performance Indicators
+- KPI 16.2.1: The Signatory has documented and implemented/published secure and non-restrictive access protocols for external assessors, including rules of engagement, principles for responsible disclosure, and reporting requirements.
+- KPI 16.2.2: The Signatory has established bug bounty programs with clear success criteria, financial or compute-based rewards, as well as appropriate guarantees of non-retaliation.
+- KPI 16.2.3: Independent external assessors, under Measure 16.2, receive access to deployed models within 30 days of a formal request, barring exceptional circumstances.
+- KPI 16.2.4: The Signatory has documented a policy that permits external assessors to publish findings after the 60-day notification period, provided the findings adhere to the responsible disclosure framework.
+- KPI 16.2.5: The Signatory has included all independent test results in their Model Report.
+- KPI 16.2.6: The Signatory has adopted a safe harbour policy to protect external assessors from legal or financial consequences when acting in good faith and in compliance with the rules of engagement.
 
  Explanation of changes to Measure 16.2: Few respondents objected to this Measure in the first draft.
  As such, in this draft we aimed to clarify the Measure further, by outlining what a safe harbour might entail.
@@ -657,24 +745,24 @@ A serious incident is defined in accordance with Article 3(49) AI Act, in the ab
 (c) the infringement of obligations under Union law intended to protect fundamental rights; (d) serious harm to property or the environment;” 
 This commitment includes allocating sufficient resources to investigate any suspicion of their model’s involvement, direct or indirect, in a serious incident. It further includes that if the suspicion is confirmed, Signatories commit to reporting the incident without undue delay to the AI Office. A Signatory reporting an incident to the AI Office does not constitute an admission of wrongdoing. Similarly, Signatories commit to not treating serious incident reports as finalised documents; they commit to retaining and continuing to add evidence and update the reports where appropriate.
 
-Signatories commit to using appropriate methods to identify serious incidents, appropriate given their business models and means of deployment. They may for example: • Facilitate third-party serious incident reporting, either directly to the AI Office and/or national competent authorities, or indirectly via the Signatory.
- • Facilitate serious incident reporting from downstream providers and users, such as API customers, either directly to the AI Office and/or national competent authorities, or indirectly via the Signatory.
- • Assess user logs for concerning queries and generations, where applicable.
- • Identify content produced by their model using watermarks or other techniques for tracing output back to a model.
- • Review other sources for evidence on incidents, such as police and media reports, posts on social media, dark web forums, and research conducted by external parties.
+Signatories commit to using appropriate methods to identify serious incidents, appropriate given their business models and means of deployment. They may for example:
+- Facilitate third-party serious incident reporting, either directly to the AI Office and/or national competent authorities, or indirectly via the Signatory.
+- Facilitate serious incident reporting from downstream providers and users, such as API customers, either directly to the AI Office and/or national competent authorities, or indirectly via the Signatory.
+- Assess user logs for concerning queries and generations, where applicable.
+- Identify content produced by their model using watermarks or other techniques for tracing output back to a model.
+- Review other sources for evidence on incidents, such as police and media reports, posts on social media, dark web forums, and research conducted by external parties.
 
 Signatories commit to triaging their serious incident identification efforts, spending more resources on incidents that are of higher severity and where there is stronger evidence of the model being indirectly or directly involved. Signatories commit to retaining documentation produced in the process of identifying, reporting, and responding to serious incidents for at least 12 months.
 
-Signatories commit to following guidance and templates on serious incident reporting provided by the AI Office where available. In their absence, Signatories commit to reporting the following elements: • Start and end date of the incident, or an approximation thereof.
- • Nature of the incident, including the resulting harm.
- • A description of the incident, including the chain of events that lead to it.
- • Root cause analysis, including, as far as possible, a description of the model’s outputs and the factors that led to their generation. This includes identifying the inputs used and any potential failures or circumvention of safeguards that contributed to producing these outputs.
- • The model that was potentially involved in the incident, be it directly or indirectly.
-
- 
- • A description of evidence available regarding the model’s direct or indirect involvement with the serious incident.
- • What, if anything, the Signatory intends to do or has done in response.
- • What, if anything, the Signatory recommends the AI Office, or national competent authorities do in response.
+Signatories commit to following guidance and templates on serious incident reporting provided by the AI Office where available. In their absence, Signatories commit to reporting the following elements:
+- Start and end date of the incident, or an approximation thereof.
+- Nature of the incident, including the resulting harm.
+- A description of the incident, including the chain of events that lead to it.
+- Root cause analysis, including, as far as possible, a description of the model’s outputs and the factors that led to their generation. This includes identifying the inputs used and any potential failures or circumvention of safeguards that contributed to producing these outputs.
+- The model that was potentially involved in the incident, be it directly or indirectly.
+- A description of evidence available regarding the model’s direct or indirect involvement with the serious incident.
+- What, if anything, the Signatory intends to do or has done in response.
+- What, if anything, the Signatory recommends the AI Office, or national competent authorities do in response.
 
 Where the Signatory does not yet have certain relevant information, they may note that in their serious incident report. Where an incident has already been reported via another framework, such as NIS2, Signatories may send that report instead.
 
@@ -690,29 +778,28 @@ Commitment 18. Whistleblowing protections
  LEGAL TEXT Article 87 AI Act: “Directive (EU) 2019/1937 shall apply to the reporting of infringements of this Regulation and the protection of persons reporting such infringements.” 
 In order to fulfil their obligations under Article 87 AI Act, Signatories with more than 50 employees commit to implementing whistleblowing channels and afford appropriate whistleblowing protections to covered persons and activities, as per Directive (EU) 2019/1937.
 
-Signatories recognise their obligations regarding whistleblowing protections following from Directive (EU) 2019/1937. This recognition is without prejudice to the full application of these obligations and how they have been transposed into national law. The following provisions are intended to highlight the most significant obligations and do not constitute an exhaustive list of all responsibilities under Directive (EU) 2019/1937: 
- • establishing secure and confidential internal reporting channels that allow for both written and oral reporting.
-
- 
- • designating an impartial person or department to handle reports, acknowledge receipt within seven days, and provide feedback within three months.
- • maintaining proper records while ensuring confidentiality and respecting data protection requirements including but not limited to the specification under GDPR.
- • providing clear information about both internal and external reporting procedures.
- • protecting whistleblowers from all forms of retaliation, including dismissal, demotion, or harassment.
+Signatories recognise their obligations regarding whistleblowing protections following from Directive (EU) 2019/1937. This recognition is without prejudice to the full application of these obligations and how they have been transposed into national law. The following provisions are intended to highlight the most significant obligations and do not constitute an exhaustive list of all responsibilities under Directive (EU) 2019/1937:
+- establishing secure and confidential internal reporting channels that allow for both written and oral reporting.
+- designating an impartial person or department to handle reports, acknowledge receipt within seven days, and provide feedback within three months.
+- maintaining proper records while ensuring confidentiality and respecting data protection requirements including but not limited to the specification under GDPR.
+- providing clear information about both internal and external reporting procedures.
+- protecting whistleblowers from all forms of retaliation, including dismissal, demotion, or harassment.
 
 Should there be a designated mailbox for whistleblowing set up by the AI Office, Signatories commit to informing covered persons of its existence.
 
 Signatories with less than 50 employees are encouraged to implement the whistleblower protections outlined above, in particular, at least annually informing employees of an AI Office mailbox, if it is operational, and implementing measures and policies to protect whistleblowers from all forms of retaliation, including dismissal, demotion, or harassment.
-Potential Key Performance Indicators 
- • KPI 18.1: Documented evidence of a whistleblower policy that ensures employees can report wrongdoing freely, anonymously, and without fear of retaliation. This policy will include: • Scope of protected disclosures.
- • Internal and external reporting channels.
- • Anti-retaliation measures and assurances.
- • Investigation process for reported concerns.
- • Jurisdictional affordances and limitations of protections.
- • KPI 18.2: Description of the communication strategy for informing employees and stakeholders about whistleblower protections and reporting channels.
- • KPI 18.3: Evidence of regular awareness initiatives (e.g. training, internal communications, campaigns) conducted at least annually.
- • KPI 18.4: Provision of anonymous internal reporting mechanisms (e.g. compliance hotlines, secure messaging platforms) specifically for concerns related to general-purpose AI models with systemic risk.
- • KPI 18.5: Documentation of AI-related whistleblower reports received, categorised by concern type, while maintaining confidentiality.
- • KPI 18.6: Documentation of initial response times and the time taken to act upon the communicated concern. The initial response and acknowledgement of the whistleblowing report will happen without undue delay, while actions taken in response to the whistleblower report will be proportionate to the severity of the concerns reported.
+Potential Key Performance Indicators
+- KPI 18.1: Documented evidence of a whistleblower policy that ensures employees can report wrongdoing freely, anonymously, and without fear of retaliation. This policy will include:
+- Scope of protected disclosures.
+- Internal and external reporting channels.
+- Anti-retaliation measures and assurances.
+- Investigation process for reported concerns.
+- Jurisdictional affordances and limitations of protections.
+- KPI 18.2: Description of the communication strategy for informing employees and stakeholders about whistleblower protections and reporting channels.
+- KPI 18.3: Evidence of regular awareness initiatives (e.g. training, internal communications, campaigns) conducted at least annually.
+- KPI 18.4: Provision of anonymous internal reporting mechanisms (e.g. compliance hotlines, secure messaging platforms) specifically for concerns related to general-purpose AI models with systemic risk.
+- KPI 18.5: Documentation of AI-related whistleblower reports received, categorised by concern type, while maintaining confidentiality.
+- KPI 18.6: Documentation of initial response times and the time taken to act upon the communicated concern. The initial response and acknowledgement of the whistleblowing report will happen without undue delay, while actions taken in response to the whistleblower report will be proportionate to the severity of the concerns reported.
 
  Explanation of the changes to Commitment 18: A variety of stakeholders gave the feedback that the most important obligations under Directive (EU) 2019/1937 should be reiterated here in the Code. In addition, language was added that encourages small companies that don’t fall under the Directive to implement an adjusted minimum version of whistleblowing protections.
 
@@ -745,25 +832,26 @@ Commitment 20. Documentation In order to fulfil their obligations under Article 
 
 Measure 20.1. Documentation regarding classification based on Article 51 AI Act Signatories commit to documenting information relevant to the classification of general-purpose AI models with systemic risk based on Article 51 AI Act.
 
-More specifically, this entails: • The documentation requirements outlined in Commitment 1.
- • Results from risk assessments, described in Commitments 6—10, including model evaluation results, and an assessment of the model’s generality, autonomy, and ability to use and access tools and scaffolding (see Annex XI, Section 2, point 1. and Annex XIII AI Act). This may be covered in the Model Report.
- • The reach of the model, in particular the number of registered business users established in the Union (Annex XIII, point (f) AI Act).
+More specifically, this entails:
+- The documentation requirements outlined in Commitment 1.
+- Results from risk assessments, described in Commitments 6—10, including model evaluation results, and an assessment of the model’s generality, autonomy, and ability to use and access tools and scaffolding (see Annex XI, Section 2, point 1. and Annex XIII AI Act). This may be covered in the Model Report.
+- The reach of the model, in particular the number of registered business users established in the Union (Annex XIII, point (f) AI Act).
 
-Measure 20.2. Documentation regarding adherence to the Code and the AI Act Signatories commit to documenting information relevant to their adherence to the Code. This includes: • Their Framework.
-
- 
- • Their Model Reports.
- • Adequacy and adherence assessments described in Commitment 15.
- • Where applicable, a detailed description of the system architecture explaining how software components build or feed into each other and integrate into the overall processing (Annex XI, Section 2, point 3. AI Act), including input/output filters, fine-tuning, system prompts, feature inhibition/activation, query routing, hidden chains of thought, and tool use.
- • Evidence of a whistleblower policy and of informing employees and stakeholders about whistleblower protections and reporting channels.
+Measure 20.2. Documentation regarding adherence to the Code and the AI Act Signatories commit to documenting information relevant to their adherence to the Code. This includes:
+- Their Framework.
+- Their Model Reports.
+- Adequacy and adherence assessments described in Commitment 15.
+- Where applicable, a detailed description of the system architecture explaining how software components build or feed into each other and integrate into the overall processing (Annex XI, Section 2, point 3. AI Act), including input/output filters, fine-tuning, system prompts, feature inhibition/activation, query routing, hidden chains of thought, and tool use.
+- Evidence of a whistleblower policy and of informing employees and stakeholders about whistleblower protections and reporting channels.
 
  Explanation of changes to Commitment 20: This Commitment was clarified to ensure consistency and avoid duplication with the obligations that providers of general-purpose AI model already face under Article 53 AI Act, further detailed in Commitment 1. Given the complexity of the documentation requirements, there’s a chance we’ve double counted in places or missed something; if this is the case, please let us know in the EU survey.
 
 Commitment 21. Public transparency Signatories commit to offering appropriate public transparency with the aim of aiding the wider ecosystem, including the public and external researchers, to better understand and mitigate systemic risks stemming from general-purpose AI models, especially in light of the nascency of the science of assessing and mitigating systemic risks. At a minimum, Signatories commit to publishing their Framework and their Model Reports or similar documents (such as model cards or system cards). Information may be redacted where its inclusion would substantially increase systemic risk, such as the disclosure of information about safety mitigations that would undermine their effectiveness or divulge sensitive commercial information to a degree disproportionate to the societal benefit.
 
-Potential Key Performance Indicators • KPI 21.1: Signatories publish updated or new versions of their Frameworks within 15 working days of sending it to the AI Office, potentially redacting information where its inclusion would substantially increase systemic risk or divulge sensitive commercial information to a degree disproportionate to the societal benefit.
- • KPI 21.2: Signatories publish Model Reports within five days after the relevant model is released on the EU market, redacting information where its inclusion would substantially increase systemic risk or divulge sensitive commercial information to a degree disproportionate to the societal benefit.
- • KPI 21.3: Signatories publish documents summarising the contents of their Model Report within five days of the relevant model being released on the EU market. For example, they publish model or system cards describing the results from systemic risk assessments, as well as mitigations put in place.
+Potential Key Performance Indicators
+- KPI 21.1: Signatories publish updated or new versions of their Frameworks within 15 working days of sending it to the AI Office, potentially redacting information where its inclusion would substantially increase systemic risk or divulge sensitive commercial information to a degree disproportionate to the societal benefit.
+- KPI 21.2: Signatories publish Model Reports within five days after the relevant model is released on the EU market, redacting information where its inclusion would substantially increase systemic risk or divulge sensitive commercial information to a degree disproportionate to the societal benefit.
+- KPI 21.3: Signatories publish documents summarising the contents of their Model Report within five days of the relevant model being released on the EU market. For example, they publish model or system cards describing the results from systemic risk assessments, as well as mitigations put in place.
 
  Explanation of changes to Commitment 21: This Commitment was revised following provider feedback that publishing Model Reports was overly burdensome and goes beyond the requirements of the AI Act. To address concerns, we eased disclosure requirements, allowing the redaction of sensitive commercial information where societal benefits are minimal. We also clarified that model or system cards could be substitutes for a summarised or redacted version of Model Reports, something which is typically published alongside general-purpose AI models with systemic risk.
 
