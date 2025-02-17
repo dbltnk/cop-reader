@@ -10,6 +10,36 @@ if (window.matchMedia) {
     darkModeMediaQuery.addEventListener('change', e => setDarkMode(e.matches));
 }
 
+// Recitals functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const recitals = document.querySelectorAll('.main-content .recital');
+    const recitalsFullSection = document.querySelector('.recitals-full');
+
+    // Clear any existing recitals in the full section
+    while (recitalsFullSection.children.length > 1) { // Keep the h2
+        recitalsFullSection.removeChild(recitalsFullSection.lastChild);
+    }
+
+    // Clone each recital to the full section
+    recitals.forEach((recital, index) => {
+        const recitalClone = recital.cloneNode(true);
+        const number = index + 1;
+        recitalClone.classList.add('full-section-recital');
+        const header = recitalClone.querySelector('h4');
+        header.dataset.recitalNumber = number;
+        recital.querySelector('h4').dataset.recitalNumber = number;
+        recitalsFullSection.appendChild(recitalClone);
+    });
+
+    // Add click handlers to main content recitals only
+    document.querySelectorAll('.recital:not(.full-section-recital)').forEach(recital => {
+        const header = recital.querySelector('h4');
+        header.addEventListener('click', () => {
+            recital.classList.toggle('collapsed');
+        });
+    });
+});
+
 // Glossary functionality
 document.addEventListener('DOMContentLoaded', () => {
     const glossaryTerms = document.querySelectorAll('.glossary-term');

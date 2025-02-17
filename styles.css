@@ -81,11 +81,11 @@
 .info-box,
 .explanatory-box,
 .disclaimer-box {
-    margin: 3rem auto;
+    margin: 3rem 0;
     padding: 1.5rem;
     border-radius: 4px;
-    max-width: 800px;
-    width: 90%;
+    width: 55%;
+    border-left: 2px solid #e0e0e0;
 }
 
 .disclaimer-box {
@@ -174,16 +174,17 @@
 .glossary {
     margin-top: 4rem;
     padding-top: 2rem;
-    border-top: 1px solid #ddd;
 }
 
 .glossary h2 {
     margin-bottom: 2rem;
+    width: 55%;
 }
 
 .glossary-list {
     list-style: none;
     padding: 0;
+    width: 55%;
 }
 
 .glossary-list dt {
@@ -255,10 +256,6 @@
     }
 
     /* Dark mode glossary */
-    .glossary {
-        border-top-color: #333;
-    }
-
     .glossary-list dd {
         color: #aaa;
     }
@@ -295,5 +292,124 @@
 
     .disclaimer-box a {
         color: #4fc3f7;
+    }
+}
+
+/* Recital styles */
+.recital {
+    margin: 2rem 0;
+    padding: 1rem 1.5rem;
+    background-color: #fafafa;
+    border-left: 2px solid #e0e0e0;
+    transition: all 0.3s ease-out;
+    width: 55%;
+}
+
+.recital.collapsed {
+    padding: 0.7rem 1.5rem;
+}
+
+.recital.collapsed p {
+    display: none;
+}
+
+.recital h4 {
+    margin: 0;
+    padding: 0.3rem 0;
+    font-weight: 500;
+    color: #757575;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.recital p {
+    margin: 1rem 0 0 0;
+    transition: all 0.3s ease-out;
+}
+
+.recital h4::before {
+    content: "▼";
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.recital.collapsed h4::before {
+    transform: rotate(-90deg);
+}
+
+/* Recital counter */
+article {
+    counter-reset: recital-counter;
+}
+
+.recital h4::after {
+    content: " " attr(data-recital-number);
+}
+
+/* Recitals section */
+.recitals-full {
+    margin-top: 4rem;
+    padding-top: 2rem;
+}
+
+.recitals-full h2 {
+    margin-bottom: 2rem;
+    width: 55%;
+}
+
+/* Full section specific styles */
+.recitals-full .recital {
+    background-color: transparent;
+    border-left: none;
+    padding: 0.5rem 0;
+    margin: 1rem 0;
+    width: 55%;
+}
+
+.recitals-full .recital h4 {
+    cursor: default;
+}
+
+.recitals-full .recital h4::before {
+    display: none;
+}
+
+/* Dark mode additions */
+@media (prefers-color-scheme: dark) {
+    .recital {
+        background-color: #222;
+        border-left-color: #444;
+    }
+
+    .recital h4 {
+        color: #aaa;
+    }
+
+    .recitals-full .recital {
+        background-color: transparent;
+        border-left: none;
+    }
+}
+
+.full-section-recital h4::after {
+    content: " " attr(data-recital-number);
+    counter-increment: none;
+}
+
+/* For smaller screens */
+@media (max-width: 760px) {
+
+    .glossary h2,
+    .glossary-list,
+    .recitals-full h2,
+    .recital,
+    .recitals-full .recital,
+    .legal-text,
+    .info-box,
+    .explanatory-box,
+    .disclaimer-box {
+        width: 85%;
     }
 }
