@@ -6,9 +6,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.querySelector('.main-content');
     const mediaQuery = window.matchMedia('(min-width: 1024px)');
 
+    // Highlight current section in navigation
+    const observerCallback = (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                const navLink = navContent.querySelector(`a[href="#${id}"]`);
+                if (navLink) {
+                    navContent.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+                    navLink.classList.add('active');
+                }
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+        rootMargin: '-20% 0px -70% 0px'
+    });
+
     // Build navigation from content
     function buildNavigation() {
         const navList = document.createElement('ul');
+
+        // Add Opening Statement
+        const openingStatement = document.querySelector('h2:first-of-type');
+        if (openingStatement && openingStatement.textContent.includes('Opening statement')) {
+            const openingLi = document.createElement('li');
+            const openingLink = document.createElement('a');
+            const headingId = 'opening-statement';
+            openingStatement.id = headingId;
+            openingLink.href = `#${headingId}`;
+            openingLink.textContent = openingStatement.textContent;
+            openingLi.appendChild(openingLink);
+            navList.appendChild(openingLi);
+            observer.observe(openingStatement);
+        }
+
+        // Add Drafting Plan
+        const draftingPlan = document.querySelector('h2:last-of-type');
+        if (draftingPlan && draftingPlan.textContent.includes('Drafting plan')) {
+            const draftingLi = document.createElement('li');
+            const draftingLink = document.createElement('a');
+            const headingId = 'drafting-plan';
+            draftingPlan.id = headingId;
+            draftingLink.href = `#${headingId}`;
+            draftingLink.textContent = draftingPlan.textContent;
+            draftingLi.appendChild(draftingLink);
+            navList.appendChild(draftingLi);
+            observer.observe(draftingPlan);
+        }
+
         const headings = mainContent.querySelectorAll('h2, h3, h4');
         let currentCommitmentList = null;
 
@@ -49,21 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     measureLi.appendChild(link);
                     currentCommitmentList.appendChild(measureLi);
                 }
+
+                observer.observe(heading);
             }
         });
-
-        // Add Recitals link if it exists
-        const recitalsHeading = document.querySelector('.recital h4');
-        if (recitalsHeading) {
-            const recitalsId = 'recitals';
-            recitalsHeading.id = recitalsId;
-            const recitalsLink = document.createElement('a');
-            recitalsLink.href = `#${recitalsId}`;
-            recitalsLink.textContent = 'Recitals';
-            const recitalsLi = document.createElement('li');
-            recitalsLi.appendChild(recitalsLink);
-            navList.appendChild(recitalsLi);
-        }
 
         // Add Glossary link if it exists
         const glossarySection = document.querySelector('.glossary');
@@ -74,6 +110,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const glossaryLi = document.createElement('li');
             glossaryLi.appendChild(glossaryLink);
             navList.appendChild(glossaryLi);
+            observer.observe(glossarySection);
+        }
+
+        // Add Recitals link if it exists
+        const recitalsSection = document.querySelector('.recitals-full');
+        if (recitalsSection) {
+            const recitalsLink = document.createElement('a');
+            recitalsLink.href = '#recitals';
+            recitalsLink.textContent = 'Recitals';
+            const recitalsLi = document.createElement('li');
+            recitalsLi.appendChild(recitalsLink);
+            navList.appendChild(recitalsLi);
+            observer.observe(recitalsSection);
         }
 
         // Clear and update navigation
@@ -142,29 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleMenu(e.matches); // Open on desktop, close on mobile
             wasDesktop = e.matches;
         }
-    });
-
-    // Highlight current section in navigation
-    const observerCallback = (entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.id;
-                const navLink = navContent.querySelector(`a[href="#${id}"]`);
-                if (navLink) {
-                    navContent.querySelectorAll('a').forEach(a => a.classList.remove('active'));
-                    navLink.classList.add('active');
-                }
-            }
-        });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, {
-        rootMargin: '-20% 0px -70% 0px'
-    });
-
-    // Observe all sections
-    document.querySelectorAll('section[id], h2[id], h3[id]').forEach(section => {
-        observer.observe(section);
     });
 });
 

@@ -1,4 +1,4 @@
- Second Draft General-Purpose AI Code of Practice 
+Second Draft General-Purpose AI Code of Practice 
 Opening statement by the Chairs and Vice-Chairs 
 As the Chairs and Vice-Chairs of the four Working Groups, we hereby present the second draft of the General-Purpose AI Code of Practice under the AI Act (the “Code”). Participants in the Working Groups and observers of the Code of Practice Plenary are welcome to submit written feedback on this draft by 15 January 2025 via a dedicated survey shared with them.
 
@@ -95,10 +95,10 @@ Measure 1.2. Ensuring quality, integrity, and security of information Signatorie
 
 In the context of drawing-up, updating, and controlling the quality and security of the information and records, Signatories are encouraged to follow the established protocols and technical standards.
 
- Table 1: Reference table for Measure 1.1.
+TABLE 1 REMOVED 
 
- Information that Signatories commit to drawing up and For the AI keeping up-to-date to fulfil the AI Act obligations. Office and For AI Act (Note: The underlined text is a summarised form of the national downstream reference corresponding AI Act obligation as specified in Annex competent providers XI Section 1 and/or Annex XII AI Act). authorities, 
-TABLE REMOVED 
+Information that Signatories commit to drawing up and For the AI keeping up-to-date to fulfil the AI Act obligations. Office and For AI Act (Note: The underlined text is a summarised form of the national downstream reference corresponding AI Act obligation as specified in Annex competent providers XI Section 1 and/or Annex XII AI Act). authorities, 
+
 Appendix: Essential elements of an Acceptable Use Policy 
 An Acceptable Use Policy (AUP) is defined as guidelines to users on what is and is not considered acceptable use.
 
