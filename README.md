@@ -47,6 +47,7 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [ ] Collapsable nav items?
 - [ ] Collapse them by default
 - [ ] Anchor links, click to copy & share!
+- [ ] Glossary does not work with spaces in the term
 - [ ] All headlines need to obey line width
 - [ ] More space between list items, UL and OL
 - [ ] Make boxes more unique

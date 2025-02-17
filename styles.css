@@ -244,6 +244,7 @@ h5 {
     cursor: pointer;
     transition: color 0.2s ease;
     gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
 /* Ensure box headlines don't break layout */
@@ -340,6 +341,7 @@ body.dark-mode h5:hover {
     .anchor-link {
         opacity: 0.5;
         padding: 0.5rem;
+        margin-top: 0;
     }
 
     h2,
@@ -347,6 +349,7 @@ body.dark-mode h5:hover {
     h4,
     h5 {
         padding-right: 1rem;
+        align-items: center;
     }
 }
 

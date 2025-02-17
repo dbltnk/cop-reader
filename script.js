@@ -181,10 +181,29 @@ document.addEventListener('DOMContentLoaded', () => {
         feedback.className = 'copy-feedback';
         document.body.appendChild(feedback);
 
+        // Keep track of used IDs to ensure uniqueness
+        const usedIds = new Set();
+
         headlines.forEach(headline => {
-            // Create a unique ID if none exists
+            // Create base ID from text content
+            let baseId = headline.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
+            // If no ID exists, create a unique one
             if (!headline.id) {
-                headline.id = headline.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                let uniqueId = baseId;
+                let counter = 1;
+
+                // If this ID is already used, append a number until we find a unique one
+                while (usedIds.has(uniqueId)) {
+                    uniqueId = `${baseId}-${counter}`;
+                    counter++;
+                }
+
+                headline.id = uniqueId;
+                usedIds.add(uniqueId);
+            } else {
+                // If headline already has an ID, still track it to ensure uniqueness
+                usedIds.add(headline.id);
             }
 
             // Create anchor link
