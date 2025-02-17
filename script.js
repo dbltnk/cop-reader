@@ -196,47 +196,148 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Glossary functionality
 document.addEventListener('DOMContentLoaded', () => {
-    const glossaryTerms = document.querySelectorAll('.glossary-term');
+    // Extract all glossary terms
     const glossaryList = document.querySelector('.glossary-list');
+    const glossaryTerms = document.querySelectorAll('.glossary-term');
     const tooltip = document.createElement('div');
     tooltip.className = 'glossary-tooltip';
     document.body.appendChild(tooltip);
 
-    // Add reference numbers to terms
-    let termCounter = 1;
+    // Create map of terms and their IDs
     const termMap = new Map();
+    let termCounter = 1;
 
     // First pass: create the map of terms
     glossaryList.querySelectorAll('dt').forEach(term => {
         const id = term.id.replace('term-', '');
-        termMap.set(id, {
+        termMap.set(id.toLowerCase(), {
+            id: id,
             number: termCounter++,
             definition: term.nextElementSibling.textContent
         });
     });
 
-    // Second pass: add numbers to inline terms
-    glossaryTerms.forEach(term => {
-        const termId = term.getAttribute('href').substring(6); // Remove #term-
-        const termInfo = termMap.get(termId);
-        if (termInfo) {
-            const ref = document.createElement('span');
-            ref.className = 'glossary-ref';
-            ref.textContent = termInfo.number;
-            term.appendChild(ref);
+    // Function to automatically tag glossary terms in text
+    function autoTagGlossaryTerms(element) {
+        // Skip if element is in excluded areas
+        if (element.closest('.glossary, .side-nav, .nav-content, a, code, pre')) {
+            return;
         }
-    });
+
+        const walker = document.createTreeWalker(
+            element,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode: function (node) {
+                    // Skip if parent is in excluded elements
+                    if (node.parentElement.closest('.glossary, .side-nav, .nav-content, a, code, pre')) {
+                        return NodeFilter.FILTER_REJECT;
+                    }
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            }
+        );
+
+        const nodesToReplace = [];
+        while (walker.nextNode()) {
+            nodesToReplace.push(walker.currentNode);
+        }
+
+        nodesToReplace.forEach(textNode => {
+            let text = textNode.nodeValue;
+            let newHtml = text;
+
+            // Sort terms by length (longest first) to handle overlapping terms
+            const sortedTerms = Array.from(termMap.keys()).sort((a, b) => b.length - a.length);
+
+            // Create a regex that matches whole words only
+            sortedTerms.forEach(term => {
+                const regex = new RegExp(`\\b${term}\\b`, 'gi');
+                const termInfo = termMap.get(term);
+
+                newHtml = newHtml.replace(regex, (match) => {
+                    return `<a href="#term-${termInfo.id}" class="glossary-term">${match}<span class="glossary-ref">${termInfo.number}</span></a>`;
+                });
+            });
+
+            if (newHtml !== text) {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = newHtml;
+                const fragment = document.createDocumentFragment();
+                while (tempDiv.firstChild) {
+                    fragment.appendChild(tempDiv.firstChild);
+                }
+                textNode.parentNode.replaceChild(fragment, textNode);
+            }
+        });
+    }
+
+    // Apply auto-tagging to main content
+    const mainContent = document.querySelector('.main-content');
+    autoTagGlossaryTerms(mainContent);
+
+    // Function to add event listeners to glossary terms
+    function addGlossaryTermListeners() {
+        const allGlossaryTerms = document.querySelectorAll('.glossary-term');
+        const isMobile = window.matchMedia('(max-width: 1023px)').matches;
+
+        allGlossaryTerms.forEach(term => {
+            // Common click handler for both mobile and desktop
+            term.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentTerm === term) {
+                    hideTooltip();
+                } else {
+                    showTooltip(term);
+                }
+            });
+
+            // Desktop-only hover handlers
+            if (!isMobile) {
+                term.addEventListener('mouseenter', () => showTooltip(term));
+                term.addEventListener('mouseleave', (e) => {
+                    // Only hide if we're not moving to the tooltip
+                    if (!e.relatedTarget || !e.relatedTarget.closest('.glossary-tooltip')) {
+                        hideTooltip();
+                    }
+                });
+            }
+        });
+
+        // Desktop-only tooltip hover handling
+        if (!isMobile) {
+            tooltip.addEventListener('mouseleave', (e) => {
+                // Only hide if we're not moving to a term
+                if (!e.relatedTarget || !e.relatedTarget.closest('.glossary-term')) {
+                    hideTooltip();
+                }
+            });
+        }
+
+        // Global click handler to close tooltip when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.glossary-term') && !e.target.closest('.glossary-tooltip')) {
+                hideTooltip();
+            }
+        });
+    }
+
+    // Add event listeners after creating the terms
+    addGlossaryTermListeners();
 
     let currentTerm = null;
 
     function showTooltip(term) {
+        // Hide any existing tooltip first
+        hideTooltip();
+
         const termId = term.getAttribute('href').substring(6);
-        const termInfo = termMap.get(termId);
+        const termInfo = termMap.get(termId.toLowerCase());
         if (termInfo) {
             currentTerm = term;
             tooltip.innerHTML = `
                 <div class="glossary-tooltip-header">
-                    <span class="glossary-tooltip-term">${termId} [${termInfo.number}]</span>
+                    <span class="glossary-tooltip-term">${termInfo.id} [${termInfo.number}]</span>
                 </div>
                 <div class="glossary-tooltip-content">
                     ${termInfo.definition}
@@ -277,54 +378,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function hideTooltip() {
         tooltip.classList.remove('active');
         currentTerm = null;
-    }
-
-    // Event listeners for desktop
-    if (window.matchMedia('(min-width: 1024px)').matches) {
-        glossaryTerms.forEach(term => {
-            term.addEventListener('mouseenter', () => showTooltip(term));
-            term.addEventListener('mouseleave', (e) => {
-                // Only hide if we're not moving to the tooltip
-                if (!e.relatedTarget || !e.relatedTarget.closest('.glossary-tooltip')) {
-                    hideTooltip();
-                }
-            });
-            term.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (currentTerm === term) {
-                    hideTooltip();
-                } else {
-                    showTooltip(term);
-                }
-            });
-        });
-
-        // Add tooltip hover handling
-        tooltip.addEventListener('mouseleave', (e) => {
-            // Only hide if we're not moving to a term
-            if (!e.relatedTarget || !e.relatedTarget.closest('.glossary-term')) {
-                hideTooltip();
-            }
-        });
-    } else {
-        // Event listeners for mobile
-        glossaryTerms.forEach(term => {
-            term.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (currentTerm === term) {
-                    hideTooltip();
-                } else {
-                    showTooltip(term);
-                }
-            });
-        });
-
-        // Hide tooltip when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.glossary-term') && !e.target.closest('.glossary-tooltip')) {
-                hideTooltip();
-            }
-        });
     }
 
     // Update tooltip position on scroll and resize
