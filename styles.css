@@ -176,6 +176,13 @@
     padding-top: 2rem;
 }
 
+h2 {
+    max-width: 650px;
+    line-height: 1.4;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
 .glossary h2 {
     margin-bottom: 2rem;
     width: 55%;
@@ -1079,4 +1086,76 @@ body.light-mode .nav-content a.active {
 
 body.light-mode .nav-label {
     color: #111;
+}
+
+.kpi-box {
+    background-color: #f8f9fa;
+    border-left: 4px solid #28a745;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    max-width: 650px;
+}
+
+.kpi-box h5 {
+    color: #28a745;
+    margin-top: 0;
+    font-size: 1rem;
+}
+
+.kpi-box .kpi-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.kpi-box .kpi-list li {
+    margin-bottom: 0.5rem;
+}
+
+.kpi-box .kpi-target {
+    color: #28a745;
+    font-weight: 500;
+}
+
+/* Dark mode styles for KPI box */
+@media (prefers-color-scheme: dark) {
+    .kpi-box {
+        background-color: #1a1a1a;
+        border-left-color: #2ecc71;
+    }
+
+    .kpi-box h5 {
+        color: #2ecc71;
+    }
+
+    .kpi-box .kpi-target {
+        color: #2ecc71;
+    }
+}
+
+body.light-mode .kpi-box {
+    background-color: #f8f9fa;
+    border-left-color: #28a745;
+}
+
+body.light-mode .kpi-box h5 {
+    color: #28a745;
+}
+
+body.light-mode .kpi-box .kpi-target {
+    color: #28a745;
+}
+
+body.dark-mode .kpi-box {
+    background-color: #1a1a1a;
+    border-left-color: #2ecc71;
+}
+
+body.dark-mode .kpi-box h5 {
+    color: #2ecc71;
+}
+
+body.dark-mode .kpi-box .kpi-target {
+    color: #2ecc71;
 }

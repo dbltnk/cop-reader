@@ -3,6 +3,87 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('.side-nav');
     const toggle = document.querySelector('.nav-toggle');
     const navContent = document.getElementById('nav-content');
+    const mainContent = document.querySelector('.main-content');
+
+    // Build navigation from content
+    function buildNavigation() {
+        const navList = document.createElement('ul');
+        const headings = mainContent.querySelectorAll('h2, h3, h4');
+        let currentCommitmentList = null;
+
+        headings.forEach(heading => {
+            // Skip headings inside boxes and KPI sections
+            if (heading.closest('.info-box, .kpi-box, .explanatory-box, .legal-text, .disclaimer-box')) {
+                return;
+            }
+
+            // Skip KPI sections and other unwanted headers
+            if (heading.textContent.toLowerCase().includes('kpi') ||
+                heading.textContent.toLowerCase().includes('performance indicator') ||
+                heading.textContent.toLowerCase().includes('whereas')) {
+                return;
+            }
+
+            // Create the link
+            const link = document.createElement('a');
+            const headingText = heading.textContent.trim();
+
+            // Only process Commitments and Measures
+            if (headingText.startsWith('Commitment') || headingText.startsWith('Measure')) {
+                const headingId = headingText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                heading.id = headingId;
+                link.href = `#${headingId}`;
+                link.textContent = headingText;
+
+                // Create list item
+                const li = document.createElement('li');
+                li.appendChild(link);
+
+                if (headingText.startsWith('Commitment')) {
+                    currentCommitmentList = document.createElement('ul');
+                    li.appendChild(currentCommitmentList);
+                    navList.appendChild(li);
+                } else if (headingText.startsWith('Measure') && currentCommitmentList) {
+                    const measureLi = document.createElement('li');
+                    measureLi.appendChild(link);
+                    currentCommitmentList.appendChild(measureLi);
+                }
+            }
+        });
+
+        // Add Recitals link if it exists
+        const recitalsHeading = document.querySelector('.recital h4');
+        if (recitalsHeading) {
+            const recitalsId = 'recitals';
+            recitalsHeading.id = recitalsId;
+            const recitalsLink = document.createElement('a');
+            recitalsLink.href = `#${recitalsId}`;
+            recitalsLink.textContent = 'Recitals';
+            const recitalsLi = document.createElement('li');
+            recitalsLi.appendChild(recitalsLink);
+            navList.appendChild(recitalsLi);
+        }
+
+        // Add Glossary link if it exists
+        const glossarySection = document.querySelector('.glossary');
+        if (glossarySection) {
+            const glossaryLink = document.createElement('a');
+            glossaryLink.href = '#glossary';
+            glossaryLink.textContent = 'Glossary';
+            const glossaryLi = document.createElement('li');
+            glossaryLi.appendChild(glossaryLink);
+            navList.appendChild(glossaryLi);
+        }
+
+        // Clear and update navigation
+        while (navContent.children.length > 1) { // Keep the h3 "Contents"
+            navContent.removeChild(navContent.lastChild);
+        }
+        navContent.appendChild(navList);
+    }
+
+    // Build initial navigation
+    buildNavigation();
 
     // Toggle navigation
     toggle.addEventListener('click', () => {
