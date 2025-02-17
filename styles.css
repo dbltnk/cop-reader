@@ -485,7 +485,8 @@ article {
 /* Responsive layout improvements */
 @media (min-width: 761px) and (max-width: 1599px) {
     article {
-        max-width: 1000px;
+        width: 87.5%;
+        max-width: 1400px;
         margin: 0 auto;
     }
 
@@ -498,7 +499,7 @@ article {
     .info-box,
     .explanatory-box,
     .disclaimer-box {
-        width: 75%;
+        width: 55%;
     }
 }
 
@@ -906,9 +907,22 @@ article {
 /* Ultra-wide screen optimizations */
 @media (min-width: 1600px) {
     article {
+        width: 87.5%;
         max-width: 1400px;
         margin: 0 auto;
         margin-right: 350px;
+    }
+
+    .glossary h2,
+    .glossary-list,
+    .recitals-full h2,
+    .recital,
+    .recitals-full .recital,
+    .legal-text,
+    .info-box,
+    .explanatory-box,
+    .disclaimer-box {
+        width: 55%;
     }
 
     .side-nav {
