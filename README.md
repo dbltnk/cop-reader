@@ -38,7 +38,7 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 ## Unsorted notes:
 - [ ] Longer lines
 - [x] Collapsable shortcuts, see more ToC
-- [ ] Nav items closer togethet
+- [ ] Nav items closer together
 - [ ] ToC text formatting
 - [ ] ToC titles too long, truncate?
 - [ ] Remove the all caps formatting
@@ -67,7 +67,7 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [ ] Animation polish for recitals
 - [ ] Dropdown arrow too to right side
 - [ ] Recital hover smaller than the box
-- [ ] Key nav skips commitment 2
+- [x] Key nav skips commitment 2
 - [ ] Check key nav against screenreader and accessibility guidelines
 - [ ] Nav item spacing polish pass
 - [ ] Hamburger icon not equally spaces to top and right

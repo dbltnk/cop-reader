@@ -46,20 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Skip TRANSPARENCY and COPYRIGHT headlines
-            const headingText = heading.textContent.trim();
-            if (headingText === 'TRANSPARENCY' || headingText === 'COPYRIGHT') {
-                return;
-            }
-
-            const headingId = headingText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            const headingId = heading.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
             heading.id = headingId;
 
             const li = document.createElement('li');
             const link = document.createElement('a');
             link.href = `#${headingId}`;
             // Use mapped text if available, otherwise use original text
-            link.textContent = navTextMap[headingText] || headingText;
+            link.textContent = navTextMap[heading.textContent.trim()] || heading.textContent.trim();
             li.appendChild(link);
 
             // Create a sublist for this section
