@@ -25,6 +25,9 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [ ] Full screenreader support
 - [ ] Full support for [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/)
 
+## Known issues:
+- [ ] Glossary hover is not visible on mobile devices
+
 ## Credits & License
 
 This is being developed by Alexander Zacherl (alexander.zacherl@googlemail.com) and I have not yet figured out how to license it.
