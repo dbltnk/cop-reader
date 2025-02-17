@@ -11,6 +11,43 @@
 
 <body>
     <article role="main">
+        <!-- Navigation -->
+        <nav class="side-nav" role="navigation" aria-label="Table of contents">
+            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-content">
+                <span class="nav-icon">&#9776;</span>
+                <span class="nav-label">Table of Contents</span>
+            </button>
+            <div class="nav-controls">
+                <div class="theme-control">
+                    <label for="theme-select">Theme:</label>
+                    <select id="theme-select" aria-label="Select color theme">
+                        <option value="system">System Default</option>
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </div>
+                <button class="recital-toggle" aria-label="Toggle all recitals" aria-pressed="true">
+                    <span class="toggle-icon">▼</span>
+                    <span class="toggle-text"> All Recitals</span>
+                </button>
+            </div>
+            <div id="nav-content" class="nav-content">
+                <h3>Contents</h3>
+                <ul>
+                    <li>
+                        <a href="#commitment-21">Commitment 21. Public transparency</a>
+                        <ul>
+                            <li><a href="#considerations">Considerations</a></li>
+                            <li><a href="#kpi">Key Performance Indicators</a></li>
+                            <li><a href="#whereas">Whereas</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#glossary">Glossary</a></li>
+                    <li><a href="#recitals">Full Recitals</a></li>
+                </ul>
+            </div>
+        </nav>
+
         <h1>EU AI Act Code of Practice</h1>
 
         <section class="main-content" aria-label="Main content">

@@ -1,3 +1,56 @@
+// Navigation functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.querySelector('.side-nav');
+    const toggle = document.querySelector('.nav-toggle');
+    const navContent = document.getElementById('nav-content');
+
+    // Toggle navigation
+    toggle.addEventListener('click', () => {
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', !isExpanded);
+        nav.classList.toggle('active');
+    });
+
+    // Close navigation when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+            nav.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    // Close navigation when pressing Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            nav.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    // Highlight current section in navigation
+    const observerCallback = (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                const navLink = navContent.querySelector(`a[href="#${id}"]`);
+                if (navLink) {
+                    navContent.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+                    navLink.classList.add('active');
+                }
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+        rootMargin: '-20% 0px -70% 0px'
+    });
+
+    // Observe all sections
+    document.querySelectorAll('section[id], h2[id], h3[id]').forEach(section => {
+        observer.observe(section);
+    });
+});
+
 // Dark mode functionality
 function setDarkMode(isDark) {
     document.body.classList.toggle('dark-mode', isDark);
@@ -14,6 +67,10 @@ if (window.matchMedia) {
 document.addEventListener('DOMContentLoaded', () => {
     const recitals = document.querySelectorAll('.main-content .recital');
     const recitalsFullSection = document.querySelector('.recitals-full');
+    const recitalToggle = document.querySelector('.recital-toggle');
+    let recitalsExpanded = true;
+
+    recitalToggle.setAttribute('aria-pressed', recitalsExpanded);
 
     // Clear any existing recitals in the full section
     while (recitalsFullSection.children.length > 1) { // Keep the h2
@@ -36,6 +93,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const header = recital.querySelector('h4');
         header.addEventListener('click', () => {
             recital.classList.toggle('collapsed');
+        });
+    });
+
+    // Add recital toggle functionality
+    recitalToggle.addEventListener('click', () => {
+        recitalsExpanded = !recitalsExpanded;
+        recitalToggle.setAttribute('aria-pressed', recitalsExpanded);
+
+        document.querySelectorAll('.recital:not(.full-section-recital)').forEach(recital => {
+            if (recitalsExpanded) {
+                recital.classList.remove('collapsed');
+                recital.setAttribute('aria-expanded', 'true');
+            } else {
+                recital.classList.add('collapsed');
+                recital.setAttribute('aria-expanded', 'false');
+            }
         });
     });
 });
@@ -185,4 +258,39 @@ document.addEventListener('DOMContentLoaded', () => {
             positionTooltip(currentTerm);
         }
     });
+});
+
+// Theme handling
+const themeSelect = document.getElementById('theme-select');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+// Load saved theme preference
+const savedTheme = localStorage.getItem('theme') || 'system';
+themeSelect.value = savedTheme;
+
+function setTheme(theme) {
+    if (theme === 'system') {
+        document.body.classList.remove('light-mode', 'dark-mode');
+        setDarkMode(prefersDark.matches);
+    } else {
+        document.body.classList.remove('light-mode', 'dark-mode');
+        document.body.classList.add(`${theme}-mode`);
+    }
+}
+
+// Initialize theme
+setTheme(savedTheme);
+
+// Handle theme changes
+themeSelect.addEventListener('change', (e) => {
+    const theme = e.target.value;
+    setTheme(theme);
+    localStorage.setItem('theme', theme);
+});
+
+// Handle system theme changes
+prefersDark.addEventListener('change', (e) => {
+    if (themeSelect.value === 'system') {
+        setDarkMode(e.matches);
+    }
 }); 
