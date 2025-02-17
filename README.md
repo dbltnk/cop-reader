@@ -9,6 +9,7 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - Client-side scipting for accessibility and usability features (below)
 - Host static site on GitHub pages
 - Human and automated QA to prevent any differences to the official PDF
+- Proper credit for https://github.com/edwardtufte/tufte-css/blob/gh-pages/LICENSE
 
 ## Features:
 - Disclaimer & contribution guide
