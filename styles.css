@@ -150,6 +150,14 @@
     font-weight: 600;
 }
 
+/* Add general h4 style */
+h4 {
+    font-size: 1.3em;
+    line-height: 1.4;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
 /* Lists */
 .kpi-list {
     list-style: none;
@@ -485,7 +493,7 @@ article {
     }
 
     h4 {
-        font-size: 1.1em;
+        font-size: 1.3em;
     }
 }
 

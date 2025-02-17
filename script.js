@@ -37,7 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // Skip TRANSPARENCY and COPYRIGHT headlines
             const headingText = heading.textContent.trim();
+            if (headingText === 'TRANSPARENCY' || headingText === 'COPYRIGHT') {
+                return;
+            }
+
             const headingId = headingText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
             heading.id = headingId;
 
