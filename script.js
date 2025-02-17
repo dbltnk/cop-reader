@@ -67,10 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const subHeadingText = currentNode.textContent.trim();
 
-                    // Skip unwanted headers
+                    // Skip unwanted headers and measures (they'll be handled within commitments)
                     if (!subHeadingText.toLowerCase().includes('kpi') &&
                         !subHeadingText.toLowerCase().includes('performance indicator') &&
-                        !subHeadingText.toLowerCase().includes('whereas')) {
+                        !subHeadingText.toLowerCase().includes('whereas') &&
+                        !subHeadingText.startsWith('Measure')) {
 
                         const subHeadingId = subHeadingText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
                         currentNode.id = subHeadingId;
