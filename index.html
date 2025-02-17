@@ -11,12 +11,14 @@
 
 <body>
     <article role="main">
+        <!-- Navigation toggle -->
+        <button class="nav-toggle" aria-expanded="false" aria-controls="side-nav" aria-label="Toggle navigation menu">
+            <span class="nav-icon" aria-hidden="true">&#9776;</span>
+            <span class="nav-label">Table of Contents</span>
+        </button>
+
         <!-- Navigation -->
-        <nav class="side-nav" role="navigation" aria-label="Table of contents">
-            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-content">
-                <span class="nav-icon">&#9776;</span>
-                <span class="nav-label">Table of Contents</span>
-            </button>
+        <nav id="side-nav" class="side-nav" role="navigation" aria-label="Table of contents">
             <div class="nav-controls">
                 <div class="theme-control">
                     <label for="theme-select">Theme:</label>
@@ -26,7 +28,6 @@
                         <option value="dark">🌙 Dark</option>
                     </select>
                 </div>
-                <button class="close-nav" aria-label="Close menu">✕</button>
             </div>
             <div class="keyboard-shortcuts" aria-label="Keyboard shortcuts">
                 <h4>Keyboard Shortcuts</h4>
@@ -34,7 +35,7 @@
                     <li><kbd>↑</kbd>/<kbd>↓</kbd> Navigate headlines</li>
                     <li><kbd>←</kbd>/<kbd>→</kbd> Navigate commitments</li>
                     <li><kbd>1</kbd>To top<kbd>2</kbd>To glossary<kbd>3</kbd>To recitals</li>
-                    <li><kbd>4</kbd>Toggle all recitals<kbd>0</kbd>Toggle menu</li>
+                    <li><kbd>4</kbd>Toggle all recitals</li>
                 </ul>
             </div>
             <div id="nav-content" class="nav-content">

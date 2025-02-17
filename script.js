@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggle = document.querySelector('.nav-toggle');
     const navContent = document.getElementById('nav-content');
     const mainContent = document.querySelector('.main-content');
-    const closeButton = document.querySelector('.close-nav');
+    const mediaQuery = window.matchMedia('(min-width: 1024px)');
 
     // Build navigation from content
     function buildNavigation() {
@@ -86,33 +86,62 @@ document.addEventListener('DOMContentLoaded', () => {
     // Build initial navigation
     buildNavigation();
 
+    // Function to toggle menu
+    function toggleMenu(force = null) {
+        const isExpanded = force !== null ? force : toggle.getAttribute('aria-expanded') === 'true';
+        const newState = force !== null ? force : !isExpanded;
+
+        toggle.setAttribute('aria-expanded', newState);
+        nav.classList.toggle('active', newState);
+
+        // Announce to screen readers
+        const announcement = document.createElement('div');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.setAttribute('class', 'sr-only');
+        announcement.textContent = `Navigation menu ${newState ? 'opened' : 'closed'}`;
+        document.body.appendChild(announcement);
+        setTimeout(() => announcement.remove(), 1000);
+    }
+
+    // Close menu
+    function closeMenu() {
+        toggleMenu(false);
+    }
+
+    // Open menu
+    function openMenu() {
+        toggleMenu(true);
+    }
+
     // Toggle navigation
-    toggle.addEventListener('click', () => {
-        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-        toggle.setAttribute('aria-expanded', !isExpanded);
-        nav.classList.toggle('active');
-    });
+    toggle.addEventListener('click', () => toggleMenu());
 
     // Close navigation when clicking outside
     document.addEventListener('click', (e) => {
         if (!nav.contains(e.target) && !toggle.contains(e.target)) {
-            nav.classList.remove('active');
-            toggle.setAttribute('aria-expanded', 'false');
+            closeMenu();
         }
     });
 
-    // Close navigation when pressing Escape
+    // Handle keyboard navigation
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            nav.classList.remove('active');
-            toggle.setAttribute('aria-expanded', 'false');
+            closeMenu();
         }
     });
 
-    // Add close button handler
-    closeButton.addEventListener('click', () => {
-        nav.classList.remove('active');
-        toggle.setAttribute('aria-expanded', 'false');
+    // Set initial state based on screen size
+    if (mediaQuery.matches) {
+        openMenu(); // Start open on desktop
+    }
+
+    // Handle resize events - only set initial state when changing between mobile/desktop
+    let wasDesktop = mediaQuery.matches;
+    mediaQuery.addEventListener('change', (e) => {
+        if (e.matches !== wasDesktop) {
+            toggleMenu(e.matches); // Open on desktop, close on mobile
+            wasDesktop = e.matches;
+        }
     });
 
     // Highlight current section in navigation
@@ -447,7 +476,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.querySelector('.main-content');
     const nav = document.querySelector('.side-nav');
     const toggle = document.querySelector('.nav-toggle');
-    const closeButton = document.querySelector('.close-nav');
 
     // Store previous positions for jump-back functionality
     let previousPosition = null;
@@ -567,7 +595,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             case '4':
                 e.preventDefault();
-                document.querySelector('.recital-toggle').click();
+                const recitalToggle = document.querySelector('.recital-toggle');
+                if (recitalToggle) {
+                    recitalToggle.click();
+                }
                 break;
 
             case '0':
