@@ -8,6 +8,7 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - Find a good default template for accessible text rendering 
 - Client-side scipting for accessibility and usability features (below)
 - Host static site on GitHub pages
+- Human and automated QA to prevent any differences to the official PDF
 
 ## Features:
 - Disclaimer & contribution guide
