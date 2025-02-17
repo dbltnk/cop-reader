@@ -48,7 +48,7 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [ ] Collapse them by default
 - [~] Anchor links, click to copy & share!
 - [X] Glossary does not work with spaces in the term
-- [ ] All headlines need to obey line width
+- [x] All headlines need to obey line width
 - [ ] More space between list items, UL and OL
 - [ ] Make boxes more unique
 - [ ] Add characters / custom icons to boxes
@@ -79,4 +79,4 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [ ] Check for and remove footnotes
 - [ ] Icons: Talking chairs, lawyercat
 - [ ] R.: Fonts, colors
-- [ ] signatur break points not optimal
+- [ ] signatures: break points not optimal

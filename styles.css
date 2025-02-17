@@ -227,24 +227,44 @@ body.dark-mode h5 {
     padding-top: 2rem;
 }
 
-h2 {
-    max-width: 650px;
-    line-height: 1.4;
-    margin-top: 2.5rem;
-    margin-bottom: 1.5rem;
-}
-
 h2,
 h3,
 h4,
 h5 {
-    position: relative;
-    display: flex;
-    align-items: center;
+    width: 55%;
+    line-height: 1.4;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
     cursor: pointer;
     transition: color 0.2s ease;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+}
+
+.anchor-link {
+    opacity: 0;
+    text-decoration: none;
+    color: #666;
+    font-size: 0.7em;
+    transition: opacity 0.2s ease;
+    vertical-align: middle;
+    margin-left: 0.3em;
+}
+
+.anchor-link::after {
+    content: "⚓";
+}
+
+h2:hover,
+h3:hover,
+h4:hover,
+h5:hover {
+    color: #1971c2;
+}
+
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link {
+    opacity: 1;
 }
 
 /* Ensure box headlines don't break layout */
@@ -275,34 +295,12 @@ h5 {
     display: none;
 }
 
-.anchor-link {
-    opacity: 0;
-    text-decoration: none;
-    margin-left: 0.5rem;
-    transition: opacity 0.2s ease, color 0.2s ease;
-    color: #666;
-    flex-shrink: 0;
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-}
-
-h2:hover,
-h3:hover,
-h4:hover,
-h5:hover {
-    color: #1971c2;
-}
-
-h2:hover .anchor-link,
-h3:hover .anchor-link,
-h4:hover .anchor-link,
-h5:hover .anchor-link {
-    opacity: 1;
-}
-
-.anchor-link:hover {
-    color: #1971c2;
+/* The headline text should take up all available width except for the anchor */
+h2> :not(.anchor-link),
+h3> :not(.anchor-link),
+h4> :not(.anchor-link),
+h5> :not(.anchor-link) {
+    flex: 1 1 calc(100% - 3.5rem);
 }
 
 /* Dark mode */
@@ -1745,5 +1743,27 @@ body.dark-mode .signatures {
     h4,
     h5 {
         padding-right: 1rem;
+    }
+}
+
+/* Ultra-wide screen optimizations */
+@media (min-width: 1600px) {
+
+    h2,
+    h3,
+    h4,
+    h5 {
+        width: 65%;
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 760px) {
+
+    h2,
+    h3,
+    h4,
+    h5 {
+        width: 100%;
     }
 }
