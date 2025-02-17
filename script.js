@@ -440,24 +440,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.querySelector('.main-content');
     autoTagGlossaryTerms(mainContent);
 
+    // Function to detect if the device is a mobile device
+    function isMobileDevice() {
+        // Primary check: User Agent for mobile devices
+        const userAgentCheck = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        // Secondary check: Touch capability
+        const touchCheck = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+        // Tertiary check: Screen size (as a fallback)
+        const screenCheck = window.matchMedia('(max-width: 760px)').matches;
+
+        // Additional check: pointer type (if supported)
+        const pointerCheck = window.matchMedia?.('(pointer: coarse)').matches;
+
+        // Consider a device mobile if:
+        // 1. It's identified as a mobile device by user agent OR
+        // 2. It has touch capabilities AND either has a coarse pointer or small screen
+        return userAgentCheck || (touchCheck && (pointerCheck || screenCheck));
+    }
+
     // Function to add event listeners to glossary terms
     function addGlossaryTermListeners() {
         const allGlossaryTerms = document.querySelectorAll('.glossary-term');
-        const isMobile = window.matchMedia('(max-width: 1023px)').matches;
+        const isDeviceMobile = isMobileDevice();
 
         allGlossaryTerms.forEach(term => {
-            // Common click handler for both mobile and desktop
-            term.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (currentTerm === term) {
-                    hideTooltip();
-                } else {
-                    showTooltip(term);
-                }
-            });
+            if (isDeviceMobile) {
+                // Mobile-only tap handler
+                term.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (currentTerm === term) {
+                        hideTooltip();
+                    } else {
+                        showTooltip(term);
+                    }
+                });
+            } else {
+                // Desktop-only click and hover handlers
+                term.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (currentTerm === term) {
+                        hideTooltip();
+                    } else {
+                        showTooltip(term);
+                    }
+                });
 
-            // Desktop-only hover handlers
-            if (!isMobile) {
                 term.addEventListener('mouseenter', () => showTooltip(term));
                 term.addEventListener('mouseleave', (e) => {
                     // Only hide if we're not moving to the tooltip
@@ -469,7 +499,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Desktop-only tooltip hover handling
-        if (!isMobile) {
+        if (!isDeviceMobile) {
             tooltip.addEventListener('mouseleave', (e) => {
                 // Only hide if we're not moving to a term
                 if (!e.relatedTarget || !e.relatedTarget.closest('.glossary-term')) {
@@ -484,6 +514,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 hideTooltip();
             }
         });
+
+        // Handle device orientation change for mobile devices
+        if (isDeviceMobile) {
+            window.addEventListener('orientationchange', () => {
+                if (currentTerm) {
+                    // Reposition tooltip after orientation change
+                    setTimeout(() => positionTooltip(currentTerm), 100);
+                }
+            });
+        }
     }
 
     // Add event listeners after creating the terms
