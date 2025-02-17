@@ -430,11 +430,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const termMap = new Map();
     let termCounter = 1;
 
+    // Helper function to escape special regex characters
+    function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // Helper function to create a valid ID from a term
+    function createValidId(term) {
+        return term.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    }
+
     // First pass: create the map of terms
     glossaryList.querySelectorAll('dt').forEach(term => {
+        const originalTerm = term.textContent.trim();
         const id = term.id.replace('term-', '');
-        termMap.set(id.toLowerCase(), {
+        termMap.set(originalTerm.toLowerCase(), {
             id: id,
+            originalTerm: originalTerm,
             number: termCounter++,
             definition: term.nextElementSibling.textContent
         });
@@ -471,25 +483,31 @@ document.addEventListener('DOMContentLoaded', () => {
             let newHtml = text;
 
             // Sort terms by length (longest first) to handle overlapping terms
-            const sortedTerms = Array.from(termMap.keys()).sort((a, b) => b.length - a.length);
+            const sortedTerms = Array.from(termMap.keys())
+                .sort((a, b) => b.length - a.length)
+                .map(term => ({
+                    term: term,
+                    info: termMap.get(term)
+                }));
 
-            // Create a regex that matches whole words only
-            sortedTerms.forEach(term => {
-                const regex = new RegExp(`\\b${term}\\b`, 'gi');
-                const termInfo = termMap.get(term);
+            // Create a temporary div to hold the HTML while we process it
+            const tempDiv = document.createElement('div');
+            tempDiv.textContent = text;
+            let currentHtml = tempDiv.innerHTML;
 
-                newHtml = newHtml.replace(regex, (match) => {
-                    return `<a href="#term-${termInfo.id}" class="glossary-term">${match}<span class="glossary-ref">${termInfo.number}</span></a>`;
+            // Process each term
+            sortedTerms.forEach(({ term, info }) => {
+                const escapedTerm = escapeRegExp(term);
+                // Match whole words only, accounting for word boundaries and spaces
+                const regex = new RegExp(`(?<=^|[^a-zA-Z0-9-])${escapedTerm}(?=$|[^a-zA-Z0-9-])`, 'gi');
+
+                currentHtml = currentHtml.replace(regex, (match) => {
+                    return `<a href="#term-${info.id}" class="glossary-term">${match}<span class="glossary-ref">${info.number}</span></a>`;
                 });
             });
 
-            if (newHtml !== text) {
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = newHtml;
-                const fragment = document.createDocumentFragment();
-                while (tempDiv.firstChild) {
-                    fragment.appendChild(tempDiv.firstChild);
-                }
+            if (currentHtml !== tempDiv.innerHTML) {
+                const fragment = document.createRange().createContextualFragment(currentHtml);
                 textNode.parentNode.replaceChild(fragment, textNode);
             }
         });
@@ -595,12 +613,13 @@ document.addEventListener('DOMContentLoaded', () => {
         hideTooltip();
 
         const termId = term.getAttribute('href').substring(6);
-        const termInfo = termMap.get(termId.toLowerCase());
+        // Find the term info by ID
+        const termInfo = Array.from(termMap.values()).find(info => info.id === termId);
         if (termInfo) {
             currentTerm = term;
             tooltip.innerHTML = `
                 <div class="glossary-tooltip-header">
-                    <span class="glossary-tooltip-term">${termInfo.id} [${termInfo.number}]</span>
+                    <span class="glossary-tooltip-term">${termInfo.originalTerm} [${termInfo.number}]</span>
                 </div>
                 <div class="glossary-tooltip-content">
                     ${termInfo.definition}

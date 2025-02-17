@@ -19,9 +19,9 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [x] Proper credit for https://github.com/edwardtufte/tufte-css/blob/gh-pages/LICENSE
 
 ## Features:
-- [x] Disclaimer & contribution guide
-- [x] Responsive on any device from mobile phones to wide screen monitors
-- [x] Amazing text rendering that is a pleasure to read
+- [~] Disclaimer & contribution guide
+- [~] Responsive on any device from mobile phones to wide screen monitors
+- [~] Amazing text rendering that is a pleasure to read
 - [x] Table of contents in a side bar left (desktop) or menu (mobile)
 - [x] Dark and light mode, following the device default (user configurable, save any changes locally)
 - [x] Full support for browser-based search functions (no search provided by the web app itself)
@@ -37,7 +37,7 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 
 ## Unsorted notes:
 - [ ] Longer lines
-- [x] Collapsable shortcuts, see more ToC
+- [~] Collapsable shortcuts, see more ToC
 - [ ] Nav items closer together
 - [ ] ToC text formatting
 - [ ] ToC titles too long, truncate?
@@ -46,8 +46,8 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [ ] Move settings away or down or sth
 - [ ] Collapsable nav items?
 - [ ] Collapse them by default
-- [ ] Anchor links, click to copy & share!
-- [ ] Glossary does not work with spaces in the term
+- [~] Anchor links, click to copy & share!
+- [X] Glossary does not work with spaces in the term
 - [ ] All headlines need to obey line width
 - [ ] More space between list items, UL and OL
 - [ ] Make boxes more unique
