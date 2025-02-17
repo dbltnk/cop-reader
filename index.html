@@ -1759,6 +1759,371 @@
                 work. This requires not only competence in machine learning but also access to the relevant domain
                 expertise necessary to evaluate risks and other related aspects effectively.</p>
 
+            <p>Signatories commit to providing all model evaluators (internal and/or external) with the support needed
+                to
+                work to a rigorous scientific standard (as described in Measure 10.3), by giving them enough time, model
+                access, engineering support, and compute budget to properly evaluate a general-purpose AI model with
+                systemic risk. This also includes appropriate levels of model elicitation (see Measure 10.4) and access
+                to
+                models as part of systems where appropriate (see Measure 10.5). In addition, for external model
+                evaluators,
+                the conditions specified under Measure 16.1 apply.</p>
+
+            <p>To facilitate model elicitation, Signatories commit to working towards giving more model evaluators,
+                internal and external, grey- and white-box access to their general-purpose AI models with systemic risk,
+                considering a cost-benefit analysis with regards to model security (see Measure 12.2).</p>
+
+            <h4>Measure 10.10. Safety margins</h4>
+            <p>When Signatories use model evaluation results to inform the mapping of risk tiers to mitigations (see
+                Measure 4.3), they commit to defining a considerable safety margin which is representative of potential
+                under-elicitation, potential improvements after deployment, and general uncertainty in the evidence
+                collection.</p>
+
+            <h4>Measure 10.11. Forecast-ready model evaluations</h4>
+            <p>Signatories are encouraged to make key model evaluations for the most severe risks more 'forecast-ready'
+                over time, for example by running 'scaling law experiments' that intend to give predictions for when
+                future
+                models might be showing dangerous capabilities.</p>
+
+            <div class="kpi-box">
+                <h5>Potential Key Performance Indicators</h5>
+                <ul class="kpi-list">
+                    <li><span class="kpi-target">KPI 10.11.1:</span> Percentage of evaluations used as evidence in Model
+                        Report, which allow for some level of forecasting (target: 10%).</li>
+                </ul>
+            </div>
+
+            <h4>Measure 10.12. Post-deployment monitoring</h4>
+            <p>Signatories commit to conducting post-deployment monitoring for systemic risks at the highest risk tier
+                and
+                may conduct it for lower risk tiers as well. This includes, but is not limited to, the collection of
+                relevant model-independent evidence defined in Measure 10.1.</p>
+
+            <p>Signatories commit to establishing contractual, technical, or other mechanisms to gather and include
+                relevant post-deployment information in risk assessment and ensure the effectiveness of their
+                mitigations.
+                Relevant post-deployment information encompasses information Signatories can collect after placing the
+                model
+                on the market, which informs the identification and assessment of risks and mitigations. Such
+                information
+                includes but is not limited to information on model integration, model usage, and model impacts. These
+                mechanisms may vary across different model integrations and usage and Signatories are encouraged to
+                adapt
+                their post-deployment monitoring to their model's distribution strategy and the type of customers and
+                industries using the model.</p>
+
+            <p>All Signatories (including those who are providers of open-source models) are encouraged to consider
+                methods
+                such as: anonymous reporting channels; incident report forms and bug bounties; supporting
+                community-driven
+                evaluations and public leaderboards; monitoring evidence of model usage in the real world (for example
+                identifying usage in software repositories and known malware, as well as monitoring public forums and
+                social
+                media for novel patterns of usage); supporting the scientific study of their models' emerging risks,
+                capabilities, and effects in the market (using, for example, participatory methods); investing in new
+                technical methods supporting the privacy-preserving monitoring and analysis of individual instances of
+                AI
+                agents built from their models (for example watermarks, fingerprinting, digital signatures, or
+                decentralised, privacy-preserving monitoring techniques).</p>
+
+            <p>Signatories who are providers of closed-source models, deployed via an API, are encouraged to
+                additionally
+                monitor their general-purpose AI models with systemic risk via lightweight telemetry (logging) and data
+                analysis methods, ensuring the preservation of user privacy and avoidance of transmitting sensitive data
+                in
+                accordance with EU laws and regulations. Where model providers themselves deploy AI systems, they will
+                monitor these models as part of these systems, considering especially end-user feedback.</p>
+
+            <p>In addition, and especially where the above methods are not available and Signatories do not have access
+                to
+                enough relevant information via other means, Signatories commit to making use of, and enforcing, license
+                agreements with downstream model deployers and users, which require those licensees to share – in a
+                privacy
+                preserving way – key evidence about systemic risks investigated by the Signatory. For end users who are
+                natural persons signatories may allow those end users to opt in to sharing similar relevant information,
+                ensuring the preservation of user privacy and avoidance of transmitting sensitive data in accordance
+                with
+                EU laws and regulations.</p>
+
+            <div class="kpi-box">
+                <h5>Potential Key Performance Indicators</h5>
+                <ul class="kpi-list">
+                    <li><span class="kpi-target">KPI 10.12.1:</span> Percentage of risks at the highest risk tiers for
+                        which evidence is being collected using at least three forms of post-deployment monitoring
+                        (target:
+                        75%).</li>
+                    <li><span class="kpi-target">KPI 10.12.2:</span> Percentage of risks at lower risk tiers for which
+                        evidence is being collected using at least one form of post-deployment monitoring (target: 50%).
+                    </li>
+                    <li><span class="kpi-target">KPI 10.12.3:</span> Percentage of licensees who report actionable
+                        evidence collected for the highest risk tiers (target: 50%).</li>
+                </ul>
+            </div>
+
+            <div class="explanatory-box">
+                <h4>Explanation of changes to Commitment 10 (Evidence collection)</h4>
+                <p>Most changes in this section were based on requests for clarifications on how certain key terms (such
+                    as
+                    "scientific rigour" or "state-of-the-art model evaluations") will be defined.</p>
+
+                <p>We also aimed to ensure that the options available to fulfil the Measures are proportional to the
+                    risks
+                    at hand (especially allowing for additional focus on the highest tiers of risks). Additionally, we
+                    took
+                    into consideration deployment contexts (for example, what methods are appropriate for open-source
+                    releases) and aimed to reduce bureaucratic burdens on SMEs while giving them as much clarity as
+                    possible. We also clarified that this Commitment can be applied to work done internally or
+                    externally
+                    (see also Commitment 16).</p>
+
+                <p>We also wanted to make explicitly clear that that post-deployment monitoring (which was moved here)
+                    was
+                    not prescribed as a fixed, inflexible and potentially inappropriate single technique but instead as
+                    a
+                    measure which could be fulfilled in ways that are most appropriate for the business model and
+                    deployment context around a model.</p>
+            </div>
+
+            <h2>TECHNICAL RISK MITIGATION FOR PROVIDERS OF GENERAL-PURPOSE AI MODELS WITH SYSTEMIC RISK</h2>
+
+            <h3>Commitment 11. Safety mitigations</h3>
+            <p>In order to fulfil their obligations under Article 55(1), point (b) AI Act, Signatories commit to
+                implementing safety mitigations that are proportional to the risks from the development and deployment
+                of
+                such models, and reducing risks to acceptable levels. Signatories commit to ensuring that safety
+                mitigations are state-of-the-art and adhering to AI Office guidance where available.</p>
+
+            <p>In order to satisfy Commitment 11:</p>
+
+            <h4>Measure 11.1. Safety mitigations to consider</h4>
+            <p>Signatories are encouraged to consider implementing safety mitigations which include, but are not limited
+                to: (a) filtering and cleaning training data, (b) monitoring and filtering the inputs and outputs of
+                models, (c) changing the behaviour of a model, such as fine-tuning the model to refuse certain requests,
+                (d) restricting the deployment of a model, such as restricting access of certain models to vetted users,
+                (e) countermeasures or other safety tools made available to other actors to reduce systemic risk, and
+                (f)
+                high-assurance quantitative safety guarantees on the behaviour of a model.</p>
+
+            <h4>Measure 11.2. State-of-the-art</h4>
+            <p>State-of-the-art mitigations are those that best reflect the relevant findings of research, technology,
+                and
+                experience, and incorporate the best-known procedures for mitigating systemic risks. State-of-the-art
+                mitigations are not always those that mitigate all risks to the greatest extent; instead, Signatories
+                commit to striving to implement mitigations proportionate to the risks (cf. risk tiers in Measure 4.2).
+                In
+                this sense, state-of-the-art mitigations are those that best mitigate especially the highest-tier risks.
+                Signatories are also encouraged to take into account any benefits lost by the implementation of
+                mitigations.</p>
+
+            <div class="explanatory-box">
+                <h4>Explanation of changes to Commitment 11</h4>
+                <p>Previously, safety and security mitigations were covered by a single joint 'Measure 12'; in this
+                    draft,
+                    they are split into Commitments 11 and 12.</p>
+
+                <p>Some respondents felt there was a need for more detail on which safety mitigations are required. To
+                    give
+                    more detail, while also taking into account the fact that the field of technical risk mitigation is
+                    developing and has few established solutions that are known to work, we list a set of safety
+                    mitigations that Signatories are encouraged to consider.</p>
+
+                <p>We think that an outcome-based approach is likely most effective. Instead of requiring a fixed set of
+                    mitigations, which may be outdated (or worse, actively counterproductive) in the future, we think
+                    model providers will commit to implementing mitigations proportionate to the risk posed by a model.
+                </p>
+            </div>
+
+            <h3>Commitment 12. Security mitigations</h3>
+            <p>In order to fulfil their obligations under Article 55(1), points (b) and (d) AI Act, Signatories commit
+                to
+                mitigating systemic risks from the possession of the unreleased weights, and associated assets such as
+                unreleased algorithmic insights, of their general-purpose AI models with systemic risk. To do so,
+                Signatories commit to implementing security mitigations designed to thwart attempts to obtain such
+                weights
+                and associated assets by highly motivated and well-resourced non-state actors, including insider
+                threats,
+                in line with the RAND SL3 benchmark. Signatories are encouraged to implement and advance research on
+                more
+                stringent security mitigations, in line with the RAND SL4 or above benchmarks, if they expect to face
+                attempts to steal such weights or associated assets from state-level adversaries.</p>
+
+            <p>In order to satisfy Commitment 12:</p>
+
+            <h4>Measure 12.1. General cybersecurity best practices</h4>
+            <p>Signatories commit to adopting general cybersecurity best practices. This will include, but is not
+                limited
+                to: (a) strong password policies and management, (b) email filtering for suspicious links and phishing
+                attempts, (c) protection of wireless networks, (d) policies for untrusted removable media, (e) physical
+                intrusion prevention, and (f) regular software updates and patch management.</p>
+
+            <p>These best practices will be in line with cybersecurity technical standards such as ISO/IEC 27001, NIST
+                800-53, SOC 2, and a European harmonized standard on cybersecurity if available, and will also be in
+                line
+                with regulations such as the NIS2 Directive and the Cyber Resilience Act.</p>
+
+            <h4>Measure 12.2. Security assurance</h4>
+            <p>Signatories commit to implementing measures to assure and test their security readiness against the
+                threat
+                actors in Commitment 12. This will include, but is not limited to: (a) frequent security reviews by an
+                accredited third party, (b) frequent active red-teaming, (c) secure communication channels for third
+                parties to report security issues, (d) competitive bug bounty programs to encourage public participation
+                in
+                security testing, (e) clear and public security whistleblower policies which prohibit retribution, in
+                line
+                with Commitment 18, (f) installation of Endpoint Detection and Response (EDR) and Intrusion Detection
+                System (IDS) tools on all company devices and network components, and (g) the use of a security team to
+                monitor for EDR alerts and perform incident handling, response and recovery for security breaches in a
+                timely manner.</p>
+
+            <p>These measures will align with security assurance technical standards such as NIST 800-53 (CA-2(1), CA-
+                8(2), RA-5(11), IR-4(14)), and NIST SP 800-115 5.2.</p>
+
+            <h4>Measure 12.3. Protection of stored model weights and related assets</h4>
+            <p>Signatories commit to implementing measures to protect stored model weights and associated assets such as
+                unreleased algorithmic insights. This will include, but is not limited to: (a) a registry of all devices
+                and locations where model weights are stored, (b) access control and monitoring of access on all devices
+                storing model weights, with alerts on copying to non-controlled devices, (c) storage on dedicated
+                devices
+                which host only data, code, and services treated with equivalent levels of sensitivity and security, (d)
+                ensuring model weights are always encrypted in storage and transport, with at least 256-bit security and
+                with encryption keys stored securely on a Trusted Platform Module (TPM), (e) ensuring model weights are
+                only decrypted for legitimate use to non-persistent memory, (f) implementing confidential computing once
+                available and practical, using hardware-based, attested trusted execution environments to prevent
+                unauthorised access to model weights while in use, and (g) restricting physical access to data centres
+                and
+                other sensitive working environments to required personnel only, along with regular inspections of such
+                sites for unauthorised personnel or devices.</p>
+
+            <p>These measures will be in line with technical standards such as NIST 800-53.</p>
+
+            <h4>Measure 12.4. Interfaces and access control to model weights</h4>
+            <p>Signatories commit to implementing measures to harden interfaces and access to model weights under
+                storage
+                or in use. This will include, but is not limited to: (a) explicitly authorising only required software
+                and
+                personnel entities for both direct or indirect access to model weights, enforced through multi-factor
+                authentication mechanisms, and audited on a regular basis; (b) thorough review by a security team of any
+                software interface accessing model weights for vulnerabilities or data leakage; (c) hardening interfaces
+                with access to the weights, to reduce the risk of data and weight exfiltration, using methods such as
+                output rate limiting; and (d) limiting the number of people who have non-hardened direct access to
+                weights.</p>
+
+            <p>These measures will be in line with technical standards such as NIST SP 800-171, INCITS 359-2004, and
+                NIST
+                800-53.</p>
+
+            <div class="kpi-box">
+                <h5>Potential Key Performance Indicator</h5>
+                <ul class="kpi-list">
+                    <li><span class="kpi-target">KPI 12.4.1:</span> Percentage of defined interfaces and access points
+                        to
+                        unreleased model weights and associated assets that have implemented the specified security
+                        controls (target: 100%).</li>
+                </ul>
+            </div>
+
+            <h4>Measure 12.5. Insider threats</h4>
+            <p>Signatories commit to implementing measures to screen for and protect against insider threats. This will
+                include, but is not limited to: (a) background checks on employees and contractors that have or might
+                reasonably obtain access to unreleased model weights, associated assets, or systems that control the
+                storage or use of unreleased model weights; and (b) the provision of training on recognising and
+                reporting
+                insider threats.</p>
+
+            <p>These measures will align with technical standards such as NIST 800-53 (PM-12, PS-3).</p>
+
+            <h4>Measure 12.6. Regime of applicability</h4>
+            <p>Signatories commit to ensuring that the security measures in Measures 12.1—12.5 apply to all versions and
+                copies of unreleased model weights and associated assets for general-purpose AI models with systemic
+                risk
+                throughout their lifecycle, from before training until any secure deletion of model weights or open
+                releasing of them.</p>
+
+            <div class="kpi-box">
+                <h5>Potential Key Performance Indicator</h5>
+                <ul class="kpi-list">
+                    <li><span class="kpi-target">KPI 12.6.1:</span> Percentage of copies and versions of unreleased
+                        model
+                        weights that have the security mitigations in Measures 12.1.–12.5. applied (target: 100%).</li>
+                </ul>
+            </div>
+
+            <h4>Measure 12.7. Limited disclosure</h4>
+            <p>Signatories commit to ensuring that any publicly available copy of the Framework or the Model Report only
+                discloses security mitigations in Measures 12.1—12.5 to a level of detail that does not undermine the
+                effectiveness of the security mitigations and is consistent with publicly available details about such
+                mitigations.</p>
+
+            <div class="explanatory-box">
+                <h4>Explanation of changes to Commitment 12</h4>
+                <p>Previously, safety and security mitigations were covered by a single joint 'Measure 12'; in this
+                    draft,
+                    they are split into Commitments 11 and 12. In response to feedback about making mitigations more
+                    concrete, we specify a level of security mitigations that we believe to be appropriate for
+                    Signatories. We anticipate feedback on this level of security mitigation.</p>
+            </div>
+
+            <h3>Commitment 13. Development and deployment decisions</h3>
+            <p>In order to fulfil their obligations under Article 55(1), points (b) and (d) AI Act, Signatories commit
+                to
+                mitigating residual risks where safety and security mitigations are insufficient. To do so, Signatories
+                commit to establishing a process to decide whether and how to proceed with the development and
+                deployment
+                of a general-purpose AI model with systemic risk. This process will be described in the Framework and
+                will
+                include how decisions for this process are made and escalated through the organisation, including its
+                management body (cf. Commitment 14).</p>
+
+            <p>In order to satisfy Commitment 13:</p>
+
+            <h4>Measure 13.1. Conditions for not proceeding</h4>
+            <p>Signatories commit to detailing in their Framework conditions under which further development and
+                deployment of a general-purpose AI model with systemic risk will not proceed due to insufficient
+                mitigations for (a) keeping risk below an unacceptable level, or (b) appropriately mitigating risk that
+                is below an unacceptable level (cf. Measure 4.2). This will also describe a process that will be used
+                for
+                de-deploying a model (where not openly released) and falling back on another one, if needed based on any
+                post-deployment monitoring and risk assessment. This commitment does not preclude the use of other
+                conditions or processes used for decision-making for development and deployment.</p>
+
+            <h4>Measure 13.2. Decision process for proceeding</h4>
+            <p>Signatories commit to detailing in their Framework the decision process under which development and
+                deployment of a general-purpose AI model with systemic risk can proceed, after a decision has been made
+                to
+                not proceed (cf. Measure 13.1). This will include the implementation of appropriate safety and security
+                mitigations, followed by any necessary risk assessments to demonstrate that systemic risks are kept
+                below
+                an unacceptable level and appropriately mitigated below that level.</p>
+
+            <h4>Measure 13.3. Staging deployment when proceeding</h4>
+            <p>Signatories commit to detailing in their Framework whether and how the deployment of general-purpose AI
+                models with systemic risk will be staged to keep systemic risks below an unacceptable level and
+                appropriately mitigated below that. This may include practices such as (a) limiting API access to vetted
+                users, (b) gradually expanding access based on risk assessments, (c) starting with a closed release
+                before
+                any open release, (d) using logging systems to track usage and safety concerns, (e) setting criteria for
+                progressing through stages, including those based on risk tiers and user feedback, and (f) retaining the
+                ability to restrict access.</p>
+
+            <h4>Measure 13.4. Transparency into external input in decision-making</h4>
+            <p>To provide transparency into decision-making around the management of unacceptable risks, Signatories
+                commit to detailing in their Framework if and when development and deployment decisions will have input
+                from external actors, including relevant government actors, particularly where unacceptable risks are
+                involved. Fulfilling this commitment does not require such involvement or authorisation but does require
+                transparency around its presence or absence, in alignment with existing international commitments such
+                as
+                the Frontier AI Safety Commitments (Outcome 3.VIII).</p>
+
+            <div class="explanatory-box">
+                <h4>Explanation of changes to Commitment 13</h4>
+                <p>Previously, Commitment 13 was numbered as 'Measure 14'. We made two major changes in response to
+                    feedback: (a) providing more detail and examples about what a description of a decision process
+                    should
+                    include, including a description of how deployment should be staged when deciding to proceed (the
+                    new
+                    Measure 13.3), and (b) making it clear that input into external decision-making is not required in
+                    this Commitment; we only require description if such input is required (Measure 13.4).</p>
+            </div>
         </section>
 
         <!-- Glossary Section -->
