@@ -237,12 +237,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Clone each recital to the full section
     recitals.forEach((recital, index) => {
-        const recitalClone = recital.cloneNode(true);
         const number = index + 1;
+
+        // Add header if it doesn't exist in original recital
+        let originalHeader = recital.querySelector('h4');
+        if (!originalHeader) {
+            originalHeader = document.createElement('h4');
+            recital.insertBefore(originalHeader, recital.firstChild);
+        }
+
+        const recitalClone = recital.cloneNode(true);
+        const recitalId = `in-text-recital-${number}`;
+        recital.id = recitalId;
+
+        // Update the header with just the number in the data attribute
+        originalHeader.textContent = '';
+        originalHeader.dataset.recitalNumber = number;
+
+        // Modify the clone for the summary section
         recitalClone.classList.add('full-section-recital');
         const header = recitalClone.querySelector('h4');
+        header.textContent = '';
         header.dataset.recitalNumber = number;
-        recital.querySelector('h4').dataset.recitalNumber = number;
+
+        // Create a link wrapper
+        const linkWrapper = document.createElement('a');
+        linkWrapper.href = `#${recitalId}`;
+        linkWrapper.classList.add('recital-link');
+
+        // Move recital content inside the link
+        while (recitalClone.firstChild) {
+            linkWrapper.appendChild(recitalClone.firstChild);
+        }
+        recitalClone.appendChild(linkWrapper);
+
         recitalsFullSection.appendChild(recitalClone);
     });
 
@@ -265,6 +293,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const header = recital.querySelector('h4');
         header.addEventListener('click', () => {
             toggleRecital(recital);
+        });
+    });
+
+    // Handle clicks on recital links in summary section
+    document.querySelectorAll('.recital-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetId = link.getAttribute('href').substring(1);
+            const targetRecital = document.getElementById(targetId);
+            if (targetRecital) {
+                // Ensure the target recital is expanded
+                toggleRecital(targetRecital, true);
+                // Smooth scroll with offset
+                e.preventDefault();
+                const offset = 100;
+                const targetPosition = targetRecital.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                // Visual feedback
+                targetRecital.classList.add('highlight');
+                setTimeout(() => targetRecital.classList.remove('highlight'), 2000);
+            }
         });
     });
 
