@@ -158,6 +158,38 @@ h4 {
     margin-bottom: 1rem;
 }
 
+/* Add h5 styling */
+h5 {
+    font-size: 1.1em;
+    line-height: 1.4;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Dark mode h5 */
+@media (prefers-color-scheme: dark) {
+    h5 {
+        color: #e0e0e0;
+    }
+}
+
+body.light-mode h5 {
+    color: #333;
+}
+
+body.dark-mode h5 {
+    color: #e0e0e0;
+}
+
+/* Adjust h5 for mobile */
+@media (max-width: 760px) {
+    h5 {
+        font-size: 1.05em;
+    }
+}
+
 /* Lists */
 .kpi-list {
     list-style: none;

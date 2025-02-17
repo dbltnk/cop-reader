@@ -29,45 +29,93 @@ document.addEventListener('DOMContentLoaded', () => {
         const navList = document.createElement('ul');
         const mainContent = document.querySelector('.main-content');
 
-        // Get all headings H2-H4
-        const headings = mainContent.querySelectorAll('h2, h3, h4');
-        let currentH2List = null;
-        let currentH3List = null;
-
-        headings.forEach(heading => {
+        // Get all main headlines (h2) and create navigation items for them
+        const mainHeadings = mainContent.querySelectorAll('h2');
+        mainHeadings.forEach(heading => {
             // Skip if heading is inside a box
             if (heading.closest('.info-box, .kpi-box, .explanatory-box, .legal-text, .disclaimer-box')) {
                 return;
             }
 
+            // Skip TRANSPARENCY and COPYRIGHT headlines
             const headingText = heading.textContent.trim();
+            if (headingText === 'TRANSPARENCY' || headingText === 'COPYRIGHT') {
+                return;
+            }
+
             const headingId = headingText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
             heading.id = headingId;
 
+            const li = document.createElement('li');
             const link = document.createElement('a');
             link.href = `#${headingId}`;
             link.textContent = headingText;
-
-            const li = document.createElement('li');
             li.appendChild(link);
 
-            // Add to appropriate level of navigation
-            if (heading.tagName === 'H2') {
-                const subList = document.createElement('ul');
-                li.appendChild(subList);
-                currentH2List = subList;
-                currentH3List = null;
-                navList.appendChild(li);
-            } else if (heading.tagName === 'H3' && currentH2List) {
-                const subList = document.createElement('ul');
-                li.appendChild(subList);
-                currentH3List = subList;
-                currentH2List.appendChild(li);
-            } else if (heading.tagName === 'H4' && currentH3List) {
-                currentH3List.appendChild(li);
-            }
+            // Create a sublist for this section
+            const subList = document.createElement('ul');
+            li.appendChild(subList);
 
+            navList.appendChild(li);
             observer.observe(heading);
+
+            // Process all h3 and h4 headings that come after this h2 until the next h2
+            let currentNode = heading.nextElementSibling;
+            while (currentNode && currentNode.tagName !== 'H2') {
+                if ((currentNode.tagName === 'H3' || currentNode.tagName === 'H4') &&
+                    !currentNode.closest('.info-box, .kpi-box, .explanatory-box, .legal-text, .disclaimer-box')) {
+
+                    const subHeadingText = currentNode.textContent.trim();
+
+                    // Skip unwanted headers
+                    if (!subHeadingText.toLowerCase().includes('kpi') &&
+                        !subHeadingText.toLowerCase().includes('performance indicator') &&
+                        !subHeadingText.toLowerCase().includes('whereas')) {
+
+                        const subHeadingId = subHeadingText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                        currentNode.id = subHeadingId;
+
+                        const subLi = document.createElement('li');
+                        const subLink = document.createElement('a');
+                        subLink.href = `#${subHeadingId}`;
+                        subLink.textContent = subHeadingText;
+                        subLi.appendChild(subLink);
+
+                        // For Commitments, create a nested sublist
+                        if (subHeadingText.startsWith('Commitment')) {
+                            const measuresList = document.createElement('ul');
+                            subLi.appendChild(measuresList);
+
+                            // Look ahead for measures
+                            let measureNode = currentNode.nextElementSibling;
+                            while (measureNode && !measureNode.tagName.match(/^H[1-3]$/)) {
+                                if (measureNode.tagName === 'H4' &&
+                                    !measureNode.closest('.info-box, .kpi-box, .explanatory-box, .legal-text, .disclaimer-box')) {
+                                    const measureText = measureNode.textContent.trim();
+                                    if (measureText.startsWith('Measure')) {
+                                        const measureId = measureText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                                        measureNode.id = measureId;
+
+                                        const measureLi = document.createElement('li');
+                                        const measureLink = document.createElement('a');
+                                        measureLink.href = `#${measureId}`;
+                                        measureLink.textContent = measureText;
+                                        measureLi.appendChild(measureLink);
+                                        measuresList.appendChild(measureLi);
+
+                                        observer.observe(measureNode);
+                                    }
+                                }
+                                measureNode = measureNode.nextElementSibling;
+                            }
+                        }
+
+                        subList.appendChild(subLi);
+                        observer.observe(currentNode);
+                    }
+                }
+                currentNode = currentNode.nextElementSibling;
+            }
         });
 
         // Add Glossary link if it exists
