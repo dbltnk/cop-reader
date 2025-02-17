@@ -1,5 +1,12 @@
 # cop-reader
 
+## Credits & License
+
+This is being developed by Alexander Zacherl (alexander.zacherl@googlemail.com) and I have not yet figured out how to license it.
+
+This project uses [Tufte CSS](https://github.com/edwardtufte/tufte-css) as a foundation for its styling, which is licensed under the MIT License. Copyright (c) 2014 Dave Liepmann. See [LICENSE-TUFTE-CSS](LICENSE-TUFTE-CSS) for the full license text.
+
+
 ## Goal:
 Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-draft-general-purpose-ai-code-practice-published-written-independent-experts) of the EU AI Act Code of Practice more accessible and improve usability for a wide range of stakeholders on both mobile and desktop devices. 
 
@@ -28,8 +35,46 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 ## Known issues:
 - [ ] Glossary hover is not visible on mobile devices
 
-## Credits & License
-
-This is being developed by Alexander Zacherl (alexander.zacherl@googlemail.com) and I have not yet figured out how to license it.
-
-This project uses [Tufte CSS](https://github.com/edwardtufte/tufte-css) as a foundation for its styling, which is licensed under the MIT License. Copyright (c) 2014 Dave Liepmann. See [LICENSE-TUFTE-CSS](LICENSE-TUFTE-CSS) for the full license text.
+## Unsorted notes:
+- [ ] Longer lines
+- [ ] Collapsable shortcuts, see more ToC
+- [ ] Nav items closer togethet
+- [ ] ToC text formatting
+- [ ] ToC titles too long, truncate?
+- [ ] Remove the all caps formatting
+- [ ] Sans serif for the nav?
+- [ ] Move settings away or down or sth
+- [ ] Collapsable nav items?
+- [ ] Collapse them by default
+- [ ] Anchor links, click to copy & share!
+- [ ] Ahh headlines need to obey line width
+- [ ] More space between list items, UL and OL
+- [ ] Make boxes more unique
+- [ ] Add characters / custom icons to boxes
+- [ ] Add proper favicon
+- [ ] Change color of nav item to selected on click
+- [ ] H5 hard to recognize as such
+- [ ] Use full width for text on small screens
+- [ ] Headlines more space before
+- [ ] Nav item not just color as current indicator
+- [ ] Equalize distance between left and box and box and nav bar
+- [ ] KPI box goes too wide
+- [ ] Accessibility text color contrast check
+- [ ] Boxes similar styles, too different, KPI vs yellow one
+- [ ] Replace emojis with icons, lucide.dev
+- [ ] Style the flowcharts
+- [ ] Icons for commitments and measures?
+- [ ] Animation polish for recitals
+- [ ] Dropdown arrow too to right side
+- [ ] Recital hover smaller than the box
+- [ ] Key nav skips commitment 2
+- [ ] Check key nav against screenreader and accessibility guidelines
+- [ ] Nav item spacing polish pass
+- [ ] Hamburger icon not equally spaces to top and right
+- [ ] Left-align all content items better, list standa out etc right now (maybe just mobile)
+- [ ] Font could be smaller on small screens, also reduce padding left and right
+- [ ] Underline for glossary item vertically too far away on small screen
+- [ ] Select to share feature, send snippet, plug into default sharing API
+- [ ] Check for and remove footnotes
+- [ ] Icons: Talking chairs, lawyercat
+- [ ] R.: Fonts, colors
