@@ -21,15 +21,21 @@
                 <div class="theme-control">
                     <label for="theme-select">Theme:</label>
                     <select id="theme-select" aria-label="Select color theme">
-                        <option value="system">System Default</option>
-                        <option value="light">Light</option>
-                        <option value="dark">Dark</option>
+                        <option value="system">🖥️ System Default</option>
+                        <option value="light">☀️ Light</option>
+                        <option value="dark">🌙 Dark</option>
                     </select>
                 </div>
-                <button class="recital-toggle" aria-label="Toggle all recitals" aria-pressed="true">
-                    <span class="toggle-icon">▼</span>
-                    <span class="toggle-text"> All Recitals</span>
-                </button>
+                <button class="close-nav" aria-label="Close menu">✕</button>
+            </div>
+            <div class="keyboard-shortcuts" aria-label="Keyboard shortcuts">
+                <h4>Keyboard Shortcuts</h4>
+                <ul>
+                    <li><kbd>↑</kbd>/<kbd>↓</kbd> Navigate headlines</li>
+                    <li><kbd>←</kbd>/<kbd>→</kbd> Navigate commitments</li>
+                    <li><kbd>1</kbd>To top<kbd>2</kbd>To glossary<kbd>3</kbd>To recitals</li>
+                    <li><kbd>4</kbd>Toggle all recitals<kbd>0</kbd>Toggle menu</li>
+                </ul>
             </div>
             <div id="nav-content" class="nav-content">
                 <h3>Contents</h3>
@@ -63,8 +69,8 @@
             <h2>Commitment 21. Public transparency</h2>
 
             <div class="recital" role="region" aria-expanded="true">
-                <h4 role="button" tabindex="0" aria-controls="recital-content">Recital</h4>
-                <div id="recital-content">
+                <h4 role="button" tabindex="0" aria-controls="recital-1-content">Recital</h4>
+                <div id="recital-1-content">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
                         labore
                         et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
@@ -79,8 +85,8 @@
                 light of the nascency of the science of assessing and mitigating systemic risks.</p>
 
             <div class="recital" role="region" aria-expanded="true">
-                <h4 role="button" tabindex="0" aria-controls="recital-content">Recital</h4>
-                <div id="recital-content">
+                <h4 role="button" tabindex="0" aria-controls="recital-2-content">Recital</h4>
+                <div id="recital-2-content">
                     <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
                         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
                         mollit
@@ -127,8 +133,8 @@
             </ul>
 
             <div class="recital" role="region" aria-expanded="true">
-                <h4 role="button" tabindex="0" aria-controls="recital-content">Recital</h4>
-                <div id="recital-content">
+                <h4 role="button" tabindex="0" aria-controls="recital-3-content">Recital</h4>
+                <div id="recital-3-content">
                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
                         totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
                         dicta sunt explicabo.</p>

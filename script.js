@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggle = document.querySelector('.nav-toggle');
     const navContent = document.getElementById('nav-content');
     const mainContent = document.querySelector('.main-content');
+    const closeButton = document.querySelector('.close-nav');
 
     // Build navigation from content
     function buildNavigation() {
@@ -108,6 +109,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Add close button handler
+    closeButton.addEventListener('click', () => {
+        nav.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+    });
+
     // Highlight current section in navigation
     const observerCallback = (entries) => {
         entries.forEach(entry => {
@@ -148,10 +155,7 @@ if (window.matchMedia) {
 document.addEventListener('DOMContentLoaded', () => {
     const recitals = document.querySelectorAll('.main-content .recital');
     const recitalsFullSection = document.querySelector('.recitals-full');
-    const recitalToggle = document.querySelector('.recital-toggle');
     let recitalsExpanded = true;
-
-    recitalToggle.setAttribute('aria-pressed', recitalsExpanded);
 
     // Clear any existing recitals in the full section
     while (recitalsFullSection.children.length > 1) { // Keep the h2
@@ -169,28 +173,37 @@ document.addEventListener('DOMContentLoaded', () => {
         recitalsFullSection.appendChild(recitalClone);
     });
 
+    // Function to toggle a single recital
+    function toggleRecital(recital, force = null) {
+        const isExpanded = force !== null ? force : recital.getAttribute('aria-expanded') === 'true';
+        const newState = force !== null ? force : !isExpanded;
+
+        recital.setAttribute('aria-expanded', newState);
+        recital.classList.toggle('collapsed', !newState);
+
+        const content = recital.querySelector('[id^="recital-"]');
+        if (content) {
+            content.style.display = newState ? 'block' : 'none';
+        }
+    }
+
     // Add click handlers to main content recitals only
     document.querySelectorAll('.recital:not(.full-section-recital)').forEach(recital => {
         const header = recital.querySelector('h4');
         header.addEventListener('click', () => {
-            recital.classList.toggle('collapsed');
+            toggleRecital(recital);
         });
     });
 
-    // Add recital toggle functionality
-    recitalToggle.addEventListener('click', () => {
-        recitalsExpanded = !recitalsExpanded;
-        recitalToggle.setAttribute('aria-pressed', recitalsExpanded);
-
-        document.querySelectorAll('.recital:not(.full-section-recital)').forEach(recital => {
-            if (recitalsExpanded) {
-                recital.classList.remove('collapsed');
-                recital.setAttribute('aria-expanded', 'true');
-            } else {
-                recital.classList.add('collapsed');
-                recital.setAttribute('aria-expanded', 'false');
-            }
-        });
+    // Global recital toggle (keyboard shortcut '4')
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '4') {
+            e.preventDefault();
+            recitalsExpanded = !recitalsExpanded;
+            document.querySelectorAll('.recital:not(.full-section-recital)').forEach(recital => {
+                toggleRecital(recital, recitalsExpanded);
+            });
+        }
     });
 });
 
@@ -427,4 +440,183 @@ prefersDark.addEventListener('change', (e) => {
     if (themeSelect.value === 'system') {
         setDarkMode(e.matches);
     }
+});
+
+// Keyboard Navigation
+document.addEventListener('DOMContentLoaded', () => {
+    const mainContent = document.querySelector('.main-content');
+    const nav = document.querySelector('.side-nav');
+    const toggle = document.querySelector('.nav-toggle');
+    const closeButton = document.querySelector('.close-nav');
+
+    // Store previous positions for jump-back functionality
+    let previousPosition = null;
+    let lastJumpKey = null;
+
+    // Helper function to find next/previous element
+    function findNextPrevElement(selector, forward = true, startElement = null) {
+        const elements = Array.from(mainContent.querySelectorAll(selector));
+        if (!elements.length) return null;
+
+        if (!startElement) {
+            return forward ? elements[0] : elements[elements.length - 1];
+        }
+
+        const currentIndex = elements.indexOf(startElement);
+        if (currentIndex === -1) {
+            const currentY = startElement.getBoundingClientRect().top;
+            const nextElement = forward
+                ? elements.find(el => el.getBoundingClientRect().top > currentY)
+                : elements.reverse().find(el => el.getBoundingClientRect().top < currentY);
+            return nextElement || (forward ? elements[0] : elements[elements.length - 1]);
+        }
+
+        const nextIndex = forward ? currentIndex + 1 : currentIndex - 1;
+        return elements[nextIndex] || (forward ? elements[0] : elements[elements.length - 1]);
+    }
+
+    // Helper function to scroll element into view
+    function scrollToElement(element, savePrevious = true) {
+        if (!element) return;
+
+        if (savePrevious) {
+            previousPosition = window.scrollY;
+        }
+
+        const offset = 100; // Offset from the top of the viewport
+        const elementRect = element.getBoundingClientRect();
+        const absoluteElementTop = elementRect.top + window.pageYOffset;
+        const middle = absoluteElementTop - (window.innerHeight / 2);
+
+        window.scrollTo({
+            top: middle,
+            behavior: 'smooth'
+        });
+
+        // Announce to screen readers
+        const announcement = document.createElement('div');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.setAttribute('class', 'sr-only');
+        announcement.textContent = element.textContent;
+        document.body.appendChild(announcement);
+        setTimeout(() => announcement.remove(), 1000);
+
+        // Visual feedback
+        element.setAttribute('tabindex', '-1');
+        element.focus();
+        element.classList.add('keyboard-highlight');
+        setTimeout(() => element.classList.remove('keyboard-highlight'), 1000);
+    }
+
+    // Keyboard event handler
+    document.addEventListener('keydown', (e) => {
+        // Ignore if user is typing in an input
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+        const activeElement = document.activeElement;
+        const key = e.key.toLowerCase();
+
+        // Handle return to previous position for number keys
+        if (['1', '2', '3'].includes(key) && key === lastJumpKey && previousPosition !== null) {
+            e.preventDefault();
+            window.scrollTo({
+                top: previousPosition,
+                behavior: 'smooth'
+            });
+            previousPosition = null;
+            lastJumpKey = null;
+            return;
+        }
+
+        switch (key) {
+            case 'arrowup':
+            case 'arrowdown':
+                e.preventDefault();
+                const nextHeading = findNextPrevElement('h2, h3, h4, .recital h4, .kpi-box h5', key === 'arrowdown', activeElement);
+                scrollToElement(nextHeading);
+                break;
+
+            case 'arrowleft':
+            case 'arrowright':
+                e.preventDefault();
+                const commitmentSelector = 'h2[id^="commitment"], h3[id^="commitment"]';
+                const nextCommitment = findNextPrevElement(commitmentSelector, key === 'arrowright', activeElement);
+                scrollToElement(nextCommitment);
+                break;
+
+            case '1':
+                e.preventDefault();
+                previousPosition = window.scrollY;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                lastJumpKey = '1';
+                break;
+
+            case '2':
+                e.preventDefault();
+                const glossary = document.querySelector('.glossary');
+                scrollToElement(glossary);
+                lastJumpKey = '2';
+                break;
+
+            case '3':
+                e.preventDefault();
+                const recitalsSection = document.querySelector('.recitals-full');
+                scrollToElement(recitalsSection);
+                lastJumpKey = '3';
+                break;
+
+            case '4':
+                e.preventDefault();
+                document.querySelector('.recital-toggle').click();
+                break;
+
+            case '0':
+                e.preventDefault();
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    toggle.setAttribute('aria-expanded', 'false');
+                } else {
+                    nav.classList.add('active');
+                    toggle.setAttribute('aria-expanded', 'true');
+                }
+                break;
+
+            case 'escape':
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+                // Close any open tooltips
+                document.querySelectorAll('.glossary-tooltip.active').forEach(tooltip => {
+                    tooltip.classList.remove('active');
+                });
+                break;
+        }
+    });
+
+    // Add styles for keyboard navigation
+    const style = document.createElement('style');
+    style.textContent = `
+        .keyboard-highlight {
+            outline: 3px solid #1971c2;
+            outline-offset: 4px;
+            border-radius: 2px;
+        }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+        @media (prefers-color-scheme: dark) {
+            .keyboard-highlight {
+                outline-color: #4fc3f7;
+            }
+        }
+    `;
+    document.head.appendChild(style);
 }); 
