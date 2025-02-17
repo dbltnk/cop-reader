@@ -156,6 +156,8 @@
 .explanatory-box h4,
 .disclaimer-box h4 {
     margin-top: 0;
+    margin-right: 2rem;
+    /* Space for anchor */
     font-weight: 600;
 }
 
@@ -230,6 +232,122 @@ h2 {
     line-height: 1.4;
     margin-top: 2.5rem;
     margin-bottom: 1.5rem;
+}
+
+h2,
+h3,
+h4,
+h5 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    gap: 0.5rem;
+}
+
+/* Ensure box headlines don't break layout */
+.legal-text h4,
+.info-box h4,
+.explanatory-box h4,
+.disclaimer-box h4,
+.kpi-box h5 {
+    margin-top: 0;
+    margin-right: 2rem;
+    /* Space for anchor */
+}
+
+/* Prevent click on certain interactive headlines */
+.recital h4,
+.keyboard-shortcuts-header h4 {
+    cursor: default;
+}
+
+.recital h4:hover,
+.keyboard-shortcuts-header h4:hover {
+    color: inherit;
+}
+
+/* Remove anchor from certain headlines */
+.recital h4 .anchor-link,
+.keyboard-shortcuts-header h4 .anchor-link {
+    display: none;
+}
+
+.anchor-link {
+    opacity: 0;
+    text-decoration: none;
+    margin-left: 0.5rem;
+    transition: opacity 0.2s ease, color 0.2s ease;
+    color: #666;
+    flex-shrink: 0;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+h2:hover,
+h3:hover,
+h4:hover,
+h5:hover {
+    color: #1971c2;
+}
+
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link {
+    opacity: 1;
+}
+
+.anchor-link:hover {
+    color: #1971c2;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+
+    h2:hover,
+    h3:hover,
+    h4:hover,
+    h5:hover {
+        color: #4fc3f7;
+    }
+
+    .anchor-link {
+        color: #999;
+    }
+}
+
+/* Light mode */
+body.light-mode h2:hover,
+body.light-mode h3:hover,
+body.light-mode h4:hover,
+body.light-mode h5:hover {
+    color: #1971c2;
+}
+
+/* Dark mode */
+body.dark-mode h2:hover,
+body.dark-mode h3:hover,
+body.dark-mode h4:hover,
+body.dark-mode h5:hover {
+    color: #4fc3f7;
+}
+
+/* Mobile optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .anchor-link {
+        opacity: 0.5;
+        padding: 0.5rem;
+    }
+
+    h2,
+    h3,
+    h4,
+    h5 {
+        padding-right: 1rem;
+    }
 }
 
 .glossary h2 {
@@ -1575,5 +1693,54 @@ body.dark-mode .signatures {
 @media (min-width: 1600px) {
     .signatures {
         width: 65%;
+    }
+}
+
+.anchor-link::after {
+    content: "⚓";
+    font-size: 0.8em;
+}
+
+/* Feedback tooltip */
+.copy-feedback {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+}
+
+.copy-feedback.active {
+    opacity: 1;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+    .copy-feedback {
+        background: rgba(255, 255, 255, 0.8);
+        color: black;
+    }
+}
+
+/* Mobile optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .anchor-link {
+        opacity: 0.5;
+        padding: 0.5rem;
+    }
+
+    h2,
+    h3,
+    h4,
+    h5 {
+        padding-right: 1rem;
     }
 }

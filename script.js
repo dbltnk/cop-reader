@@ -174,6 +174,52 @@ document.addEventListener('DOMContentLoaded', () => {
     // Build initial navigation
     buildNavigation();
 
+    // Add anchor links to headlines
+    function addAnchorLinks() {
+        const headlines = mainContent.querySelectorAll('h2, h3, h4, h5');
+        const feedback = document.createElement('div');
+        feedback.className = 'copy-feedback';
+        document.body.appendChild(feedback);
+
+        headlines.forEach(headline => {
+            // Create a unique ID if none exists
+            if (!headline.id) {
+                headline.id = headline.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            }
+
+            // Create anchor link
+            const anchor = document.createElement('a');
+            anchor.className = 'anchor-link';
+            anchor.setAttribute('aria-label', 'Copy link to this section');
+            anchor.href = `#${headline.id}`;
+
+            // Function to handle copying
+            const copyLink = (e) => {
+                e.preventDefault();
+                const url = new URL(window.location.href);
+                url.hash = headline.id;
+                navigator.clipboard.writeText(url.toString()).then(() => {
+                    feedback.textContent = 'Link copied to clipboard!';
+                    feedback.classList.add('active');
+                    setTimeout(() => feedback.classList.remove('active'), 2000);
+                }).catch(() => {
+                    feedback.textContent = 'Failed to copy link. Please try again.';
+                    feedback.classList.add('active');
+                    setTimeout(() => feedback.classList.remove('active'), 2000);
+                });
+            };
+
+            // Add click handler to both headline and anchor
+            headline.addEventListener('click', copyLink);
+            anchor.addEventListener('click', copyLink);
+
+            headline.appendChild(anchor);
+        });
+    }
+
+    // Add anchor links after building navigation
+    addAnchorLinks();
+
     // Function to toggle menu
     function toggleMenu(force = null) {
         const isExpanded = force !== null ? force : toggle.getAttribute('aria-expanded') === 'true';
