@@ -37,7 +37,7 @@ Commitments and Measures and expanded the Code's provisions while maintaining it
 present this second draft as a foundation for further development. The next draft will draw on your feedback
 provided via the EU survey, in provider workshops, and in Working Group meetings. Thus far, we have
 found your feedback extremely helpful, resulting in substantial changes. We therefore encourage
-stakeholders to continue providing comprehensive feedback on all aspects of the Code, including both
+stakeholders to continue providing comprehensive feedback on all aspects of the Code, including both
 new and unchanged elements. Your feedback will help shape the final version of the Code, which will
 play a crucial role in guiding the future of general-purpose AI model development and deployment.
 
@@ -80,7 +80,7 @@ Key features of the development process of the Code include:
     •   Four specialised Working Group meetings led by Chairs and Vice-Chairs
     •   Meetings with representatives from EU Member States in the AI Board and from the European
         Parliament
-Additional time for consultation and deliberation – both externally and internally – will be needed to refine
+Additional time for consultation and deliberation – both externally and internally – will be needed to refine
 and improve the current draft. As a group of independent Chairs and Vice-Chairs, we strive to make this
 process as transparent and accessible to stakeholders as possible, aiming to share our work and our thinking
 as early as possible, while taking sufficient time to coordinate and discuss key questions within Working
@@ -112,7 +112,7 @@ Thank you for your support!
                                                   Zacherl              Rajkumar              Anderljung
                                                Working Group 2       Working Group 3        Working Group 4
                                                  Vice-Chair            Vice-Chair             Vice-Chair
-Drafting plan, principles, and assumptions
+Drafting plan, principles, and assumptions
 
 This second draft provides more detailed provisions and concrete examples. At this stage, it still does not
 contain the level of granularity, especially for the KPIs, that we expect to include in the final adopted
@@ -155,7 +155,7 @@ Below are some high-level principles we follow when drafting the Code:
                circumvention. The Code strives to accomplish this by, for example, avoiding unnecessary
                use of proxy terms or metrics. The AI Office will monitor and review Measures and KPIs
                that may be susceptible to circumvention and other forms of misspecification.
-          c. Commitments, Measures, and KPIs should differentiate, where applicable, between
+          c. Commitments, Measures, and KPIs should differentiate, where applicable, between
               different types of risks, distribution strategies and deployment contexts of the concerned
               general-purpose AI model, and other factors that may influence the tiers of risk, and how
               risks need to be assessed and mitigated. For example, Commitments, Measures, and KPIs
@@ -198,7 +198,7 @@ Below are some high-level principles we follow when drafting the Code:
      providers can demonstrate equal or superior safety outcomes through alternative approaches that
      are less burdensome, these innovations should be recognised as improving the state of the art of AI
      governance and evidence and we should support their wider adoption.
-The current draft is written under the assumption that there will only be a small number of both general-
+The current draft is written under the assumption that there will only be a small number of both general-
 purpose AI models with systemic risk and providers thereof. Should that assumption prove wrong,
 future drafts may need to be changed significantly, for instance, by introducing a more detailed tiered
 system of Commitments aiming to focus primarily on those models that provide the largest or most severe
@@ -206,8 +206,7 @@ systemic risks. In particular, we want to highlight that even if modifications o
 increase the number of providers in scope, the modifiers’ obligations under Articles 53 and 55 AI Act
 should be limited to the extent of their respective modifications, as appropriate. We expect more
 clarifications from the AI Office on these points, as stated in its dedicated Q&A.
-                                 
-
+                                 
 
 I. PREAMBLE
 
@@ -288,7 +287,6 @@ Whereas:
 
 Therefore, the Signatories of this Code commit to the following:
 
-
 TRANSPARENCY
                                                LEGAL TEXT
 Article 53(1), point (a) AI Act: “Providers of general-purpose AI models shall draw up and keep up-to-date
@@ -310,7 +308,6 @@ on the model architecture, and the information on model usage, are made publicly
 shall not apply to general-purpose AI models with systemic risks.”
 Article 53(7) AI Act: “Any information or documentation obtained pursuant to this Article, including trade
 secrets, shall be treated in accordance with the confidentiality obligations set out in Article 78.”
-
 
 Commitment 1. Documentation
 In order to fulfil the obligations in Article 53(1), points (a) and (b) AI Act, Signatories commit to the
@@ -353,9 +350,7 @@ records, Signatories are encouraged to follow the established protocols and tech
                 corresponding AI Act obligation as specified in Annex           competent     providers
                        XI Section 1 and/or Annex XII AI Act).                   authorities,
 
-
 TABLE REMOVED
-
 
 Appendix: Essential elements of an Acceptable Use Policy
 
@@ -434,8 +429,6 @@ comply with Union law on copyright and related rights, and in particular to iden
 including through state-of-the-art technologies, a reservation of rights expressed pursuant to Article 4(3) of
 Directive (EU) 2019/790;”
 
-
-
 Commitment 2. Copyright policy
 In order to fulfil the obligation to put in place a policy to comply with Union law on copyright and related
 rights, and in particular to identify and comply with, including through state-of-the-art technologies, a
@@ -465,12 +458,8 @@ information or trade secrets in accordance with Union and national law.3
 Key Performance Indicator
       •    KPI 2.2.1: Summary of the up-to-date internal copyright policy published on Signatory’s website.
 
-
-
-
 3
     To be streamlined with the AI Office’s template according to Article 53(1), point (d) AI Act.
-
 
 Measure 2.3: Make reasonable efforts to assess the copyright compliance of third-party datasets
 Signatories commit to undertaking a copyright due diligence when entering into an agreement with a third
@@ -510,14 +499,10 @@ models. Signatories are encouraged to take into account, as appropriate, relevan
 by public authorities in the European Union and the European Economic Area and in the jurisdictions where
 they are established.
 
-
-
-
 4
  Cf. the definition of a pirate website in "WIPO Advisory Committee on Enforcement, The building respect for intellectual property
 database project”, WIPO/ACE/14/9, para 2 (June 18, 2019).
                 
-
 
 Key Performance Indicator
      •     KPI 2.5.1: Documentation of the list of piracy websites excluded from crawling. This KPI does not
@@ -558,8 +543,6 @@ Key Performance Indicators
      •     KPI 2.7.1: List of other solutions for expressions of rights reservations honoured by the Signatory
            is provided in the copyright policy, including information on the period of time as of which these
            solutions have been honoured by the Signatory.
-
-
 
 5 Recital 18, Dir. (EU) 2019/790: “Other uses should not be affected by the reservation of rights for the purposes of text and data
 
@@ -604,7 +587,6 @@ Key Performance Indicator
        •    KPI 2.10.1: Acceptable use policy, terms and conditions, or other equivalent documents include a
             prohibition of copyright-infringing uses.
 
-
 6 To be streamlined with the AI Office’s template according to Article 53(1), point (d) AI Act.
 7 To be streamlined with the AI Office’s template according to Article 53(1), point (d) AI Act.
 8
@@ -626,7 +608,6 @@ Key Performance Indicators
      •   KPI 2.11.2: Internal process to adequately handle copyright-related complaints specified in the
          copyright policy. Publication of the possibility to lodge copyright-related complaints on the website
          of the Signatory. This KPI does not apply to SMEs.
-
 
 III. COMMITMENTS BY PROVIDERS OF GENERAL-
 PURPOSE AI MODELS WITH SYSTEMIC RISK
@@ -662,13 +643,9 @@ PURPOSE AI MODELS WITH SYSTEMIC RISK
 
  Chairs and Vice-Chairs of Working Groups 2, 3, and 4.
 
-
-
-
                                              LEGAL TEXT
  Article 55(1) AI Act: “In addition to the obligations listed in Articles 53 and 54, providers of general-
  purpose AI models with systemic risk shall:
-
 
      (a) perform model evaluation in accordance with standardised protocols and tools reflecting the state
          of the art, including conducting and documenting adversarial testing of the model with a view to
@@ -702,7 +679,6 @@ PURPOSE AI MODELS WITH SYSTEMIC RISK
  Article 3(64) AI Act: “‘high-impact capabilities’ means capabilities that match or exceed the capabilities
  recorded in the most advanced general-purpose AI models;”
 
-
 Whereas:
 
      a) The Signatories recognise that providers of general-purpose AI models with systemic risk should
@@ -714,7 +690,6 @@ Whereas:
         particularly important where the general-purpose AI model with systemic risk is more likely to (i)
         present substantial systemic risk, (ii) has uncertain capabilities and impacts, or (iii) where the
         provider lacks relevant expertise. Conversely, there may be less need for more comprehensive
-
 
         measures when there is good reason to believe that a new general-purpose AI model with systemic
         risk will exhibit the same capabilities and propensities as exhibited by general-purpose AI models
@@ -762,9 +737,7 @@ Whereas:
           trajectories of general-purpose AI models with systemic risk into account for the identification of
           systemic risks.
 
-
 Therefore, the Signatories of this Code commit to the following:
-
 
 Commitment 3. Taxonomy
                             INFORMATION BOX FROM THE AI OFFICE
@@ -777,7 +750,6 @@ a fundamental notion within the AI Act which must be interpreted and implemented
 across all providers, beyond Signatories of the Code. Therefore, some of the considerations of Section 3.1
 and the list of risks given in Sections 3.2 and 3.3 of this draft Code might ultimately be better placed in
 related AI Office guidelines.
-
 
 In order to fulfil their obligations under Article 55(1) AI Act, Signatories commit to drawing from the
 elements of this taxonomy when assessing and mitigating systemic risks from their general-purpose AI
@@ -805,8 +777,6 @@ Considerations based on the nature of risks:
      •   Irreversibility. Resulting harm is impossible or very difficult to reverse.
      •   Asymmetric impact. Small groups of actors or a small number of causative events may have
          significant impact.
-
-
 
 Practice-oriented considerations:
 
@@ -927,7 +897,6 @@ purpose AI model with systemic risk. These include:
     • Interactions with other AI models or systems
     • Model limitations, inadequacies, or potential failures
 
-
  Explanation of changes to Commitment 3 (Taxonomy): Our main change for this section of the draft
  was to include the considerations that we used to create this taxonomy (and which we suggest as a first
  basis for risk identification at the Signatories). We have aimed to clearly indicate selected systemic risks
@@ -935,7 +904,6 @@ purpose AI model with systemic risk. These include:
  identify additional risks and sources of risk as they emerge or become more defined and actionable. We
  have also clarified that model capabilities are not risks in themselves, but that they should be considered
  for risk analysis.
-
 
 Commitment 4. Safety and Security Framework
 In order to fulfil their obligations under Article 55(1) AI Act, Signatories commit to adopting,
@@ -949,7 +917,6 @@ deployment of general-purpose AI models with systemic risk.
 
 The explanatory box below provides a high-level template which Signatories could, but are not obligated
 to, follow when writing their Framework.
-
 
            EXPLANATORY BOX: Potential outline of a Safety and Security Framework
 
@@ -966,7 +933,6 @@ Commitments 11—12
 Commitment 13
 5. Governance risk mitigations
 Commitments 14—21
-
 
 In order to satisfy Commitment 4:
 
@@ -1191,15 +1157,10 @@ methods.
  section introduces key changes aimed at ensuring that evaluations and mitigations occur when necessary
  and as defined in other parts of the Code, especially clearly specifying milestones beyond the generic
 
-
-
-38
-              
-
+              
 
  “continuous”. We also made sure to not require additional documentation creation and updates when not
  necessary. We also added a Measure to better specify what happens after a model is retired.
-
 
 RISK ASSESSMENT FOR PROVIDERS OF GENERAL-PURPOSE AI
 MODELS WITH SYSTEMIC RISK
@@ -1207,7 +1168,6 @@ Risk assessment here refers to the process of risk identification, risk analysis
 conducted systematically, iteratively, and collaboratively, drawing on the knowledge and views of multiple
 experts and stakeholders, and it may look different for different types of systemic risks. It will use the best
 available information and rigorous techniques, supplemented by further enquiry as necessary.
-
 
 Commitment 7. Risk identification
 In order to fulfil their obligations under Article 55(1) AI Act, Signatories commit to identifying systemic
@@ -1222,7 +1182,6 @@ to engage a diverse range of voices.
 
 Signatories commit to developing risk tiers (see Measure 4.2) for each identified risk and to using the
 identified systemic risks in their risk analysis.
-
 
 Commitment 8. Risk analysis
 In order to fulfil their obligations under Article 55(1) AI Act, Signatories commit to carrying out a rigorous
@@ -1242,10 +1201,7 @@ Risk analysis may be undertaken with varying degrees of detail and complexity, d
 may be posed by the relevant general-purpose AI model with systemic risk. Analysis techniques may be
 qualitative, quantitative, or a combination of these, depending on the circumstances and intended use. Such
 
-
-39
-             
-
+             
 
 analysis techniques will be state-of-the-art, such as by drawing from existing standards, in particular
 European harmonized standards, or recognised best practices in risk management provided that those
@@ -1260,13 +1216,11 @@ objectives of the AI Act. Risk estimation techniques will include but not be lim
 Commitment 10. Risk estimates will build on evidence gained from serious incident reporting
 (Commitment 17) and monitoring (e.g. post-deployment monitoring as detailed in Measure 10.12).
 
-
 Commitment 9. Risk evaluation
 In order to fulfil their obligations under Article 55(1) AI Act, Signatories commit to comparing the results
 of risk analysis (Commitment 8) to the pre-defined risk tiers (Measure 4.2) to assess the level of risk. At a
 minimum, this will entail assessing whether the level of risk is acceptable. This will also include an
 assessment of the residual risk posed by the model, after mitigations have been applied.
-
 
  Explanation of changes to Commitments 7—9 (Risk identification, analysis and evaluation): Our
  primary goal for this draft was to ensure that the Measures align closely with existing standards in risk
@@ -1276,8 +1230,6 @@ assessment of the residual risk posed by the model, after mitigations have been 
  conjunction with Measure 4.2 (Risk tiers) to ensure that the risk analysis can very concretely inform both
  the depth of model evaluations, as well as allowing and supporting informed decision-making on
  mitigations.
-
-
 
 Commitment 10. Evidence collection
 In order to fulfil their obligations under Article 55(1) AI Act, Signatories commit to conducting a thorough
@@ -1293,11 +1245,7 @@ The depth of evidence collection will be proportional to the tier of risk being 
 about how much risk a given model adds. Signatories may start evidence collection for a risk with less
 resource-intensive methods (e.g. literature reviews or running open benchmarks) and follow-up with more
 
-
-
-40
-             
-
+             
 
 thorough evaluations (e.g. agentic evaluations or uplift studies) to focus their evidence collection efforts
 according to their risk priorities.
@@ -1343,11 +1291,7 @@ Methods that are not state-of-the-art include, for example, saturated benchmarks
 the AI Office as not having high enough scientific rigour (see Measure 10.3). Signatories commit to
 periodically (at least every 6 months) reviewing the effectiveness of their model evaluations and updating
 
-
-
-41
-             
-
+             
 
 or deprecating model evaluations that have been shown to not be effective or state-of-the-art anymore,
 aiming to focus their efforts on high-signal model evaluations.
@@ -1394,10 +1338,7 @@ validate, reproduce or improve on model evaluation results. This may be shown, f
 peer reviews or reproductions by other parties, facilitated through securely releasing appropriate amounts
 of model evaluation data (always taking into account proliferation risks); secure release of model evaluation
 
-
-42
-              
-
+              
 
 code and documentation of evaluation methodology, evaluation environment, computational environment,
 and elicitation methods.
@@ -1443,11 +1384,7 @@ runs, parallel execution, re-runs, as well as appropriate staffing and engineeri
 closely to, for example, identify software bugs or model refusals which might lead to artificially lowered
 estimates. For the most severe risks identified, Signatories commit to roughly matching the elicitation
 
-
-
-43
-             
-
+             
 
 efforts spent on their leading non-safety research projects. They may proportionally reduce these efforts for
 lower levels of risk.
@@ -1491,12 +1428,7 @@ in English, i.e. those based on programming capabilities). Signatories commit to
 but for all modalities supported by a model. For other modalities, representation might be measured in
 different categories than languages (e.g. image representations).
 
-
-
-
-44
-               
-
+               
 
 To facilitate this, Signatories are encouraged to make use of participatory methods involving expert or lay
 representatives of civil society, academia, and other relevant stakeholders, where this is appropriate for the
@@ -1542,12 +1474,7 @@ Office (e.g. the international network of AI Safety Institutes), Signatories are
 sharing via industry organisations, but will ensure that there is no strict membership requirement or other
 restrictions which lead to the exclusion of potential competitors.
 
-
-
-45
-            
-
-
+            
 
 Potential Key Performance Indicators
      •   KPI 10.8.1: Number of relevant parties with whom evidence collection best practice guidance has
@@ -1592,11 +1519,7 @@ Signatories commit to conducting post-deployment monitoring for systemic risks a
 may conduct it for lower risk tiers as well. This includes, but is not limited to, the collection of relevant
 model-independent evidence defined in Measure 10.1.
 
-
-46
-             
-
-
+             
 
 Signatories commit to establishing contractual, technical, or other mechanisms to gather and include
 relevant post-deployment information in risk assessment and ensure the effectiveness of their mitigations.
@@ -1639,12 +1562,7 @@ Potential Key Performance Indicators
      •   KPI 10.12.3 Percentage of licensees who report actionable evidence collected for the highest risk
          tiers (target: 50%).
 
-
-
-
-47
-              
-
+              
 
  Explanation of changes to Commitment 10 (Evidence collection): Most changes in this section were
  based on requests for clarifications on how certain key terms (such as “scientific rigour” or “state-of-the-
@@ -1661,7 +1579,6 @@ Potential Key Performance Indicators
  was not prescribed as a fixed, inflexible and potentially inappropriate single technique but instead as a
  measure which could be fulfilled in ways that are most appropriate for the business model and
  deployment context around a model.
-
 
 TECHNICAL RISK MITIGATION FOR PROVIDERS OF GENERAL-
 PURPOSE AI MODELS WITH SYSTEMIC RISK
@@ -1690,12 +1607,7 @@ striving to implement mitigations proportionate to the risks (cf. risk tiers in 
 state-of-the-art mitigations are those that best mitigate especially the highest-tier risks. Signatories are also
 encouraged to take into account any benefits lost by the implementation of mitigations.
 
-
-
-
-48
-             
-
+             
 
  Explanation of changes to Commitment 11: Previously, safety and security mitigations were covered
  by a single joint ‘Measure 12’; in this draft, they are split into Commitments 11 and 12.
@@ -1708,8 +1620,6 @@ encouraged to take into account any benefits lost by the implementation of mitig
  We think that an outcome-based approach is likely most effective. Instead of requiring a fixed set of
  mitigations, which may be outdated (or worse, actively counterproductive) in the future, we think model
  providers will commit to implementing mitigations proportionate to the risk posed by a model.
-
-
 
 Commitment 12. Security mitigations
 In order to fulfil their obligations under Article 55(1), points (b) and (d) AI Act, Signatories commit to
@@ -1743,11 +1653,7 @@ actors in Commitment 12. This will include, but is not limited to:
          (c) secure communication channels for third parties to report security issues,
          (d) competitive bug bounty programs to encourage public participation in security testing,
 
-
-
-49
-             
-
+             
 
         (e) clear and public security whistleblower policies which prohibit retribution, in line with
         Commitment 18,
@@ -1790,12 +1696,7 @@ storage or in use. This will include, but is not limited to:
 These measures will be in line with technical standards such as NIST SP 800-171, INCITS 359-2004, and
 NIST 800-53.
 
-
-
-
-50
-             
-
+             
 
 Potential Key Performance Indicator
      •   KPI 12.4.1: Percentage of defined interfaces and access points to unreleased model weights and
@@ -1830,22 +1731,16 @@ Potential Key Performance Indicator
      •   KPI 12.6.1: Percentage of copies and versions of unreleased model weights that have the security
          mitigations in Measures 12.1.–12.5. applied (target: 100%)
 
-
 Explanation of changes to Commitment 12: Previously, safety and security mitigations were covered by
 a single joint ‘Measure 12’; in this draft, they are split into Commitments 11 and 12. In response to feedback
 about making mitigations more concrete, we specify a level of security mitigations that we believe to be
 appropriate for Signatories. We anticipate feedback on this level of security mitigation.
 
-
 Commitment 13. Development and deployment decisions
 In order to fulfil their obligations under Article 55(1), points (b) and (d) AI Act, Signatories commit to
 mitigating residual risks where safety and security mitigations are insufficient. To do so, Signatories
 
-
-
-51
-           
-
+           
 
 commit to establishing a process to decide whether and how to proceed with the development and
 deployment of a general-purpose AI model with systemic risk. This process will be described in the
@@ -1887,27 +1782,17 @@ involved. Fulfilling this commitment does not require such involvement or author
 transparency around its presence or absence, in alignment with existing international commitments such as
 the Frontier AI Safety Commitments (Outcome 3.VIII).
 
-
 Explanation of changes to Commitment 13: Previously, Commitment 13 was numbered as ‘Measure 14’.
 We made two major changes in response to feedback: (a) providing more detail and examples about what
 
-
-
-52
-           
-
+           
 
 a description of a decision process should include, including a description of how deployment should be
 staged when deciding to proceed (the new Measure 13.3), and (b) making it clear that input into external
 decision-making is not required in this Commitment; we only require description if such input is required
 (Measure 13.4).
 
-
-
-
-53
-            
-
+            
 
 GOVERNANCE RISK MITIGATION FOR PROVIDERS                                                                OF
 GENERAL-PURPOSE AI MODELS WITH SYSTEMIC RISK
@@ -1916,7 +1801,6 @@ at Union level according to Article 55(1), point (b) AI Act. This Section sets o
 processes to which Signatories commit in order to comply with this obligation. The Section also sets out
 measures that Signatories commit in order to fulfil the obligations in Articles 52(1), 53(1), point (a)
 (specifically Annex XI, Section 2 AI Act), 55(1), point (c), and 87 AI Act.
-
 
 Commitment 14. Systemic risk responsibility allocation
 In order to fulfil their obligations under Article 55(1) AI Act, Signatories commit to clearly allocating
@@ -1953,11 +1837,7 @@ Potential Key Performance Indicators
                 access to the information they need to oversee the organisation’s systemic risk
                 management, including, at minimum, all the information that the Signatory documents with
 
-
-
-54
-             
-
+             
 
                  the purpose of providing it to the AI Office or national competent authorities upon request
                  (see Commitments 1 and 20).
@@ -2003,12 +1883,7 @@ function, where applicable) or by external parties (as per Measure 16.1). Both t
 assessments will be reported to the management body in its supervisory function. The thoroughness of the
 reviews will be proportional to the possible systemic risk posed by the model in question.
 
-
-
-
-55
-             
-
+             
 
 The adequacy assessment will consider best practices, relevant research and state-of-the-art science, serious
 incident reports, and potential external expertise. It will cover the following questions, supported with
@@ -2052,12 +1927,7 @@ Potential Key Performance Indicators
  to help Signatories identify in what ways, if any, their current practices are insufficient, giving them time
  to adjust during the development of the model.
 
-
-
-
-56
-             
-
+             
 
 Commitment 16. External risk assessment
 To fulfil their obligations under Article 55(1) AI Act, Signatories commit to enabling sufficient external
@@ -2105,10 +1975,7 @@ bodies, that have been recognised by the AI Office or meet the criteria below:
 
      •   have significant domain expertise for the risk domain(s) or risk model(s) they are evaluating for,
 
-
-57
-                    
-
+                    
 
      •    are technically skilled and experienced in conducting model evaluations, if relevant,
      •    have internal and external information security protocols in place, sufficient for the level and type
@@ -2128,13 +1995,8 @@ independently report results and guarantees of non-retaliation, including restri
 Signatories are encouraged to use the evidence generated through such external assessments to support
 them in their responsibility to provide evidence for Commitments 6—10.
 
-
-
-
 Figure 1: Decision tree outlining the conditions under which Signatories commit to conducting an external assessment of a specific
 systemic risk pre-deployment
-
-
 
  Explanation of the changes to Measure 16.1: This revision is a direct response to feedback received
  from multiple stakeholder groups, with some calling for stricter external assessment requirements than
@@ -2142,10 +2004,7 @@ systemic risk pre-deployment
  voluntary. All stakeholders requested significantly more detail on what ‘adequacy’ means regarding
  external assessors; the updated text now clarifies who qualifies as a ‘qualified’ external assessor and
 
-
-58
-            
-
+            
 
  points to continually updated guidance, including a list of recognised external assessors from the AI
  Office.
@@ -2190,12 +2049,7 @@ Signatories are further encouraged to use such evidence to fulfil Commitments 6.
 Signatories are encouraged to actively incentivise external assessment after market placement, such as via
 bug bounty programs.
 
-
-
-
-59
-             
-
+             
 
 Potential Key Performance Indicators
 
@@ -2214,7 +2068,6 @@ Potential Key Performance Indicators
          legal or financial consequences when acting in good faith and in compliance with the rules of
          engagement.
 
-
  Explanation of changes to Measure 16.2: Few respondents objected to this Measure in the first draft.
  As such, in this draft we aimed to clarify the Measure further, by outlining what a safe harbour might
  entail.
@@ -2226,7 +2079,6 @@ Article 55(1)(c) AI Act: “In addition to the obligations listed in Articles 53
 purpose AI models with systemic risk shall keep track of, document, and report, without undue delay, to
 the AI Office and, as appropriate, to national competent authorities, relevant information about serious
 incidents and possible corrective measures to address them;”
-
 
 In order to fulfil their obligations under Article 55(1), point (c) AI Act, Signatories commit to setting up
 processes with adequate resourcing.
@@ -2242,13 +2094,7 @@ point (a) AI Act), a serious and irreversible disruption of the management or op
 infrastructure (Article 3(49), point (b) AI Act), and serious harm to property or the environment (Article
 3(49), point (d) AI Act).
 
-
-
-60
-             
-
-
-
+             
 
                                                LEGAL TEXT
 Article 3(49) AI Act: “‘serious incident’ means an incident or malfunctioning of an AI system that directly
@@ -2257,7 +2103,6 @@ or indirectly leads to any of the following:
 (b) a serious and irreversible disruption of the management or operation of critical infrastructure.
 (c) the infringement of obligations under Union law intended to protect fundamental rights;
 (d) serious harm to property or the environment;”
-
 
 This commitment includes allocating sufficient resources to investigate any suspicion of their model’s
 involvement, direct or indirect, in a serious incident. It further includes that if the suspicion is confirmed,
@@ -2293,12 +2138,7 @@ Office where available. In their absence, Signatories commit to reporting the fo
         failures or circumvention of safeguards that contributed to producing these outputs.
     • The model that was potentially involved in the incident, be it directly or indirectly.
 
-
-
-
-61
-             
-
+             
 
      •   A description of evidence available regarding the model’s direct or indirect involvement with the
          serious incident.
@@ -2324,15 +2164,11 @@ line with guidance from the AI Office, where available.
  Response Readiness,” seeing as it would fit better into other parts of the Code. In response, we’ve moved
  that Measure into Measure 4.5 in this draft.
 
-
-
 Commitment 18. Whistleblowing protections
 
                                              LEGAL TEXT
 Article 87 AI Act: “Directive (EU) 2019/1937 shall apply to the reporting of infringements of this
 Regulation and the protection of persons reporting such infringements.”
-
-
 
 In order to fulfil their obligations under Article 87 AI Act, Signatories with more than 50 employees commit
 to implementing whistleblowing channels and afford appropriate whistleblowing protections to covered
@@ -2347,10 +2183,7 @@ significant obligations and do not constitute an exhaustive list of all responsi
      •   establishing secure and confidential internal reporting channels that allow for both written and oral
          reporting.
 
-
-62
-            
-
+            
 
      •   designating an impartial person or department to handle reports, acknowledge receipt within seven
          days, and provide feedback within three months.
@@ -2395,12 +2228,7 @@ Potential Key Performance Indicators
  addition, language was added that encourages small companies that don’t fall under the Directive to
  implement an adjusted minimum version of whistleblowing protections.
 
-
-
-
-63
-             
-
+             
 
 Commitment 19. Notifications
 In order to fulfil their obligations under Article 52(1) and Article 55(1) AI Act, Signatories commit to
@@ -2448,10 +2276,7 @@ in a timely manner and not later than within five business days of a confirmed u
 confirming updates will be outlined in the Framework. Such access could be provided via a publicly
 accessible link or via a sufficiently secure channel specified by the AI Office.
 
-
-64
-            
-
+            
 
 Measure 19.3 Framework adequacy assessment notification
 Signatories commit to ensuring the AI Office has access to the latest unredacted version of their Framework
@@ -2496,11 +2321,7 @@ Measure 20.2. Documentation regarding adherence to the Code and the AI Act
 Signatories commit to documenting information relevant to their adherence to the Code. This includes:
     • Their Framework.
 
-
-
-65
-             
-
+             
 
      •   Their Model Reports.
      •   Adequacy and adherence assessments described in Commitment 15.
@@ -2547,7 +2368,3 @@ Potential Key Performance Indicators
  cards could be substitutes for a summarised or redacted version of Model Reports, something which is
  typically published alongside general-purpose AI models with systemic risk.
 
-
-
-66
-
