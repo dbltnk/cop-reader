@@ -27,35 +27,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // Build navigation from content
     function buildNavigation() {
         const navList = document.createElement('ul');
+        const mainContent = document.querySelector('.main-content');
 
-        // Add Opening Statement
-        const openingStatement = document.querySelector('h2:first-of-type');
-        if (openingStatement && openingStatement.textContent.includes('Opening statement')) {
-            const openingLi = document.createElement('li');
-            const openingLink = document.createElement('a');
-            const headingId = 'opening-statement';
-            openingStatement.id = headingId;
-            openingLink.href = `#${headingId}`;
-            openingLink.textContent = openingStatement.textContent;
-            openingLi.appendChild(openingLink);
-            navList.appendChild(openingLi);
-            observer.observe(openingStatement);
-        }
+        // Get all main headlines (h2) and create navigation items for them
+        const mainHeadings = mainContent.querySelectorAll('h2');
+        mainHeadings.forEach(heading => {
+            // Skip if heading is inside a box
+            if (heading.closest('.info-box, .kpi-box, .explanatory-box, .legal-text, .disclaimer-box')) {
+                return;
+            }
 
-        // Add Drafting Plan
-        const draftingPlan = document.querySelector('h2:last-of-type');
-        if (draftingPlan && draftingPlan.textContent.includes('Drafting plan')) {
-            const draftingLi = document.createElement('li');
-            const draftingLink = document.createElement('a');
-            const headingId = 'drafting-plan';
-            draftingPlan.id = headingId;
-            draftingLink.href = `#${headingId}`;
-            draftingLink.textContent = draftingPlan.textContent;
-            draftingLi.appendChild(draftingLink);
-            navList.appendChild(draftingLi);
-            observer.observe(draftingPlan);
-        }
+            const headingText = heading.textContent.trim();
+            const headingId = headingText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            heading.id = headingId;
 
+            const li = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = `#${headingId}`;
+            link.textContent = headingText;
+            li.appendChild(link);
+
+            // If this is a section that might contain Commitments/Measures, prepare for sub-items
+            if (headingText.includes('COMMITMENTS')) {
+                const subList = document.createElement('ul');
+                li.appendChild(subList);
+            }
+
+            navList.appendChild(li);
+            observer.observe(heading);
+        });
+
+        // Add Commitments and Measures as sub-items
         const headings = mainContent.querySelectorAll('h2, h3, h4');
         let currentCommitmentList = null;
 
@@ -72,25 +74,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Create the link
-            const link = document.createElement('a');
             const headingText = heading.textContent.trim();
 
             // Only process Commitments and Measures
             if (headingText.startsWith('Commitment') || headingText.startsWith('Measure')) {
                 const headingId = headingText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
                 heading.id = headingId;
+                const link = document.createElement('a');
                 link.href = `#${headingId}`;
                 link.textContent = headingText;
 
-                // Create list item
-                const li = document.createElement('li');
-                li.appendChild(link);
-
                 if (headingText.startsWith('Commitment')) {
-                    currentCommitmentList = document.createElement('ul');
-                    li.appendChild(currentCommitmentList);
-                    navList.appendChild(li);
+                    // Find the parent COMMITMENTS section's list
+                    const commitmentsSection = navList.querySelector('li a[href="#ii-commitments-by-providers-of-general-purpose-ai-models"]');
+                    if (commitmentsSection) {
+                        let subList = commitmentsSection.nextElementSibling;
+                        if (!subList || !subList.tagName === 'UL') {
+                            subList = document.createElement('ul');
+                            commitmentsSection.parentElement.appendChild(subList);
+                        }
+                        currentCommitmentList = document.createElement('ul');
+                        const li = document.createElement('li');
+                        li.appendChild(link);
+                        li.appendChild(currentCommitmentList);
+                        subList.appendChild(li);
+                    }
                 } else if (headingText.startsWith('Measure') && currentCommitmentList) {
                     const measureLi = document.createElement('li');
                     measureLi.appendChild(link);
