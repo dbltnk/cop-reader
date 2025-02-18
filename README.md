@@ -34,6 +34,7 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 
 ## Known issues:
 - [~] Glossary hover is not visible on mobile devices
+- [] KPI boxes are too wide on tablets (<760px)
 
 ## Unsorted notes:
 - [ ] Longer lines
