@@ -984,9 +984,20 @@ body.dark-mode .recital-link:hover {
 
 /* Ensure text remains readable */
 @media (max-width: 400px) {
+    html {
+        font-size: 14px;
+    }
+
     body {
-        font-size: 16px;
         line-height: 1.6;
+    }
+
+    p,
+    dl,
+    ol,
+    ul {
+        font-size: 1.1rem;
+        line-height: 1.6rem;
     }
 
     h1 {
