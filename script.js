@@ -130,22 +130,23 @@ function scrollToElement(element, savePrevious = true, updateNav = true) {
 
 // Function to detect if the device is a mobile device
 function isMobileDevice() {
-    // Primary check: User Agent for mobile devices
-    const userAgentCheck = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    // Prioritize pointer type check as it's most reliable for touch interfaces
+    if (window.matchMedia('(pointer: coarse)').matches) {
+        return true;
+    }
 
     // Secondary check: Touch capability
-    const touchCheck = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        return true;
+    }
 
-    // Tertiary check: Screen size
-    const screenCheck = window.matchMedia('(max-width: 760px)').matches;
+    // Tertiary check: User Agent
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        return true;
+    }
 
-    // Additional check: pointer type (if supported)
-    const pointerCheck = window.matchMedia?.('(pointer: coarse)').matches;
-
-    // Consider a device mobile if:
-    // 1. It's identified as a mobile device by user agent OR
-    // 2. It has touch capabilities AND either has a coarse pointer or small screen
-    return userAgentCheck || (touchCheck && (pointerCheck || screenCheck));
+    // Final check: Screen size
+    return window.matchMedia('(max-width: 760px)').matches;
 }
 
 // Add box icons
@@ -790,63 +791,73 @@ document.addEventListener('DOMContentLoaded', () => {
     function addGlossaryTermListeners() {
         const allGlossaryTerms = document.querySelectorAll('.glossary-term');
         const isDeviceMobile = isMobileDevice();
+        let touchStartTime = 0;
+        let touchStartTarget = null;
 
         allGlossaryTerms.forEach(term => {
             if (isDeviceMobile) {
-                // Mobile-only tap handler
-                term.addEventListener('touchend', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
+                // Mobile-only handlers
+                term.addEventListener('touchstart', (e) => {
+                    touchStartTime = Date.now();
+                    touchStartTarget = e.target;
+                }, { passive: true });
 
-                    // Always show tooltip on mobile tap
-                    showTooltip(term);
-                }, { passive: false });
-            } else {
-                // Desktop-only click and hover handlers
+                term.addEventListener('touchend', (e) => {
+                    const touchDuration = Date.now() - touchStartTime;
+                    // Only handle quick taps (less than 300ms) and ensure it's the same target
+                    if (touchDuration < 300 && e.target === touchStartTarget) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        // Toggle tooltip
+                        if (currentTerm === term) {
+                            hideTooltip();
+                        } else {
+                            showTooltip(term);
+                        }
+                    }
+                    touchStartTarget = null;
+                });
+
+                // Prevent any click events on mobile
                 term.addEventListener('click', (e) => {
                     e.preventDefault();
-                    if (currentTerm === term) {
-                        hideTooltip();
-                    } else {
-                        showTooltip(term);
-                    }
+                    e.stopPropagation();
+                }, { capture: true });
+            } else {
+                // Desktop-only hover handler
+                term.addEventListener('mouseenter', () => {
+                    showTooltip(term);
                 });
 
-                term.addEventListener('mouseenter', () => showTooltip(term));
-                term.addEventListener('mouseleave', (e) => {
-                    // Only hide if we're not moving to the tooltip
-                    if (!e.relatedTarget || !e.relatedTarget.closest('.glossary-tooltip')) {
-                        hideTooltip();
-                    }
+                term.addEventListener('mouseleave', () => {
+                    hideTooltip();
+                });
+
+                // Prevent default click behavior on desktop
+                term.addEventListener('click', (e) => {
+                    e.preventDefault();
                 });
             }
         });
 
-        // Desktop-only tooltip hover handling
-        if (!isDeviceMobile) {
-            tooltip.addEventListener('mouseleave', (e) => {
-                // Only hide if we're not moving to a term
-                if (!e.relatedTarget || !e.relatedTarget.closest('.glossary-term')) {
+        // Document click handler only for mobile
+        if (isDeviceMobile) {
+            document.addEventListener('click', (e) => {
+                // Only hide if clicking outside tooltip and term
+                if (currentTerm && !e.target.closest('.glossary-term, .glossary-tooltip')) {
                     hideTooltip();
                 }
-            });
-        }
+            }, { capture: true });
 
-        // Global click handler to close tooltip when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.glossary-term') && !e.target.closest('.glossary-tooltip')) {
-                hideTooltip();
-            }
-        });
-
-        // Handle device orientation change for mobile devices
-        if (isDeviceMobile) {
-            window.addEventListener('orientationchange', () => {
-                if (currentTerm) {
-                    // Reposition tooltip after orientation change
-                    setTimeout(() => positionTooltip(currentTerm), 100);
-                }
-            });
+            // Prevent scroll-triggered touches from activating tooltips
+            let isScrolling;
+            document.addEventListener('scroll', () => {
+                window.clearTimeout(isScrolling);
+                isScrolling = setTimeout(() => {
+                    touchStartTarget = null;
+                }, 100);
+            }, { passive: true });
         }
     }
 
@@ -856,12 +867,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentTerm = null;
 
     function showTooltip(term) {
-        // Hide any existing tooltip first
-        hideTooltip();
-
         const termId = term.getAttribute('href').substring(6);
+        // Don't do anything if this term is already showing
+        if (currentTerm === term) {
+            return;
+        }
+
+        // Only hide existing tooltip if we're showing a different one
+        if (currentTerm) {
+            hideTooltip();
+        }
+
         // Find the term info by ID
         const termInfo = Array.from(termMap.values()).find(info => info.id === termId);
+
         if (termInfo) {
             currentTerm = term;
 
@@ -893,7 +912,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function hideTooltip() {
+        if (currentTerm) {
+            currentTerm.removeAttribute('aria-describedby');
+        }
+        tooltip.classList.remove('active');
+        currentTerm = null;
+    }
+
     function positionTooltip(term) {
+        // On mobile, we don't need to calculate position since it's fixed at bottom
+        if (isMobileDevice()) {
+            return;
+        }
+
+        // Only calculate position for desktop
         const rect = term.getBoundingClientRect();
         const tooltipWidth = 300; // Fixed width for calculation
         const windowWidth = window.innerWidth;
@@ -913,19 +946,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const top = rect.top + window.scrollY - 10;
 
-        tooltip.style.position = 'absolute';
-        tooltip.style.top = `${top}px`;
-        tooltip.style.left = `${left}px`;
-        tooltip.style.right = 'auto';
-        tooltip.style.marginRight = '0';
-    }
-
-    function hideTooltip() {
-        if (currentTerm) {
-            currentTerm.removeAttribute('aria-describedby');
-        }
-        tooltip.classList.remove('active');
-        currentTerm = null;
+        // Batch the style updates
+        requestAnimationFrame(() => {
+            tooltip.style.position = 'absolute';
+            tooltip.style.top = `${top}px`;
+            tooltip.style.left = `${left}px`;
+            tooltip.style.right = 'auto';
+            tooltip.style.marginRight = '0';
+        });
     }
 
     // Update tooltip position on scroll and resize
