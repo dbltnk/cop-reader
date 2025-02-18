@@ -52,13 +52,13 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [X] Glossary does not work with spaces in the term
 - [x] All headlines need to obey line width
 - [ ] More space between list items, UL and OL
-- [ ] Make boxes more unique
-- [ ] Add characters / custom icons to boxes
+- [x] Make boxes more unique
+- [x] Add characters / custom icons to boxes
 - [ ] Add proper favicon
-- [ ] Change color of nav item to selected on click
-- [ ] H5 hard to recognize as such
+- [x] Change color of nav item to selected on click
+- [~] H5 hard to recognize as such
 - [ ] Use full width for text on small screens
-- [ ] Headlines more space before
+- [x] Headlines more space before
 - [x] Nav item not just color as current indicator
 - [ ] Equalize distance between left and box and box and nav bar
 - [ ] KPI box goes too wide
