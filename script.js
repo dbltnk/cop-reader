@@ -32,32 +32,139 @@ document.addEventListener('DOMContentLoaded', () => {
         'Key features of the development process of the Code include:': 'Development Process',
         'Drafting plan, principles, and assumptions': 'Drafting Plan',
         'Below are some high-level principles we follow when drafting the Code:': 'Drafting Principles',
-        'The Objectives of the Code are as follows:': 'Objectives',
-        'Commitment 1: Ensure AI systems are safe and respect fundamental rights': 'C1: Safety & Rights',
-        'Commitment 2: Ensure appropriate transparency and communication': 'C2: Transparency',
-        'Commitment 3: Empower users and clearly define responsibilities': 'C3: User Empowerment',
-        'Commitment 4: Maintain robust data governance': 'C4: Data Governance',
-        'Commitment 5: Foster sustainable AI systems': 'C5: Sustainability',
-        'Commitment 6: Take accountability': 'C6: Accountability'
+        'The Objectives of the Code are as follows:': 'Objectives'
     };
 
-    // Highlight current section in navigation
+    // Enhanced observer callback for navigation highlighting
     const observerCallback = (entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const id = entry.target.id;
-                const navLink = navContent.querySelector(`a[href="#${id}"]`);
-                if (navLink) {
-                    navContent.querySelectorAll('a').forEach(a => a.classList.remove('active'));
-                    navLink.classList.add('active');
-                }
+                updateActiveNavItem(entry.target);
             }
         });
     };
 
+    // Create a more precise observer for navigation
     const observer = new IntersectionObserver(observerCallback, {
-        rootMargin: '-20% 0px -70% 0px'
+        rootMargin: '-20% 0px -70% 0px',
+        threshold: [0, 0.1, 0.5, 1]  // Observe at multiple thresholds for better accuracy
     });
+
+    // Function to update active navigation item
+    function updateActiveNavItem(target) {
+        const navContent = document.getElementById('nav-content');
+        const allNavLinks = navContent.querySelectorAll('a');
+
+        // Get all headlines
+        const headlines = Array.from(document.querySelectorAll('h2, h3, h4'))
+            .filter(heading => !heading.closest('.kpi-box, .explanatory-box, .legal-box, .disclaimer-box'));
+
+        // Get the middle of the viewport
+        const viewportMiddle = window.scrollY + (window.innerHeight / 3);
+
+        // Find all headlines above viewport middle
+        const activeHeadlines = headlines.filter(headline => {
+            const headlinePosition = headline.getBoundingClientRect().top + window.scrollY;
+            return headlinePosition <= viewportMiddle;
+        });
+
+        // Get the last headline (most recent one above viewport middle)
+        let activeHeadline = activeHeadlines[activeHeadlines.length - 1];
+
+        // If we're at the very top of the page, use the first headline
+        if (!activeHeadline && headlines.length > 0) {
+            activeHeadline = headlines[0];
+        }
+
+        // Remove all active classes
+        allNavLinks.forEach(link => {
+            link.classList.remove('active', 'active-deepest');
+        });
+
+        if (activeHeadline) {
+            const targetId = activeHeadline.id;
+            const targetLink = navContent.querySelector(`a[href="#${targetId}"]`);
+
+            if (targetLink) {
+                // Find all currently active links
+                const activeLinks = [];
+
+                // Add active class to the target and collect parent links
+                activeLinks.push(targetLink);
+
+                let parent = targetLink.closest('li').parentElement.closest('li');
+                while (parent) {
+                    const parentLink = parent.querySelector('a');
+                    if (parentLink) {
+                        parentLink.classList.add('active'); // Only add active class to parents
+                        activeLinks.push(parentLink);
+                    }
+                    parent = parent.parentElement.closest('li');
+                }
+
+                // Find the deepest visible active link
+                const visibleActiveLinks = activeLinks.filter(link => {
+                    const rect = link.getBoundingClientRect();
+                    const navRect = navContent.getBoundingClientRect();
+                    return rect.top >= navRect.top && rect.bottom <= navRect.bottom;
+                });
+
+                // Add active-deepest class only to the deepest visible link
+                if (visibleActiveLinks.length > 0) {
+                    const deepestLink = visibleActiveLinks[0];
+                    deepestLink.classList.add('active', 'active-deepest');
+                } else {
+                    // If no visible links, add to the target link
+                    targetLink.classList.add('active', 'active-deepest');
+                }
+
+                // Ensure the active item is visible in the navigation
+                // Only scroll if the target isn't already visible
+                const navRect = navContent.getBoundingClientRect();
+                const linkRect = targetLink.getBoundingClientRect();
+
+                if (linkRect.top < navRect.top || linkRect.bottom > navRect.bottom) {
+                    targetLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+        }
+    }
+
+    // Function to scroll element into view (modified)
+    function scrollToElement(element, savePrevious = true) {
+        if (!element) return;
+
+        if (savePrevious) {
+            previousPosition = window.scrollY;
+        }
+
+        const offset = 100;
+        const elementRect = element.getBoundingClientRect();
+        const absoluteElementTop = elementRect.top + window.pageYOffset;
+        const middle = absoluteElementTop - (window.innerHeight / 2);
+
+        window.scrollTo({
+            top: middle,
+            behavior: 'smooth'
+        });
+
+        // Update navigation after scrolling
+        setTimeout(() => updateActiveNavItem(element), 100);
+
+        // Announce to screen readers
+        const announcement = document.createElement('div');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.setAttribute('class', 'sr-only');
+        announcement.textContent = element.textContent;
+        document.body.appendChild(announcement);
+        setTimeout(() => announcement.remove(), 1000);
+
+        // Visual feedback
+        element.setAttribute('tabindex', '-1');
+        element.focus();
+        element.classList.add('keyboard-highlight');
+        setTimeout(() => element.classList.remove('keyboard-highlight'), 1000);
+    }
 
     // Build navigation from content
     function buildNavigation() {
@@ -328,6 +435,45 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isMobileDevice()) {
         keyboardShortcuts.style.display = 'none';
     }
+
+    // Add click handler to navigation links
+    navContent.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link) {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                scrollToElement(targetElement);
+            }
+        }
+    });
+
+    // Handle initial state and URL hash
+    function handleInitialState() {
+        if (window.location.hash) {
+            const targetElement = document.querySelector(window.location.hash);
+            if (targetElement) {
+                setTimeout(() => {
+                    scrollToElement(targetElement, false);
+                }, 100);
+            }
+        } else {
+            updateActiveNavItem(document.querySelector('h1, h2, h3, h4'));
+        }
+    }
+
+    // Call initial state handler after building navigation
+    handleInitialState();
+
+    // Add scroll handler with debounce
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            updateActiveNavItem();
+        }, 100);
+    });
 });
 
 // Dark mode functionality

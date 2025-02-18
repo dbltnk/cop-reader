@@ -1029,10 +1029,44 @@ article {
     align-items: center;
     padding: 0;
     font-size: 0.9rem;
+    position: relative;
 }
 
 .nav-content a:hover {
     text-decoration: underline;
+}
+
+/* Only the deepest active item gets the visual treatment */
+.nav-content a.active-deepest {
+    font-weight: 600;
+    color: #1971c2;
+    /* Default color for light mode */
+}
+
+.nav-content a.active-deepest::before {
+    content: "▶";
+    position: absolute;
+    left: -1rem;
+    font-size: 0.7em;
+    opacity: 0.8;
+    display: block;
+}
+
+/* Dark mode active nav item */
+@media (prefers-color-scheme: dark) {
+    .nav-content a.active-deepest {
+        color: #4fc3f7;
+    }
+}
+
+/* Light mode active nav item */
+body.light-mode .nav-content a.active-deepest {
+    color: #1971c2;
+}
+
+/* Dark mode active nav item */
+body.dark-mode .nav-content a.active-deepest {
+    color: #4fc3f7;
 }
 
 /* Adjust nested items to be slightly smaller but still accessible */
