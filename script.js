@@ -402,6 +402,11 @@ document.addEventListener('DOMContentLoaded', () => {
             anchor.setAttribute('aria-label', 'Copy link to this section');
             anchor.href = `#${headline.id}`;
 
+            // Add Lucide icon
+            const icon = document.createElement('i');
+            icon.setAttribute('data-lucide', 'anchor');
+            anchor.appendChild(icon);
+
             // Function to handle copying
             const copyLink = (e) => {
                 e.preventDefault();
@@ -424,6 +429,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             headline.appendChild(anchor);
         });
+
+        // Create Lucide icons
+        lucide.createIcons();
     }
 
     // Add anchor links after building navigation
@@ -898,6 +906,7 @@ const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 // Load saved theme preference
 const savedTheme = localStorage.getItem('theme') || 'system';
 themeSelect.value = savedTheme;
+themeSelect.setAttribute('value', savedTheme); // Set initial value attribute
 
 function setTheme(theme) {
     if (theme === 'system') {
@@ -915,6 +924,7 @@ setTheme(savedTheme);
 // Handle theme changes
 themeSelect.addEventListener('change', (e) => {
     const theme = e.target.value;
+    themeSelect.setAttribute('value', theme); // Update value attribute
     setTheme(theme);
     localStorage.setItem('theme', theme);
 });

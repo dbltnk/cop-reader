@@ -29,11 +29,16 @@
             <div class="nav-controls">
                 <div class="theme-control">
                     <label for="theme-select">Theme:</label>
-                    <select id="theme-select" aria-label="Select color theme">
-                        <option value="system">🖥️ System Default</option>
-                        <option value="light">☀️ Light</option>
-                        <option value="dark">🌙 Dark</option>
-                    </select>
+                    <div class="theme-select-wrapper">
+                        <select id="theme-select" aria-label="Select color theme">
+                            <option value="system">System Default</option>
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                        <i data-lucide="monitor" class="theme-icon system-icon"></i>
+                        <i data-lucide="sun" class="theme-icon light-icon"></i>
+                        <i data-lucide="moon" class="theme-icon dark-icon"></i>
+                    </div>
                 </div>
             </div>
             <div class="keyboard-shortcuts" aria-label="Keyboard shortcuts">

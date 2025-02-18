@@ -389,10 +389,17 @@ h5:not(.legal-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *) {
     transition: opacity 0.2s ease;
     vertical-align: middle;
     margin-left: 0.3em;
+    display: inline-flex;
+    align-items: center;
 }
 
 .anchor-link::after {
-    content: "⚓";
+    content: "";
+}
+
+.anchor-link i {
+    width: 1em;
+    height: 1em;
 }
 
 h2:hover,
@@ -1893,7 +1900,7 @@ body.dark-mode .signatures {
 }
 
 .anchor-link::after {
-    content: "⚓";
+    content: "";
     font-size: 0.8em;
 }
 
@@ -1961,4 +1968,34 @@ body.dark-mode .signatures {
     h5 {
         width: 100%;
     }
+}
+
+/* Theme control styles */
+.theme-select-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.theme-icon {
+    position: absolute;
+    right: 2rem;
+    width: 1.2em;
+    height: 1.2em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+/* Show icon based on selected value */
+#theme-select[value="system"]~.system-icon,
+#theme-select[value="light"]~.light-icon,
+#theme-select[value="dark"]~.dark-icon {
+    opacity: 1;
+}
+
+/* Theme select styling */
+#theme-select {
+    padding-right: 3.5rem;
+    /* Make room for icon */
 }
