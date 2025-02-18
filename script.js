@@ -709,57 +709,76 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const walker = document.createTreeWalker(
-            element,
-            NodeFilter.SHOW_TEXT,
-            {
-                acceptNode: function (node) {
-                    // Skip if parent is in excluded elements
-                    if (node.parentElement.closest('.glossary, .side-nav, .nav-content, a, code, pre')) {
-                        return NodeFilter.FILTER_REJECT;
+        // Process each text-containing element separately
+        const textElements = element.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li');
+        textElements.forEach(textElement => {
+            // Track which terms have been tagged in this specific element
+            const taggedTerms = new Set();
+
+            const walker = document.createTreeWalker(
+                textElement,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: function (node) {
+                        // Skip if parent is in excluded elements
+                        if (node.parentElement.closest('.glossary, .side-nav, .nav-content, a, code, pre')) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        return NodeFilter.FILTER_ACCEPT;
                     }
-                    return NodeFilter.FILTER_ACCEPT;
                 }
+            );
+
+            const nodesToReplace = [];
+            while (walker.nextNode()) {
+                nodesToReplace.push(walker.currentNode);
             }
-        );
 
-        const nodesToReplace = [];
-        while (walker.nextNode()) {
-            nodesToReplace.push(walker.currentNode);
-        }
+            nodesToReplace.forEach(textNode => {
+                let text = textNode.nodeValue;
+                let newHtml = text;
 
-        nodesToReplace.forEach(textNode => {
-            let text = textNode.nodeValue;
-            let newHtml = text;
+                // Sort terms by length (longest first) to handle overlapping terms
+                const sortedTerms = Array.from(termMap.keys())
+                    .sort((a, b) => b.length - a.length)
+                    .map(term => ({
+                        term: term,
+                        info: termMap.get(term)
+                    }));
 
-            // Sort terms by length (longest first) to handle overlapping terms
-            const sortedTerms = Array.from(termMap.keys())
-                .sort((a, b) => b.length - a.length)
-                .map(term => ({
-                    term: term,
-                    info: termMap.get(term)
-                }));
+                // Create a temporary div to hold the HTML while we process it
+                const tempDiv = document.createElement('div');
+                tempDiv.textContent = text;
+                let currentHtml = tempDiv.innerHTML;
 
-            // Create a temporary div to hold the HTML while we process it
-            const tempDiv = document.createElement('div');
-            tempDiv.textContent = text;
-            let currentHtml = tempDiv.innerHTML;
+                // Process each term
+                sortedTerms.forEach(({ term, info }) => {
+                    // Skip if this term has already been tagged in this element
+                    if (taggedTerms.has(term)) {
+                        return;
+                    }
 
-            // Process each term
-            sortedTerms.forEach(({ term, info }) => {
-                const escapedTerm = escapeRegExp(term);
-                // Match whole words only, accounting for word boundaries and spaces
-                const regex = new RegExp(`(?<=^|[^a-zA-Z0-9-])${escapedTerm}(?=$|[^a-zA-Z0-9-])`, 'gi');
+                    const escapedTerm = escapeRegExp(term);
+                    // Match whole words only, accounting for word boundaries and spaces
+                    const regex = new RegExp(`(?<=^|[^a-zA-Z0-9-])${escapedTerm}(?=$|[^a-zA-Z0-9-])`, 'gi');
 
-                currentHtml = currentHtml.replace(regex, (match) => {
-                    return `<a href="#term-${info.id}" class="glossary-term">${match}<span class="glossary-ref">${info.number}</span></a>`;
+                    // Only replace the first occurrence
+                    let hasReplaced = false;
+                    currentHtml = currentHtml.replace(regex, (match) => {
+                        if (hasReplaced) {
+                            return match; // Return unchanged for subsequent matches
+                        }
+                        hasReplaced = true;
+                        taggedTerms.add(term); // Mark this term as tagged
+                        return `<a href="#term-${info.id}" class="glossary-term">${match}<span class="glossary-ref">${info.number}</span></a>`;
+                    });
                 });
-            });
 
-            if (currentHtml !== tempDiv.innerHTML) {
-                const fragment = document.createRange().createContextualFragment(currentHtml);
-                textNode.parentNode.replaceChild(fragment, textNode);
-            }
+                if (currentHtml !== tempDiv.innerHTML) {
+                    const fragment = document.createRange().createContextualFragment(currentHtml);
+                    textNode.parentNode.replaceChild(fragment, textNode);
+                }
+            });
         });
     }
 
