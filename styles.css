@@ -483,85 +483,56 @@ body.dark-mode h5:hover {
 
 /* Recital styles */
 .recital {
-    margin: 2rem 0;
-    padding: 1rem 1.5rem;
-    background-color: #fafafa;
-    border-left: 2px solid #e0e0e0;
-    transition: all 0.3s ease-out;
+    margin: 3rem 0;
+    padding: 0 0 0 1.5rem;
     width: 55%;
-}
-
-.recital.highlight {
-    background-color: #fff3cd;
-    border-left-color: #ffc107;
     transition: all 0.3s ease-out;
-}
-
-.recital-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    padding: 2rem 0.5rem 0.5rem 0.5rem;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
+    font-style: italic;
+    font-size: 0.9em;
+    line-height: 1.6;
+    color: #444;
+    border-left: 1px solid #ddd;
     position: relative;
 }
 
-.recital-link::after {
-    content: "↑ Go to recital";
-    position: absolute;
-    right: 0.5rem;
-    top: 0.5rem;
-    font-size: 0.9em;
-    color: #666;
-    opacity: 0.8;
-    transition: opacity 0.2s ease;
-    background-color: inherit;
-    padding: 0.2rem 0.5rem;
-    border-radius: 3px;
-}
-
-.recital-link:hover {
-    text-decoration: none;
-    background-color: #f0f0f0;
-}
-
-.recital-link:hover::after {
-    opacity: 1;
-}
-
-.recital.collapsed {
-    padding: 0.7rem 1.5rem;
-}
-
-.recital.collapsed [id^="recital-"] {
-    display: none;
-}
-
 .recital h4 {
-    margin: 0;
-    padding: 0.3rem 0;
+    margin: 0 0 0.3rem 0;
+    padding: 0;
     font-weight: 500;
     color: #757575;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-}
-
-.recital [id^="recital-"] {
-    margin: 1rem 0 0 0;
-    transition: all 0.3s ease-out;
+    font-style: normal;
+    font-size: 1.1em;
 }
 
 .recital h4::before {
     content: "▼";
-    font-size: 0.8em;
+    font-size: 0.7em;
     transition: transform 0.3s ease;
+    opacity: 0.6;
+    position: absolute;
+    left: 0.5rem;
 }
 
 .recital.collapsed h4::before {
     transform: rotate(-90deg);
+}
+
+.recital.collapsed [id^="recital-"] {
+    display: none;
+}
+
+.recital [id^="recital-"] {
+    margin: 0;
+    transition: all 0.3s ease-out;
+}
+
+.recital.highlight {
+    background-color: rgba(255, 243, 205, 0.4);
+    transition: all 0.3s ease-out;
 }
 
 /* Recital counter */
@@ -588,11 +559,13 @@ article {
 /* Full section specific styles */
 .recitals-full .recital {
     background-color: transparent;
-    border-left: none;
-    padding: 0.5rem 0;
-    margin: 1rem 0;
+    border-left: 1px solid #ddd;
+    padding: 0 0 0 1.5rem;
+    margin: 2rem 0;
     width: 55%;
     position: relative;
+    font-style: italic;
+    font-size: 0.9em;
 }
 
 .recitals-full .recital h4 {
@@ -603,12 +576,12 @@ article {
     display: none;
 }
 
-/* Add jump indicator for summary recitals */
+/* Recital link styles */
 .recital-link {
     text-decoration: none;
     color: inherit;
     display: block;
-    padding: 2rem 0.5rem 0.5rem 0.5rem;
+    padding: 1rem 0.5rem;
     border-radius: 4px;
     transition: background-color 0.2s ease;
     position: relative;
@@ -618,10 +591,11 @@ article {
     content: "↑ Go to recital";
     position: absolute;
     right: 0.5rem;
-    top: 2.25rem;
+    top: 50%;
+    transform: translateY(-50%);
     font-size: 0.9em;
-    color: #666;
-    opacity: 0.8;
+    color: #888;
+    opacity: 0.6;
     transition: opacity 0.2s ease;
     background-color: inherit;
     padding: 0.2rem 0.5rem;
@@ -630,63 +604,65 @@ article {
 
 .recital-link:hover {
     text-decoration: none;
-    background-color: #f0f0f0;
+    background-color: rgba(0, 0, 0, 0.03);
+    /* More subtle hover effect */
 }
 
 .recital-link:hover::after {
-    opacity: 1;
+    opacity: 0.8;
 }
 
 /* Dark mode additions */
 @media (prefers-color-scheme: dark) {
     .recital {
-        background-color: #222;
+        color: #b0b0b0;
         border-left-color: #444;
     }
 
-    .recital.highlight {
-        background-color: #332d1a;
-        border-left-color: #b38600;
-    }
-
-    .recital-link:hover {
-        background-color: #2a2a2a;
-    }
-
     .recital h4 {
-        color: #aaa;
-    }
-
-    .recitals-full .recital {
-        background-color: transparent;
-        border-left: none;
-    }
-
-    .recital-link::after {
         color: #999;
     }
 
+    .recital.highlight {
+        background-color: rgba(51, 45, 26, 0.4);
+    }
+
     .recital-link:hover {
-        background-color: #2a2a2a;
+        background-color: rgba(255, 255, 255, 0.03);
+        /* Subtle hover in dark mode */
+    }
+
+    .recital-link::after {
+        color: #777;
     }
 }
 
-body.light-mode .recital.highlight {
-    background-color: #fff3cd;
-    border-left-color: #ffc107;
+/* Light mode */
+body.light-mode .recital {
+    color: #444;
+    border-left-color: #ddd;
+}
+
+body.light-mode .recital h4 {
+    color: #757575;
 }
 
 body.light-mode .recital-link:hover {
-    background-color: #f0f0f0;
+    background-color: rgba(0, 0, 0, 0.03);
 }
 
-body.dark-mode .recital.highlight {
-    background-color: #332d1a;
-    border-left-color: #b38600;
+/* Dark mode */
+body.dark-mode .recital {
+    color: #b0b0b0;
+    border-left-color: #444;
+}
+
+body.dark-mode .recital h4 {
+    color: #999;
 }
 
 body.dark-mode .recital-link:hover {
-    background-color: #2a2a2a;
+    background-color: rgba(255, 255, 255, 0.03);
 }
 
 /* Mobile-optimized styles */
@@ -770,6 +746,14 @@ body.dark-mode .recital-link:hover {
 
     .glossary-term:active::after {
         opacity: 0.6;
+    }
+
+    .recital {
+        padding: 0 1rem 0 1.5rem;
+    }
+
+    .recitals-full .recital {
+        padding: 0 1rem 0 1.5rem;
     }
 }
 
@@ -1396,14 +1380,24 @@ body.light-mode .nav-label {
 }
 
 .kpi-box {
-    background-color: #e8f5e9;
-    border-left: 4px solid #2e7d32;
+    margin: 3rem 0;
+    padding: 0 0 0 1.5rem;
+    width: 55%;
+    font-style: italic;
+    font-size: 0.9em;
+    line-height: 1.6;
+    color: #444;
+    border-left: 1px solid #ddd;
+    position: relative;
 }
 
 .kpi-box h5 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    color: inherit;
+    margin: 0 0 0.3rem 0;
+    padding: 0;
+    font-weight: 500;
+    color: #757575;
+    font-style: normal;
+    font-size: 1.1em;
 }
 
 .kpi-box .kpi-list {
@@ -1414,89 +1408,57 @@ body.light-mode .nav-label {
 
 .kpi-box .kpi-list li {
     margin-bottom: 0.8rem;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .kpi-box .kpi-target {
-    color: inherit;
     font-weight: 500;
+    color: inherit;
 }
 
-/* Dark mode box styles */
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
     .kpi-box {
-        background-color: #1a2e1a;
-        border-left-color: #4caf50;
+        color: #b0b0b0;
+        border-left-color: #444;
     }
 
     .kpi-box h5 {
-        color: inherit;
-    }
-
-    .kpi-box .kpi-target {
-        color: inherit;
+        color: #999;
     }
 }
 
 /* Light mode */
 body.light-mode .kpi-box {
-    background-color: #e8f5e9;
-    border-left: 4px solid #2e7d32;
+    color: #444;
+    border-left-color: #ddd;
 }
 
 body.light-mode .kpi-box h5 {
-    color: inherit;
-}
-
-body.light-mode .kpi-box .kpi-target {
-    color: inherit;
+    color: #757575;
 }
 
 /* Dark mode */
 body.dark-mode .kpi-box {
-    background-color: #1a2e1a;
-    border-left-color: #4caf50;
+    color: #b0b0b0;
+    border-left-color: #444;
 }
 
 body.dark-mode .kpi-box h5 {
-    color: inherit;
+    color: #999;
 }
 
-body.dark-mode .kpi-box .kpi-target {
-    color: inherit;
-}
-
-/* Mobile-optimized styles */
+/* Mobile optimizations */
 @media (hover: none) and (pointer: coarse),
 (max-width: 760px) {
-
-    .glossary h2,
-    .glossary-list,
-    .recitals-full h2,
-    .recital,
-    .recitals-full .recital,
-    .legal-box,
-    .explanatory-box,
-    .disclaimer-box,
     .kpi-box {
+        padding: 0 1rem 0 1.5rem;
         width: 100%;
-        margin-left: 0;
-        margin-right: 0;
-        padding: 1rem;
     }
 }
 
 /* Ultra-wide screen optimizations */
 @media (min-width: 1600px) {
-
-    .glossary h2,
-    .glossary-list,
-    .recitals-full h2,
-    .recital,
-    .recitals-full .recital,
-    .legal-box,
-    .explanatory-box,
-    .disclaimer-box,
     .kpi-box {
         width: 65%;
     }
