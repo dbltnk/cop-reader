@@ -1,3 +1,49 @@
+// Shared state for navigation
+let previousPosition = null;
+let lastJumpKey = null;
+
+// Function to scroll element into view
+function scrollToElement(element, savePrevious = true, updateNav = true) {
+    if (!element) return;
+
+    if (savePrevious) {
+        previousPosition = window.scrollY;
+    }
+
+    // Simple offset for headlines
+    const offset = 20;
+    const position = element.offsetTop - offset;
+
+    // Prevent focus from causing scroll
+    element.style.scrollMarginTop = offset + 'px';
+
+    window.scrollTo({
+        top: position,
+        behavior: 'smooth'
+    });
+
+    // Update navigation after scrolling if requested
+    if (updateNav) {
+        setTimeout(() => updateActiveNavItem(element), 100);
+    }
+
+    // Announce to screen readers
+    const announcement = document.createElement('div');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.setAttribute('class', 'sr-only');
+    announcement.textContent = element.textContent;
+    document.body.appendChild(announcement);
+    setTimeout(() => announcement.remove(), 300);
+
+    // Visual feedback without causing additional scroll
+    requestAnimationFrame(() => {
+        element.setAttribute('tabindex', '-1');
+        element.focus({ preventScroll: true });
+        element.classList.add('keyboard-highlight');
+        setTimeout(() => element.classList.remove('keyboard-highlight'), 300);
+    });
+}
+
 // Function to detect if the device is a mobile device
 function isMobileDevice() {
     // Primary check: User Agent for mobile devices
@@ -128,42 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
-    }
-
-    // Function to scroll element into view (modified)
-    function scrollToElement(element, savePrevious = true) {
-        if (!element) return;
-
-        if (savePrevious) {
-            previousPosition = window.scrollY;
-        }
-
-        const offset = 100;
-        const elementRect = element.getBoundingClientRect();
-        const absoluteElementTop = elementRect.top + window.pageYOffset;
-        const middle = absoluteElementTop - (window.innerHeight / 2);
-
-        window.scrollTo({
-            top: middle,
-            behavior: 'smooth'
-        });
-
-        // Update navigation after scrolling
-        setTimeout(() => updateActiveNavItem(element), 100);
-
-        // Announce to screen readers
-        const announcement = document.createElement('div');
-        announcement.setAttribute('aria-live', 'polite');
-        announcement.setAttribute('class', 'sr-only');
-        announcement.textContent = element.textContent;
-        document.body.appendChild(announcement);
-        setTimeout(() => announcement.remove(), 1000);
-
-        // Visual feedback
-        element.setAttribute('tabindex', '-1');
-        element.focus();
-        element.classList.add('keyboard-highlight');
-        setTimeout(() => element.classList.remove('keyboard-highlight'), 1000);
     }
 
     // Build navigation from content
@@ -444,6 +454,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = link.getAttribute('href').substring(1);
             const targetElement = document.getElementById(targetId);
             if (targetElement) {
+                // Prevent any default scrolling
+                e.preventDefault();
                 scrollToElement(targetElement);
             }
         }
@@ -889,8 +901,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Store previous positions for jump-back functionality
-    let previousPosition = null;
-    let lastJumpKey = null;
     let navigationDepthLevel = 3; // Track navigation depth level (3 = all, 2 = commitments+sections, 1 = commitments only)
 
     // Helper function to find next/previous element
@@ -913,39 +923,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const nextIndex = forward ? currentIndex + 1 : currentIndex - 1;
         return elements[nextIndex] || (forward ? elements[0] : elements[elements.length - 1]);
-    }
-
-    // Helper function to scroll element into view
-    function scrollToElement(element, savePrevious = true) {
-        if (!element) return;
-
-        if (savePrevious) {
-            previousPosition = window.scrollY;
-        }
-
-        const offset = 100; // Offset from the top of the viewport
-        const elementRect = element.getBoundingClientRect();
-        const absoluteElementTop = elementRect.top + window.pageYOffset;
-        const middle = absoluteElementTop - (window.innerHeight / 2);
-
-        window.scrollTo({
-            top: middle,
-            behavior: 'smooth'
-        });
-
-        // Announce to screen readers
-        const announcement = document.createElement('div');
-        announcement.setAttribute('aria-live', 'polite');
-        announcement.setAttribute('class', 'sr-only');
-        announcement.textContent = element.textContent;
-        document.body.appendChild(announcement);
-        setTimeout(() => announcement.remove(), 1000);
-
-        // Visual feedback
-        element.setAttribute('tabindex', '-1');
-        element.focus();
-        element.classList.add('keyboard-highlight');
-        setTimeout(() => element.classList.remove('keyboard-highlight'), 1000);
     }
 
     // Helper function to toggle navigation depth
