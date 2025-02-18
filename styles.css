@@ -603,8 +603,8 @@ article {
 .recital-link::after {
     content: "↑ Go to recital";
     position: absolute;
-    right: 0.5rem;
-    top: 50%;
+    right: 0.75rem;
+    top: 10%;
     transform: translateY(-50%);
     font-size: 0.9em;
     color: #888;
