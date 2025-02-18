@@ -34,7 +34,7 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 
 ## Known issues:
 - [~] Glossary hover is not visible on mobile devices
-- [] KPI boxes are too wide on tablets (<760px)
+- [ ] KPI boxes are too wide on tablets (<760px)
 
 ## Unsorted notes:
 - [ ] Longer lines
@@ -79,7 +79,8 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [ ] Select to share feature, send snippet, plug into default sharing API
 - [ ] Check for and remove footnotes
 - [ ] Icons: Talking chairs, lawyercat
-- [ ] R.: Fonts, colors
+- [~] Fonts
+- [ ] Colors
 - [ ] signatures: break points not optimal
 - [ ] Anchor icon breaks to new line on mobile
 - [~] Always hide the keyboard shortcuts on mobile
