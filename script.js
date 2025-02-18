@@ -226,7 +226,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Build navigation from content
     function buildNavigation() {
         const navList = document.createElement('ul');
-        const mainContent = document.querySelector('.main-content');
+        navList.setAttribute('role', 'navigation');
+        navList.setAttribute('aria-label', 'Document sections');
 
         // Get all main headlines (h2) and create navigation items for them
         const mainHeadings = mainContent.querySelectorAll('h2');
@@ -240,14 +241,18 @@ document.addEventListener('DOMContentLoaded', () => {
             heading.id = headingId;
 
             const li = document.createElement('li');
+            li.setAttribute('role', 'none');
             const link = document.createElement('a');
             link.href = `#${headingId}`;
+            link.setAttribute('role', 'menuitem');
             // Use mapped text if available, otherwise use original text
             link.textContent = navTextMap[heading.textContent.trim()] || heading.textContent.trim();
             li.appendChild(link);
 
             // Create a sublist for this section
             const subList = document.createElement('ul');
+            subList.setAttribute('role', 'menu');
+            subList.setAttribute('aria-label', `Subsections of ${link.textContent}`);
             li.appendChild(subList);
 
             navList.appendChild(li);
@@ -840,16 +845,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const termInfo = Array.from(termMap.values()).find(info => info.id === termId);
         if (termInfo) {
             currentTerm = term;
+
+            // Set up ARIA relationships
+            const tooltipId = `tooltip-${termId}`;
+            tooltip.id = tooltipId;
+            term.setAttribute('aria-describedby', tooltipId);
+
             tooltip.innerHTML = `
-                <div class="glossary-tooltip-header">
-                    <span class="glossary-tooltip-term">${termInfo.originalTerm} [${termInfo.number}]</span>
+                <div class="glossary-tooltip-header" role="tooltip">
+                    <span class="glossary-tooltip-term" id="tooltip-term-${termId}">${termInfo.originalTerm} [${termInfo.number}]</span>
                 </div>
-                <div class="glossary-tooltip-content">
+                <div class="glossary-tooltip-content" role="definition" aria-labelledby="tooltip-term-${termId}">
                     ${termInfo.definition}
                 </div>
             `;
+
+            tooltip.setAttribute('role', 'tooltip');
             tooltip.classList.add('active');
             positionTooltip(term);
+
+            // Announce to screen readers
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('class', 'sr-only');
+            announcement.textContent = `Glossary definition for ${termInfo.originalTerm}: ${termInfo.definition}`;
+            document.body.appendChild(announcement);
+            setTimeout(() => announcement.remove(), 1000);
         }
     }
 
@@ -881,6 +902,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function hideTooltip() {
+        if (currentTerm) {
+            currentTerm.removeAttribute('aria-describedby');
+        }
         tooltip.classList.remove('active');
         currentTerm = null;
     }
@@ -916,6 +940,14 @@ function setTheme(theme) {
         document.body.classList.remove('light-mode', 'dark-mode');
         document.body.classList.add(`${theme}-mode`);
     }
+
+    // Announce theme change to screen readers
+    const announcement = document.createElement('div');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.setAttribute('class', 'sr-only');
+    announcement.textContent = `Theme changed to ${theme === 'system' ? 'system default' : theme} mode`;
+    document.body.appendChild(announcement);
+    setTimeout(() => announcement.remove(), 1000);
 }
 
 // Initialize theme
@@ -925,6 +957,7 @@ setTheme(savedTheme);
 themeSelect.addEventListener('change', (e) => {
     const theme = e.target.value;
     themeSelect.setAttribute('value', theme); // Update value attribute
+    themeSelect.setAttribute('aria-label', `Current theme: ${theme}`);
     setTheme(theme);
     localStorage.setItem('theme', theme);
 });
@@ -944,6 +977,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add click handlers for shortcut buttons
     document.querySelectorAll('.shortcut-btn').forEach(button => {
+        // Add descriptive ARIA labels
+        const key = button.dataset.key;
+        const action = button.textContent.replace(/[↑↓←→]|\d/g, '').trim();
+        button.setAttribute('aria-label', `Press ${key} to ${action}`);
+
         button.addEventListener('click', (e) => {
             e.preventDefault();
             // Create a synthetic keyboard event
@@ -954,6 +992,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             // Dispatch the event to trigger the existing keyboard handler
             document.dispatchEvent(keyEvent);
+
+            // Announce action to screen readers
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('class', 'sr-only');
+            announcement.textContent = `Executing keyboard shortcut: ${action}`;
+            document.body.appendChild(announcement);
+            setTimeout(() => announcement.remove(), 1000);
         });
     });
 
@@ -1163,6 +1209,10 @@ const shortcutsContent = document.getElementById('keyboard-shortcuts-content');
 const isExpanded = localStorage.getItem('keyboardShortcutsExpanded') !== 'false';
 collapseToggle.setAttribute('aria-expanded', isExpanded);
 shortcutsContent.classList.toggle('collapsed', !isExpanded);
+
+collapseToggle.setAttribute('aria-label', 'Toggle keyboard shortcuts visibility');
+shortcutsContent.setAttribute('role', 'region');
+shortcutsContent.setAttribute('aria-label', 'Keyboard shortcuts list');
 
 collapseToggle.addEventListener('click', () => {
     const isCurrentlyExpanded = collapseToggle.getAttribute('aria-expanded') === 'true';

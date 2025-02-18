@@ -22,7 +22,7 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 ## Features:
 - [x] Disclaimer & contribution guide
 - [~] Responsive on any device from mobile phones to wide screen monitors
-- [~] Amazing text rendering that is a pleasure to read
+- [x] Amazing text rendering that is a pleasure to read
 - [x] Table of contents in a side bar left (desktop) or menu (mobile)
 - [x] Dark and light mode, following the device default (user configurable, save any changes locally)
 - [x] Full support for browser-based search functions (no search provided by the web app itself)
