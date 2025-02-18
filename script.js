@@ -727,6 +727,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('.side-nav');
     const toggle = document.querySelector('.nav-toggle');
 
+    // Add click handlers for shortcut buttons
+    document.querySelectorAll('.shortcut-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Create a synthetic keyboard event
+            const keyEvent = new KeyboardEvent('keydown', {
+                key: button.dataset.key,
+                bubbles: true,
+                cancelable: true
+            });
+            // Dispatch the event to trigger the existing keyboard handler
+            document.dispatchEvent(keyEvent);
+        });
+    });
+
     // Store previous positions for jump-back functionality
     let previousPosition = null;
     let lastJumpKey = null;
