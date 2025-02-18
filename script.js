@@ -28,11 +28,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Navigation text mapping
     const navTextMap = {
-        'Opening statement by the Chairs and Vice-Chairs': 'Opening statement',
-        'Key features of the development process of the Code include:': 'CoP development process',
-        'Drafting plan, principles, and assumptions': 'Drafting plan',
-        'Below are some high-level principles we follow when drafting the Code:': 'Drafting principles',
-        'The Objectives of the Code are as follows:': 'Objectives'
+        'Opening statement by the Chairs and Vice-Chairs': 'Opening Statement',
+        'Key features of the development process of the Code include:': 'Development Process',
+        'Drafting plan, principles, and assumptions': 'Drafting Plan',
+        'Below are some high-level principles we follow when drafting the Code:': 'Drafting Principles',
+        'The Objectives of the Code are as follows:': 'Objectives',
+        'Commitment 1: Ensure AI systems are safe and respect fundamental rights': 'C1: Safety & Rights',
+        'Commitment 2: Ensure appropriate transparency and communication': 'C2: Transparency',
+        'Commitment 3: Empower users and clearly define responsibilities': 'C3: User Empowerment',
+        'Commitment 4: Maintain robust data governance': 'C4: Data Governance',
+        'Commitment 5: Foster sustainable AI systems': 'C5: Sustainability',
+        'Commitment 6: Take accountability': 'C6: Accountability'
     };
 
     // Highlight current section in navigation
@@ -724,6 +730,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Store previous positions for jump-back functionality
     let previousPosition = null;
     let lastJumpKey = null;
+    let navigationDepthLevel = 3; // Track navigation depth level (3 = all, 2 = commitments+sections, 1 = commitments only)
 
     // Helper function to find next/previous element
     function findNextPrevElement(selector, forward = true, startElement = null) {
@@ -778,6 +785,55 @@ document.addEventListener('DOMContentLoaded', () => {
         element.focus();
         element.classList.add('keyboard-highlight');
         setTimeout(() => element.classList.remove('keyboard-highlight'), 1000);
+    }
+
+    // Helper function to toggle navigation depth
+    function toggleNavigationDepth() {
+        // Cycle through levels: 3 -> 2 -> 1 -> 3
+        navigationDepthLevel = navigationDepthLevel > 1 ? navigationDepthLevel - 1 : 3;
+
+        // Get all navigation items
+        const navItems = document.querySelectorAll('#nav-content li');
+
+        navItems.forEach(li => {
+            // Check the nesting level of this li
+            let depth = 0;
+            let parent = li;
+            while (parent && parent.tagName === 'LI') {
+                depth++;
+                parent = parent.parentElement.closest('li');
+            }
+
+            // Show/hide based on depth and current navigation level
+            if (depth === 1) {
+                // H2 level - always show
+                li.style.display = 'block';
+                // But maybe hide its children container
+                const childList = li.querySelector('ul');
+                if (childList) {
+                    childList.style.display = navigationDepthLevel > 1 ? 'block' : 'none';
+                }
+            } else if (depth === 2) {
+                // H3 level
+                li.style.display = navigationDepthLevel >= 2 ? 'block' : 'none';
+                // Handle its children container
+                const childList = li.querySelector('ul');
+                if (childList) {
+                    childList.style.display = navigationDepthLevel === 3 ? 'block' : 'none';
+                }
+            } else if (depth === 3) {
+                // H4 level (measures)
+                li.style.display = navigationDepthLevel === 3 ? 'block' : 'none';
+            }
+        });
+
+        // Announce to screen readers
+        const announcement = document.createElement('div');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.setAttribute('class', 'sr-only');
+        announcement.textContent = `Navigation depth level ${navigationDepthLevel}`;
+        document.body.appendChild(announcement);
+        setTimeout(() => announcement.remove(), 1000);
     }
 
     // Keyboard event handler
@@ -843,6 +899,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (recitalToggle) {
                     recitalToggle.click();
                 }
+                break;
+
+            case '5':
+                e.preventDefault();
+                toggleNavigationDepth();
                 break;
 
             case '0':
