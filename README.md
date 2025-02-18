@@ -34,7 +34,8 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [ ] Full support for [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/)
 
 ## Known issues:
-- [~] Glossary hover is not visible on mobile devices
+- [x] Glossary hover is not visible on mobile devices
+- [~] Dark mode is not working on mobile devices
 - [ ] KPI boxes are too wide on tablets (<760px)
 
 ## Unsorted notes:

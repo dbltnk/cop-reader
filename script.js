@@ -977,14 +977,21 @@ const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 // Load saved theme preference
 const savedTheme = localStorage.getItem('theme') || 'system';
 themeSelect.value = savedTheme;
-themeSelect.setAttribute('value', savedTheme); // Set initial value attribute
+themeSelect.setAttribute('value', savedTheme);
 
 function setTheme(theme) {
+    // First remove any existing theme classes
+    document.body.classList.remove('light-mode', 'dark-mode');
+
     if (theme === 'system') {
-        document.body.classList.remove('light-mode', 'dark-mode');
-        setDarkMode(prefersDark.matches);
+        // For system theme, apply dark mode based on system preference
+        if (prefersDark.matches) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.add('light-mode');
+        }
     } else {
-        document.body.classList.remove('light-mode', 'dark-mode');
+        // For explicit theme choice, apply the selected theme
         document.body.classList.add(`${theme}-mode`);
     }
 
@@ -1012,7 +1019,7 @@ themeSelect.addEventListener('change', (e) => {
 // Handle system theme changes
 prefersDark.addEventListener('change', (e) => {
     if (themeSelect.value === 'system') {
-        setDarkMode(e.matches);
+        setTheme('system');
     }
 });
 
