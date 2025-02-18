@@ -2,6 +2,86 @@
 let previousPosition = null;
 let lastJumpKey = null;
 
+// Function to update active navigation item
+function updateActiveNavItem(target) {
+    const navContent = document.getElementById('nav-content');
+    const allNavLinks = navContent.querySelectorAll('a');
+
+    // Get all headlines
+    const headlines = Array.from(document.querySelectorAll('h2, h3, h4'))
+        .filter(heading => !heading.closest('.kpi-box, .explanatory-box, .legal-box, .disclaimer-box'));
+
+    // Get the middle of the viewport
+    const viewportMiddle = window.scrollY + (window.innerHeight / 3);
+
+    // Find all headlines above viewport middle
+    const activeHeadlines = headlines.filter(headline => {
+        const headlinePosition = headline.getBoundingClientRect().top + window.scrollY;
+        return headlinePosition <= viewportMiddle;
+    });
+
+    // Get the last headline (most recent one above viewport middle)
+    let activeHeadline = activeHeadlines[activeHeadlines.length - 1];
+
+    // If we're at the very top of the page, use the first headline
+    if (!activeHeadline && headlines.length > 0) {
+        activeHeadline = headlines[0];
+    }
+
+    // Remove all active classes
+    allNavLinks.forEach(link => {
+        link.classList.remove('active', 'active-deepest');
+    });
+
+    if (activeHeadline) {
+        const targetId = activeHeadline.id;
+        const targetLink = navContent.querySelector(`a[href="#${targetId}"]`);
+
+        if (targetLink) {
+            // Find all currently active links
+            const activeLinks = [];
+
+            // Add active class to the target and collect parent links
+            activeLinks.push(targetLink);
+
+            let parent = targetLink.closest('li').parentElement.closest('li');
+            while (parent) {
+                const parentLink = parent.querySelector('a');
+                if (parentLink) {
+                    parentLink.classList.add('active'); // Only add active class to parents
+                    activeLinks.push(parentLink);
+                }
+                parent = parent.parentElement.closest('li');
+            }
+
+            // Find the deepest visible active link
+            const visibleActiveLinks = activeLinks.filter(link => {
+                const rect = link.getBoundingClientRect();
+                const navRect = navContent.getBoundingClientRect();
+                return rect.top >= navRect.top && rect.bottom <= navRect.bottom;
+            });
+
+            // Add active-deepest class only to the deepest visible link
+            if (visibleActiveLinks.length > 0) {
+                const deepestLink = visibleActiveLinks[0];
+                deepestLink.classList.add('active', 'active-deepest');
+            } else {
+                // If no visible links, add to the target link
+                targetLink.classList.add('active', 'active-deepest');
+            }
+
+            // Ensure the active item is visible in the navigation
+            // Only scroll if the target isn't already visible
+            const navRect = navContent.getBoundingClientRect();
+            const linkRect = targetLink.getBoundingClientRect();
+
+            if (linkRect.top < navRect.top || linkRect.bottom > navRect.bottom) {
+                targetLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+    }
+}
+
 // Function to scroll element into view
 function scrollToElement(element, savePrevious = true, updateNav = true) {
     if (!element) return;
@@ -142,86 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
         rootMargin: '-20% 0px -70% 0px',
         threshold: [0, 0.1, 0.5, 1]  // Observe at multiple thresholds for better accuracy
     });
-
-    // Function to update active navigation item
-    function updateActiveNavItem(target) {
-        const navContent = document.getElementById('nav-content');
-        const allNavLinks = navContent.querySelectorAll('a');
-
-        // Get all headlines
-        const headlines = Array.from(document.querySelectorAll('h2, h3, h4'))
-            .filter(heading => !heading.closest('.kpi-box, .explanatory-box, .legal-box, .disclaimer-box'));
-
-        // Get the middle of the viewport
-        const viewportMiddle = window.scrollY + (window.innerHeight / 3);
-
-        // Find all headlines above viewport middle
-        const activeHeadlines = headlines.filter(headline => {
-            const headlinePosition = headline.getBoundingClientRect().top + window.scrollY;
-            return headlinePosition <= viewportMiddle;
-        });
-
-        // Get the last headline (most recent one above viewport middle)
-        let activeHeadline = activeHeadlines[activeHeadlines.length - 1];
-
-        // If we're at the very top of the page, use the first headline
-        if (!activeHeadline && headlines.length > 0) {
-            activeHeadline = headlines[0];
-        }
-
-        // Remove all active classes
-        allNavLinks.forEach(link => {
-            link.classList.remove('active', 'active-deepest');
-        });
-
-        if (activeHeadline) {
-            const targetId = activeHeadline.id;
-            const targetLink = navContent.querySelector(`a[href="#${targetId}"]`);
-
-            if (targetLink) {
-                // Find all currently active links
-                const activeLinks = [];
-
-                // Add active class to the target and collect parent links
-                activeLinks.push(targetLink);
-
-                let parent = targetLink.closest('li').parentElement.closest('li');
-                while (parent) {
-                    const parentLink = parent.querySelector('a');
-                    if (parentLink) {
-                        parentLink.classList.add('active'); // Only add active class to parents
-                        activeLinks.push(parentLink);
-                    }
-                    parent = parent.parentElement.closest('li');
-                }
-
-                // Find the deepest visible active link
-                const visibleActiveLinks = activeLinks.filter(link => {
-                    const rect = link.getBoundingClientRect();
-                    const navRect = navContent.getBoundingClientRect();
-                    return rect.top >= navRect.top && rect.bottom <= navRect.bottom;
-                });
-
-                // Add active-deepest class only to the deepest visible link
-                if (visibleActiveLinks.length > 0) {
-                    const deepestLink = visibleActiveLinks[0];
-                    deepestLink.classList.add('active', 'active-deepest');
-                } else {
-                    // If no visible links, add to the target link
-                    targetLink.classList.add('active', 'active-deepest');
-                }
-
-                // Ensure the active item is visible in the navigation
-                // Only scroll if the target isn't already visible
-                const navRect = navContent.getBoundingClientRect();
-                const linkRect = targetLink.getBoundingClientRect();
-
-                if (linkRect.top < navRect.top || linkRect.bottom > navRect.bottom) {
-                    targetLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-            }
-        }
-    }
 
     // Build navigation from content
     function buildNavigation() {
