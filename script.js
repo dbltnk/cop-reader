@@ -12,7 +12,11 @@ function scrollToElement(element, savePrevious = true, updateNav = true) {
 
     // Simple offset for headlines
     const offset = 20;
-    const position = element.offsetTop - offset;
+
+    // Get the element's position relative to the viewport and add current scroll position
+    const elementRect = element.getBoundingClientRect();
+    const absoluteTop = window.pageYOffset + elementRect.top;
+    const position = absoluteTop - offset;
 
     // Prevent focus from causing scroll
     element.style.scrollMarginTop = offset + 'px';
@@ -998,8 +1002,11 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'arrowup':
             case 'arrowdown':
                 e.preventDefault();
-                const nextHeading = findNextPrevElement('h2, h3, h4, .recital h4, .kpi-box h5', key === 'arrowdown', activeElement);
-                scrollToElement(nextHeading);
+                // Include all headlines, including those in boxes
+                const nextHeading = findNextPrevElement('h1, h2, h3, h4, h5, .kpi-box h5, .legal-box h4, .explanatory-box h4, .disclaimer-box h4', key === 'arrowdown', activeElement);
+                if (nextHeading) {
+                    scrollToElement(nextHeading);
+                }
                 break;
 
             case 'arrowleft':
