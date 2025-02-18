@@ -30,7 +30,7 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [x] Glossary at the end, all terms from the glossary are highlighted in the document itself and show their definition on-hover and (desktop) or on-tap (mobile), with a direct link to jump to the glossary
 - [x] Recitals are shown in-line by default, but can also be shown just at the end of the document (user configurable, save any changes locally)
 - [x] Keyboard navigation
-- [ ] Full screenreader support
+- [~] Full screenreader support
 - [ ] Full support for [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/)
 
 ## Known issues:
