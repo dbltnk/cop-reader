@@ -4,6 +4,19 @@
  * Copyright (c) 2014 Dave Liepmann
  */
 
+/* Base styles */
+body {
+    font-family: "Source Serif 4", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+}
+
+/* Navigation font */
+.side-nav,
+.nav-toggle,
+.explanatory-box,
+.disclaimer-box {
+    font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
 /* Custom styles for EU AI Act Code of Practice */
 
 /* Base styles */
@@ -891,7 +904,7 @@ body.dark-mode .recital-link:hover {
     position: fixed;
     right: 0;
     top: 0;
-    width: 300px;
+    width: 360px;
     height: 100vh;
     background: #fff;
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
@@ -971,7 +984,7 @@ article {
 }
 
 .nav-content {
-    padding: 1rem;
+    padding: 1.5rem;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
@@ -1070,7 +1083,7 @@ article {
 
 /* Navigation controls */
 .nav-controls {
-    padding: 1rem;
+    padding: 1.5rem;
     border-bottom: 1px solid #eee;
     display: flex;
     align-items: center;
@@ -1466,7 +1479,7 @@ body.dark-mode .kpi-box h5 {
 
 /* Keyboard shortcuts styles */
 .keyboard-shortcuts {
-    padding: 1rem;
+    padding: 1.5rem;
     border-bottom: 1px solid #eee;
     flex-shrink: 0;
 }
