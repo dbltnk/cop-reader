@@ -74,16 +74,15 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [x] Key nav skips commitment 2
 - [ ] Check key nav against screenreader and accessibility guidelines
 - [ ] Nav item spacing polish pass
-- [ ] Hamburger icon not equally spaces to top and right
-- [ ] Left-align all content items better, list standa out etc right now (maybe just mobile)
+- [ ] Hamburger icon not equally spaced to top and right
+- [ ] Left-align all content items better, list stands out etc right now (maybe just mobile)
 - [ ] Font could be smaller on small screens, also reduce padding left and right
 - [ ] Underline for glossary item vertically too far away on small screen
 - [ ] Select to share feature, send snippet, plug into default sharing API
-- [ ] Check for and remove footnotes
-- [ ] Icons: Talking chairs, lawyercat
+- [x] Check for and remove footnotes
+- [x] Icons: Talking chairs, lawyercat
 - [~] Fonts
 - [ ] Colors
-- [ ] signatures: break points not optimal
 - [ ] Anchor icon breaks to new line on mobile
 - [~] Always hide the keyboard shortcuts on mobile
 - [ ] Chair signatures: break points not optimal
