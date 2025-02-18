@@ -86,3 +86,4 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [ ] signatures: break points not optimal
 - [ ] Anchor icon breaks to new line on mobile
 - [~] Always hide the keyboard shortcuts on mobile
+- [ ] Chair signatures: break points not optimal

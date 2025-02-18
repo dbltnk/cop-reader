@@ -2141,3 +2141,36 @@ body.dark-mode .disclaimer-box strong {
 body.dark-mode .disclaimer-box a {
     color: #4fc3f7;
 }
+
+/* Mobile optimizations for headings */
+@media (max-width: 760px) {
+
+    h2:not(.legal-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *),
+    h3:not(.legal-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *),
+    h4:not(.legal-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *),
+    h5:not(.legal-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *) {
+        width: 100%;
+        padding-right: 1rem;
+        padding-left: 0;
+        margin-top: 2.5rem;
+        /* Slightly reduced top margin on mobile */
+        margin-bottom: 1rem;
+    }
+
+    /* Adjust font sizes for better mobile readability */
+    h2 {
+        font-size: 1.6em;
+    }
+
+    h3 {
+        font-size: 1.4em;
+    }
+
+    h4 {
+        font-size: 1.2em;
+    }
+
+    h5 {
+        font-size: 1.1em;
+    }
+}
