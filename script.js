@@ -68,8 +68,51 @@ function isMobileDevice() {
     return userAgentCheck || (touchCheck && (pointerCheck || screenCheck));
 }
 
+// Add box icons
+function addBoxIcons() {
+    // Icon configuration for each box type
+    const boxIcons = {
+        'legal-box': { icon: 'scale', label: 'Legal text' },
+        'explanatory-box': { icon: 'lightbulb', label: 'Explanation' },
+        'recital': { icon: 'info', label: 'Recital' },
+        'kpi-box': { icon: 'goal', label: 'Key Performance Indicator' },
+        'disclaimer-box': { icon: 'triangle-alert', label: 'Important disclaimer' }
+    };
+
+    // Process each box type
+    Object.entries(boxIcons).forEach(([boxClass, { icon, label }]) => {
+        document.querySelectorAll(`.${boxClass}`).forEach(box => {
+            const heading = box.querySelector('h4, h5');
+            if (heading) {
+                // Create icon element
+                const iconWrapper = document.createElement('span');
+                iconWrapper.className = 'box-icon';
+                iconWrapper.setAttribute('aria-hidden', 'true'); // Hide from screen readers since it's decorative
+
+                const iconElement = document.createElement('i');
+                iconElement.setAttribute('data-lucide', icon);
+
+                iconWrapper.appendChild(iconElement);
+
+                // Insert icon before the heading text
+                heading.insertBefore(iconWrapper, heading.firstChild);
+
+                // Update ARIA label to include the box type
+                const existingLabel = heading.getAttribute('aria-label') || heading.textContent;
+                heading.setAttribute('aria-label', `${label}: ${existingLabel}`);
+            }
+        });
+    });
+
+    // Recreate Lucide icons
+    lucide.createIcons();
+}
+
 // Navigation functionality
 document.addEventListener('DOMContentLoaded', () => {
+    // Add box icons
+    addBoxIcons();
+
     const nav = document.querySelector('.side-nav');
     const toggle = document.querySelector('.nav-toggle');
     const navContent = document.getElementById('nav-content');

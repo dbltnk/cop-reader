@@ -6,6 +6,7 @@ This is being developed by Alexander Zacherl (alexander.zacherl@googlemail.com) 
 
 This project uses [Tufte CSS](https://github.com/edwardtufte/tufte-css) as a foundation for its styling, which is licensed under the MIT License. Copyright (c) 2014 Dave Liepmann. See [LICENSE-TUFTE-CSS](LICENSE-TUFTE-CSS) for the full license text.
 
+This project uses [Lucide Icons](https://lucide.dev/), which is licensed under the ISC License. Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
 
 ## Goal:
 Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-draft-general-purpose-ai-code-practice-published-written-independent-experts) of the EU AI Act Code of Practice more accessible and improve usability for a wide range of stakeholders on both mobile and desktop devices. 

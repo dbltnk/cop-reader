@@ -110,6 +110,118 @@ body {
     border-left: 2px solid #e0e0e0;
 }
 
+/* Box icon styles */
+.box-icon {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 0.75rem;
+    vertical-align: middle;
+}
+
+.box-icon svg {
+    width: 1.2em;
+    height: 1.2em;
+    stroke-width: 2;
+}
+
+/* Box-specific icon colors */
+.legal-box .box-icon svg {
+    color: #495057;
+}
+
+.explanatory-box .box-icon svg {
+    color: #1971c2;
+}
+
+.disclaimer-box .box-icon svg {
+    color: #d32f2f;
+}
+
+.kpi-box .box-icon svg {
+    color: #666;
+}
+
+.recital .box-icon svg {
+    color: #757575;
+}
+
+/* Dark mode icon colors */
+@media (prefers-color-scheme: dark) {
+    .legal-box .box-icon svg {
+        color: #adb5bd;
+    }
+
+    .explanatory-box .box-icon svg {
+        color: #4fc3f7;
+    }
+
+    .disclaimer-box .box-icon svg {
+        color: #ff5252;
+    }
+
+    .kpi-box .box-icon svg {
+        color: #999;
+    }
+
+    .recital .box-icon svg {
+        color: #999;
+    }
+}
+
+/* Light mode icon colors */
+body.light-mode .legal-box .box-icon svg {
+    color: #495057;
+}
+
+body.light-mode .explanatory-box .box-icon svg {
+    color: #1971c2;
+}
+
+body.light-mode .disclaimer-box .box-icon svg {
+    color: #d32f2f;
+}
+
+body.light-mode .kpi-box .box-icon svg {
+    color: #666;
+}
+
+body.light-mode .recital .box-icon svg {
+    color: #757575;
+}
+
+/* Dark mode icon colors */
+body.dark-mode .legal-box .box-icon svg {
+    color: #adb5bd;
+}
+
+body.dark-mode .explanatory-box .box-icon svg {
+    color: #4fc3f7;
+}
+
+body.dark-mode .disclaimer-box .box-icon svg {
+    color: #ff5252;
+}
+
+body.dark-mode .kpi-box .box-icon svg {
+    color: #999;
+}
+
+body.dark-mode .recital .box-icon svg {
+    color: #999;
+}
+
+/* Mobile optimizations for icons */
+@media (max-width: 760px) {
+    .box-icon {
+        margin-right: 0.5rem;
+    }
+
+    .box-icon svg {
+        width: 1.1em;
+        height: 1.1em;
+    }
+}
+
 .disclaimer-box {
     background-color: #ffebee;
     border-left: 4px solid #d32f2f;
