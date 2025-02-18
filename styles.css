@@ -86,8 +86,7 @@
 }
 
 /* Box styles */
-.legal-text,
-.info-box,
+.legal-box,
 .explanatory-box,
 .disclaimer-box,
 .kpi-box {
@@ -136,24 +135,18 @@
     color: #666;
 }
 
-.legal-text {
+.legal-box {
     background-color: #f8f9fa;
     border-left: 4px solid #495057;
 }
 
-.info-box {
+.explanatory-box {
     background-color: #e7f5ff;
     border-left: 4px solid #1971c2;
 }
 
-.explanatory-box {
-    background-color: #fff9db;
-    border-left: 4px solid #f59f00;
-}
-
 /* Box headers */
-.legal-text h4,
-.info-box h4,
+.legal-box h4,
 .explanatory-box h4,
 .disclaimer-box h4 {
     margin-top: 0;
@@ -229,10 +222,10 @@ body.dark-mode h5 {
 }
 
 /* Base headline styles - only apply width constraint when NOT in a box */
-h2:not(.legal-text *, .info-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *),
-h3:not(.legal-text *, .info-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *),
-h4:not(.legal-text *, .info-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *),
-h5:not(.legal-text *, .info-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *) {
+h2:not(.legal-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *),
+h3:not(.legal-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *),
+h4:not(.legal-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *),
+h5:not(.legal-box *, .explanatory-box *, .disclaimer-box *, .kpi-box *) {
     width: 55%;
     line-height: 1.4;
     margin-top: 2.5rem;
@@ -242,14 +235,10 @@ h5:not(.legal-text *, .info-box *, .explanatory-box *, .disclaimer-box *, .kpi-b
 }
 
 /* Box headlines - ensure they take full width */
-.legal-text h2,
-.legal-text h3,
-.legal-text h4,
-.legal-text h5,
-.info-box h2,
-.info-box h3,
-.info-box h4,
-.info-box h5,
+.legal-box h2,
+.legal-box h3,
+.legal-box h4,
+.legal-box h5,
 .explanatory-box h2,
 .explanatory-box h3,
 .explanatory-box h4,
@@ -296,9 +285,7 @@ h5:hover .anchor-link {
 }
 
 /* Ensure box headlines don't break layout */
-.legal-text h4,
-.info-box h4,
-.explanatory-box h4,
+.legal-box h4,
 .disclaimer-box h4,
 .kpi-box h5 {
     margin-top: 0;
@@ -363,7 +350,8 @@ body.dark-mode h5:hover {
 }
 
 /* Mobile optimizations */
-@media (hover: none) and (pointer: coarse) {
+@media (hover: none) and (pointer: coarse),
+(max-width: 760px) {
     .anchor-link {
         opacity: 0.5;
         padding: 0.5rem;
@@ -438,19 +426,14 @@ body.dark-mode h5:hover {
         color: #999;
     }
 
-    .legal-text {
+    .legal-box {
         background-color: #2a2a2a;
         border-left-color: #666;
     }
 
-    .info-box {
+    .explanatory-box {
         background-color: #1a2a3a;
         border-left-color: #2b5a8f;
-    }
-
-    .explanatory-box {
-        background-color: #2a2a1a;
-        border-left-color: #8f7a2b;
     }
 
     /* Dark mode text */
@@ -727,8 +710,7 @@ body.dark-mode .recital-link:hover {
     .recitals-full h2,
     .recital,
     .recitals-full .recital,
-    .legal-text,
-    .info-box,
+    .legal-box,
     .explanatory-box,
     .disclaimer-box,
     .kpi-box {
@@ -815,8 +797,7 @@ body.dark-mode .recital-link:hover {
     .recitals-full h2,
     .recital,
     .recitals-full .recital,
-    .legal-text,
-    .info-box,
+    .legal-box,
     .explanatory-box,
     .disclaimer-box,
     .kpi-box {
@@ -865,8 +846,7 @@ body.dark-mode .recital-link:hover {
     .recitals-full h2,
     .recital,
     .recitals-full .recital,
-    .legal-text,
-    .info-box,
+    .legal-box,
     .explanatory-box,
     .disclaimer-box,
     .kpi-box {
@@ -1257,8 +1237,7 @@ body.dark-mode .theme-control select {
     .recitals-full h2,
     .recital,
     .recitals-full .recital,
-    .legal-text,
-    .info-box,
+    .legal-box,
     .explanatory-box,
     .disclaimer-box,
     .kpi-box {
@@ -1306,19 +1285,14 @@ body.light-mode .glossary-tooltip-header {
     border-bottom-color: #eee;
 }
 
-body.light-mode .legal-text {
+body.light-mode .legal-box {
     background-color: #f8f9fa;
     border-left: 4px solid #495057;
 }
 
-body.light-mode .info-box {
+body.light-mode .explanatory-box {
     background-color: #e7f5ff;
     border-left: 4px solid #1971c2;
-}
-
-body.light-mode .explanatory-box {
-    background-color: #fff9db;
-    border-left: 4px solid #f59f00;
 }
 
 body.light-mode .disclaimer-box {
@@ -1501,8 +1475,7 @@ body.dark-mode .kpi-box .kpi-target {
     .recitals-full h2,
     .recital,
     .recitals-full .recital,
-    .legal-text,
-    .info-box,
+    .legal-box,
     .explanatory-box,
     .disclaimer-box,
     .kpi-box {
@@ -1521,8 +1494,7 @@ body.dark-mode .kpi-box .kpi-target {
     .recitals-full h2,
     .recital,
     .recitals-full .recital,
-    .legal-text,
-    .info-box,
+    .legal-box,
     .explanatory-box,
     .disclaimer-box,
     .kpi-box {

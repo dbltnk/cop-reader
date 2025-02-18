@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mainHeadings = mainContent.querySelectorAll('h2');
         mainHeadings.forEach(heading => {
             // Skip if heading is inside a box
-            if (heading.closest('.info-box, .kpi-box, .explanatory-box, .legal-text, .disclaimer-box')) {
+            if (heading.closest('.kpi-box, .explanatory-box, .legal-box, .disclaimer-box')) {
                 return;
             }
 
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let currentNode = heading.nextElementSibling;
             while (currentNode && currentNode.tagName !== 'H2') {
                 if ((currentNode.tagName === 'H3' || currentNode.tagName === 'H4') &&
-                    !currentNode.closest('.info-box, .kpi-box, .explanatory-box, .legal-text, .disclaimer-box')) {
+                    !currentNode.closest('.kpi-box, .explanatory-box, .legal-box, .disclaimer-box')) {
 
                     const subHeadingText = currentNode.textContent.trim();
 
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             let measureNode = currentNode.nextElementSibling;
                             while (measureNode && !measureNode.tagName.match(/^H[1-3]$/)) {
                                 if (measureNode.tagName === 'H4' &&
-                                    !measureNode.closest('.info-box, .kpi-box, .explanatory-box, .legal-text, .disclaimer-box')) {
+                                    !measureNode.closest('.kpi-box, .explanatory-box, .legal-box, .disclaimer-box')) {
                                     const measureText = measureNode.textContent.trim();
                                     if (measureText.startsWith('Measure')) {
                                         const measureId = measureText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
