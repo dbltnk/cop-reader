@@ -317,6 +317,63 @@ body.dark-mode .recital .box-icon svg {
 .explanatory-box {
     background-color: #e7f5ff;
     border-left: 4px solid #1971c2;
+    margin: 3rem 0;
+    padding: 0;
+    width: 55%;
+    position: relative;
+}
+
+.explanatory-box h4 {
+    margin: 0;
+    padding: 1rem 1.5rem;
+    font-weight: 500;
+    color: #1971c2;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-style: normal;
+    font-size: 1.1em;
+    line-height: 1.4;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.explanatory-box h4 .header-content {
+    display: inline;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    min-width: 0;
+}
+
+.explanatory-box h4 .box-icon {
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+}
+
+.explanatory-box h4 .toggle-arrow {
+    display: inline-block;
+    font-size: 0.7em;
+    transition: transform 0.3s ease;
+    opacity: 0.6;
+    margin-left: 0.5em;
+    flex-shrink: 0;
+}
+
+.explanatory-box.collapsed h4 .toggle-arrow {
+    transform: rotate(-90deg);
+}
+
+.explanatory-box .explanatory-content {
+    transition: all 0.3s ease-out;
+    padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.explanatory-box.collapsed .explanatory-content {
+    display: none;
 }
 
 /* Box headers */
@@ -333,7 +390,6 @@ body.dark-mode .recital .box-icon svg {
 .recital h4,
 .keyboard-shortcuts-header h4,
 .legal-box h4,
-.explanatory-box h4,
 .disclaimer-box h4,
 .kpi-box h5 {
     cursor: default;
@@ -342,7 +398,6 @@ body.dark-mode .recital .box-icon svg {
 .recital h4:hover,
 .keyboard-shortcuts-header h4:hover,
 .legal-box h4:hover,
-.explanatory-box h4:hover,
 .disclaimer-box h4:hover,
 .kpi-box h5:hover {
     color: inherit;
@@ -352,7 +407,6 @@ body.dark-mode .recital .box-icon svg {
 .recital h4 .anchor-link,
 .keyboard-shortcuts-header h4 .anchor-link,
 .legal-box h4 .anchor-link,
-.explanatory-box h4 .anchor-link,
 .disclaimer-box h4 .anchor-link,
 .kpi-box h5 .anchor-link {
     display: none;

@@ -154,14 +154,14 @@ function addBoxIcons() {
     // Icon configuration for each box type
     const boxIcons = {
         'legal-box': { icon: 'scale', label: 'Legal text' },
-        'explanatory-box': { icon: 'lightbulb', label: 'Explanation' },
-        'recital': { icon: 'info', label: 'Recital' },
-        'kpi-box': { icon: 'goal', label: 'Key Performance Indicator' },
+        'explanatory-box': { icon: 'lightbulb', label: 'Explanation', collapsible: true },
+        'recital': { icon: 'info', label: 'Recital', collapsible: true },
+        'kpi-box': { icon: 'goal', label: 'Key Performance Indicator', collapsible: true },
         'disclaimer-box': { icon: 'triangle-alert', label: 'Important disclaimer' }
     };
 
     // Process each box type
-    Object.entries(boxIcons).forEach(([boxClass, { icon, label }]) => {
+    Object.entries(boxIcons).forEach(([boxClass, { icon, label, collapsible }]) => {
         document.querySelectorAll(`.${boxClass}`).forEach(box => {
             const heading = box.querySelector('h4, h5');
             if (heading) {
@@ -188,7 +188,7 @@ function addBoxIcons() {
                 iconWrapper.appendChild(iconElement);
 
                 // Add arrow for collapsible boxes
-                if (boxClass === 'kpi-box' || boxClass === 'recital') {
+                if (collapsible) {
                     const arrowSpan = document.createElement('span');
                     arrowSpan.className = 'toggle-arrow';
                     arrowSpan.textContent = '▼';
@@ -202,6 +202,16 @@ function addBoxIcons() {
                 // Update ARIA label to include the box type
                 const existingLabel = heading.getAttribute('aria-label') || heading.textContent;
                 heading.setAttribute('aria-label', `${label}: ${existingLabel}`);
+
+                // Wrap content for explanatory boxes
+                if (boxClass === 'explanatory-box') {
+                    const content = document.createElement('div');
+                    content.className = 'explanatory-content';
+                    while (box.lastChild !== heading) {
+                        content.appendChild(box.lastChild);
+                    }
+                    box.appendChild(content);
+                }
             }
         });
     });
@@ -584,10 +594,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 100);
     });
 
-    // Add click handlers to KPI boxes
-    document.querySelectorAll('.kpi-box').forEach(box => {
-        const header = box.querySelector('h5');
+    // Add click handlers to collapsible boxes
+    document.querySelectorAll('.kpi-box, .explanatory-box').forEach(box => {
+        const header = box.querySelector('h4, h5');
         if (header) {
+            // Initialize aria-expanded attribute
+            box.setAttribute('aria-expanded', 'true');
             header.addEventListener('click', () => {
                 toggleBox(box);
             });
