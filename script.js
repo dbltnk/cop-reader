@@ -229,6 +229,14 @@ function toggleBox(box, force = null) {
     box.classList.toggle('collapsed', !newState);
 }
 
+// Function to toggle all boxes
+function toggleAllBoxes(force = null) {
+    const boxes = document.querySelectorAll('.kpi-box, .explanatory-box, .disclaimer-box, .legal-box');
+    boxes.forEach(box => {
+        toggleBox(box, force);
+    });
+}
+
 // Navigation functionality
 document.addEventListener('DOMContentLoaded', () => {
     // Add box icons
@@ -1281,10 +1289,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             case '4':
                 e.preventDefault();
-                const recitalToggle = document.querySelector('.recital-toggle');
-                if (recitalToggle) {
-                    recitalToggle.click();
-                }
+                toggleAllBoxes();
                 break;
 
             case '5':
