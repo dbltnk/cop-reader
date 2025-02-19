@@ -157,7 +157,7 @@ function addBoxIcons() {
         'explanatory-box': { icon: 'lightbulb', label: 'Explanation', collapsible: true },
         'recital': { icon: 'info', label: 'Recital', collapsible: true },
         'kpi-box': { icon: 'goal', label: 'Key Performance Indicator', collapsible: true },
-        'disclaimer-box': { icon: 'triangle-alert', label: 'Important disclaimer' }
+        'disclaimer-box': { icon: 'triangle-alert', label: 'Important disclaimer', collapsible: true }
     };
 
     // Process each box type
@@ -596,7 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Add click handlers to collapsible boxes
-    document.querySelectorAll('.kpi-box, .explanatory-box').forEach(box => {
+    document.querySelectorAll('.kpi-box, .explanatory-box, .disclaimer-box').forEach(box => {
         const header = box.querySelector('h4, h5');
         if (header) {
             // Initialize aria-expanded attribute

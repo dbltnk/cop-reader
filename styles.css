@@ -274,105 +274,43 @@ body.dark-mode .recital .box-icon svg {
 .disclaimer-box {
     background-color: #ffebee;
     border-left: 4px solid #d32f2f;
-}
-
-.disclaimer-box p {
-    margin: 0 0 1rem 0;
-    line-height: 1.5;
-}
-
-.disclaimer-box strong {
-    color: #d32f2f;
-}
-
-.disclaimer-box ul {
-    margin: 0;
-    padding-left: 1.5rem;
-}
-
-.disclaimer-box li {
-    margin-bottom: 0.5rem;
-    line-height: 1.5;
-}
-
-.disclaimer-box a {
-    color: #0277bd;
-    text-decoration: none;
-}
-
-.disclaimer-box a:hover {
-    text-decoration: underline;
-}
-
-.disclaimer-box footer {
-    font-size: 0.9em;
-    color: #666;
-}
-
-.legal-box {
-    background-color: #f8f9fa;
-    border-left: 4px solid #495057;
-}
-
-.explanatory-box {
-    background-color: #e7f5ff;
-    border-left: 4px solid #1971c2;
-    margin: 3rem 0;
-    padding: 0;
-    width: 55%;
     position: relative;
 }
 
-.explanatory-box h4 {
+.disclaimer-box h4 {
     margin: 0;
     padding: 1rem 1.5rem;
     font-weight: 500;
-    color: #1971c2;
+    color: #d32f2f;
     cursor: pointer;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    font-style: normal;
-    font-size: 1.1em;
-    line-height: 1.4;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    width: 100%;
-    box-sizing: border-box;
 }
 
-.explanatory-box h4 .header-content {
-    display: inline;
-    width: 100%;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    min-width: 0;
-}
-
-.explanatory-box h4 .box-icon {
-    flex-shrink: 0;
-    margin-right: 0.5rem;
-}
-
-.explanatory-box h4 .toggle-arrow {
+.disclaimer-box h4 .toggle-arrow {
     display: inline-block;
     font-size: 0.7em;
     transition: transform 0.3s ease;
     opacity: 0.6;
     margin-left: 0.5em;
-    flex-shrink: 0;
 }
 
-.explanatory-box.collapsed h4 .toggle-arrow {
+.disclaimer-box.collapsed h4 .toggle-arrow {
     transform: rotate(-90deg);
 }
 
-.explanatory-box .explanatory-content {
-    transition: all 0.3s ease-out;
-    padding: 0 1.5rem 1.5rem 1.5rem;
+.disclaimer-box>*:not(h4) {
+    padding: 0 1.5rem 0 1.5rem;
 }
 
-.explanatory-box.collapsed .explanatory-content {
+.disclaimer-box p {
+    margin-bottom: 1rem;
+}
+
+.disclaimer-box p:last-child {
+    margin-bottom: 0;
+    padding-bottom: 1.5rem;
+}
+
+.disclaimer-box.collapsed>*:not(h4) {
     display: none;
 }
 
