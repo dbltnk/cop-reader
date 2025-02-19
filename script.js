@@ -153,7 +153,7 @@ function isMobileDevice() {
 function addBoxIcons() {
     // Icon configuration for each box type
     const boxIcons = {
-        'legal-box': { icon: 'scale', label: 'Legal text' },
+        'legal-box': { icon: 'scale', label: 'Legal text', collapsible: true },
         'explanatory-box': { icon: 'lightbulb', label: 'Explanation', collapsible: true },
         'recital': { icon: 'info', label: 'Recital', collapsible: true },
         'kpi-box': { icon: 'goal', label: 'Key Performance Indicator', collapsible: true },
@@ -596,7 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Add click handlers to collapsible boxes
-    document.querySelectorAll('.kpi-box, .explanatory-box, .disclaimer-box').forEach(box => {
+    document.querySelectorAll('.kpi-box, .explanatory-box, .disclaimer-box, .legal-box').forEach(box => {
         const header = box.querySelector('h4, h5');
         if (header) {
             // Initialize aria-expanded attribute

@@ -161,21 +161,39 @@ body {
 
 .explanatory-box h4,
 .disclaimer-box h4,
+.legal-box h4,
 .kpi-box h5 {
     cursor: pointer;
 }
 
-.explanatory-box h4 {
+.explanatory-box h4,
+.legal-box h4 {
     margin: 0;
     padding: 1rem 1.5rem;
 }
 
-.explanatory-box>*:not(h4) {
+.explanatory-box>*:not(h4),
+.legal-box>*:not(h4) {
     padding: 0 1.5rem;
 }
 
-.explanatory-box.collapsed>*:not(h4) {
+.explanatory-box.collapsed>*:not(h4),
+.legal-box.collapsed>*:not(h4) {
     display: none;
+}
+
+.explanatory-box h4 .toggle-arrow,
+.legal-box h4 .toggle-arrow {
+    display: inline-block;
+    font-size: 0.7em;
+    transition: transform 0.3s ease;
+    opacity: 0.6;
+    margin-left: 0.5em;
+}
+
+.explanatory-box.collapsed h4 .toggle-arrow,
+.legal-box.collapsed h4 .toggle-arrow {
+    transform: rotate(-90deg);
 }
 
 /* Box icon styles */
@@ -345,18 +363,12 @@ body.dark-mode .recital .box-icon svg {
 
 /* Prevent click on certain interactive headlines */
 .recital h4,
-.keyboard-shortcuts-header h4,
-.legal-box h4,
-.disclaimer-box h4,
-.kpi-box h5 {
+.keyboard-shortcuts-header h4 {
     cursor: default;
 }
 
 .recital h4:hover,
-.keyboard-shortcuts-header h4:hover,
-.legal-box h4:hover,
-.disclaimer-box h4:hover,
-.kpi-box h5:hover {
+.keyboard-shortcuts-header h4:hover {
     color: inherit;
 }
 
