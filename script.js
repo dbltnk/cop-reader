@@ -580,7 +580,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle initial state and URL hash
     function handleInitialState() {
         if (window.location.hash) {
-            const targetElement = document.querySelector(window.location.hash);
+            const escapedHash = window.location.hash.replace(/\./g, '\\.');
+            const targetElement = document.querySelector(escapedHash);
             if (targetElement) {
                 setTimeout(() => {
                     scrollToElement(targetElement, false);
