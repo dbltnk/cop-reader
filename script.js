@@ -799,7 +799,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Process each text-containing element separately
-        const textElements = element.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li');
+        const textElements = element.querySelectorAll('p, li');  // Removed h1, h2, h3, h4, h5, h6 from selection
         textElements.forEach(textElement => {
             // Track which terms have been tagged in this specific element
             const taggedTerms = new Set();
