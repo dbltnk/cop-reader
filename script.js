@@ -165,18 +165,39 @@ function addBoxIcons() {
         document.querySelectorAll(`.${boxClass}`).forEach(box => {
             const heading = box.querySelector('h4, h5');
             if (heading) {
+                // Create header content wrapper if it doesn't exist
+                let headerContent = heading.querySelector('.header-content');
+                if (!headerContent) {
+                    headerContent = document.createElement('div');
+                    headerContent.className = 'header-content';
+
+                    // Move existing content into the wrapper
+                    while (heading.firstChild) {
+                        headerContent.appendChild(heading.firstChild);
+                    }
+                }
+
                 // Create icon element
                 const iconWrapper = document.createElement('span');
                 iconWrapper.className = 'box-icon';
-                iconWrapper.setAttribute('aria-hidden', 'true'); // Hide from screen readers since it's decorative
+                iconWrapper.setAttribute('aria-hidden', 'true');
 
                 const iconElement = document.createElement('i');
                 iconElement.setAttribute('data-lucide', icon);
 
                 iconWrapper.appendChild(iconElement);
 
-                // Insert icon before the heading text
-                heading.insertBefore(iconWrapper, heading.firstChild);
+                // Add arrow for collapsible boxes
+                if (boxClass === 'kpi-box' || boxClass === 'recital') {
+                    const arrowSpan = document.createElement('span');
+                    arrowSpan.className = 'toggle-arrow';
+                    arrowSpan.textContent = '▼';
+                    headerContent.appendChild(arrowSpan);
+                }
+
+                // Insert icon at the start of the header content
+                headerContent.insertBefore(iconWrapper, headerContent.firstChild);
+                heading.appendChild(headerContent);
 
                 // Update ARIA label to include the box type
                 const existingLabel = heading.getAttribute('aria-label') || heading.textContent;
@@ -187,6 +208,15 @@ function addBoxIcons() {
 
     // Recreate Lucide icons
     lucide.createIcons();
+}
+
+// Function to toggle a collapsible box
+function toggleBox(box, force = null) {
+    const isExpanded = force !== null ? force : box.getAttribute('aria-expanded') === 'true';
+    const newState = force !== null ? force : !isExpanded;
+
+    box.setAttribute('aria-expanded', newState);
+    box.classList.toggle('collapsed', !newState);
 }
 
 // Navigation functionality
@@ -372,7 +402,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add anchor links to headlines
     function addAnchorLinks() {
-        const headlines = mainContent.querySelectorAll('h2, h3, h4, h5');
+        // Only select headlines that are not inside boxes
+        const headlines = mainContent.querySelectorAll('h2:not(.kpi-box *, .explanatory-box *, .legal-box *, .disclaimer-box *, .recital *), h3:not(.kpi-box *, .explanatory-box *, .legal-box *, .disclaimer-box *, .recital *), h4:not(.kpi-box *, .explanatory-box *, .legal-box *, .disclaimer-box *, .recital *), h5:not(.kpi-box *, .explanatory-box *, .legal-box *, .disclaimer-box *, .recital *)');
         const feedback = document.createElement('div');
         feedback.className = 'copy-feedback';
         document.body.appendChild(feedback);
@@ -381,6 +412,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const usedIds = new Set();
 
         headlines.forEach(headline => {
+            // Skip if headline is inside a box
+            if (headline.closest('.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital')) {
+                return;
+            }
+
             // Create base ID from text content
             let baseId = headline.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
@@ -546,6 +582,16 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollTimeout = setTimeout(() => {
             updateActiveNavItem();
         }, 100);
+    });
+
+    // Add click handlers to KPI boxes
+    document.querySelectorAll('.kpi-box').forEach(box => {
+        const header = box.querySelector('h5');
+        if (header) {
+            header.addEventListener('click', () => {
+                toggleBox(box);
+            });
+        }
     });
 });
 

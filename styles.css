@@ -322,11 +322,40 @@ body.dark-mode .recital .box-icon svg {
 /* Box headers */
 .legal-box h4,
 .explanatory-box h4,
-.disclaimer-box h4 {
+.disclaimer-box h4,
+.kpi-box h5 {
     margin-top: 0;
-    margin-right: 2rem;
-    /* Space for anchor */
+    margin-right: 0;
     font-weight: 600;
+}
+
+/* Prevent click on certain interactive headlines */
+.recital h4,
+.keyboard-shortcuts-header h4,
+.legal-box h4,
+.explanatory-box h4,
+.disclaimer-box h4,
+.kpi-box h5 {
+    cursor: default;
+}
+
+.recital h4:hover,
+.keyboard-shortcuts-header h4:hover,
+.legal-box h4:hover,
+.explanatory-box h4:hover,
+.disclaimer-box h4:hover,
+.kpi-box h5:hover {
+    color: inherit;
+}
+
+/* Remove anchor from certain headlines */
+.recital h4 .anchor-link,
+.keyboard-shortcuts-header h4 .anchor-link,
+.legal-box h4 .anchor-link,
+.explanatory-box h4 .anchor-link,
+.disclaimer-box h4 .anchor-link,
+.kpi-box h5 .anchor-link {
+    display: none;
 }
 
 /* Add general h4 style */
@@ -472,23 +501,6 @@ h5:hover .anchor-link {
     margin-top: 0;
     margin-right: 2rem;
     /* Space for anchor */
-}
-
-/* Prevent click on certain interactive headlines */
-.recital h4,
-.keyboard-shortcuts-header h4 {
-    cursor: default;
-}
-
-.recital h4:hover,
-.keyboard-shortcuts-header h4:hover {
-    color: inherit;
-}
-
-/* Remove anchor from certain headlines */
-.recital h4 .anchor-link,
-.keyboard-shortcuts-header h4 .anchor-link {
-    display: none;
 }
 
 /* The headline text should take up all available width except for the anchor */
@@ -1665,12 +1677,36 @@ body.light-mode .nav-label {
     color: #757575;
     font-style: normal;
     font-size: 1.1em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.kpi-box h5 .header-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.kpi-box h5 .toggle-arrow {
+    content: "▼";
+    font-size: 0.7em;
+    transition: transform 0.3s ease;
+    opacity: 0.6;
+    margin-left: 0.3em;
+}
+
+.kpi-box.collapsed h5 .toggle-arrow {
+    transform: rotate(-90deg);
+}
+
+.kpi-box.collapsed .kpi-list {
+    display: none;
 }
 
 .kpi-box .kpi-list {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
+    transition: all 0.3s ease-out;
 }
 
 .kpi-box .kpi-list li {
