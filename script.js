@@ -583,13 +583,39 @@ document.addEventListener('DOMContentLoaded', () => {
             recital.insertBefore(originalHeader, recital.firstChild);
         }
 
+        // Create header content wrapper
+        const headerContent = document.createElement('div');
+        headerContent.className = 'header-content';
+
+        // Create icon element
+        const iconWrapper = document.createElement('span');
+        iconWrapper.className = 'box-icon';
+        iconWrapper.setAttribute('aria-hidden', 'true');
+
+        const iconElement = document.createElement('i');
+        iconElement.setAttribute('data-lucide', 'quote');
+
+        iconWrapper.appendChild(iconElement);
+        headerContent.appendChild(iconWrapper);
+
+        // Create text node for recital number
+        const textNode = document.createTextNode(`Recital ${number}`);
+        headerContent.appendChild(textNode);
+
+        // Create arrow span
+        const arrowSpan = document.createElement('span');
+        arrowSpan.className = 'toggle-arrow';
+        arrowSpan.textContent = '▼';
+        headerContent.appendChild(arrowSpan);
+
+        // Clear header and add new content
+        originalHeader.textContent = '';
+        originalHeader.appendChild(headerContent);
+        originalHeader.dataset.recitalNumber = number;
+
         const recitalClone = recital.cloneNode(true);
         const recitalId = `in-text-recital-${number}`;
         recital.id = recitalId;
-
-        // Update the header with just the number in the data attribute
-        originalHeader.textContent = '';
-        originalHeader.dataset.recitalNumber = number;
 
         // Modify the clone for the summary section
         recitalClone.classList.add('full-section-recital');
@@ -610,6 +636,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         recitalsFullSection.appendChild(recitalClone);
     });
+
+    // Create Lucide icons
+    lucide.createIcons();
 
     // Function to toggle a single recital
     function toggleRecital(recital, force = null) {

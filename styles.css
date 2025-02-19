@@ -690,15 +690,28 @@ body.dark-mode h5:hover {
 }
 
 .recital h4::before {
+    display: none;
+}
+
+.recital h4 .box-icon {
+    margin-right: 0.5rem;
+}
+
+.recital h4 .header-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.recital h4 .toggle-arrow {
     content: "▼";
     font-size: 0.7em;
     transition: transform 0.3s ease;
     opacity: 0.6;
-    position: absolute;
-    left: 0.5rem;
+    margin-left: 0.3em;
 }
 
-.recital.collapsed h4::before {
+.recital.collapsed h4 .toggle-arrow {
     transform: rotate(-90deg);
 }
 
@@ -720,11 +733,6 @@ body.dark-mode h5:hover {
 /* Recital counter */
 article {
     counter-reset: none;
-}
-
-/* Add "Recital X" text using the data attribute */
-.recital h4::after {
-    content: "Recital " attr(data-recital-number);
 }
 
 /* Recitals section */
