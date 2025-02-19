@@ -479,7 +479,8 @@ document.addEventListener('DOMContentLoaded', () => {
             headline.addEventListener('click', copyLink);
             anchor.addEventListener('click', copyLink);
 
-            headline.appendChild(anchor);
+            // Insert anchor at the start of the headline
+            headline.insertBefore(anchor, headline.firstChild);
         });
 
         // Create Lucide icons
