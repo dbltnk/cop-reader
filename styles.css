@@ -165,6 +165,15 @@ body {
     cursor: pointer;
 }
 
+.explanatory-box h4 {
+    margin: 0;
+    padding: 1rem 1.5rem;
+}
+
+.explanatory-box>*:not(h4) {
+    padding: 0 1.5rem;
+}
+
 .explanatory-box.collapsed>*:not(h4) {
     display: none;
 }
