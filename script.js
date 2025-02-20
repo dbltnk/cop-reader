@@ -254,11 +254,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Navigation text mapping
     const navTextMap = {
-        'Opening statement by the Chairs and Vice-Chairs': 'Opening Statement',
-        'Key features of the development process of the Code include:': 'Development Process',
-        'Drafting plan, principles, and assumptions': 'Drafting Plan',
-        'Below are some high-level principles we follow when drafting the Code:': 'Drafting Principles',
-        'The Objectives of the Code are as follows:': 'Objectives'
+        'Opening statement by the Chairs and Vice-Chairs': 'Introduction',
+        'Key features of the development process of the Code include:': 'Introduction',
+        'Drafting plan, principles, and assumptions': 'Introduction',
+        'Below are some high-level principles we follow when drafting the Code:': 'Introduction',
+        'The Objectives of the Code are as follows:': null // Setting to null will exclude this item
     };
 
     // Enhanced observer callback for navigation highlighting
@@ -282,11 +282,34 @@ document.addEventListener('DOMContentLoaded', () => {
         navList.setAttribute('role', 'navigation');
         navList.setAttribute('aria-label', 'Document sections');
 
+        // Add Introduction as first item, linking to top
+        const introLi = document.createElement('li');
+        introLi.setAttribute('role', 'none');
+        const introLink = document.createElement('a');
+        introLink.href = '#';
+        introLink.setAttribute('role', 'menuitem');
+        introLink.textContent = 'Introduction';
+        introLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        introLi.appendChild(introLink);
+        navList.appendChild(introLi);
+
         // Get all main headlines (h2) and create navigation items for them
         const mainHeadings = mainContent.querySelectorAll('h2');
         mainHeadings.forEach(heading => {
             // Skip if heading is inside a box
             if (heading.closest('.kpi-box, .explanatory-box, .legal-box, .disclaimer-box')) {
+                return;
+            }
+
+            const headingText = heading.textContent.trim();
+            const mappedText = navTextMap[headingText];
+
+            // Skip if mapped to Introduction or null
+            if (mappedText === 'Introduction' || mappedText === null) {
+                observer.observe(heading);
                 return;
             }
 
@@ -299,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
             link.href = `#${headingId}`;
             link.setAttribute('role', 'menuitem');
             // Use mapped text if available, otherwise use original text
-            link.textContent = navTextMap[heading.textContent.trim()] || heading.textContent.trim();
+            link.textContent = mappedText || headingText;
             li.appendChild(link);
 
             // Create a sublist for this section
@@ -323,7 +346,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!subHeadingText.toLowerCase().includes('kpi') &&
                         !subHeadingText.toLowerCase().includes('performance indicator') &&
                         !subHeadingText.toLowerCase().includes('whereas') &&
-                        !subHeadingText.startsWith('Measure')) {
+                        !subHeadingText.startsWith('Measure') &&
+                        subHeadingText !== 'The Objectives of the Code are as follows:') {
 
                         const subHeadingId = subHeadingText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
                         currentNode.id = subHeadingId;
