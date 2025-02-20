@@ -160,7 +160,7 @@ body {
 .explanatory-box,
 .disclaimer-box,
 .kpi-box {
-    margin: 3rem 0;
+    margin: 1.5rem 0;
     padding: 1.5rem;
     border-radius: 4px;
     width: 55%;
@@ -1015,24 +1015,122 @@ body.dark-mode .recital-link:hover {
     dl,
     ol,
     ul {
-        font-size: 1.1rem;
-        line-height: 1.6rem;
+        font-size: 1rem;
+        line-height: 1.3rem;
     }
 
     h1 {
-        font-size: 1.8em;
+        font-size: 1.8rem;
     }
 
     h2 {
-        font-size: 1.5em;
+        font-size: 1.2rem;
     }
 
     h3 {
-        font-size: 1.3em;
+        font-size: 1.1rem;
     }
 
     h4 {
-        font-size: 1.3em;
+        font-size: 1rem;
+    }
+
+    h5 {
+        font-size: 0.9rem;
+    }
+
+    .kpi-box .kpi-list li {
+        max-width: 100% !important;
+    }
+}
+
+@media (min-width: 401px) and (max-width: 760px) {
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        line-height: 1.6;
+    }
+
+    p,
+    dl,
+    ol,
+    ul {
+        font-size: 1rem;
+        line-height: 1.4rem;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    h4 {
+        font-size: 1.1rem;
+    }
+
+    h5 {
+        font-size: 1rem;
+    }
+
+    .kpi-box .kpi-list li {
+        max-width: 100% !important;
+    }
+}
+
+@media (min-width: 761px) {
+    html {
+        font-size: 18px;
+    }
+
+    body {
+        line-height: 1.8;
+    }
+
+    p,
+    dl,
+    ol,
+    ul {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    h1 {
+        font-size: 2.6rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    h3 {
+        font-size: 1.4rem;
+    }
+
+    h4 {
+        font-size: 1.2rem;
+    }
+
+    h5 {
+        font-size: 1.1rem;
+    }
+
+    .kpi-box .kpi-list li {
+        max-width: 55% !important;
+    }
+}
+
+@media (min-width: 1600px) {
+    .kpi-box .kpi-list li {
+        max-width: 85% !important;
     }
 }
 
@@ -1815,12 +1913,22 @@ body.dark-mode .kpi-box h5 {
         padding: 0 1rem 0 1.5rem;
         width: 100%;
     }
+
+    .kpi-box .kpi-list,
+    .kpi-box .kpi-list li {
+        width: 100%;
+    }
 }
 
 /* Ultra-wide screen optimizations */
 @media (min-width: 1600px) {
     .kpi-box {
         width: 65%;
+    }
+
+    .kpi-box .kpi-list,
+    .kpi-box .kpi-list li {
+        width: 100%;
     }
 }
 
@@ -2310,23 +2418,6 @@ body.dark-mode .disclaimer-box a {
         margin-top: 2.5rem;
         /* Slightly reduced top margin on mobile */
         margin-bottom: 1rem;
-    }
-
-    /* Adjust font sizes for better mobile readability */
-    h2 {
-        font-size: 1.6em;
-    }
-
-    h3 {
-        font-size: 1.4em;
-    }
-
-    h4 {
-        font-size: 1.2em;
-    }
-
-    h5 {
-        font-size: 1.1em;
     }
 }
 
