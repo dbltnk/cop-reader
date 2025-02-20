@@ -38,9 +38,13 @@ body {
 
 .glossary-ref {
     font-size: 0.7em;
-    vertical-align: super;
+    position: relative;
+    top: -0.5em;
     color: #666;
     margin-left: 2px;
+    line-height: 0;
+    text-decoration: none !important;
+    display: inline-block;
 }
 
 /* Base tooltip styles */
