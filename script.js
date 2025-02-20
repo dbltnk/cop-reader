@@ -130,13 +130,13 @@ function scrollToElement(element, savePrevious = true, updateNav = true) {
 
 // Function to detect if the device is a mobile device
 function isMobileDevice() {
-    // Prioritize pointer type check as it's most reliable for touch interfaces
-    if (window.matchMedia('(pointer: coarse)').matches) {
+    // Prioritize pointer type check as it's most reliable for touch interfaces, but also ensure small screen
+    if (window.matchMedia('(pointer: coarse)').matches && window.matchMedia('(max-width: 760px)').matches) {
         return true;
     }
 
-    // Secondary check: Touch capability
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+    // Secondary check: Touch capability, plus small screen
+    if (('ontouchstart' in window || navigator.maxTouchPoints > 0) && window.matchMedia('(max-width: 760px)').matches) {
         return true;
     }
 

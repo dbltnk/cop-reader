@@ -11,7 +11,12 @@ This project uses [Lucide Icons](https://lucide.dev/), which is licensed under t
 ## Goal:
 Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-draft-general-purpose-ai-code-practice-published-written-independent-experts) of the EU AI Act Code of Practice more accessible and improve usability for a wide range of stakeholders on both mobile and desktop devices. 
 
-## Development Plan:
+## Contribution Guide
+
+This code base was quickly hacked together in a few days by an amateur, making lots of use of LLMs to write everything. It should be considered prototype quality and not a code base that can be maintained in the long run. There is too much technical debt and design debt for that. Low hanging fruits will be plucked (such as simple text changes), but more complex changes and fixes will not be considered. If you think this web app is so useful that you want it to exist for the long run, consider forking it and maintaining it yourself.
+
+## Development Plan
+
 - [x] Convert the official PDF to HTML
 - [x] Find a good default template for accessible text rendering 
 - [x] Client-side scipting for accessibility and usability features (below)
@@ -19,7 +24,8 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [ ] Human and automated QA to prevent any differences to the official PDF
 - [x] Proper credit for https://github.com/edwardtufte/tufte-css/blob/gh-pages/LICENSE
 
-## Features:
+## Features
+
 - [x] Disclaimer & contribution guide
 - [~] Responsive on any device from mobile phones to wide screen monitors
 - [x] Amazing text rendering that is a pleasure to read
@@ -33,14 +39,14 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [~] Full screenreader support
 - [ ] Full support for [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/)
 
-## Known issues:
+## Known issues & unsorted notes
+
 - [x] Glossary hover is not visible on mobile devices
 - [~] Dark mode is not working on mobile devices
 - [ ] KPI boxes are too wide on tablets (<760px)
-- [ ] Glossary hover does not work on touch screen laptops, the "hot keys" box is accidentally removed as well (check for mouse instead?)
+- [~] Glossary hover does not work on touch screen laptops, the "hot keys" box is accidentally removed as well (check for mouse instead?)
 - [ ] Recital header numbers missing on the summary ones
 - [ ] Underline for glossary item vertically too far away on small screen
-## Unsorted notes:
 - [ ] Longer lines
 - [~] Collapsable shortcuts, see more ToC
 - [ ] Nav items closer together
