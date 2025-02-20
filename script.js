@@ -69,15 +69,6 @@ function updateActiveNavItem(target) {
                 // If no visible links, add to the target link
                 targetLink.classList.add('active', 'active-deepest');
             }
-
-            // Ensure the active item is visible in the navigation
-            // Only scroll if the target isn't already visible
-            const navRect = navContent.getBoundingClientRect();
-            const linkRect = targetLink.getBoundingClientRect();
-
-            if (linkRect.top < navRect.top || linkRect.bottom > navRect.bottom) {
-                targetLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
         }
     }
 }
@@ -282,162 +273,78 @@ document.addEventListener('DOMContentLoaded', () => {
         navList.setAttribute('role', 'navigation');
         navList.setAttribute('aria-label', 'Document sections');
 
-        // Add Introduction as first item, linking to top
-        const introLi = document.createElement('li');
-        introLi.setAttribute('role', 'none');
-        const introLink = document.createElement('a');
-        introLink.href = '#';
-        introLink.setAttribute('role', 'menuitem');
-        introLink.textContent = 'Introduction';
-        introLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-        introLi.appendChild(introLink);
-        navList.appendChild(introLi);
+        // Get all headlines, excluding those in special boxes
+        const headlines = Array.from(mainContent.querySelectorAll('h2, h3, h4'))
+            .filter(heading => !heading.closest('.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital'));
 
-        // Get all main headlines (h2) and create navigation items for them
-        const mainHeadings = mainContent.querySelectorAll('h2');
-        mainHeadings.forEach(heading => {
-            // Skip if heading is inside a box
-            if (heading.closest('.kpi-box, .explanatory-box, .legal-box, .disclaimer-box')) {
-                return;
+        // Create a stack to keep track of parent lists at each level
+        const listStack = {
+            1: navList, // h2 level
+            2: null,    // h3 level
+            3: null     // h4 level
+        };
+
+        // Process each headline
+        headlines.forEach(heading => {
+            // Get heading level (2 for h2, 3 for h3, etc.)
+            const level = parseInt(heading.tagName[1]) - 1;
+
+            // Create unique ID for the heading if it doesn't have one
+            if (!heading.id) {
+                heading.id = heading.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
             }
 
-            const headingText = heading.textContent.trim();
-            const mappedText = navTextMap[headingText];
-
-            // Skip if mapped to Introduction or null
-            if (mappedText === 'Introduction' || mappedText === null) {
-                observer.observe(heading);
-                return;
-            }
-
-            const headingId = heading.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
-            heading.id = headingId;
-
+            // Create list item and link
             const li = document.createElement('li');
             li.setAttribute('role', 'none');
             const link = document.createElement('a');
-            link.href = `#${headingId}`;
+            link.href = `#${heading.id}`;
             link.setAttribute('role', 'menuitem');
-            // Use mapped text if available, otherwise use original text
-            link.textContent = mappedText || headingText;
+            link.textContent = heading.textContent.trim();
             li.appendChild(link);
 
-            // Create a sublist for this section
-            const subList = document.createElement('ul');
-            subList.setAttribute('role', 'menu');
-            subList.setAttribute('aria-label', `Subsections of ${link.textContent}`);
-            li.appendChild(subList);
+            // Create a new sublist if this heading might have children
+            if (level < 3) {
+                const subList = document.createElement('ul');
+                subList.setAttribute('role', 'menu');
+                subList.setAttribute('aria-label', `Subsections of ${link.textContent}`);
+                li.appendChild(subList);
+                listStack[level + 1] = subList;
+            }
 
-            navList.appendChild(li);
+            // Add the list item to the appropriate parent list
+            listStack[level].appendChild(li);
+
+            // Observe this heading for intersection
             observer.observe(heading);
+        });
 
-            // Process all h3 and h4 headings that come after this h2 until the next h2
-            let currentNode = heading.nextElementSibling;
-            while (currentNode && currentNode.tagName !== 'H2') {
-                if ((currentNode.tagName === 'H3' || currentNode.tagName === 'H4') &&
-                    !currentNode.closest('.kpi-box, .explanatory-box, .legal-box, .disclaimer-box')) {
+        // Add special sections (Glossary and Recitals) at the end
+        const specialSections = [
+            { selector: '.glossary', text: 'Glossary', id: 'glossary' },
+            { selector: '.recitals-full', text: 'Recitals', id: 'recitals-full' }
+        ];
 
-                    const subHeadingText = currentNode.textContent.trim();
+        specialSections.forEach(({ selector, text, id }) => {
+            const section = document.querySelector(selector);
+            if (section) {
+                // Ensure the section has the correct ID
+                section.id = id;
 
-                    // Skip unwanted headers and measures (they'll be handled within commitments)
-                    if (!subHeadingText.toLowerCase().includes('kpi') &&
-                        !subHeadingText.toLowerCase().includes('performance indicator') &&
-                        !subHeadingText.toLowerCase().includes('whereas') &&
-                        !subHeadingText.startsWith('Measure') &&
-                        subHeadingText !== 'The Objectives of the Code are as follows:') {
-
-                        const subHeadingId = subHeadingText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-                        currentNode.id = subHeadingId;
-
-                        const subLi = document.createElement('li');
-                        const subLink = document.createElement('a');
-                        subLink.href = `#${subHeadingId}`;
-                        // Use mapped text if available, otherwise use original text
-                        subLink.textContent = navTextMap[subHeadingText] || subHeadingText;
-                        subLi.appendChild(subLink);
-
-                        // For Commitments, create a nested sublist
-                        if (subHeadingText.startsWith('Commitment')) {
-                            const measuresList = document.createElement('ul');
-                            subLi.appendChild(measuresList);
-
-                            // Abbreviate commitment text for navigation
-                            const commitmentNumber = subHeadingText.match(/Commitment (\d+)/);
-                            if (commitmentNumber) {
-                                const restOfText = subHeadingText.replace(/Commitment \d+[:.]\s*/, '');
-                                subLink.textContent = `C${commitmentNumber[1]} - ${restOfText}`;
-                            }
-
-                            // Look ahead for measures
-                            let measureNode = currentNode.nextElementSibling;
-                            while (measureNode && !measureNode.tagName.match(/^H[1-3]$/)) {
-                                if (measureNode.tagName === 'H4' &&
-                                    !measureNode.closest('.kpi-box, .explanatory-box, .legal-box, .disclaimer-box')) {
-                                    const measureText = measureNode.textContent.trim();
-                                    if (measureText.startsWith('Measure')) {
-                                        const measureId = measureText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-                                        measureNode.id = measureId;
-
-                                        const measureLi = document.createElement('li');
-                                        const measureLink = document.createElement('a');
-                                        measureLink.href = `#${measureId}`;
-
-                                        // Abbreviate measure text for navigation
-                                        const measureNumber = measureText.match(/Measure (\d+\.\d+)/);
-                                        if (measureNumber) {
-                                            const restOfText = measureText.replace(/Measure \d+\.\d+[:.]\s*/, '');
-                                            measureLink.textContent = `M${measureNumber[1]} - ${restOfText}`;
-                                        } else {
-                                            measureLink.textContent = measureText;
-                                        }
-
-                                        measureLi.appendChild(measureLink);
-                                        measuresList.appendChild(measureLi);
-
-                                        observer.observe(measureNode);
-                                    }
-                                }
-                                measureNode = measureNode.nextElementSibling;
-                            }
-                        }
-
-                        subList.appendChild(subLi);
-                        observer.observe(currentNode);
-                    }
-                }
-                currentNode = currentNode.nextElementSibling;
+                const li = document.createElement('li');
+                li.setAttribute('role', 'none');
+                const link = document.createElement('a');
+                link.href = `#${id}`;
+                link.setAttribute('role', 'menuitem');
+                link.textContent = text;
+                li.appendChild(link);
+                navList.appendChild(li);
+                observer.observe(section);
             }
         });
 
-        // Add Glossary link if it exists
-        const glossarySection = document.querySelector('.glossary');
-        if (glossarySection) {
-            const glossaryLink = document.createElement('a');
-            glossaryLink.href = '#glossary';
-            glossaryLink.textContent = 'Glossary';
-            const glossaryLi = document.createElement('li');
-            glossaryLi.appendChild(glossaryLink);
-            navList.appendChild(glossaryLi);
-            observer.observe(glossarySection);
-        }
-
-        // Add Recitals link if it exists
-        const recitalsSection = document.querySelector('.recitals-full');
-        if (recitalsSection) {
-            const recitalsLink = document.createElement('a');
-            recitalsLink.href = '#recitals';
-            recitalsLink.textContent = 'Recitals';
-            const recitalsLi = document.createElement('li');
-            recitalsLi.appendChild(recitalsLink);
-            navList.appendChild(recitalsLi);
-            observer.observe(recitalsSection);
-        }
-
         // Clear and update navigation
-        while (navContent.children.length > 1) { // Keep the h3 "Contents"
+        while (navContent.children.length > 1) { // Keep the nav header
             navContent.removeChild(navContent.lastChild);
         }
         navContent.appendChild(navList);
@@ -1243,39 +1150,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Cycle through levels: 3 -> 2 -> 1 -> 3
         navigationDepthLevel = navigationDepthLevel > 1 ? navigationDepthLevel - 1 : 3;
 
-        // Get all navigation items
-        const navItems = document.querySelectorAll('#nav-content li');
+        // Get all navigation sublists
+        const navLists = document.querySelectorAll('#nav-content ul ul');
 
-        navItems.forEach(li => {
-            // Check the nesting level of this li
-            let depth = 0;
-            let parent = li;
-            while (parent && parent.tagName === 'LI') {
-                depth++;
-                parent = parent.parentElement.closest('li');
-            }
-
-            // Show/hide based on depth and current navigation level
-            if (depth === 1) {
-                // H2 level - always show
-                li.style.display = 'block';
-                // But maybe hide its children container
-                const childList = li.querySelector('ul');
-                if (childList) {
-                    childList.style.display = navigationDepthLevel > 1 ? 'block' : 'none';
-                }
-            } else if (depth === 2) {
-                // H3 level
-                li.style.display = navigationDepthLevel >= 2 ? 'block' : 'none';
-                // Handle its children container
-                const childList = li.querySelector('ul');
-                if (childList) {
-                    childList.style.display = navigationDepthLevel === 3 ? 'block' : 'none';
-                }
-            } else if (depth === 3) {
-                // H4 level (measures)
-                li.style.display = navigationDepthLevel === 3 ? 'block' : 'none';
-            }
+        navLists.forEach(list => {
+            const depth = getListDepth(list);
+            list.style.display = depth <= navigationDepthLevel ? 'block' : 'none';
         });
 
         // Announce to screen readers
@@ -1285,6 +1165,17 @@ document.addEventListener('DOMContentLoaded', () => {
         announcement.textContent = `Navigation depth level ${navigationDepthLevel}`;
         document.body.appendChild(announcement);
         setTimeout(() => announcement.remove(), 1000);
+    }
+
+    // Helper function to get the depth of a list in the navigation
+    function getListDepth(list) {
+        let depth = 0;
+        let parent = list;
+        while (parent && parent.tagName === 'UL') {
+            depth++;
+            parent = parent.parentElement.closest('ul');
+        }
+        return depth;
     }
 
     // Keyboard event handler

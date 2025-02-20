@@ -64,7 +64,6 @@ body {
 .glossary-tooltip.active {
     display: block;
     opacity: 1;
-    pointer-events: auto;
 }
 
 /* Mobile tooltip styles */
@@ -1251,15 +1250,6 @@ article {
     font-weight: 600;
     color: #1971c2;
     /* Default color for light mode */
-}
-
-.nav-content a.active-deepest::before {
-    content: "▶";
-    position: absolute;
-    left: -1rem;
-    font-size: 0.7em;
-    opacity: 0.8;
-    display: block;
 }
 
 /* Dark mode active nav item */
