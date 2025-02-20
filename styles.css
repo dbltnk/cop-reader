@@ -889,10 +889,6 @@ body.dark-mode .recital-link:hover {
 /* Mobile-optimized styles */
 @media (hover: none) and (pointer: coarse),
 (max-width: 760px) {
-    .keyboard-shortcuts {
-        display: none !important;
-    }
-
     body {
         padding: 1rem;
     }
@@ -1788,11 +1784,13 @@ body.dark-mode .kpi-box h5 {
     justify-content: space-between;
     align-items: center;
     margin: 0 0 0.8rem 0;
+    cursor: pointer;
 }
 
 .keyboard-shortcuts-header h4 {
     margin: 0;
     font-size: 0.9rem;
+    cursor: pointer;
 }
 
 .shortcut-btn {

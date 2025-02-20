@@ -37,7 +37,7 @@ This code base was quickly hacked together in a few days by an amateur, making l
 - [x] Recitals are shown in-line by default, but can also be shown just at the end of the document (user configurable, save any changes locally)
 - [x] Keyboard navigation
 - [~] Full screenreader support
-- [ ] Full support for [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/)
+- [~] Full support for [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/)
 
 ## Known issues & unsorted notes
 

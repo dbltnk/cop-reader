@@ -556,10 +556,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Hide keyboard shortcuts on mobile
-    const keyboardShortcuts = document.querySelector('.keyboard-shortcuts');
+    // Hide headline and commitment shortcuts on mobile
     if (isMobileDevice()) {
-        keyboardShortcuts.style.display = 'none';
+        const keyboardShortcuts = document.querySelector('.keyboard-shortcuts');
+        const shortcutsList = keyboardShortcuts.querySelector('ul');
+        if (shortcutsList) {
+            // Hide headline and commitment rows
+            Array.from(shortcutsList.children).forEach(item => {
+                if (item.textContent.toLowerCase().includes('headline') ||
+                    item.textContent.toLowerCase().includes('commitment')) {
+                    item.style.display = 'none';
+                }
+            });
+        }
     }
 
     // Add click handler to navigation links
@@ -987,13 +996,13 @@ document.addEventListener('DOMContentLoaded', () => {
             term.setAttribute('aria-describedby', tooltipId);
 
             tooltip.innerHTML = `
-                <div class="glossary-tooltip-header" role="tooltip">
-                    <span class="glossary-tooltip-term" id="tooltip-term-${termId}">${termInfo.originalTerm} [${termInfo.number}]</span>
-                </div>
-                <div class="glossary-tooltip-content" role="definition" aria-labelledby="tooltip-term-${termId}">
-                    ${termInfo.definition}
-                </div>
-            `;
+                    <div class="glossary-tooltip-header" role="tooltip">
+                        <span class="glossary-tooltip-term" id="tooltip-term-${termId}">${termInfo.originalTerm} [${termInfo.number}]</span>
+                    </div>
+                    <div class="glossary-tooltip-content" role="definition" aria-labelledby="tooltip-term-${termId}">
+                        ${termInfo.definition}
+                    </div>
+                `;
 
             tooltip.setAttribute('role', 'tooltip');
             tooltip.classList.add('active');
@@ -1325,33 +1334,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add styles for keyboard navigation
     const style = document.createElement('style');
     style.textContent = `
-        .keyboard-highlight {
-            outline: 3px solid #1971c2;
-            outline-offset: 4px;
-            border-radius: 2px;
-        }
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
-        @media (prefers-color-scheme: dark) {
             .keyboard-highlight {
-                outline-color: #4fc3f7;
+                outline: 3px solid #1971c2;
+                outline-offset: 4px;
+                border-radius: 2px;
             }
-        }
-    `;
+            .sr-only {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                border: 0;
+            }
+            @media (prefers-color-scheme: dark) {
+                .keyboard-highlight {
+                    outline-color: #4fc3f7;
+                }
+            }
+        `;
     document.head.appendChild(style);
 });
 
 // Keyboard shortcuts collapse functionality
 const collapseToggle = document.querySelector('.collapse-toggle');
 const shortcutsContent = document.getElementById('keyboard-shortcuts-content');
+const shortcutsHeader = document.querySelector('.keyboard-shortcuts-header');
 
 // Load saved state
 const isExpanded = localStorage.getItem('keyboardShortcutsExpanded') !== 'false';
@@ -1362,7 +1372,8 @@ collapseToggle.setAttribute('aria-label', 'Toggle keyboard shortcuts visibility'
 shortcutsContent.setAttribute('role', 'region');
 shortcutsContent.setAttribute('aria-label', 'Keyboard shortcuts list');
 
-collapseToggle.addEventListener('click', () => {
+// Function to toggle shortcuts
+function toggleShortcuts() {
     const isCurrentlyExpanded = collapseToggle.getAttribute('aria-expanded') === 'true';
     const newExpandedState = !isCurrentlyExpanded;
 
@@ -1379,4 +1390,12 @@ collapseToggle.addEventListener('click', () => {
     announcement.textContent = `Keyboard shortcuts ${newExpandedState ? 'expanded' : 'collapsed'}`;
     document.body.appendChild(announcement);
     setTimeout(() => announcement.remove(), 1000);
-}); 
+}
+
+// Add click handlers to both the toggle button and the header
+collapseToggle.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevent double-triggering from header click
+    toggleShortcuts();
+});
+
+shortcutsHeader.addEventListener('click', toggleShortcuts); 
