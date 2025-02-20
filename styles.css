@@ -1228,6 +1228,37 @@ article {
 .nav-content ul ul ul {
     padding-left: 1.6rem;
     margin-top: 0.05rem;
+    position: relative;
+}
+
+/* Add vertical line for H4 groups */
+.nav-content ul ul li>ul {
+    position: relative;
+}
+
+.nav-content ul ul li>ul::before {
+    content: '';
+    position: absolute;
+    left: 0.8rem;
+    top: 0.25rem;
+    bottom: 0.25rem;
+    width: 1px;
+    background-color: var(--sand-6-light);
+}
+
+/* Dark mode vertical line */
+@media (prefers-color-scheme: dark) {
+    .nav-content ul ul li>ul::before {
+        background-color: var(--sand-6-dark);
+    }
+}
+
+body.light-mode .nav-content ul ul li>ul::before {
+    background-color: var(--sand-6-light);
+}
+
+body.dark-mode .nav-content ul ul li>ul::before {
+    background-color: var(--sand-6-dark);
 }
 
 .nav-content li {
