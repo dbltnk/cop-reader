@@ -2313,3 +2313,54 @@ a.keyboard-highlight,
         outline-color: #4fc3f7;
     }
 }
+
+.nav-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 0 1.5rem 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.nav-header .box-icon {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 0;
+}
+
+.nav-header .box-icon svg {
+    width: 1.2em;
+    height: 1.2em;
+    stroke-width: 2;
+    color: #666;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+    .nav-header {
+        border-bottom-color: #333;
+    }
+
+    .nav-header .box-icon svg {
+        color: #999;
+    }
+}
+
+/* Light mode */
+body.light-mode .nav-header {
+    border-bottom-color: #eee;
+}
+
+body.light-mode .nav-header .box-icon svg {
+    color: #666;
+}
+
+/* Dark mode */
+body.dark-mode .nav-header {
+    border-bottom-color: #333;
+}
+
+body.dark-mode .nav-header .box-icon svg {
+    color: #999;
+}
