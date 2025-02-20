@@ -21,7 +21,8 @@ body {
 .side-nav,
 .nav-toggle,
 .explanatory-box,
-.disclaimer-box {
+.disclaimer-box,
+.legal-box {
     font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 

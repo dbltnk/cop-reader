@@ -37,7 +37,9 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [x] Glossary hover is not visible on mobile devices
 - [~] Dark mode is not working on mobile devices
 - [ ] KPI boxes are too wide on tablets (<760px)
-
+- [ ] Glossary hover does not work on touch screen laptops, the "hot keys" box is accidentally removed as well (check for mouse instead?)
+- [ ] Recital header numbers missing on the summary ones
+- [ ] Underline for glossary item vertically too far away on small screen
 ## Unsorted notes:
 - [ ] Longer lines
 - [~] Collapsable shortcuts, see more ToC
@@ -87,3 +89,5 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 - [~] Always hide the keyboard shortcuts on mobile
 - [ ] Chair signatures: break points not optimal
 - [X] Headlines too short on mobile
+- [x] the legal box is using our serif, but it should use the sans serif
+- [ ] finish the nav visuals
