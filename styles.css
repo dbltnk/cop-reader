@@ -4,6 +4,14 @@
  * Copyright (c) 2014 Dave Liepmann
  */
 
+/* CSS Variables */
+:root {
+    --sand-1-light: #fdfdfc;
+    --sand-6-light: #dad9d6;
+    --sand-1-dark: #111110;
+    --sand-6-dark: #3b3a37;
+}
+
 /* Base styles */
 body {
     font-family: "Source Serif 4", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
@@ -508,7 +516,7 @@ h5:hover .anchor-link,
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #1a1a1a;
+        background-color: var(--sand-1-dark);
         color: #e0e0e0;
     }
 
@@ -609,7 +617,7 @@ h5> :not(.anchor-link) {
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #1a1a1a;
+        background-color: var(--sand-1-dark);
         color: #e0e0e0;
     }
 
@@ -1106,7 +1114,8 @@ body.dark-mode .recital-link:hover {
     top: 0;
     width: 360px;
     height: 100vh;
-    background: #fff;
+    background: var(--sand-1-light);
+    border-left: 1px solid var(--sand-6-light);
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     display: flex;
@@ -1293,45 +1302,29 @@ body.dark-mode .nav-content a.active-deepest {
 /* Dark mode navigation */
 @media (prefers-color-scheme: dark) {
     .side-nav {
-        background: #222;
-        border-color: #444;
-        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
+        background: var(--sand-1-dark);
+        border-left: 1px solid var(--sand-6-dark);
+        box-shadow: none;
     }
 
     .nav-toggle {
         color: #e0e0e0;
-        background-color: #222;
-        border-color: #444;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        background-color: var(--sand-1-dark);
+        border-color: var(--sand-6-dark);
+        box-shadow: none;
     }
 
     .nav-content h3 {
-        background: #222;
-        border-bottom-color: #333;
-    }
-
-    .nav-content::-webkit-scrollbar-thumb {
-        background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .nav-content {
-        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-    }
-
-    .nav-content a {
-        color: #e0e0e0;
-    }
-
-    .nav-content a:hover {
-        color: #fff;
+        background: var(--sand-1-dark);
+        border-bottom-color: var(--sand-6-dark);
     }
 }
 
 /* Light mode navigation */
 body.light-mode .side-nav {
-    background: #fff;
-    border-color: #ddd;
-    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+    background: var(--sand-1-light);
+    border-left: 1px solid var(--sand-6-light);
+    box-shadow: none;
 }
 
 body.light-mode .nav-toggle {
@@ -1343,16 +1336,16 @@ body.light-mode .nav-toggle {
 
 /* Dark mode navigation */
 body.dark-mode .side-nav {
-    background: #222;
-    border-color: #444;
-    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
+    background: var(--sand-1-dark);
+    border-left: 1px solid var(--sand-6-dark);
+    box-shadow: none;
 }
 
 body.dark-mode .nav-toggle {
     color: #e0e0e0;
-    background-color: #222;
-    border-color: #444;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    background-color: var(--sand-1-dark);
+    border-color: var(--sand-6-dark);
+    box-shadow: none;
 }
 
 body.dark-mode .nav-content a {
@@ -1530,7 +1523,7 @@ body.dark-mode .theme-control select {
 
 /* Light mode styles */
 body.light-mode {
-    background-color: #fffff8;
+    background-color: var(--sand-1-light);
     color: #111;
 }
 
@@ -1596,9 +1589,9 @@ body.light-mode .recital {
 }
 
 body.light-mode .side-nav {
-    background: #fff;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: var(--sand-1-light);
+    border-left: 1px solid var(--sand-6-light);
+    box-shadow: none;
 }
 
 body.light-mode .nav-content h3 {
@@ -2158,7 +2151,7 @@ body.dark-mode .signatures {
 
 /* Dark mode class-based */
 body.dark-mode {
-    background-color: #1a1a1a;
+    background-color: var(--sand-1-dark);
     color: #e0e0e0;
 }
 
