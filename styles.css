@@ -1968,7 +1968,7 @@ body.dark-mode .kpi-box h5 {
     gap: 0.3rem;
     border-radius: 3px;
     color: inherit;
-    font-size: inherit;
+    font-size: 0.6rem;
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -2041,7 +2041,6 @@ body.dark-mode .shortcut-btn:hover {
     list-style: none;
     padding: 0;
     margin: 0;
-    font-size: 0.85rem;
 }
 
 .keyboard-shortcuts kbd {
@@ -2050,7 +2049,7 @@ body.dark-mode .shortcut-btn:hover {
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     display: inline-block;
-    font-size: 0.75rem;
+    font-size: 0.6rem;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     line-height: 1;
     padding: 0.2rem 0.4rem;
