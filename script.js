@@ -119,13 +119,17 @@ function scrollToElement(element, savePrevious = true, updateNav = true) {
     document.body.appendChild(announcement);
     setTimeout(() => announcement.remove(), 300);
 
-    // Visual feedback without causing additional scroll
-    requestAnimationFrame(() => {
-        element.setAttribute('tabindex', '-1');
-        element.focus({ preventScroll: true });
-        element.classList.add('keyboard-highlight');
-        setTimeout(() => element.classList.remove('keyboard-highlight'), 300);
-    });
+    // Only apply focus and visual feedback for interactive elements
+    if (element.tagName === 'BUTTON' || element.tagName === 'A' ||
+        element.getAttribute('role') === 'button' ||
+        element.getAttribute('tabindex') === '0') {
+        requestAnimationFrame(() => {
+            element.setAttribute('tabindex', '-1');
+            element.focus({ preventScroll: true });
+            element.classList.add('keyboard-highlight');
+            setTimeout(() => element.classList.remove('keyboard-highlight'), 300);
+        });
+    }
 }
 
 // Function to detect if the device is a mobile device
@@ -699,6 +703,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const header = recitalClone.querySelector('h4');
         header.textContent = '';
         header.dataset.recitalNumber = number;
+
+        // Create header content for the summary section
+        const summaryHeaderContent = document.createElement('div');
+        summaryHeaderContent.className = 'header-content';
+
+        // Create icon element for summary
+        const summaryIconWrapper = document.createElement('span');
+        summaryIconWrapper.className = 'box-icon';
+        summaryIconWrapper.setAttribute('aria-hidden', 'true');
+
+        const summaryIconElement = document.createElement('i');
+        summaryIconElement.setAttribute('data-lucide', 'quote');
+
+        summaryIconWrapper.appendChild(summaryIconElement);
+        summaryHeaderContent.appendChild(summaryIconWrapper);
+
+        // Create text node for recital number in summary
+        const summaryTextNode = document.createTextNode(`Recital ${number}`);
+        summaryHeaderContent.appendChild(summaryTextNode);
+
+        // Add the header content to the summary header
+        header.appendChild(summaryHeaderContent);
 
         // Create a link wrapper
         const linkWrapper = document.createElement('a');

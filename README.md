@@ -45,7 +45,7 @@ This code base was quickly hacked together in a few days by an amateur, making l
 - [~] Dark mode is not working on mobile devices
 - [ ] KPI boxes are too wide on tablets (<760px)
 - [~] Glossary hover does not work on touch screen laptops, the "hot keys" box is accidentally removed as well (check for mouse instead?)
-- [ ] Recital header numbers missing on the summary ones
+- [x] Recital header numbers missing on the summary ones
 - [ ] Underline for glossary item vertically too far away on small screen
 - [ ] Longer lines
 - [~] Collapsable shortcuts, see more ToC

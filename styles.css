@@ -2277,3 +2277,39 @@ body.dark-mode .disclaimer-box a {
         font-size: 1.1em;
     }
 }
+
+.keyboard-highlight {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(25, 113, 194, 0.2);
+    border-radius: 2px;
+}
+
+/* Only show strong highlight on interactive elements */
+button.keyboard-highlight,
+a.keyboard-highlight,
+[role="button"].keyboard-highlight,
+[tabindex="0"].keyboard-highlight {
+    outline: 2px solid #1971c2;
+    outline-offset: 2px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    button.keyboard-highlight,
+    a.keyboard-highlight,
+    [role="button"].keyboard-highlight,
+    [tabindex="0"].keyboard-highlight {
+        outline-color: #4fc3f7;
+    }
+}
