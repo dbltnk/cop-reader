@@ -28,7 +28,7 @@ function updateActiveNavItem(target) {
         activeHeadline = headlines[0];
     }
 
-    // Remove all active classes
+    // Remove all active classes first
     allNavLinks.forEach(link => {
         link.classList.remove('active', 'active-deepest');
     });
@@ -38,39 +38,63 @@ function updateActiveNavItem(target) {
         const targetLink = navContent.querySelector(`a[href="#${targetId}"]`);
 
         if (targetLink) {
-            // Find all currently active links
-            const activeLinks = [];
+            // Helper function to check if a link is visible in the navigation
+            const isLinkVisible = (link) => {
+                // Check if the link itself is visible
+                const style = window.getComputedStyle(link);
+                if (style.display === 'none') return false;
 
-            // Add active class to the target and collect parent links
-            activeLinks.push(targetLink);
-
-            let parent = targetLink.closest('li').parentElement.closest('li');
-            while (parent) {
-                const parentLink = parent.querySelector('a');
-                if (parentLink) {
-                    parentLink.classList.add('active'); // Only add active class to parents
-                    activeLinks.push(parentLink);
+                // Check if any parent ul is hidden
+                let parent = link.closest('ul');
+                while (parent && parent !== navContent) {
+                    const style = window.getComputedStyle(parent);
+                    if (style.display === 'none') return false;
+                    parent = parent.parentElement.closest('ul');
                 }
-                parent = parent.parentElement.closest('li');
-            }
 
-            // Find the deepest visible active link
-            const visibleActiveLinks = activeLinks.filter(link => {
+                // Check if it's in the viewport
                 const rect = link.getBoundingClientRect();
                 const navRect = navContent.getBoundingClientRect();
                 return rect.top >= navRect.top && rect.bottom <= navRect.bottom;
-            });
+            };
 
-            // Add active-deepest class only to the deepest visible link
-            if (visibleActiveLinks.length > 0) {
-                const deepestLink = visibleActiveLinks[0];
-                deepestLink.classList.add('active', 'active-deepest');
+            // Find the deepest visible link in the hierarchy
+            let currentLink = targetLink;
+            let visibleLink = null;
+
+            // First check if target link itself is visible
+            if (isLinkVisible(targetLink)) {
+                visibleLink = targetLink;
             } else {
-                // If no visible links, add to the target link
-                targetLink.classList.add('active', 'active-deepest');
+                // If not, traverse up the hierarchy to find the closest visible parent
+                let parent = targetLink.closest('li').parentElement.closest('li');
+                while (parent && !visibleLink) {
+                    const parentLink = parent.querySelector('a');
+                    if (parentLink && isLinkVisible(parentLink)) {
+                        visibleLink = parentLink;
+                        break;
+                    }
+                    parent = parent.parentElement.closest('li');
+                }
+            }
+
+            // If we found a visible link, highlight it
+            if (visibleLink) {
+                visibleLink.classList.add('active-deepest');
             }
         }
     }
+}
+
+// Helper function to get the navigation level of a link
+function getNavLevel(link) {
+    let level = 0;
+    let parent = link.closest('li');
+    while (parent) {
+        level++;
+        parent = parent.parentElement.closest('li');
+    }
+    return level;
 }
 
 // Function to scroll element into view
@@ -284,14 +308,30 @@ document.addEventListener('DOMContentLoaded', () => {
             3: null     // h4 level
         };
 
+        // Keep track of used IDs to ensure uniqueness
+        const usedIds = new Map(); // Map to track both IDs and their counts
+
         // Process each headline
         headlines.forEach(heading => {
             // Get heading level (2 for h2, 3 for h3, etc.)
             const level = parseInt(heading.tagName[1]) - 1;
 
+            // Create base ID from text content
+            const baseId = heading.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
             // Create unique ID for the heading if it doesn't have one
             if (!heading.id) {
-                heading.id = heading.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                let uniqueId = baseId;
+                if (usedIds.has(baseId)) {
+                    // If this base ID was used before, increment its counter
+                    const count = usedIds.get(baseId) + 1;
+                    usedIds.set(baseId, count);
+                    uniqueId = `${baseId}-${count}`;
+                } else {
+                    // First time seeing this base ID
+                    usedIds.set(baseId, 1);
+                }
+                heading.id = uniqueId;
             }
 
             // Create list item and link
@@ -353,7 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Build initial navigation
     buildNavigation();
 
-    // Add anchor links to headlines
+    // Function to add anchor links to headlines
     function addAnchorLinks() {
         // Only select headlines that are not inside boxes
         const headlines = mainContent.querySelectorAll('h2:not(.kpi-box *, .explanatory-box *, .legal-box *, .disclaimer-box *, .recital *), h3:not(.kpi-box *, .explanatory-box *, .legal-box *, .disclaimer-box *, .recital *), h4:not(.kpi-box *, .explanatory-box *, .legal-box *, .disclaimer-box *, .recital *), h5:not(.kpi-box *, .explanatory-box *, .legal-box *, .disclaimer-box *, .recital *)');
@@ -362,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(feedback);
 
         // Keep track of used IDs to ensure uniqueness
-        const usedIds = new Set();
+        const usedIds = new Map(); // Map to track both IDs and their counts
 
         headlines.forEach(headline => {
             // Skip if headline is inside a box
@@ -371,24 +411,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Create base ID from text content
-            let baseId = headline.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            const baseId = headline.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
             // If no ID exists, create a unique one
             if (!headline.id) {
                 let uniqueId = baseId;
-                let counter = 1;
-
-                // If this ID is already used, append a number until we find a unique one
-                while (usedIds.has(uniqueId)) {
-                    uniqueId = `${baseId}-${counter}`;
-                    counter++;
+                if (usedIds.has(baseId)) {
+                    // If this base ID was used before, increment its counter
+                    const count = usedIds.get(baseId) + 1;
+                    usedIds.set(baseId, count);
+                    uniqueId = `${baseId}-${count}`;
+                } else {
+                    // First time seeing this base ID
+                    usedIds.set(baseId, 1);
                 }
-
                 headline.id = uniqueId;
-                usedIds.add(uniqueId);
-            } else {
-                // If headline already has an ID, still track it to ensure uniqueness
-                usedIds.add(headline.id);
+            }
+
+            // Track the ID even if it already existed
+            if (!usedIds.has(headline.id)) {
+                usedIds.set(headline.id, 1);
             }
 
             // Create anchor link
