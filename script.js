@@ -30,7 +30,7 @@ function updateActiveNavItem(target) {
 
     // Remove all active classes first
     allNavLinks.forEach(link => {
-        link.classList.remove('active', 'active-deepest');
+        link.classList.remove('active-deepest');
     });
 
     if (activeHeadline) {
@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Keep track of used IDs to ensure uniqueness
-        const usedIds = new Map(); // Map to track both IDs and their counts
+        const usedIds = new Map();
 
         // Process each headline
         headlines.forEach(heading => {
@@ -340,7 +340,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const link = document.createElement('a');
             link.href = `#${heading.id}`;
             link.setAttribute('role', 'menuitem');
-            link.textContent = heading.textContent.trim();
+
+            // Transform text for H3 and H4
+            let text = heading.textContent.trim();
+            if (level > 1) { // H3 and H4
+                text = text.replace(/^Measure\s+/i, 'M');
+                text = text.replace(/^Commitment\s+/i, 'C');
+            }
+            link.textContent = text;
+
             li.appendChild(link);
 
             // Create a new sublist if this heading might have children

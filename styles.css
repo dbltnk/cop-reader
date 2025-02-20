@@ -1234,11 +1234,14 @@ article {
     text-decoration: none;
     display: block;
     min-height: 44px;
-    display: flex;
-    align-items: center;
-    padding: 0;
+    padding: 12px 0;
     font-size: 0.9rem;
     position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    line-height: 20px;
 }
 
 .nav-content a:hover {
@@ -1248,25 +1251,16 @@ article {
 /* Only the deepest active item gets the visual treatment */
 .nav-content a.active-deepest {
     font-weight: 600;
-    color: #1971c2;
-    /* Default color for light mode */
 }
 
 /* Dark mode active nav item */
-@media (prefers-color-scheme: dark) {
-    .nav-content a.active-deepest {
-        color: #4fc3f7;
-    }
+body.dark-mode .nav-content a.active {
+    font-weight: 600;
 }
 
 /* Light mode active nav item */
-body.light-mode .nav-content a.active-deepest {
-    color: #1971c2;
-}
-
-/* Dark mode active nav item */
-body.dark-mode .nav-content a.active-deepest {
-    color: #4fc3f7;
+body.light-mode .nav-content a.active {
+    font-weight: 600;
 }
 
 /* Adjust nested items to be slightly smaller but still accessible */
