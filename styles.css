@@ -165,28 +165,32 @@ body {
 .disclaimer-box,
 .kpi-box {
     margin: 1.5rem 0;
-    padding: 1.5rem;
+    padding: 0;
     border-radius: 4px;
     width: 55%;
     border-left: 2px solid #e0e0e0;
-}
-
-.explanatory-box h4,
-.disclaimer-box h4,
-.legal-box h4,
-.kpi-box h5 {
-    cursor: pointer;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .explanatory-box h4,
 .legal-box h4 {
     margin: 0;
     padding: 1rem 1.5rem;
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.explanatory-box .explanatory-content,
+.legal-box>*:not(h4) {
+    padding: 1rem 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .explanatory-box>*:not(h4),
 .legal-box>*:not(h4) {
-    padding: 0 1.5rem;
+    padding: 0;
 }
 
 .explanatory-box.collapsed>*:not(h4),
