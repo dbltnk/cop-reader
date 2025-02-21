@@ -186,51 +186,63 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Theme handling
-const themeSelect = document.getElementById('theme-select');
+const themeToggle = document.getElementById('theme-toggle');
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-// Load saved theme preference
-const savedTheme = localStorage.getItem('theme') || 'system';
-themeSelect.value = savedTheme;
+// Load saved theme preference or use system preference
+const savedTheme = localStorage.getItem('theme');
+const systemTheme = prefersDark.matches ? 'dark' : 'light';
+const currentTheme = savedTheme || systemTheme;
 
 function setTheme(theme) {
-    // Remove any existing theme
-    document.documentElement.removeAttribute('data-theme');
-
-    if (theme === 'system') {
-        // For system theme, apply theme based on system preference
-        document.documentElement.setAttribute('data-theme', prefersDark.matches ? 'dark' : 'light');
-    } else {
-        // For explicit theme choice, apply the selected theme
-        document.documentElement.setAttribute('data-theme', theme);
-    }
+    // Set the theme
+    document.documentElement.setAttribute('data-theme', theme);
 
     // Store the theme preference
     localStorage.setItem('theme', theme);
-
-    // Update select value attribute for icon display
-    themeSelect.setAttribute('value', theme);
 
     // Announce to screen readers
     const announcement = document.createElement('div');
     announcement.setAttribute('aria-live', 'polite');
     announcement.setAttribute('class', 'sr-only');
-    announcement.textContent = `Theme changed to ${theme === 'system' ? 'system default' : theme} mode`;
+    announcement.textContent = `Theme changed to ${theme} mode`;
     document.body.appendChild(announcement);
     setTimeout(() => announcement.remove(), 1000);
 }
 
 // Initialize theme
-setTheme(savedTheme);
+setTheme(currentTheme);
 
-// Handle theme changes
-themeSelect.addEventListener('change', (e) => {
-    setTheme(e.target.value);
+// Handle theme toggle
+themeToggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
 });
 
-// Handle system theme changes
+// Handle system theme changes when no saved preference
 prefersDark.addEventListener('change', (e) => {
-    if (themeSelect.value === 'system') {
-        setTheme('system');
+    if (!localStorage.getItem('theme')) {
+        setTheme(e.matches ? 'dark' : 'light');
     }
 });
+
+// Handle keyboard shortcut for theme toggle
+document.addEventListener('keydown', (e) => {
+    if (e.key === '3') {
+        themeToggle.click();
+    } else if (e.key === '1') {
+        scrollToTop();
+    }
+});
+
+// Scroll to top functionality
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// Add click handler for "To top" button
+document.querySelector('.shortcut-btn[data-key="1"]').addEventListener('click', scrollToTop);

@@ -188,7 +188,8 @@ body {
 
 .side-nav {
     background-color: var(--background-color);
-    border-left-color: var(--divider-color);
+    border-left: 1px solid var(--divider-color);
+    border-right: 1px solid var(--divider-color);
     width: 100%;
     max-width: var(--side-nav-width);
     position: fixed;
@@ -240,16 +241,59 @@ body {
     opacity: 1;
 }
 
-/* Theme control container */
-.theme-control {
-    margin-bottom: var(--spacing-md);
+/* Theme control styles */
+.theme-icon {
+    display: none;
 }
 
-.theme-control label {
+[data-theme="light"] .light-icon {
     display: block;
-    margin-bottom: var(--spacing-xs);
+}
+
+[data-theme="dark"] .dark-icon {
+    display: block;
+}
+
+/* Keyboard shortcuts */
+.keyboard-shortcuts {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) 0;
+    justify-content: start;
+}
+
+.shortcut-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: none;
+    background: none;
     color: var(--text-color);
     font-size: 0.9em;
+    text-align: left;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.shortcut-btn:hover {
+    color: var(--sand-11);
+}
+
+.shortcut-btn kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.6em;
+    height: 1.6em;
+    background-color: var(--sand-3);
+    border: 1px solid var(--divider-color);
+    border-radius: 3px;
+    padding: 0 0.4em;
+    font-size: 0.8em;
+    font-family: var(--font-sans);
+    line-height: 1;
 }
 
 /* Font Usage Rules
