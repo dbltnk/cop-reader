@@ -184,3 +184,53 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Theme handling
+const themeSelect = document.getElementById('theme-select');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+// Load saved theme preference
+const savedTheme = localStorage.getItem('theme') || 'system';
+themeSelect.value = savedTheme;
+
+function setTheme(theme) {
+    // Remove any existing theme
+    document.documentElement.removeAttribute('data-theme');
+
+    if (theme === 'system') {
+        // For system theme, apply theme based on system preference
+        document.documentElement.setAttribute('data-theme', prefersDark.matches ? 'dark' : 'light');
+    } else {
+        // For explicit theme choice, apply the selected theme
+        document.documentElement.setAttribute('data-theme', theme);
+    }
+
+    // Store the theme preference
+    localStorage.setItem('theme', theme);
+
+    // Update select value attribute for icon display
+    themeSelect.setAttribute('value', theme);
+
+    // Announce to screen readers
+    const announcement = document.createElement('div');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.setAttribute('class', 'sr-only');
+    announcement.textContent = `Theme changed to ${theme === 'system' ? 'system default' : theme} mode`;
+    document.body.appendChild(announcement);
+    setTimeout(() => announcement.remove(), 1000);
+}
+
+// Initialize theme
+setTheme(savedTheme);
+
+// Handle theme changes
+themeSelect.addEventListener('change', (e) => {
+    setTheme(e.target.value);
+});
+
+// Handle system theme changes
+prefersDark.addEventListener('change', (e) => {
+    if (themeSelect.value === 'system') {
+        setTheme('system');
+    }
+});

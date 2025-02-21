@@ -25,8 +25,33 @@
  *    - Accent colors (Red, Blue, Green)
  */
 
-/* Light Mode Colors */
+/* Base theme styles */
+:root {
+    /* Base colors that don't change with theme */
+    --side-nav-width: min(350px, 90vw);
+    --content-max-width: 65ch;
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+
+    /* Typography */
+    --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-sans: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-size-base: 1rem;
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+}
+
+/* Light theme colors */
 :root[data-theme="light"] {
+    /* Theme colors */
+    --background-color: var(--sand-2);
+    --text-color: var(--sand-12);
+    --divider-color: var(--sand-6);
+
     /* Base colors (Sand) */
     --sand-1: #fdfdfc;
     /* Backgrounds */
@@ -84,8 +109,13 @@
     /* Accessible text */
 }
 
-/* Dark Mode Colors */
+/* Dark theme colors */
 :root[data-theme="dark"] {
+    /* Theme colors */
+    --background-color: var(--sand-2);
+    --text-color: var(--sand-12);
+    --divider-color: var(--sand-6);
+
     /* Base colors (Sand) */
     --sand-1: #111110;
     /* Backgrounds */
@@ -143,24 +173,83 @@
     /* Accessible text */
 }
 
-/* Custom Properties */
-:root {
-    /* Layout */
-    --side-nav-width: min(350px, 90vw);
-    --content-max-width: 65ch;
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-xl: 2rem;
-    --spacing-xxl: 3rem;
+/* Apply theme colors */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    line-height: var(--line-height-base);
+    font-family: var(--font-serif);
+    font-size: var(--font-size-base);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
-    /* Typography */
-    --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
-    --font-sans: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --font-size-base: 1rem;
-    --line-height-base: 1.5;
-    --line-height-heading: 1.2;
+.side-nav {
+    background-color: var(--background-color);
+    border-left-color: var(--divider-color);
+    width: 100%;
+    max-width: var(--side-nav-width);
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+/* Theme selector styles */
+.theme-select-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+}
+
+.theme-select-wrapper select {
+    width: 100%;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    padding-right: var(--spacing-xl);
+    border: 1px solid var(--divider-color);
+    border-radius: 4px;
+    background: var(--background-color);
+    color: var(--text-color);
+    appearance: none;
+    cursor: pointer;
+}
+
+.theme-icon {
+    position: absolute;
+    right: var(--spacing-sm);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.2em;
+    height: 1.2em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    color: var(--text-color);
+}
+
+/* Show icon based on selected value */
+#theme-select[value="system"]~.system-icon,
+#theme-select[value="light"]~.light-icon,
+#theme-select[value="dark"]~.dark-icon {
+    opacity: 1;
+}
+
+/* Theme control container */
+.theme-control {
+    margin-bottom: var(--spacing-md);
+}
+
+.theme-control label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-color);
+    font-size: 0.9em;
 }
 
 /* Font Usage Rules
@@ -189,16 +278,6 @@ html {
     font-size: 100%;
     text-size-adjust: none;
     -webkit-text-size-adjust: none;
-}
-
-body {
-    min-height: 100vh;
-    line-height: var(--line-height-base);
-    font-family: var(--font-serif);
-    font-size: var(--font-size-base);
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Typography */
@@ -308,20 +387,6 @@ select {
 }
 
 /* Layout Base */
-.side-nav {
-    width: 100%;
-    max-width: var(--side-nav-width);
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    background: var(--sand-1);
-    border-left: 1px solid var(--sand-6);
-    display: flex;
-    flex-direction: column;
-    z-index: 1000;
-}
-
 .main-content {
     width: 100%;
     max-width: var(--content-max-width);
@@ -381,93 +446,6 @@ select {
 .nav-footer {
     padding: var(--spacing-md);
     border-top: 1px solid var(--sand-6);
-}
-
-/* Theme Control */
-.theme-control {
-    margin-bottom: var(--spacing-md);
-}
-
-.theme-select-wrapper {
-    position: relative;
-    margin-top: var(--spacing-xs);
-}
-
-.theme-select-wrapper select {
-    width: 100%;
-    padding: var(--spacing-xs) var(--spacing-sm);
-    padding-right: var(--spacing-xl);
-    border: 1px solid var(--sand-6);
-    border-radius: 4px;
-    background: var(--sand-1);
-    color: inherit;
-    appearance: none;
-}
-
-.theme-icon {
-    position: absolute;
-    right: var(--spacing-sm);
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: var(--sand-11);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-
-/* Show icon based on selected value */
-select[value="system"]~.system-icon,
-select[value="light"]~.light-icon,
-select[value="dark"]~.dark-icon {
-    opacity: 1;
-}
-
-/* Keyboard Shortcuts */
-.keyboard-shortcuts {
-    font-size: 0.9em;
-}
-
-.keyboard-shortcuts-header {
-    margin-bottom: var(--spacing-sm);
-}
-
-.keyboard-shortcuts-header h4 {
-    font-size: 1em;
-    margin: 0;
-}
-
-.keyboard-shortcuts ul {
-    list-style: none;
-    padding: 0;
-}
-
-.keyboard-shortcuts li {
-    margin-bottom: var(--spacing-xs);
-    display: flex;
-    gap: var(--spacing-sm);
-}
-
-.shortcut-btn {
-    background: none;
-    border: none;
-    padding: var(--spacing-xs) var(--spacing-sm);
-    color: inherit;
-    font-size: 0.9em;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-}
-
-.shortcut-btn:hover {
-    background-color: var(--sand-3);
-}
-
-.shortcut-btn kbd {
-    background: var(--sand-3);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 0.9em;
-    font-family: var(--font-sans);
 }
 
 /* Navigation Toggle Button */
