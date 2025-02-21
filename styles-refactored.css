@@ -1,106 +1,3 @@
-/* Base CSS Setup 2025 */
-
-/* Custom Properties */
-:root {
-    /* Layout */
-    --side-nav-width: min(350px, 90vw);
-    --content-max-width: 65ch;
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-xl: 2rem;
-    --spacing-xxl: 3rem;
-
-    /* Typography */
-    --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
-    --font-sans: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --font-size-base: 1rem;
-    --line-height-base: 1.5;
-    --line-height-heading: 1.2;
-}
-
-/* Modern CSS Reset */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    font-size: 100%;
-    text-size-adjust: none;
-    -webkit-text-size-adjust: none;
-}
-
-body {
-    min-height: 100vh;
-    line-height: var(--line-height-base);
-    font-family: var(--font-sans);
-    font-size: var(--font-size-base);
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-/* Typography */
-h1,
-h2,
-h3,
-h4,
-h5 {}
-
-p {}
-
-a {}
-
-strong {}
-
-/* Lists */
-ul,
-ol {}
-
-li {}
-
-dl {}
-
-dt {}
-
-dd {}
-
-/* Images and Media */
-img,
-picture,
-video,
-canvas,
-svg {
-    display: block;
-    max-width: 100%;
-}
-
-/* Forms and Inputs */
-input,
-button,
-textarea,
-select {
-    font: inherit;
-}
-
-/* Layout Base */
-.side-nav {
-    width: 100%;
-    max-width: var(--side-nav-width);
-}
-
-.main-content {
-    width: 100%;
-    max-width: var(--content-max-width);
-    margin-inline: auto;
-    padding-inline: var(--spacing-md);
-}
-
 /* Theme Colors - Using Radix UI Color System
  * Sand: Base color for all elements
  * Red/Green/Blue: Reserved for special boxes (TBD)
@@ -109,9 +6,26 @@ select {
  * - Red: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/red.css
  * - Blue: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/blue.css
  * - Green: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/green.css
- * - Dark variants: Respective -dark.css files
+ * - Dark variants: 
+ *   - Sand: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/sand-dark.css
+ *   - Red: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/red-dark.css
+ *   - Blue: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/blue-dark.css
+ *   - Green: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/green-dark.css
+ * 
+ * COLOR USAGE GUIDELINES:
+ * 1. ALL color definitions MUST be in this section only
+ * 2. NEVER add new color definitions anywhere else in this file
+ *    - ONLY use colors from the Radix color system defined above
+ *    - NEVER add custom colors
+ * 3. Colors are organized in two root blocks:
+ *    - [data-theme="light"] for light mode colors
+ *    - [data-theme="dark"] for dark mode colors
+ * 4. Each block contains:
+ *    - Base colors (Sand palette)
+ *    - Accent colors (Red, Blue, Green)
  */
 
+/* Light Mode Colors */
 :root[data-theme="light"] {
     /* Base colors (Sand) */
     --sand-1: #fdfdfc;
@@ -144,6 +58,7 @@ select {
     --green-12: #193b2d;
 }
 
+/* Dark Mode Colors */
 :root[data-theme="dark"] {
     /* Base colors (Sand) */
     --sand-1: #111110;
@@ -175,6 +90,185 @@ select {
     --green-11: #3dd68c;
     --green-12: #b1f1cb;
 }
+
+/* Custom Properties */
+:root {
+    /* Layout */
+    --side-nav-width: min(350px, 90vw);
+    --content-max-width: 65ch;
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+
+    /* Typography */
+    --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-sans: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-size-base: 1rem;
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+}
+
+/* Font Usage Rules
+ * 1. Default font is serif (--font-serif) for all text content
+ * 2. Sans-serif (--font-sans) is used ONLY in:
+ *    - Navigation elements (.side-nav)
+ *    - Special boxes:
+ *      - Legal boxes (.legal-box)
+ *      - Explanatory boxes (.explanatory-box)
+ *      - Disclaimer boxes (.disclaimer-box)
+ *      - KPI boxes (.kpi-box)
+ *      - Glossary elements (.glossary)
+ *      - Recital elements (.recital)
+ */
+
+/* Modern CSS Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 100%;
+    text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+}
+
+body {
+    min-height: 100vh;
+    line-height: var(--line-height-base);
+    font-family: var(--font-serif);
+    font-size: var(--font-size-base);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+
+/* UI Elements - Sans-serif */
+.side-nav *,
+.legal-box *,
+.explanatory-box *,
+.disclaimer-box *,
+.kpi-box *,
+.glossary *,
+.recital * {
+    font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: var(--font-serif);
+    line-height: var(--line-height-heading);
+    color: inherit;
+}
+
+p {
+    margin-bottom: 1rem;
+    line-height: var(--line-height-base);
+    max-width: var(--content-max-width);
+}
+
+a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--sand-11);
+}
+
+strong {
+    font-weight: 600;
+}
+
+/* Lists */
+ul,
+ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    max-width: var(--content-max-width);
+}
+
+li {
+    margin-bottom: 0.5rem;
+    line-height: var(--line-height-base);
+}
+
+dl {
+    margin-bottom: 1rem;
+    max-width: var(--content-max-width);
+}
+
+dt {
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+dd {
+    margin-left: 0;
+    margin-top: 0.5rem;
+}
+
+/* Dark mode link colors */
+@media (prefers-color-scheme: dark) {
+    a:hover {
+        color: var(--sand-11);
+    }
+}
+
+body.light-mode a:hover {
+    color: var(--sand-11);
+}
+
+body.dark-mode a:hover {
+    color: var(--sand-11);
+}
+
+/* Images and Media */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* Forms and Inputs */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Layout Base */
+.side-nav {
+    width: 100%;
+    max-width: var(--side-nav-width);
+}
+
+.main-content {
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+    padding-inline: var(--spacing-md);
+}
+
+/* Breakpoints are set in stone. NEVER add any other breakpoints in this file. */
 
 /* Breakpoint: Mobile First (default) */
 /* On mobile, content takes up full width and side navigation starts collapsed. */
