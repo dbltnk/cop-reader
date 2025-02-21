@@ -7,7 +7,7 @@ const CONFIG = {
     SCROLL_TRIGGER_POSITION: 3, // Divider for window.innerHeight
     SPECIAL_SECTIONS: ['glossary', 'recitals-full'],
     EXCLUDED_CONTAINERS: '.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital-box',
-    BOX_SELECTORS: '.kpi-box, .explanatory-box, .disclaimer-box, .legal-box'
+    BOX_SELECTORS: '.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital-box',
 };
 
 // Navigation functionality
