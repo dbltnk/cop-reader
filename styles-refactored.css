@@ -336,10 +336,26 @@ html {
 
 h1 {
     font-size: 2.5rem;
-    margin-bottom: var(--spacing-xl);
-    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    margin-top: var(--spacing-xxl);
     width: 100%;
     max-width: var(--content-max-width);
+}
+
+h2 {
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h3 {
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+}
+
+h4,
+h5 {
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
 }
 
 h1,
