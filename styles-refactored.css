@@ -1,0 +1,300 @@
+/* Base CSS Setup 2025 */
+
+/* Custom Properties */
+:root {
+    /* Layout */
+    --side-nav-width: min(350px, 90vw);
+    --content-max-width: 65ch;
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+
+    /* Typography */
+    --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-sans: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-size-base: 1rem;
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+}
+
+/* Modern CSS Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 100%;
+    text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+}
+
+body {
+    min-height: 100vh;
+    line-height: var(--line-height-base);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5 {}
+
+p {}
+
+a {}
+
+strong {}
+
+/* Lists */
+ul,
+ol {}
+
+li {}
+
+dl {}
+
+dt {}
+
+dd {}
+
+/* Images and Media */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* Forms and Inputs */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Layout Base */
+.side-nav {
+    width: 100%;
+    max-width: var(--side-nav-width);
+}
+
+.main-content {
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+    padding-inline: var(--spacing-md);
+}
+
+/* Theme Colors - Using Radix UI Color System
+ * Sand: Base color for all elements
+ * Red/Green/Blue: Reserved for special boxes (TBD)
+ * Sources:
+ * - Sand: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/sand.css
+ * - Red: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/red.css
+ * - Blue: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/blue.css
+ * - Green: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/green.css
+ * - Dark variants: Respective -dark.css files
+ */
+
+:root[data-theme="light"] {
+    /* Base colors (Sand) */
+    --sand-1: #fdfdfc;
+    --sand-2: #f9f9f8;
+    --sand-3: #f1f0ef;
+    --sand-4: #e9e8e6;
+    --sand-5: #e2e1de;
+    --sand-6: #dad9d6;
+    --sand-7: #cfceca;
+    --sand-8: #bcbbb5;
+    --sand-9: #8d8d86;
+    --sand-10: #82827c;
+    --sand-11: #63635e;
+    --sand-12: #21201c;
+
+    /* Accent colors */
+    --red-9: #e5484d;
+    --red-10: #dc3e42;
+    --red-11: #ce2c31;
+    --red-12: #641723;
+
+    --blue-9: #0090ff;
+    --blue-10: #0588f0;
+    --blue-11: #0d74ce;
+    --blue-12: #113264;
+
+    --green-9: #30a46c;
+    --green-10: #2b9a66;
+    --green-11: #218358;
+    --green-12: #193b2d;
+}
+
+:root[data-theme="dark"] {
+    /* Base colors (Sand) */
+    --sand-1: #111110;
+    --sand-2: #191918;
+    --sand-3: #222221;
+    --sand-4: #2a2a28;
+    --sand-5: #31312e;
+    --sand-6: #3b3a37;
+    --sand-7: #494844;
+    --sand-8: #62605b;
+    --sand-9: #6f6d66;
+    --sand-10: #7c7b74;
+    --sand-11: #b5b3ad;
+    --sand-12: #eeeeec;
+
+    /* Accent colors */
+    --red-9: #e5484d;
+    --red-10: #ec5d5e;
+    --red-11: #ff9592;
+    --red-12: #ffd1d9;
+
+    --blue-9: #0090ff;
+    --blue-10: #3b9eff;
+    --blue-11: #70b8ff;
+    --blue-12: #c2e6ff;
+
+    --green-9: #30a46c;
+    --green-10: #33b074;
+    --green-11: #3dd68c;
+    --green-12: #b1f1cb;
+}
+
+/* Breakpoint: Mobile First (default) */
+/* On mobile, content takes up full width and side navigation starts collapsed. */
+@media screen and (max-width: 767px) {
+    .side-nav {
+        display: none;
+    }
+
+    .side-nav.is-open {
+        display: block;
+    }
+}
+
+/* Breakpoint: Tablet and up (≥768px) */
+/* On tablet and up, the navigation is always visible and on the right side of the screen, content has a max width and is centered in the rest of the screen. */
+@media screen and (min-width: 768px) {
+    body {
+        display: grid;
+        grid-template-columns: 1fr var(--side-nav-width);
+        gap: var(--spacing-xl);
+    }
+
+    .main-content {
+        margin-inline: auto 0;
+    }
+
+    .side-nav {
+        display: block;
+    }
+}
+
+/* Breakpoint: Desktop (≥1280px) */
+/* On desktop, the content has a max width and is centered in the rest of the screen. The nav is no longer on the right side of the screen, it now floats in the center, towards the right of the content. */
+@media screen and (min-width: 1280px) {
+    body {
+        max-width: calc(var(--content-max-width) + var(--side-nav-width) + var(--spacing-xl));
+        margin-inline: auto;
+    }
+}
+
+/* Theme Selection */
+.theme-control {}
+
+.theme-select-wrapper {}
+
+.theme-icon {}
+
+.system-icon,
+.light-icon,
+.dark-icon {}
+
+/* Keyboard Shortcuts */
+.keyboard-shortcuts {}
+
+.keyboard-shortcuts-header {}
+
+.collapse-toggle {}
+
+.collapse-arrow {}
+
+.keyboard-shortcuts-content {}
+
+.shortcut-btn {}
+
+kbd {}
+
+/* Box Components */
+.box-icon {}
+
+/* Content Boxes */
+.legal-box,
+.explanatory-box,
+.disclaimer-box,
+.kpi-box {}
+
+.header-content {}
+
+.toggle-arrow {}
+
+/* KPI Box Specific */
+.kpi-box {}
+
+.kpi-list {}
+
+.kpi-target {}
+
+
+
+/* Recitals */
+.recital {}
+
+.recital-link {}
+
+.full-section-recital {}
+
+/* Glossary */
+.glossary {}
+
+.glossary-list {}
+
+.glossary-term {}
+
+.glossary-ref {}
+
+.glossary-tooltip {}
+
+.glossary-tooltip-header {}
+
+.glossary-tooltip-content {}
+
+.glossary-tooltip-term {}
+
+/* Anchor Links */
+.anchor-link {}
+
+/* Utility Classes */
+.collapsed {}
+
+.active {}
+
+.active-deepest {}
+
+.highlight {}
