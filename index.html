@@ -17,12 +17,18 @@
 <body>
     <article role="main">
         <button class="nav-toggle" aria-expanded="false" aria-controls="side-nav" aria-label="Toggle navigation menu">
-            <span class="nav-icon" aria-hidden="true">&#9776;</span>
-            <span class="nav-label">Table of Contents</span>
+            <i data-lucide="menu" aria-hidden="true"></i>
         </button>
 
         <nav id="side-nav" class="side-nav" role="navigation" aria-label="Table of contents">
-            <div class="nav-controls">
+            <div class="nav-header">
+                <span class="box-icon" aria-hidden="true">
+                    <i data-lucide="book-open"></i>
+                </span>
+                Table of Contents
+            </div>
+            <div id="nav-content" class="nav-content"></div>
+            <div class="nav-footer">
                 <div class="theme-control">
                     <label for="theme-select">Theme:</label>
                     <div class="theme-select-wrapper">
@@ -36,39 +42,29 @@
                         <i data-lucide="moon" class="theme-icon dark-icon"></i>
                     </div>
                 </div>
-            </div>
-            <div class="keyboard-shortcuts" aria-label="Keyboard shortcuts">
-                <div class="keyboard-shortcuts-header">
-                    <h4>Shortcuts & toggles</h4>
-                    <button class="collapse-toggle" aria-expanded="true" aria-controls="keyboard-shortcuts-content">
-                        <span class="collapse-arrow" aria-hidden="true">▲</span>
-                    </button>
-                </div>
-                <div id="keyboard-shortcuts-content" class="keyboard-shortcuts-content">
-                    <ul>
-                        <li>
-                            <button class="shortcut-btn" data-key="ArrowUp"><kbd>↑</kbd>/<kbd>↓</kbd> Headlines</button>
-                            <button class="shortcut-btn" data-key="ArrowLeft"><kbd>←</kbd>/<kbd>→</kbd>
-                                Commitments</button>
-                        </li>
-                        <li>
-                            <button class="shortcut-btn" data-key="1"><kbd>1</kbd> To top</button>
-                            <button class="shortcut-btn" data-key="2"><kbd>2</kbd> To glossary</button>
-                            <button class="shortcut-btn" data-key="3"><kbd>3</kbd> To recitals</button>
-                        </li>
-                        <li>
-                            <button class="shortcut-btn" data-key="4"><kbd>4</kbd> Toggle all boxes</button>
-                            <button class="shortcut-btn" data-key="5"><kbd>5</kbd> Toggle navigation depth</button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div id="nav-content" class="nav-content">
-                <div class="nav-header">
-                    <span class="box-icon" aria-hidden="true">
-                        <i data-lucide="notepad-text"></i>
-                    </span>
-                    Table of Contents
+                <div class="keyboard-shortcuts" aria-label="Keyboard shortcuts">
+                    <div class="keyboard-shortcuts-header">
+                        <h4>Keyboard Shortcuts</h4>
+                    </div>
+                    <div class="keyboard-shortcuts-content">
+                        <ul>
+                            <li>
+                                <button class="shortcut-btn" data-key="ArrowUp"><kbd>↑</kbd>/<kbd>↓</kbd>
+                                    Headlines</button>
+                                <button class="shortcut-btn" data-key="ArrowLeft"><kbd>←</kbd>/<kbd>→</kbd>
+                                    Commitments</button>
+                            </li>
+                            <li>
+                                <button class="shortcut-btn" data-key="1"><kbd>1</kbd> To top</button>
+                                <button class="shortcut-btn" data-key="2"><kbd>2</kbd> To glossary</button>
+                                <button class="shortcut-btn" data-key="3"><kbd>3</kbd> To recitals</button>
+                            </li>
+                            <li>
+                                <button class="shortcut-btn" data-key="4"><kbd>4</kbd> Toggle all boxes</button>
+                                <button class="shortcut-btn" data-key="0"><kbd>0</kbd> Toggle navigation</button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>

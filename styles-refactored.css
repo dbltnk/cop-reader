@@ -259,6 +259,15 @@ select {
 .side-nav {
     width: 100%;
     max-width: var(--side-nav-width);
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    background: var(--sand-1);
+    border-left: 1px solid var(--sand-6);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
 }
 
 .main-content {
@@ -268,18 +277,189 @@ select {
     padding-inline: var(--spacing-md);
 }
 
+/* Navigation Components */
+/* Navigation Header */
+.nav-header {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--sand-6);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.nav-header .box-icon {
+    color: var(--sand-11);
+}
+
+/* Navigation Content */
+.nav-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-md);
+}
+
+.nav-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-content li {
+    margin: var(--spacing-xs) 0;
+}
+
+.nav-content a {
+    display: block;
+    padding: var(--spacing-xs) 0;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-content a:hover {
+    color: var(--sand-11);
+}
+
+.nav-content a.active {
+    font-weight: 600;
+}
+
+/* Navigation Footer */
+.nav-footer {
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--sand-6);
+}
+
+/* Theme Control */
+.theme-control {
+    margin-bottom: var(--spacing-md);
+}
+
+.theme-select-wrapper {
+    position: relative;
+    margin-top: var(--spacing-xs);
+}
+
+.theme-select-wrapper select {
+    width: 100%;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    padding-right: var(--spacing-xl);
+    border: 1px solid var(--sand-6);
+    border-radius: 4px;
+    background: var(--sand-1);
+    color: inherit;
+    appearance: none;
+}
+
+.theme-icon {
+    position: absolute;
+    right: var(--spacing-sm);
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--sand-11);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+/* Show icon based on selected value */
+select[value="system"]~.system-icon,
+select[value="light"]~.light-icon,
+select[value="dark"]~.dark-icon {
+    opacity: 1;
+}
+
+/* Keyboard Shortcuts */
+.keyboard-shortcuts {
+    font-size: 0.9em;
+}
+
+.keyboard-shortcuts-header {
+    margin-bottom: var(--spacing-sm);
+}
+
+.keyboard-shortcuts-header h4 {
+    font-size: 1em;
+    margin: 0;
+}
+
+.keyboard-shortcuts ul {
+    list-style: none;
+    padding: 0;
+}
+
+.keyboard-shortcuts li {
+    margin-bottom: var(--spacing-xs);
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.shortcut-btn {
+    background: none;
+    border: none;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    color: inherit;
+    font-size: 0.9em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.shortcut-btn:hover {
+    background-color: var(--sand-3);
+}
+
+.shortcut-btn kbd {
+    background: var(--sand-3);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-family: var(--font-sans);
+}
+
+/* Navigation Toggle Button */
+.nav-toggle {
+    position: fixed;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 50%;
+    background: var(--sand-1);
+    color: inherit;
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-toggle:hover {
+    transform: scale(1.05);
+}
+
+.nav-toggle i {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--sand-11);
+}
+
 /* Breakpoints are set in stone. NEVER add any other breakpoints in this file. */
 
 /* Breakpoint: Mobile First (default) */
 /* On mobile, content takes up full width and side navigation starts collapsed. */
-@media screen and (max-width: 767px) {
-    .side-nav {
-        display: none;
-    }
+.side-nav {
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    width: min(350px, 90vw);
+}
 
-    .side-nav.is-open {
-        display: block;
-    }
+.side-nav.is-open {
+    transform: translateX(0);
 }
 
 /* Breakpoint: Tablet and up (≥768px) */
@@ -292,11 +472,18 @@ select {
     }
 
     .main-content {
-        margin-inline: auto 0;
+        place-self: center start;
+        width: min(var(--content-max-width), 100%);
+        margin-inline: auto;
     }
 
     .side-nav {
-        display: block;
+        transform: translateX(0);
+        width: var(--side-nav-width);
+    }
+
+    .nav-toggle {
+        display: none;
     }
 }
 
@@ -307,88 +494,8 @@ select {
         max-width: calc(var(--content-max-width) + var(--side-nav-width) + var(--spacing-xl));
         margin-inline: auto;
     }
+
+    .side-nav {
+        right: calc((100% - (var(--content-max-width) + var(--side-nav-width) + var(--spacing-xl))) / 2);
+    }
 }
-
-/* Theme Selection */
-.theme-control {}
-
-.theme-select-wrapper {}
-
-.theme-icon {}
-
-.system-icon,
-.light-icon,
-.dark-icon {}
-
-/* Keyboard Shortcuts */
-.keyboard-shortcuts {}
-
-.keyboard-shortcuts-header {}
-
-.collapse-toggle {}
-
-.collapse-arrow {}
-
-.keyboard-shortcuts-content {}
-
-.shortcut-btn {}
-
-kbd {}
-
-/* Box Components */
-.box-icon {}
-
-/* Content Boxes */
-.legal-box,
-.explanatory-box,
-.disclaimer-box,
-.kpi-box {}
-
-.header-content {}
-
-.toggle-arrow {}
-
-/* KPI Box Specific */
-.kpi-box {}
-
-.kpi-list {}
-
-.kpi-target {}
-
-
-
-/* Recitals */
-.recital {}
-
-.recital-link {}
-
-.full-section-recital {}
-
-/* Glossary */
-.glossary {}
-
-.glossary-list {}
-
-.glossary-term {}
-
-.glossary-ref {}
-
-.glossary-tooltip {}
-
-.glossary-tooltip-header {}
-
-.glossary-tooltip-content {}
-
-.glossary-tooltip-term {}
-
-/* Anchor Links */
-.anchor-link {}
-
-/* Utility Classes */
-.collapsed {}
-
-.active {}
-
-.active-deepest {}
-
-.highlight {}
