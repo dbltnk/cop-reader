@@ -532,7 +532,8 @@ select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ff9592' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
 }
 
-/* Box content */
+/* Box content spacing */
+/* Reset padding for direct children */
 .disclaimer-box>*:not(h4),
 .explanatory-box>*:not(h4),
 .legal-box>*:not(h4),
@@ -540,17 +541,79 @@ select {
     padding: 0 var(--spacing-md);
 }
 
-.disclaimer-box>p:first-of-type,
-.explanatory-box>p:first-of-type,
-.legal-box>p:first-of-type,
-.kpi-box>p:first-of-type {
+/* First element after header gets top margin */
+.disclaimer-box>*:not(h4):first-of-type,
+.explanatory-box>*:not(h4):first-of-type,
+.legal-box>*:not(h4):first-of-type,
+.kpi-box>*:not(h4):first-of-type {
     margin-top: var(--spacing-md);
 }
 
-.disclaimer-box>*:last-child,
-.explanatory-box>*:last-child,
-.legal-box>*:last-child,
-.kpi-box>*:last-child {
+/* Last element gets bottom margin */
+.disclaimer-box>*:not(h4):last-child,
+.explanatory-box>*:not(h4):last-child,
+.legal-box>*:not(h4):last-child,
+.kpi-box>*:not(h4):last-child {
+    margin-bottom: var(--spacing-md);
+}
+
+/* Lists inside boxes */
+.disclaimer-box ul,
+.disclaimer-box ol,
+.explanatory-box ul,
+.explanatory-box ol,
+.legal-box ul,
+.legal-box ol,
+.kpi-box ul,
+.kpi-box ol {
+    padding-left: calc(var(--spacing-md) + 1.5rem);
+    padding-right: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Nested lists */
+.disclaimer-box ul ul,
+.disclaimer-box ul ol,
+.disclaimer-box ol ul,
+.disclaimer-box ol ol,
+.explanatory-box ul ul,
+.explanatory-box ul ol,
+.explanatory-box ol ul,
+.explanatory-box ol ol,
+.legal-box ul ul,
+.legal-box ul ol,
+.legal-box ol ul,
+.legal-box ol ol,
+.kpi-box ul ul,
+.kpi-box ul ol,
+.kpi-box ol ul,
+.kpi-box ol ol {
+    padding-left: 1.5rem;
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+}
+
+/* List items */
+.disclaimer-box li,
+.explanatory-box li,
+.legal-box li,
+.kpi-box li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Last item in list */
+.disclaimer-box li:last-child,
+.explanatory-box li:last-child,
+.legal-box li:last-child,
+.kpi-box li:last-child {
+    margin-bottom: 0;
+}
+
+/* Paragraphs inside boxes */
+.disclaimer-box p,
+.explanatory-box p,
+.legal-box p,
+.kpi-box p {
     margin-bottom: var(--spacing-md);
 }
 
