@@ -29,66 +29,118 @@
 :root[data-theme="light"] {
     /* Base colors (Sand) */
     --sand-1: #fdfdfc;
+    /* Backgrounds */
     --sand-2: #f9f9f8;
+    /* Backgrounds */
     --sand-3: #f1f0ef;
+    /* Interactive Components */
     --sand-4: #e9e8e6;
+    /* Interactive Components */
     --sand-5: #e2e1de;
+    /* Interactive Components */
     --sand-6: #dad9d6;
+    /* Borders and separators */
     --sand-7: #cfceca;
+    /* Borders and separators */
     --sand-8: #bcbbb5;
+    /* Borders and separators */
     --sand-9: #8d8d86;
+    /* Solid colors */
     --sand-10: #82827c;
+    /* Solid colors */
     --sand-11: #63635e;
+    /* Accessible text */
     --sand-12: #21201c;
+    /* Accessible text */
 
-    /* Accent colors */
+    /* Disclaimer box */
     --red-9: #e5484d;
+    /* Primary accent */
     --red-10: #dc3e42;
+    /* Hover state */
     --red-11: #ce2c31;
+    /* Active state */
     --red-12: #641723;
+    /* Accessible text */
 
+    /* Explanatory box */
     --blue-9: #0090ff;
+    /* Primary accent */
     --blue-10: #0588f0;
+    /* Hover state */
     --blue-11: #0d74ce;
+    /* Active state */
     --blue-12: #113264;
+    /* Accessible text */
 
+    /* Legal box */
     --green-9: #30a46c;
+    /* Primary accent */
     --green-10: #2b9a66;
+    /* Hover state */
     --green-11: #218358;
+    /* Active state */
     --green-12: #193b2d;
+    /* Accessible text */
 }
 
 /* Dark Mode Colors */
 :root[data-theme="dark"] {
     /* Base colors (Sand) */
     --sand-1: #111110;
+    /* Backgrounds */
     --sand-2: #191918;
+    /* Backgrounds */
     --sand-3: #222221;
+    /* Interactive Components */
     --sand-4: #2a2a28;
+    /* Interactive Components */
     --sand-5: #31312e;
+    /* Interactive Components */
     --sand-6: #3b3a37;
+    /* Borders and separators */
     --sand-7: #494844;
+    /* Borders and separators */
     --sand-8: #62605b;
+    /* Borders and separators */
     --sand-9: #6f6d66;
+    /* Solid colors */
     --sand-10: #7c7b74;
+    /* Solid colors */
     --sand-11: #b5b3ad;
+    /* Accessible text */
     --sand-12: #eeeeec;
+    /* Accessible text */
 
-    /* Accent colors */
+    /* Disclaimer box */
     --red-9: #e5484d;
+    /* Primary accent */
     --red-10: #ec5d5e;
+    /* Hover state */
     --red-11: #ff9592;
+    /* Active state */
     --red-12: #ffd1d9;
+    /* Accessible text */
 
+    /* Explanatory box */
     --blue-9: #0090ff;
+    /* Primary accent */
     --blue-10: #3b9eff;
+    /* Hover state */
     --blue-11: #70b8ff;
+    /* Active state */
     --blue-12: #c2e6ff;
+    /* Accessible text */
 
+    /* Legal box */
     --green-9: #30a46c;
+    /* Primary accent */
     --green-10: #33b074;
+    /* Hover state */
     --green-11: #3dd68c;
+    /* Active state */
     --green-12: #b1f1cb;
+    /* Accessible text */
 }
 
 /* Custom Properties */
