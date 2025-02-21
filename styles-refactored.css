@@ -459,7 +459,8 @@ select {
 /* Box headers */
 .disclaimer-box h4,
 .explanatory-box h4,
-.legal-box h4 {
+.legal-box h4,
+.kpi-box h4 {
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
@@ -470,12 +471,15 @@ select {
     line-height: 1;
     margin: 0;
     position: relative;
+    cursor: pointer;
+    user-select: none;
 }
 
 /* Add icons before headers */
 .disclaimer-box h4::before,
 .explanatory-box h4::before,
-.legal-box h4::before {
+.legal-box h4::before,
+.kpi-box h4::before {
     content: "";
     display: block;
     width: 1.1rem;
@@ -489,7 +493,8 @@ select {
 /* Add chevron after headers */
 .disclaimer-box h4::after,
 .explanatory-box h4::after,
-.legal-box h4::after {
+.legal-box h4::after,
+.kpi-box h4::after {
     content: '';
     position: absolute;
     right: var(--spacing-md);
@@ -504,19 +509,22 @@ select {
 /* Box content */
 .disclaimer-box>*:not(h4),
 .explanatory-box>*:not(h4),
-.legal-box>*:not(h4) {
+.legal-box>*:not(h4),
+.kpi-box>*:not(h4) {
     padding: 0 var(--spacing-md);
 }
 
 .disclaimer-box>p:first-of-type,
 .explanatory-box>p:first-of-type,
-.legal-box>p:first-of-type {
+.legal-box>p:first-of-type,
+.kpi-box>p:first-of-type {
     margin-top: var(--spacing-md);
 }
 
 .disclaimer-box>*:last-child,
 .explanatory-box>*:last-child,
-.legal-box>*:last-child {
+.legal-box>*:last-child,
+.kpi-box>*:last-child {
     margin-bottom: var(--spacing-md);
 }
 
@@ -563,6 +571,38 @@ select {
 
 .disclaimer-box h4::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23e5484d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z'/%3E%3Cpath d='M12 9v4'/%3E%3Cpath d='M12 17h.01'/%3E%3C/svg%3E");
+}
+
+/* Box content transition */
+.disclaimer-box>*:not(h4),
+.explanatory-box>*:not(h4),
+.legal-box>*:not(h4),
+.kpi-box>*:not(h4) {
+    transition: max-height 0.3s ease-out;
+}
+
+/* Collapsed state */
+.disclaimer-box.collapsed>*:not(h4),
+.explanatory-box.collapsed>*:not(h4),
+.legal-box.collapsed>*:not(h4),
+.kpi-box.collapsed>*:not(h4) {
+    display: none;
+}
+
+/* Rotate arrow when collapsed */
+.disclaimer-box.collapsed h4::after,
+.explanatory-box.collapsed h4::after,
+.legal-box.collapsed h4::after,
+.kpi-box.collapsed h4::after {
+    transform: rotate(-90deg);
+}
+
+/* Arrow transition */
+.disclaimer-box h4::after,
+.explanatory-box h4::after,
+.legal-box h4::after,
+.kpi-box h4::after {
+    transition: transform 0.3s ease;
 }
 
 /* Navigation Components */

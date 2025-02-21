@@ -6,7 +6,8 @@ const CONFIG = {
     INDENT_PER_LEVEL: 1,
     SCROLL_TRIGGER_POSITION: 3, // Divider for window.innerHeight
     SPECIAL_SECTIONS: ['glossary', 'recitals-full'],
-    EXCLUDED_CONTAINERS: '.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital-box'
+    EXCLUDED_CONTAINERS: '.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital-box',
+    BOX_SELECTORS: '.kpi-box, .explanatory-box, .disclaimer-box, .legal-box'
 };
 
 // Navigation functionality
@@ -19,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
         nav: document.querySelector('.side-nav'),
         toggle: document.querySelector('.nav-toggle'),
         navContent: document.getElementById('nav-content'),
-        mainContent: document.querySelector('.main-content')
+        mainContent: document.querySelector('.main-content'),
+        boxes: document.querySelectorAll(CONFIG.BOX_SELECTORS)
     };
 
     // Debounce utility
@@ -181,6 +183,53 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleMenu(e.matches);
         if (e.matches) {
             document.body.style.overflow = ''; // Ensure scroll is enabled
+        }
+    });
+
+    // Function to toggle a single box
+    function toggleBox(box, force = null) {
+        const isExpanded = force !== null ? force : box.getAttribute('aria-expanded') === 'true';
+        const newState = force !== null ? force : !isExpanded;
+
+        box.setAttribute('aria-expanded', newState);
+        box.classList.toggle('collapsed', !newState);
+
+        // Get the content element (everything after the header)
+        const header = box.querySelector('h4, h5');
+        const content = Array.from(box.children).find(child => child !== header);
+        if (content) {
+            content.style.display = newState ? 'block' : 'none';
+        }
+
+        // Announce to screen readers
+        announceToScreenReader(`${header?.textContent} ${newState ? 'expanded' : 'collapsed'}`);
+    }
+
+    // Function to toggle all boxes
+    function toggleAllBoxes(force = null) {
+        elements.boxes.forEach(box => toggleBox(box, force));
+    }
+
+    // Initialize boxes
+    elements.boxes.forEach(box => {
+        const header = box.querySelector('h4, h5');
+        if (header) {
+            // Initialize aria-expanded attribute
+            box.setAttribute('aria-expanded', 'true');
+
+            // Style the header to indicate it's clickable
+            header.style.cursor = 'pointer';
+
+            // Add click handler
+            header.addEventListener('click', () => toggleBox(box));
+        }
+    });
+
+    // Add keyboard shortcut for toggling all boxes
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '2') {
+            e.preventDefault();
+            toggleAllBoxes();
         }
     });
 });
