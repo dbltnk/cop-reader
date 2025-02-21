@@ -4,8 +4,6 @@
 
 This is being developed by Alexander Zacherl (alexander.zacherl@googlemail.com) and I have not yet figured out how to license it.
 
-This project uses [Tufte CSS](https://github.com/edwardtufte/tufte-css) as a foundation for its styling, which is licensed under the MIT License. Copyright (c) 2014 Dave Liepmann. See [LICENSE-TUFTE-CSS](LICENSE-TUFTE-CSS) for the full license text.
-
 This project uses [Lucide Icons](https://lucide.dev/), which is licensed under the ISC License. Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
 
 ## Goal:
