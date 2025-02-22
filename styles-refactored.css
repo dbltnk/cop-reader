@@ -459,6 +459,23 @@ select {
     padding-inline: var(--spacing-md);
 }
 
+/* Glossary and Recitals sections */
+.glossary,
+.recitals-full {
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+    padding-inline: var(--spacing-md);
+}
+
+.glossary h2,
+.recitals-full h2,
+.glossary-list,
+.recital {
+    width: 100%;
+    max-width: var(--content-max-width);
+}
+
 /* Content Boxes */
 /* Base styles for all boxes */
 .disclaimer-box,
