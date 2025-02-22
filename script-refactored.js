@@ -86,7 +86,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const li = document.createElement('li');
             const link = document.createElement('a');
             link.href = `#${heading.id}`;
-            link.textContent = heading.textContent;
+
+            // Transform text for navigation
+            let text = heading.textContent.trim();
+            text = text.replace(/^Measure\s+(\d+\.\d+)/i, 'M$1');
+            text = text.replace(/^Commitment\s+(\d+)/i, 'C$1');
+            link.textContent = text;
+
             link.style.paddingLeft = `${(level - 1) * CONFIG.INDENT_PER_LEVEL}rem`;
 
             li.appendChild(link);
