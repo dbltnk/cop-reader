@@ -77,17 +77,15 @@ This code base was quickly hacked together in a few days by an amateur, making l
 - [x] Boxes similar styles, too different, KPI vs yellow one
 - [x] Replace emojis with icons, lucide.dev
 - [ ] Style the flowcharts
-- [ ] Icons for commitments and measures?
 - [ ] Animation polish for recitals
 - [x] Dropdown arrow too to right side
 - [x] Key nav skips commitment 2
 - [ ] Check key nav against screenreader and accessibility guidelines
 - [x] Nav item spacing polish pass
-- [ ] Hamburger icon not equally spaced to top and right
+- [x] Hamburger icon not equally spaced to top and right
 - [x] Left-align all content items better, list stands out etc right now (maybe just mobile)
 - [x] Font could be smaller on small screens, also reduce padding left and right
 - [x] Underline for glossary item vertically too far away on small screen
-- [ ] Select to share feature, send snippet, plug into default sharing API
 - [x] Check for and remove footnotes
 - [x] Icons: Talking chairs, lawyercat
 - [~] Fonts
