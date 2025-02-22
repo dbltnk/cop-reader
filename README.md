@@ -6,6 +6,10 @@ This is being developed by Alexander Zacherl (alexander.zacherl@googlemail.com) 
 
 This project uses [Lucide Icons](https://lucide.dev/), which is licensed under the ISC License. Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
 
+This project uses [Source Serif 4](https://github.com/adobe-fonts/source-serif) and [Source Sans 3](https://github.com/adobe-fonts/source-sans) fonts, which are licensed under the SIL Open Font License, Version 1.1. Copyright 2014-2023 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.
+
+The color system is based on [Radix Colors](https://www.radix-ui.com/colors), which is licensed under the MIT License. Copyright (c) 2022 WorkOS.
+
 ## Goal:
 Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-draft-general-purpose-ai-code-practice-published-written-independent-experts) of the EU AI Act Code of Practice more accessible and improve usability for a wide range of stakeholders on both mobile and desktop devices. 
 
@@ -20,12 +24,11 @@ This code base was quickly hacked together in a few days by an amateur, making l
 - [x] Client-side scipting for accessibility and usability features (below)
 - [x] Host static site on GitHub pages
 - [ ] Human and automated QA to prevent any differences to the official PDF
-- [x] Proper credit for https://github.com/edwardtufte/tufte-css/blob/gh-pages/LICENSE
 
 ## Features
 
 - [x] Disclaimer & contribution guide
-- [~] Responsive on any device from mobile phones to wide screen monitors
+- [x] Responsive on any device from mobile phones to wide screen monitors
 - [x] Amazing text rendering that is a pleasure to read
 - [x] Table of contents in a side bar left (desktop) or menu (mobile)
 - [x] Dark and light mode, following the device default (user configurable, save any changes locally)
@@ -39,59 +42,56 @@ This code base was quickly hacked together in a few days by an amateur, making l
 
 ## Known issues & unsorted notes
 
+- [ ] Nav bar not perfectly styled, lines and selected
+- [ ] Disable tne arrow keys UI element on mobile
 - [x] Glossary hover is not visible on mobile devices
-- [~] Dark mode is not working on mobile devices
-- [ ] KPI boxes are too wide on tablets (<760px)
-- [~] Glossary hover does not work on touch screen laptops, the "hot keys" box is accidentally removed as well (check for mouse instead?)
+- [x] Dark mode is not working on mobile devices
+- [x] KPI boxes are too wide on tablets (<760px)
+- [x] Glossary hover does not work on touch screen laptops, the "hot keys" box is accidentally removed as well (check for mouse instead?)
 - [x] Recital header numbers missing on the summary ones
-- [ ] Underline for glossary item vertically too far away on small screen
-- [ ] Longer lines
-- [~] Collapsable shortcuts, see more ToC
-- [ ] Nav items closer together
-- [ ] ToC text formatting
-- [ ] ToC titles too long, truncate?
+- [x] Underline for glossary item vertically too far away on small screen
+- [x] Longer lines
+- [x] Nav items closer together
+- [x] ToC text formatting
+- [x] ToC titles too long, truncate?
 - [ ] Remove the all caps formatting
-- [ ] Sans serif for the nav?
-- [ ] Move settings away or down or sth
-- [X] Collapsable nav items?
+- [x] Sans serif for the nav?
+- [x] Move settings away or down or sth
+- [ ] Collapsable nav items?
 - [ ] Collapse them by default?
-- [~] Anchor links, click to copy & share!
+- [x] Anchor links, click to copy & share!
 - [X] Glossary does not work with spaces in the term
 - [x] All headlines need to obey line width
-- [ ] More space between list items, UL and OL
+- [x] More space between list items, UL and OL
 - [x] Make boxes more unique
 - [x] Add characters / custom icons to boxes
 - [ ] Add proper favicon
 - [x] Change color of nav item to selected on click
-- [~] H5 hard to recognize as such
-- [ ] Use full width for text on small screens
+- [x] H5 hard to recognize as such
+- [x] Use full width for text on small screens
 - [x] Headlines more space before
 - [x] Nav item not just color as current indicator
-- [ ] Equalize distance between left and box and box and nav bar
-- [ ] KPI box goes too wide
+- [] Equalize distance between left and box and box and nav bar
+- [x] KPI box goes too wide
 - [ ] Accessibility text color contrast check
 - [x] Boxes similar styles, too different, KPI vs yellow one
-- [ ] Replace emojis with icons, lucide.dev
+- [x] Replace emojis with icons, lucide.dev
 - [ ] Style the flowcharts
 - [ ] Icons for commitments and measures?
 - [ ] Animation polish for recitals
-- [ ] Dropdown arrow too to right side
-- [ ] Recital hover smaller than the box
+- [x] Dropdown arrow too to right side
 - [x] Key nav skips commitment 2
 - [ ] Check key nav against screenreader and accessibility guidelines
-- [ ] Nav item spacing polish pass
+- [x] Nav item spacing polish pass
 - [ ] Hamburger icon not equally spaced to top and right
-- [ ] Left-align all content items better, list stands out etc right now (maybe just mobile)
-- [ ] Font could be smaller on small screens, also reduce padding left and right
-- [ ] Underline for glossary item vertically too far away on small screen
+- [x] Left-align all content items better, list stands out etc right now (maybe just mobile)
+- [x] Font could be smaller on small screens, also reduce padding left and right
+- [x] Underline for glossary item vertically too far away on small screen
 - [ ] Select to share feature, send snippet, plug into default sharing API
 - [x] Check for and remove footnotes
 - [x] Icons: Talking chairs, lawyercat
 - [~] Fonts
-- [ ] Colors
-- [ ] Anchor icon breaks to new line on mobile
-- [~] Always hide the keyboard shortcuts on mobile
-- [ ] Chair signatures: break points not optimal
+- [~] Colors
+- [x] Anchor icon breaks to new line on mobile
 - [X] Headlines too short on mobile
 - [x] the legal box is using our serif, but it should use the sans serif
-- [ ] finish the nav visuals
