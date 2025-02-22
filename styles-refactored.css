@@ -378,6 +378,7 @@ select {
     max-width: var(--content-max-width);
     margin-inline: auto;
     padding-inline: var(--spacing-md);
+    counter-reset: recital;
 }
 
 /* Breakpoints are set in stone. NEVER add any other breakpoints in this file. */
@@ -611,7 +612,8 @@ select {
 .disclaimer-box,
 .explanatory-box,
 .legal-box,
-.kpi-box {
+.kpi-box,
+.recital-box {
     width: 100%;
     max-width: var(--content-max-width);
     margin-bottom: var(--spacing-lg);
@@ -952,6 +954,104 @@ select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23999999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
 }
 
+/* Recital Box specific styles */
+.recital-box {
+    counter-increment: recital;
+    border-left: 1px solid var(--sand-6);
+    padding-left: var(--spacing-md);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    font-family: var(--font-serif);
+    font-style: italic;
+    position: relative;
+    padding-top: calc(var(--spacing-md) + 1.2rem);
+    padding-right: var(--spacing-md);
+    cursor: pointer;
+}
+
+/* Add "Recital" headline with number and chevron */
+.recital-box::before {
+    content: "Recital " counter(recital);
+    position: absolute;
+    top: var(--spacing-sm);
+    left: var(--spacing-md);
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-style: normal;
+    color: var(--sand-11);
+    padding-left: 1.4rem;
+    padding-right: 2rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z'/%3E%3Cpath d='M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 1.1rem;
+}
+
+/* Add chevron after the headline */
+.recital-box::after {
+    content: '';
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-md);
+    width: 1.1rem;
+    height: 1.1rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    transition: transform 0.3s ease;
+}
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] .recital-box {
+    border-left-color: var(--sand-6);
+}
+
+/* Dark mode icons */
+:root[data-theme="dark"] .recital-box::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23999999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z'/%3E%3Cpath d='M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="dark"] .recital-box::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23999999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Collapsed state */
+.recital-box.collapsed>*:not(.recital-box::before) {
+    display: none;
+}
+
+.recital-box.collapsed::after {
+    transform: rotate(-90deg);
+}
+
+/* Mobile optimizations */
+@media (max-width: 760px) {
+
+    .recital-box,
+    .recital-box h4,
+    .recital-box p,
+    .recital-box *:not(.recital-box::before),
+    .recital-box::before {
+        font-size: 0.85rem !important;
+    }
+}
+
+/* Box Base Styles */
+.disclaimer-box,
+.explanatory-box,
+.legal-box,
+.kpi-box,
+.recital-box {
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin-bottom: var(--spacing-lg);
+    border-radius: 4px;
+    overflow: hidden;
+    font-family: var(--font-sans);
+}
+
 /* ==========================================================================
    Theme Selector
    ========================================================================== */
@@ -1090,8 +1190,7 @@ body.light-mode a:hover {
 }
 
 /* Glossary and Recitals sections */
-.glossary,
-.recitals-full {
+.glossary {
     width: 100%;
     max-width: var(--content-max-width);
     margin-inline: auto;
@@ -1099,7 +1198,6 @@ body.light-mode a:hover {
 }
 
 .glossary h2,
-.recitals-full h2,
 .glossary-list,
 .recital {
     width: 100%;

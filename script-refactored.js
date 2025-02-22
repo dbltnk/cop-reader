@@ -201,14 +201,25 @@ document.addEventListener('DOMContentLoaded', () => {
         box.classList.toggle('collapsed', !newState);
 
         // Get the content element (everything after the header)
-        const header = box.querySelector('h4, h5');
-        const content = Array.from(box.children).find(child => child !== header);
-        if (content) {
-            content.style.display = newState ? 'block' : 'none';
-        }
+        const header = box.querySelector('h4, h5') || box.querySelector('::before');
+        const content = Array.from(box.children).filter(child => {
+            // For recital boxes, we want all elements except the pseudo-elements
+            if (box.classList.contains('recital-box')) {
+                return true;
+            }
+            // For other boxes, exclude the header
+            return child !== header;
+        });
+
+        content.forEach(el => {
+            el.style.display = newState ? 'block' : 'none';
+        });
 
         // Announce to screen readers
-        announceToScreenReader(`${header?.textContent} ${newState ? 'expanded' : 'collapsed'}`);
+        const boxType = box.classList.contains('recital-box') ?
+            `Recital ${box.getAttribute('data-recital')}` :
+            header?.textContent;
+        announceToScreenReader(`${boxType} ${newState ? 'expanded' : 'collapsed'}`);
     }
 
     // Function to toggle all boxes
@@ -219,14 +230,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize boxes
     elements.boxes.forEach(box => {
         const header = box.querySelector('h4, h5');
-        if (header) {
-            // Initialize aria-expanded attribute
-            box.setAttribute('aria-expanded', 'true');
+        const isRecital = box.classList.contains('recital-box');
 
-            // Style the header to indicate it's clickable
+        // Initialize aria-expanded attribute
+        box.setAttribute('aria-expanded', 'true');
+
+        if (isRecital) {
+            // For recital boxes, make the entire box clickable
+            box.addEventListener('click', () => toggleBox(box));
+        } else if (header) {
+            // For other boxes, make the header clickable
             header.style.cursor = 'pointer';
-
-            // Add click handler
             header.addEventListener('click', () => toggleBox(box));
         }
     });
