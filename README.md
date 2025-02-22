@@ -15,7 +15,15 @@ Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-
 
 ## Contribution Guide
 
-This code base was quickly hacked together in a few days by an amateur, making lots of use of LLMs to write everything. It should be considered prototype quality and not a code base that can be maintained in the long run. There is too much technical debt and design debt for that. Low hanging fruits will be plucked (such as simple text changes), but more complex changes and fixes will not be considered. If you think this web app is so useful that you want it to exist for the long run, consider forking it and maintaining it yourself.
+This project welcomes contributions! Here's how you can help:
+
+1. **Report Issues**: Found a bug or have a suggestion? Open an issue on GitHub.
+2. **Submit Pull Requests**: Feel free to submit PRs for any improvements.
+   - For text changes and simple fixes
+   - For feature additions and major changes
+   - Please discuss larger changes in an issue first
+
+Note: This is a simple web abb built quickly by an amateur with most code written by LLMs. While I welcome all contributions, be aware there is some technical debt and some design debt. If you want to maintain a long-term version, consider forking the repo and doing a full refactor.
 
 ## Development Plan
 
@@ -42,54 +50,18 @@ This code base was quickly hacked together in a few days by an amateur, making l
 
 ## Known issues & unsorted notes
 
+- [ ] Explanation box headline can overap with chevron, on mobile (probably others as well)
+- [ ] Glossary summary numbers slightly below headers
+- [ ] Buttons in nav are not fully visible on mobile, 2nd line cut off
 - [ ] Nav bar not perfectly styled, lines and selected
 - [ ] Disable tne arrow keys UI element on mobile
-- [x] Glossary hover is not visible on mobile devices
-- [x] Dark mode is not working on mobile devices
-- [x] KPI boxes are too wide on tablets (<760px)
-- [x] Glossary hover does not work on touch screen laptops, the "hot keys" box is accidentally removed as well (check for mouse instead?)
-- [x] Recital header numbers missing on the summary ones
-- [x] Underline for glossary item vertically too far away on small screen
-- [x] Longer lines
-- [x] Nav items closer together
-- [x] ToC text formatting
-- [x] ToC titles too long, truncate?
 - [ ] Remove the all caps formatting
-- [x] Sans serif for the nav?
-- [x] Move settings away or down or sth
 - [ ] Collapsable nav items?
 - [ ] Collapse them by default?
-- [x] Anchor links, click to copy & share!
-- [X] Glossary does not work with spaces in the term
-- [x] All headlines need to obey line width
-- [x] More space between list items, UL and OL
-- [x] Make boxes more unique
-- [x] Add characters / custom icons to boxes
 - [ ] Add proper favicon
-- [x] Change color of nav item to selected on click
-- [x] H5 hard to recognize as such
-- [x] Use full width for text on small screens
-- [x] Headlines more space before
-- [x] Nav item not just color as current indicator
-- [] Equalize distance between left and box and box and nav bar
-- [x] KPI box goes too wide
 - [ ] Accessibility text color contrast check
-- [x] Boxes similar styles, too different, KPI vs yellow one
-- [x] Replace emojis with icons, lucide.dev
 - [ ] Style the flowcharts
 - [ ] Animation polish for recitals
-- [x] Dropdown arrow too to right side
-- [x] Key nav skips commitment 2
 - [ ] Check key nav against screenreader and accessibility guidelines
-- [x] Nav item spacing polish pass
-- [x] Hamburger icon not equally spaced to top and right
-- [x] Left-align all content items better, list stands out etc right now (maybe just mobile)
-- [x] Font could be smaller on small screens, also reduce padding left and right
-- [x] Underline for glossary item vertically too far away on small screen
-- [x] Check for and remove footnotes
-- [x] Icons: Talking chairs, lawyercat
 - [~] Fonts
 - [~] Colors
-- [x] Anchor icon breaks to new line on mobile
-- [X] Headlines too short on mobile
-- [x] the legal box is using our serif, but it should use the sans serif
