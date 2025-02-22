@@ -610,7 +610,8 @@ select {
 /* Box Base Styles */
 .disclaimer-box,
 .explanatory-box,
-.legal-box {
+.legal-box,
+.kpi-box {
     width: 100%;
     max-width: var(--content-max-width);
     margin-bottom: var(--spacing-lg);
@@ -619,10 +620,81 @@ select {
     font-family: var(--font-sans);
 }
 
+/* KPI Box specific styles */
+.kpi-box {
+    border-left: 1px solid var(--sand-6);
+    padding-left: var(--spacing-md);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    font-family: var(--font-serif);
+}
+
+/* Override the font-family for all KPI box elements to ensure serif is used */
+.kpi-box h5,
+.kpi-box .kpi-list,
+.kpi-box .kpi-target,
+.kpi-box * {
+    font-family: var(--font-serif) !important;
+    font-size: 0.9rem !important;
+}
+
+/* KPI list styles */
+.kpi-box .kpi-list {
+    list-style: none;
+    padding-left: 0;
+    margin: var(--spacing-sm) 0;
+}
+
+.kpi-box .kpi-list li {
+    position: relative;
+    padding-left: calc(1.1rem + var(--spacing-md));
+    /* Aligns with the target icon */
+    margin-bottom: var(--spacing-sm);
+}
+
+.kpi-box .kpi-list li::before {
+    content: '';
+    position: absolute;
+    left: 1.1rem;
+    /* Same as icon width */
+    top: 0.7em;
+    width: 4px;
+    height: 4px;
+    background-color: var(--sand-9);
+    border-radius: 50%;
+}
+
+.kpi-box .kpi-target {
+    font-weight: 500;
+    color: var(--sand-11);
+    margin-right: var(--spacing-xs);
+}
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] .kpi-box {
+    border-left-color: var(--sand-6);
+}
+
+:root[data-theme="dark"] .kpi-box .kpi-target {
+    color: var(--sand-11);
+}
+
+:root[data-theme="dark"] .kpi-box .kpi-list li::before {
+    background-color: var(--sand-9);
+}
+
+/* Mobile optimizations */
+@media (max-width: 760px) {
+    .kpi-box {
+        font-size: 0.85rem;
+    }
+}
+
 /* Box Headers */
 .disclaimer-box h4,
 .explanatory-box h4,
-.legal-box h4 {
+.legal-box h4,
+.kpi-box h5 {
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
@@ -640,7 +712,8 @@ select {
 /* Box Icons and Chevrons */
 .disclaimer-box h4::before,
 .explanatory-box h4::before,
-.legal-box h4::before {
+.legal-box h4::before,
+.kpi-box h5::before {
     content: "";
     display: block;
     width: 1.1rem;
@@ -653,7 +726,8 @@ select {
 
 .disclaimer-box h4::after,
 .explanatory-box h4::after,
-.legal-box h4::after {
+.legal-box h4::after,
+.kpi-box h5::after {
     content: '';
     position: absolute;
     right: var(--spacing-md);
@@ -734,13 +808,15 @@ select {
 /* Box States */
 .disclaimer-box.collapsed>*:not(h4),
 .explanatory-box.collapsed>*:not(h4),
-.legal-box.collapsed>*:not(h4) {
+.legal-box.collapsed>*:not(h4),
+.kpi-box.collapsed>*:not(h5) {
     display: none;
 }
 
 .disclaimer-box.collapsed h4::after,
 .explanatory-box.collapsed h4::after,
-.legal-box.collapsed h4::after {
+.legal-box.collapsed h4::after,
+.kpi-box.collapsed h5::after {
     transform: rotate(-90deg);
 }
 
@@ -847,6 +923,33 @@ select {
 
 :root[data-theme="dark"] .disclaimer-box h4::after {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ff9592' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Box icon images */
+.kpi-box h5::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Ccircle cx='12' cy='12' r='6'/%3E%3Ccircle cx='12' cy='12' r='2'/%3E%3C/svg%3E");
+}
+
+/* Box Chevron images */
+.kpi-box h5::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Dark mode chevrons */
+:root[data-theme="dark"] .legal-box h4::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%233dd68c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="dark"] .explanatory-box h4::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2370b8ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="dark"] .disclaimer-box h4::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ff9592' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="dark"] .kpi-box h5::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23999999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
 }
 
 /* ==========================================================================
