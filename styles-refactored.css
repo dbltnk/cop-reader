@@ -267,16 +267,72 @@ strong {
 }
 
 /* Lists */
-ul,
-ol {
+.main-content ul,
+.main-content ol {
     margin-bottom: 1rem;
-    padding-left: 1.5rem;
+    padding-left: 0;
     max-width: var(--content-max-width);
 }
 
-li {
-    margin-bottom: 0.5rem;
+.main-content li {
+    margin-bottom: calc(var(--spacing-xs) * 0.5);
     line-height: var(--line-height-base);
+    position: relative;
+}
+
+/* Custom bullet and number styling */
+.main-content ul li,
+.main-content ol li {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.main-content ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 4px;
+    height: 4px;
+    background-color: var(--sand-9);
+    border-radius: 50%;
+}
+
+/* Ordered list styling */
+.main-content ol,
+.legal-box ol,
+.explanatory-box ol,
+.disclaimer-box ol {
+    counter-reset: list;
+}
+
+.main-content ol>li::before {
+    content: counter(list) ".";
+    counter-increment: list;
+    position: absolute;
+    left: 0;
+    color: var(--sand-9);
+    font-feature-settings: "tnum";
+}
+
+/* Box ordered list styles */
+.legal-box ol>li::before,
+.explanatory-box ol>li::before,
+.disclaimer-box ol>li::before {
+    content: counter(list) ".";
+    counter-increment: list;
+    position: absolute;
+    left: 0;
+    font-feature-settings: "tnum";
+}
+
+/* Nested list styles */
+.main-content ul ul,
+.main-content ol ol,
+.main-content ul ol,
+.main-content ol ul {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
 }
 
 dl {
@@ -708,40 +764,69 @@ select {
 .explanatory-box ol,
 .legal-box ul,
 .legal-box ol {
-    padding-left: calc(var(--spacing-md) + 1.5rem);
+    padding-left: 0;
     padding-right: var(--spacing-md);
     margin-bottom: var(--spacing-md);
-}
-
-/* Box Nested Lists */
-.disclaimer-box ul ul,
-.disclaimer-box ul ol,
-.disclaimer-box ol ul,
-.disclaimer-box ol ol,
-.explanatory-box ul ul,
-.explanatory-box ul ol,
-.explanatory-box ol ul,
-.explanatory-box ol ol,
-.legal-box ul ul,
-.legal-box ul ol,
-.legal-box ol ul,
-.legal-box ol ol {
-    padding-left: 1.5rem;
-    margin-top: var(--spacing-xs);
-    margin-bottom: var(--spacing-xs);
 }
 
 /* Box List Items */
 .disclaimer-box li,
 .explanatory-box li,
 .legal-box li {
-    margin-bottom: var(--spacing-xs);
+    list-style: none;
+    padding-left: var(--spacing-md);
+    margin-bottom: calc(var(--spacing-xs) * 0.5);
+    position: relative;
 }
 
-.disclaimer-box li:last-child,
-.explanatory-box li:last-child,
-.legal-box li:last-child {
-    margin-bottom: 0;
+/* Box-specific colors for bullets and numbers */
+.legal-box ul li::before,
+.legal-box ol li::before {
+    color: var(--green-9);
+}
+
+.explanatory-box ul li::before,
+.explanatory-box ol li::before {
+    color: var(--blue-9);
+}
+
+.disclaimer-box ul li::before,
+.disclaimer-box ol li::before {
+    color: var(--red-9);
+}
+
+/* Box-specific bullet styles */
+.legal-box ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 4px;
+    height: 4px;
+    background-color: var(--green-9);
+    border-radius: 50%;
+}
+
+.explanatory-box ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 4px;
+    height: 4px;
+    background-color: var(--blue-9);
+    border-radius: 50%;
+}
+
+.disclaimer-box ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 4px;
+    height: 4px;
+    background-color: var(--red-9);
+    border-radius: 50%;
 }
 
 /* Box Paragraphs */
