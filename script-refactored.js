@@ -475,3 +475,132 @@ prefersDark.addEventListener('change', (e) => {
         setTheme(e.matches ? 'dark' : 'light');
     }
 });
+
+// Glossary term marking
+document.addEventListener('DOMContentLoaded', () => {
+    // Helper function to escape special regex characters
+    function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // Helper function to create plural variations
+    function getTermVariations(term) {
+        const variations = [term];
+        // Simple plural rules - can be expanded
+        if (term.endsWith('y')) {
+            variations.push(term.slice(0, -1) + 'ies');
+        } else if (term.endsWith('s')) {
+            variations.push(term + 'es');
+        } else {
+            variations.push(term + 's');
+        }
+        return variations;
+    }
+
+    // Build glossary index
+    const glossaryTerms = new Map();
+    let termCounter = 1;
+
+    document.querySelectorAll('.glossary-list dt').forEach(term => {
+        const termText = term.textContent.trim();
+        const variations = getTermVariations(termText);
+
+        variations.forEach(variant => {
+            glossaryTerms.set(variant.toLowerCase(), {
+                number: termCounter,
+                originalTerm: termText
+            });
+        });
+        termCounter++;
+    });
+
+    // Function to mark terms in a text node
+    function markTermsInNode(textNode) {
+        if (!textNode.nodeValue.trim()) return;
+
+        // Skip if we're in a headline or already processed node
+        const parent = textNode.parentElement;
+        if (parent.closest('h1, h2, h3, h4, h5, h6, .glossary-marked, .glossary')) {
+            return;
+        }
+
+        let text = textNode.nodeValue;
+        let html = text;
+        let hasChanges = false;
+
+        // Sort terms by length (longest first) to handle overlapping terms
+        const sortedTerms = Array.from(glossaryTerms.keys())
+            .sort((a, b) => b.length - a.length);
+
+        // Track which terms we've marked in this text node
+        const markedTerms = new Set();
+
+        sortedTerms.forEach(term => {
+            if (markedTerms.has(term)) return;
+
+            const escapedTerm = escapeRegExp(term);
+            const regex = new RegExp(`(?<=^|[^a-zA-Z0-9-])${escapedTerm}(?=$|[^a-zA-Z0-9-])`, 'gi');
+
+            // Only replace first occurrence
+            html = html.replace(regex, (match) => {
+                if (markedTerms.has(term)) return match;
+
+                const info = glossaryTerms.get(term.toLowerCase());
+                markedTerms.add(term);
+                hasChanges = true;
+
+                return `<span class="glossary-marked" data-glossary-number="${info.number}">${match}</span>`;
+            });
+        });
+
+        if (hasChanges) {
+            const fragment = document.createRange().createContextualFragment(html);
+            textNode.parentNode.replaceChild(fragment, textNode);
+        }
+    }
+
+    // Process all text nodes in the main content
+    function processContent(root) {
+        const walker = document.createTreeWalker(
+            root,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode: (node) => {
+                    // Skip if parent is already processed or in excluded elements
+                    if (node.parentElement.closest('.glossary-marked, script, style, .glossary')) {
+                        return NodeFilter.FILTER_REJECT;
+                    }
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            }
+        );
+
+        const nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach(markTermsInNode);
+    }
+
+    // Initial processing
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+        processContent(mainContent);
+    }
+
+    // Optional: Handle dynamically added content
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            mutation.addedNodes.forEach(node => {
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    processContent(node);
+                }
+            });
+        });
+    });
+
+    if (mainContent) {
+        observer.observe(mainContent, {
+            childList: true,
+            subtree: true
+        });
+    }
+});

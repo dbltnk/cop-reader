@@ -326,8 +326,10 @@ strong {
     font-feature-settings: "tnum";
 }
 
-/* Legal box ordered list specific adjustments */
-.legal-box ol {
+/* Box ordered list specific adjustments */
+.legal-box ol,
+.explanatory-box ol,
+.disclaimer-box ol {
     padding-left: var(--spacing-md) !important;
 }
 
@@ -1199,14 +1201,101 @@ body.light-mode a:hover {
     width: 100%;
     max-width: var(--content-max-width);
     margin-inline: auto;
-    padding-inline: var(--spacing-md);
+    padding: var(--spacing-xl) var(--spacing-md);
+    background: var(--sand-2);
 }
 
-.glossary h2,
-.glossary-list,
-.recital {
+.glossary h2 {
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--sand-12);
+    border-bottom: 1px solid var(--sand-6);
+    padding-bottom: var(--spacing-md);
+}
+
+.glossary-list {
     width: 100%;
     max-width: var(--content-max-width);
+    counter-reset: glossary;
+}
+
+.glossary-list dt {
+    counter-increment: glossary;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: var(--spacing-lg);
+    color: var(--sand-12);
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-sm);
+}
+
+.glossary-list dt::before {
+    content: counter(glossary);
+    font-size: 0.75em;
+    font-weight: normal;
+    color: var(--sand-10);
+    min-width: 1.8em;
+    text-align: center;
+}
+
+.glossary-list dd {
+    font-family: var(--font-serif);
+    margin-left: calc(1.6em + var(--spacing-sm));
+    /* Align with term text after the number */
+    margin-top: var(--spacing-xs);
+    color: var(--sand-11);
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+/* First term doesn't need extra top margin */
+.glossary-list dt:first-of-type {
+    margin-top: 0;
+}
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] .glossary {
+    background: var(--sand-3);
+}
+
+/* ==========================================================================
+   Glossary Terms
+   ========================================================================== */
+
+.glossary-marked {
+    text-decoration: underline;
+    text-decoration-thickness: 0.5px;
+    text-decoration-color: var(--sand-8);
+    text-underline-offset: 0.2em;
+    position: relative;
+    /* Ensure inline positioning */
+    display: inline;
+}
+
+.glossary-marked::after {
+    content: attr(data-glossary-number);
+    font-size: 0.65em;
+    font-family: var(--font-sans);
+    color: var(--sand-10);
+    vertical-align: super;
+    margin-left: 0.1em;
+    line-height: 0;
+    /* Prevent affecting line height */
+    position: relative;
+    top: -0.1em;
+    font-feature-settings: "tnum";
+    font-weight: 500;
+}
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] .glossary-marked {
+    text-decoration-color: var(--sand-7);
+}
+
+:root[data-theme="dark"] .glossary-marked::after {
+    color: var(--sand-9);
 }
 
 /* ==========================================================================
