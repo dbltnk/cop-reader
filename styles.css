@@ -396,7 +396,6 @@ select {
     body {
         display: grid;
         grid-template-columns: 1fr var(--side-nav-width);
-        gap: var(--spacing-xl);
     }
 
     .main-content {
