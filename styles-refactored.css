@@ -326,6 +326,11 @@ strong {
     font-feature-settings: "tnum";
 }
 
+/* Legal box ordered list specific adjustments */
+.legal-box ol {
+    padding-left: var(--spacing-md) !important;
+}
+
 /* Nested list styles */
 .main-content ul ul,
 .main-content ol ol,
