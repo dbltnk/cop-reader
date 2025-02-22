@@ -1,5 +1,7 @@
 # cop-reader
 
+This little web site's goal is to make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-draft-general-purpose-ai-code-practice-published-written-independent-experts) of the EU AI Act Code of Practice more accessible and improve usability for a wide range of stakeholders on both mobile and desktop devices. 
+
 ## Credits & License
 
 This is being developed by Alexander Zacherl (alexander.zacherl@googlemail.com) and I have not yet figured out how to license it.
@@ -9,9 +11,6 @@ This project uses [Lucide Icons](https://lucide.dev/), which is licensed under t
 This project uses [Source Serif 4](https://github.com/adobe-fonts/source-serif) and [Source Sans 3](https://github.com/adobe-fonts/source-sans) fonts, which are licensed under the SIL Open Font License, Version 1.1. Copyright 2014-2023 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.
 
 The color system is based on [Radix Colors](https://www.radix-ui.com/colors), which is licensed under the MIT License. Copyright (c) 2022 WorkOS.
-
-## Goal:
-Make the [latest draft](https://digital-strategy.ec.europa.eu/en/library/second-draft-general-purpose-ai-code-practice-published-written-independent-experts) of the EU AI Act Code of Practice more accessible and improve usability for a wide range of stakeholders on both mobile and desktop devices. 
 
 ## Contribution Guide
 
@@ -32,6 +31,7 @@ Note: This is a simple web abb built quickly by an amateur with most code writte
 - [x] Client-side scipting for accessibility and usability features (below)
 - [x] Host static site on GitHub pages
 - [ ] Human and automated QA to prevent any differences to the official PDF
+- [ ] Figure out more long term hosting solution and domain
 
 ## Features
 
@@ -63,5 +63,5 @@ Note: This is a simple web abb built quickly by an amateur with most code writte
 - [ ] Style the flowcharts
 - [ ] Animation polish for recitals
 - [ ] Check key nav against screenreader and accessibility guidelines
-- [~] Fonts
-- [~] Colors
+- [ ] Finalize fonts
+- [ ] Finalize colors
