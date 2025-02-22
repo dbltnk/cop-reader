@@ -9,6 +9,7 @@ const CONFIG = {
     EXCLUDED_CONTAINERS: '.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital-box',
     BOX_SELECTORS: '.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital-box',
     TOAST_DURATION: 2000, // Duration in ms for toast notifications
+    NAV_MANUAL_SCROLL_TIMEOUT: 2000, // Time to wait after manual nav scroll before auto-scrolling
 };
 
 // Toast notification system
@@ -214,25 +215,78 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Update active navigation item
+    let lastNavScrollTime = 0;
+    let isUpdatingNav = false;
+
     function updateActiveNavItem() {
-        const scrollPosition = window.scrollY + window.innerHeight / CONFIG.SCROLL_TRIGGER_POSITION;
+        if (isUpdatingNav) return;
+        isUpdatingNav = true;
 
-        const headlines = Array.from(elements.mainContent.querySelectorAll('h2, h3, h4'))
-            .filter(heading => !heading.closest(CONFIG.EXCLUDED_CONTAINERS))
-            .map(heading => ({
-                element: heading,
-                position: heading.getBoundingClientRect().top + window.scrollY
-            }))
-            .filter(item => item.position <= scrollPosition);
+        requestAnimationFrame(() => {
+            const scrollPosition = window.scrollY + window.innerHeight / CONFIG.SCROLL_TRIGGER_POSITION;
 
-        const activeHeadline = headlines[headlines.length - 1];
+            const headlines = Array.from(elements.mainContent.querySelectorAll('h2, h3, h4'))
+                .filter(heading => !heading.closest(CONFIG.EXCLUDED_CONTAINERS))
+                .map(heading => ({
+                    element: heading,
+                    position: heading.getBoundingClientRect().top + window.scrollY
+                }))
+                .filter(item => item.position <= scrollPosition);
 
-        elements.navContent.querySelectorAll('a').forEach(link => {
-            link.classList.remove('active');
-            if (activeHeadline && link.getAttribute('href') === `#${activeHeadline.element.id}`) {
-                link.classList.add('active');
+            const activeHeadline = headlines[headlines.length - 1];
+            let activeLink = null;
+
+            elements.navContent.querySelectorAll('a').forEach(link => {
+                link.classList.remove('active');
+                if (activeHeadline && link.getAttribute('href') === `#${activeHeadline.element.id}`) {
+                    link.classList.add('active');
+                    activeLink = link;
+                }
+            });
+
+            // Auto-scroll nav if user hasn't manually scrolled recently
+            if (activeLink && Date.now() - lastNavScrollTime > CONFIG.NAV_MANUAL_SCROLL_TIMEOUT) {
+                const navContainer = elements.navContent;
+                const linkRect = activeLink.getBoundingClientRect();
+                const containerRect = navContainer.getBoundingClientRect();
+
+                if (linkRect.top < containerRect.top || linkRect.bottom > containerRect.bottom) {
+                    activeLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
             }
+
+            isUpdatingNav = false;
         });
+    }
+
+    // Track manual nav scrolling
+    elements.navContent.addEventListener('scroll', () => {
+        lastNavScrollTime = Date.now();
+    });
+
+    // Handle scroll without debounce
+    window.addEventListener('scroll', updateActiveNavItem, { passive: true });
+
+    // Update keyboard navigation to ensure nav highlighting
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            requestAnimationFrame(updateActiveNavItem);
+        }
+    });
+
+    // Update scroll to top to ensure nav highlighting
+    function scrollToTop() {
+        // Reset nav scroll first
+        elements.navContent.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        requestAnimationFrame(updateActiveNavItem);
     }
 
     // Event Listeners
@@ -260,15 +314,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = link.getAttribute('href').substring(1);
             const targetElement = document.getElementById(targetId);
             if (targetElement) {
-                window.location.hash = targetId;
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Update URL without scrolling
+                history.pushState(null, '', `#${targetId}`);
                 toggleMenu(false);
             }
         }
     });
-
-    // Handle scroll with proper debounce
-    const debouncedUpdateActiveNavItem = debounce(updateActiveNavItem, CONFIG.SCROLL_DEBOUNCE_MS);
-    window.addEventListener('scroll', debouncedUpdateActiveNavItem);
 
     // Initialize
     initializeHeadingAnchors();
@@ -347,8 +399,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === '2') {
             e.preventDefault();
             toggleAllBoxes();
+        } else if (e.key === '1') {
+            scrollToTop();
+        } else if (e.key === '3') {
+            themeToggle.click();
         }
     });
+
+    // Add click handler for "To top" button
+    document.querySelector('.shortcut-btn[data-key="1"]').addEventListener('click', scrollToTop);
 });
 
 // Theme handling
@@ -397,18 +456,5 @@ prefersDark.addEventListener('change', (e) => {
 document.addEventListener('keydown', (e) => {
     if (e.key === '3') {
         themeToggle.click();
-    } else if (e.key === '1') {
-        scrollToTop();
     }
 });
-
-// Scroll to top functionality
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
-
-// Add click handler for "To top" button
-document.querySelector('.shortcut-btn[data-key="1"]').addEventListener('click', scrollToTop);
