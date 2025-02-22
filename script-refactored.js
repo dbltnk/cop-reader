@@ -586,6 +586,158 @@ document.addEventListener('DOMContentLoaded', () => {
         processContent(mainContent);
     }
 
+    // Create popup element
+    const popup = document.createElement('div');
+    popup.className = 'glossary-popup';
+    popup.innerHTML = `
+        <div class="glossary-popup-header">
+            <span class="glossary-popup-term"></span>
+        </div>
+        <div class="glossary-popup-definition"></div>
+    `;
+    document.body.appendChild(popup);
+
+    // Track current popup state
+    let currentTerm = null;
+    let isHovering = false;
+    let isClickShown = false;
+
+    // Helper to get term definition
+    function getTermDefinition(number) {
+        const dt = document.querySelector(`.glossary-list dt:nth-child(${2 * number - 1})`);
+        const dd = document.querySelector(`.glossary-list dt:nth-child(${2 * number - 1}) + dd`);
+        return {
+            term: dt?.textContent.trim(),
+            definition: dd?.textContent.trim()
+        };
+    }
+
+    // Helper to position popup
+    function positionPopup(target) {
+        const rect = target.getBoundingClientRect();
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+        if (isMobile) {
+            // Mobile positioning is handled by CSS
+            return;
+        }
+
+        // Calculate available space
+        const spaceRight = window.innerWidth - rect.right - 16; // 16px buffer
+        const spaceLeft = rect.left - 16;
+
+        // Default to right positioning
+        let left = rect.right + 8;
+
+        // If not enough space on right, try left
+        if (spaceRight < 300 && spaceLeft > 300) {
+            left = rect.left - 308; // 300px + 8px gap
+        }
+        // If neither side has space, center above/below
+        else if (spaceRight < 300 && spaceLeft < 300) {
+            left = Math.max(16, Math.min(
+                window.innerWidth - 316,
+                rect.left + (rect.width - 300) / 2
+            ));
+        }
+
+        // Position relative to viewport and adjust for scroll
+        popup.style.position = 'absolute';
+        popup.style.left = `${left}px`;
+        popup.style.top = `${rect.top + window.scrollY}px`; // Add scrollY since we're using absolute positioning
+    }
+
+    // Helper to hide popup
+    function hidePopup(force = false) {
+        if (force || (!isHovering && !isClickShown)) {
+            popup.classList.remove('show');
+            currentTerm = null;
+            isClickShown = false;
+        }
+    }
+
+    // Helper to show popup
+    function showPopup(target, fromClick = false) {
+        const number = parseInt(target.dataset.glossaryNumber);
+        if (!number) return;
+
+        const { term, definition } = getTermDefinition(number);
+        if (!term || !definition) return;
+
+        popup.querySelector('.glossary-popup-term').textContent = term;
+        popup.querySelector('.glossary-popup-definition').textContent = definition;
+
+        positionPopup(target);
+        popup.classList.add('show');
+        currentTerm = target;
+        if (fromClick) {
+            isClickShown = true;
+        }
+    }
+
+    // Check if device has hover capability
+    const hasHover = window.matchMedia('(hover: hover)').matches;
+
+    // Click handlers for all devices
+    document.addEventListener('click', (e) => {
+        const term = e.target.closest('.glossary-marked');
+
+        if (term) {
+            if (currentTerm === term) {
+                isHovering = false; // Reset hover state on click
+                hidePopup(true); // Force hide on direct term click
+            } else {
+                isHovering = false; // Reset hover state on click
+                isClickShown = true; // Set click state before showing
+                showPopup(term, true);
+            }
+            e.stopPropagation();
+        } else {
+            isHovering = false; // Reset hover state on outside click
+            hidePopup(true); // Force hide on outside click
+        }
+    });
+
+    // Event handlers for hover
+    if (hasHover) {
+        document.addEventListener('mouseover', (e) => {
+            const term = e.target.closest('.glossary-marked');
+            if (term && !isClickShown) { // Don't show on hover if shown by click
+                isHovering = true;
+                showPopup(term, false);
+            }
+        });
+
+        document.addEventListener('mouseout', (e) => {
+            const term = e.target.closest('.glossary-marked');
+            if (term) {
+                isHovering = false;
+                if (!isClickShown) { // Only hide if not shown by click
+                    setTimeout(hidePopup, 100);
+                }
+            }
+        });
+    }
+
+    // Handle scroll and resize
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (currentTerm) {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                if (currentTerm) {
+                    positionPopup(currentTerm);
+                }
+            }, 100);
+        }
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+        if (currentTerm) {
+            positionPopup(currentTerm);
+        }
+    });
+
     // Optional: Handle dynamically added content
     const observer = new MutationObserver(mutations => {
         mutations.forEach(mutation => {
