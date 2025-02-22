@@ -8,7 +8,103 @@ const CONFIG = {
     SPECIAL_SECTIONS: ['glossary', 'recitals-full'],
     EXCLUDED_CONTAINERS: '.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital-box',
     BOX_SELECTORS: '.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital-box',
+    TOAST_DURATION: 2000, // Duration in ms for toast notifications
 };
+
+// Toast notification system
+function showToast(message) {
+    let container = document.querySelector('.toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    container.appendChild(toast);
+
+    // Trigger reflow
+    toast.offsetHeight;
+
+    // Show the toast
+    requestAnimationFrame(() => {
+        toast.classList.add('show');
+    });
+
+    // Remove the toast after duration
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 200);
+    }, CONFIG.TOAST_DURATION);
+}
+
+// Heading anchor system
+function initializeHeadingAnchors() {
+    // Get all headlines in main content, excluding those in special boxes
+    const headlines = Array.from(document.querySelectorAll('.main-content h2, .main-content h3, .main-content h4, .main-content h5'))
+        .filter(heading => !heading.closest(CONFIG.EXCLUDED_CONTAINERS));
+
+    // Keep track of used IDs to ensure uniqueness
+    const usedIds = new Set();
+
+    headlines.forEach(heading => {
+        // Generate base ID from text content
+        let baseId = heading.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
+        // Ensure unique ID
+        let uniqueId = baseId;
+        let counter = 1;
+        while (usedIds.has(uniqueId)) {
+            uniqueId = `${baseId}-${++counter}`;
+        }
+        usedIds.add(uniqueId);
+
+        // Set the unique ID
+        heading.id = uniqueId;
+
+        // Create anchor wrapper
+        const anchor = document.createElement('a');
+        anchor.className = 'heading-anchor';
+        anchor.href = `#${uniqueId}`;
+
+        // Move the heading's content into the anchor
+        const headingContent = heading.textContent;
+        heading.textContent = '';
+
+        // Add Lucide anchor icon
+        const icon = document.createElement('i');
+        icon.setAttribute('data-lucide', 'anchor');
+        icon.className = 'anchor-icon';
+        anchor.appendChild(icon);
+
+        // Add text
+        const text = document.createElement('span');
+        text.textContent = headingContent;
+        anchor.appendChild(text);
+
+        // Add click handler
+        anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = new URL(window.location.href);
+            url.hash = uniqueId;
+            navigator.clipboard.writeText(url.toString())
+                .then(() => {
+                    showToast('Link copied to clipboard');
+                    // Update URL without scrolling
+                    history.pushState(null, '', url.toString());
+                })
+                .catch(() => showToast('Failed to copy link'));
+        });
+
+        // Replace heading content with anchor
+        heading.appendChild(anchor);
+    });
+
+    // Initialize new Lucide icons
+    lucide.createIcons();
+}
 
 // Navigation functionality
 document.addEventListener('DOMContentLoaded', () => {
@@ -252,6 +348,9 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleAllBoxes();
         }
     });
+
+    // Initialize heading anchors
+    initializeHeadingAnchors();
 });
 
 // Theme handling

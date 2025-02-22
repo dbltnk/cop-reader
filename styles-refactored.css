@@ -1203,3 +1203,61 @@ body.light-mode a:hover {
     width: 100%;
     max-width: var(--content-max-width);
 }
+
+/* ==========================================================================
+   Toast Notifications
+   ========================================================================== */
+
+.toast-container {
+    position: fixed;
+    bottom: var(--spacing-lg);
+    right: var(--spacing-lg);
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.toast {
+    background: var(--sand-3);
+    color: var(--sand-12);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 4px;
+    margin-top: var(--spacing-sm);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: all 0.2s ease;
+    border: 1px solid var(--sand-6);
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   Heading anchor styles
+   ========================================================================== */
+
+.heading-anchor {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.heading-anchor:hover {
+    color: var(--sand-11);
+}
+
+.heading-anchor .anchor-icon {
+    color: var(--sand-9);
+    width: 1em;
+    height: 1em;
+}
+
+.heading-anchor:hover .anchor-icon {
+    color: var(--sand-11);
+}
