@@ -1,3 +1,7 @@
+/* ==========================================================================
+   Configuration & Variables
+   ========================================================================== */
+
 /* Theme Colors - Using Radix UI Color System
  * Sand: Base color for all elements
  * Red/Green/Blue: Reserved for special boxes (TBD)
@@ -25,11 +29,14 @@
  *    - Accent colors (Red, Blue, Green)
  */
 
-/* Base theme styles */
+/* Base Configuration
+   ========================================================================== */
 :root {
-    /* Base colors that don't change with theme */
+    /* Layout */
     --side-nav-width: min(350px, 90vw);
     --content-max-width: 65ch;
+
+    /* Spacing Scale */
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
@@ -37,7 +44,7 @@
     --spacing-xl: 2rem;
     --spacing-xxl: 3rem;
 
-    /* Typography */
+    /* Typography Scale */
     --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
     --font-sans: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --font-size-base: 1rem;
@@ -45,14 +52,15 @@
     --line-height-heading: 1.2;
 }
 
-/* Light theme colors */
+/* Theme Colors - Light Mode
+   ========================================================================== */
 :root[data-theme="light"] {
     /* Theme colors */
     --background-color: var(--sand-2);
     --text-color: var(--sand-12);
     --divider-color: var(--sand-6);
 
-    /* Base colors (Sand) */
+    /* Sand Scale */
     --sand-1: #fdfdfc;
     /* Backgrounds */
     --sand-2: #f9f9f8;
@@ -78,7 +86,7 @@
     --sand-12: #21201c;
     /* Accessible text */
 
-    /* Disclaimer box */
+    /* Accent Colors */
     --red-9: #e5484d;
     /* Primary accent */
     --red-10: #dc3e42;
@@ -88,7 +96,6 @@
     --red-12: #641723;
     /* Accessible text */
 
-    /* Explanatory box */
     --blue-9: #0090ff;
     /* Primary accent */
     --blue-10: #0588f0;
@@ -98,7 +105,6 @@
     --blue-12: #113264;
     /* Accessible text */
 
-    /* Legal box */
     --green-9: #30a46c;
     /* Primary accent */
     --green-10: #2b9a66;
@@ -109,14 +115,15 @@
     /* Accessible text */
 }
 
-/* Dark theme colors */
+/* Theme Colors - Dark Mode
+   ========================================================================== */
 :root[data-theme="dark"] {
     /* Theme colors */
     --background-color: var(--sand-2);
     --text-color: var(--sand-12);
     --divider-color: var(--sand-6);
 
-    /* Base colors (Sand) */
+    /* Sand Scale */
     --sand-1: #111110;
     /* Backgrounds */
     --sand-2: #191918;
@@ -142,7 +149,7 @@
     --sand-12: #eeeeec;
     /* Accessible text */
 
-    /* Disclaimer box */
+    /* Accent Colors */
     --red-9: #e5484d;
     /* Primary accent */
     --red-10: #ec5d5e;
@@ -152,7 +159,6 @@
     --red-12: #ffd1d9;
     /* Accessible text */
 
-    /* Explanatory box */
     --blue-9: #0090ff;
     /* Primary accent */
     --blue-10: #3b9eff;
@@ -162,7 +168,6 @@
     --blue-12: #c2e6ff;
     /* Accessible text */
 
-    /* Legal box */
     --green-9: #30a46c;
     /* Primary accent */
     --green-10: #33b074;
@@ -173,141 +178,9 @@
     /* Accessible text */
 }
 
-/* Apply theme colors */
-body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    min-height: 100vh;
-    line-height: var(--line-height-base);
-    font-family: var(--font-serif);
-    font-size: var(--font-size-base);
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.side-nav {
-    background-color: var(--background-color);
-    border-left: 1px solid var(--divider-color);
-    border-right: 1px solid var(--divider-color);
-    width: 100%;
-    max-width: var(--side-nav-width);
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    z-index: 1000;
-}
-
-/* Theme selector styles */
-.theme-select-wrapper {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    width: 100%;
-}
-
-.theme-select-wrapper select {
-    width: 100%;
-    padding: var(--spacing-xs) var(--spacing-sm);
-    padding-right: var(--spacing-xl);
-    border: 1px solid var(--divider-color);
-    border-radius: 4px;
-    background: var(--background-color);
-    color: var(--text-color);
-    appearance: none;
-    cursor: pointer;
-}
-
-.theme-icon {
-    position: absolute;
-    right: var(--spacing-sm);
-    top: 50%;
-    transform: translateY(-50%);
-    width: 1.2em;
-    height: 1.2em;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    color: var(--text-color);
-}
-
-/* Show icon based on selected value */
-#theme-select[value="system"]~.system-icon,
-#theme-select[value="light"]~.light-icon,
-#theme-select[value="dark"]~.dark-icon {
-    opacity: 1;
-}
-
-/* Theme control styles */
-.theme-icon {
-    display: none;
-}
-
-[data-theme="light"] .light-icon {
-    display: block;
-}
-
-[data-theme="dark"] .dark-icon {
-    display: block;
-}
-
-/* Keyboard shortcuts */
-.keyboard-shortcuts {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: var(--spacing-xs);
-    padding: var(--spacing-sm) 0;
-    justify-content: start;
-}
-
-.shortcut-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border: none;
-    background: none;
-    color: var(--text-color);
-    font-size: 0.9em;
-    text-align: left;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.shortcut-btn:hover {
-    color: var(--sand-11);
-}
-
-.shortcut-btn kbd {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 1.6em;
-    height: 1.6em;
-    background-color: var(--sand-3);
-    border: 1px solid var(--divider-color);
-    border-radius: 3px;
-    padding: 0 0.4em;
-    font-size: 0.8em;
-    font-family: var(--font-sans);
-    line-height: 1;
-}
-
-/* Font Usage Rules
- * 1. Default font is serif (--font-serif) for all text content
- * 2. Sans-serif (--font-sans) is used ONLY in:
- *    - Navigation elements (.side-nav)
- *    - Special boxes:
- *      - Legal boxes (.legal-box)
- *      - Explanatory boxes (.explanatory-box)
- *      - Disclaimer boxes (.disclaimer-box)
- *      - KPI boxes (.kpi-box)
- *      - Glossary elements (.glossary)
- *      - Recital elements (.recital-box)
- */
+/* ==========================================================================
+   Reset & Base Styles
+   ========================================================================== */
 
 /* Modern CSS Reset */
 *,
@@ -324,22 +197,34 @@ html {
     -webkit-text-size-adjust: none;
 }
 
-/* Typography */
+/* Base Typography */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    line-height: var(--line-height-base);
+    font-family: var(--font-serif);
+    font-size: var(--font-size-base);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
-/* UI Elements - Sans-serif */
-.side-nav *,
-.legal-box *,
-.explanatory-box *,
-.disclaimer-box * {
-    font-family: var(--font-sans);
+/* Typography Scale */
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: var(--font-serif);
+    line-height: var(--line-height-heading);
+    color: inherit;
 }
 
 h1 {
     font-size: 2.5rem;
     margin-bottom: var(--spacing-lg);
     margin-top: var(--spacing-xxl);
-    width: 100%;
-    max-width: var(--content-max-width);
 }
 
 h2 {
@@ -358,16 +243,7 @@ h5 {
     margin-bottom: var(--spacing-xs);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-    font-family: var(--font-serif);
-    line-height: var(--line-height-heading);
-    color: inherit;
-}
-
+/* Base Elements */
 p {
     margin-bottom: 1rem;
     line-height: var(--line-height-base);
@@ -418,22 +294,7 @@ dd {
     margin-top: 0.5rem;
 }
 
-/* Dark mode link colors */
-@media (prefers-color-scheme: dark) {
-    a:hover {
-        color: var(--sand-11);
-    }
-}
-
-body.light-mode a:hover {
-    color: var(--sand-11);
-}
-
-body.dark-mode a:hover {
-    color: var(--sand-11);
-}
-
-/* Images and Media */
+/* Media Elements */
 img,
 picture,
 video,
@@ -443,7 +304,7 @@ svg {
     max-width: 100%;
 }
 
-/* Forms and Inputs */
+/* Form Elements */
 input,
 button,
 textarea,
@@ -451,7 +312,11 @@ select {
     font: inherit;
 }
 
-/* Layout Base */
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+/* Main Content */
 .main-content {
     width: 100%;
     max-width: var(--content-max-width);
@@ -459,276 +324,59 @@ select {
     padding-inline: var(--spacing-md);
 }
 
-/* Glossary and Recitals sections */
-.glossary,
-.recitals-full {
-    width: 100%;
-    max-width: var(--content-max-width);
-    margin-inline: auto;
-    padding-inline: var(--spacing-md);
+/* Breakpoints are set in stone. NEVER add any other breakpoints in this file. */
+
+/* Responsive Layout */
+/* On tablet and up (≥768px): navigation is always visible and on the right side */
+@media screen and (min-width: 768px) {
+    body {
+        display: grid;
+        grid-template-columns: 1fr var(--side-nav-width);
+        gap: var(--spacing-xl);
+    }
+
+    .main-content {
+        place-self: center start;
+        width: min(var(--content-max-width), 100%);
+        margin-inline: auto;
+    }
 }
 
-.glossary h2,
-.recitals-full h2,
-.glossary-list,
-.recital {
-    width: 100%;
-    max-width: var(--content-max-width);
+/* On desktop (≥1280px): content centered, nav floats to the right */
+@media screen and (min-width: 1280px) {
+    body {
+        max-width: calc(var(--content-max-width) + var(--side-nav-width) + var(--spacing-xl));
+        margin-inline: auto;
+    }
 }
 
-/* Content Boxes */
-/* Base styles for all boxes */
-.disclaimer-box,
-.explanatory-box,
-.legal-box {
-    width: 100%;
-    max-width: var(--content-max-width);
-    margin-bottom: var(--spacing-lg);
-    border-radius: 4px;
-    overflow: hidden;
-    font-family: var(--font-sans);
-}
+/* ==========================================================================
+   Components
+   ========================================================================== */
 
-/* Box headers */
-.disclaimer-box h4,
-.explanatory-box h4,
-.legal-box h4,
-.kpi-box h4 {
+/* Navigation
+   ========================================================================== */
+.side-nav {
+    background-color: var(--background-color);
+    border-left: 1px solid var(--divider-color);
+    border-right: 1px solid var(--divider-color);
+    width: var(--side-nav-width);
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
     display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-md);
-    font-family: var(--font-sans);
-    font-weight: 600;
-    font-size: 1.1rem;
-    line-height: 1;
-    margin: 0;
-    position: relative;
-    cursor: pointer;
-    user-select: none;
-}
-
-/* Add icons before headers */
-.disclaimer-box h4::before,
-.explanatory-box h4::before,
-.legal-box h4::before,
-.kpi-box h4::before {
-    content: "";
-    display: block;
-    width: 1.1rem;
-    height: 1.1rem;
-    flex-shrink: 0;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-/* Add chevron after headers - base styles */
-.disclaimer-box h4::after,
-.explanatory-box h4::after,
-.legal-box h4::after,
-.kpi-box h4::after {
-    content: '';
-    position: absolute;
-    right: var(--spacing-md);
-    width: 1.1rem;
-    height: 1.1rem;
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.7;
+    flex-direction: column;
+    z-index: 1000;
+    transform: translateX(100%);
     transition: transform 0.3s ease;
 }
 
-/* Box-specific chevron colors */
-.legal-box h4::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2330a46c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+.side-nav.is-open {
+    transform: translateX(0);
 }
 
-.explanatory-box h4::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%230090ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-}
-
-.disclaimer-box h4::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23e5484d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z'/%3E%3Cpath d='M12 9v4'/%3E%3Cpath d='M12 17h.01'/%3E%3C/svg%3E");
-}
-
-/* Dark theme chevron colors */
-:root[data-theme="dark"] .legal-box h4::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%233dd68c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-}
-
-:root[data-theme="dark"] .explanatory-box h4::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2370b8ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-}
-
-:root[data-theme="dark"] .disclaimer-box h4::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ff9592' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-}
-
-/* Box content spacing */
-/* Reset padding for direct children */
-.disclaimer-box>*:not(h4),
-.explanatory-box>*:not(h4),
-.legal-box>*:not(h4),
-.kpi-box>*:not(h4) {
-    padding: 0 var(--spacing-md);
-}
-
-/* First element after header gets top margin */
-.disclaimer-box>*:not(h4):first-of-type,
-.explanatory-box>*:not(h4):first-of-type,
-.legal-box>*:not(h4):first-of-type,
-.kpi-box>*:not(h4):first-of-type {
-    margin-top: var(--spacing-md);
-}
-
-/* Last element gets bottom margin */
-.disclaimer-box>*:not(h4):last-child,
-.explanatory-box>*:not(h4):last-child,
-.legal-box>*:not(h4):last-child,
-.kpi-box>*:not(h4):last-child {
-    margin-bottom: var(--spacing-md);
-}
-
-/* Lists inside boxes */
-.disclaimer-box ul,
-.disclaimer-box ol,
-.explanatory-box ul,
-.explanatory-box ol,
-.legal-box ul,
-.legal-box ol,
-.kpi-box ul,
-.kpi-box ol {
-    padding-left: calc(var(--spacing-md) + 1.5rem);
-    padding-right: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-}
-
-/* Nested lists */
-.disclaimer-box ul ul,
-.disclaimer-box ul ol,
-.disclaimer-box ol ul,
-.disclaimer-box ol ol,
-.explanatory-box ul ul,
-.explanatory-box ul ol,
-.explanatory-box ol ul,
-.explanatory-box ol ol,
-.legal-box ul ul,
-.legal-box ul ol,
-.legal-box ol ul,
-.legal-box ol ol,
-.kpi-box ul ul,
-.kpi-box ul ol,
-.kpi-box ol ul,
-.kpi-box ol ol {
-    padding-left: 1.5rem;
-    margin-top: var(--spacing-xs);
-    margin-bottom: var(--spacing-xs);
-}
-
-/* List items */
-.disclaimer-box li,
-.explanatory-box li,
-.legal-box li,
-.kpi-box li {
-    margin-bottom: var(--spacing-xs);
-}
-
-/* Last item in list */
-.disclaimer-box li:last-child,
-.explanatory-box li:last-child,
-.legal-box li:last-child,
-.kpi-box li:last-child {
-    margin-bottom: 0;
-}
-
-/* Paragraphs inside boxes */
-.disclaimer-box p,
-.explanatory-box p,
-.legal-box p,
-.kpi-box p {
-    margin-bottom: var(--spacing-md);
-}
-
-/* Legal Box */
-.legal-box {
-    background-color: color-mix(in srgb, var(--green-9) 10%, transparent);
-    border: 1px solid color-mix(in srgb, var(--green-9) 20%, transparent);
-}
-
-.legal-box h4 {
-    color: var(--green-12);
-    background-color: color-mix(in srgb, var(--green-9) 15%, transparent);
-}
-
-.legal-box h4::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2330a46c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z'/%3E%3Cpath d='m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z'/%3E%3Cpath d='M7 21h10'/%3E%3Cpath d='M12 3v18'/%3E%3Cpath d='M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2'/%3E%3C/svg%3E");
-}
-
-/* Explanatory Box */
-.explanatory-box {
-    background-color: color-mix(in srgb, var(--blue-9) 10%, transparent);
-    border: 1px solid color-mix(in srgb, var(--blue-9) 20%, transparent);
-}
-
-.explanatory-box h4 {
-    color: var(--blue-12);
-    background-color: color-mix(in srgb, var(--blue-9) 15%, transparent);
-}
-
-.explanatory-box h4::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%230090ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 16v-4'/%3E%3Cpath d='M12 8h.01'/%3E%3C/svg%3E");
-}
-
-/* Disclaimer Box */
-.disclaimer-box {
-    background-color: color-mix(in srgb, var(--red-9) 10%, transparent);
-    border: 1px solid color-mix(in srgb, var(--red-9) 20%, transparent);
-}
-
-.disclaimer-box h4 {
-    color: var(--red-12);
-    background-color: color-mix(in srgb, var(--red-9) 15%, transparent);
-}
-
-.disclaimer-box h4::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23e5484d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z'/%3E%3Cpath d='M12 9v4'/%3E%3Cpath d='M12 17h.01'/%3E%3C/svg%3E");
-}
-
-/* Box content transition */
-.disclaimer-box>*:not(h4),
-.explanatory-box>*:not(h4),
-.legal-box>*:not(h4),
-.kpi-box>*:not(h4) {
-    transition: max-height 0.3s ease-out;
-}
-
-/* Collapsed state */
-.disclaimer-box.collapsed>*:not(h4),
-.explanatory-box.collapsed>*:not(h4),
-.legal-box.collapsed>*:not(h4),
-.kpi-box.collapsed>*:not(h4) {
-    display: none;
-}
-
-/* Rotate arrow when collapsed */
-.disclaimer-box.collapsed h4::after,
-.explanatory-box.collapsed h4::after,
-.legal-box.collapsed h4::after,
-.kpi-box.collapsed h4::after {
-    transform: rotate(-90deg);
-}
-
-/* Arrow transition */
-.disclaimer-box h4::after,
-.explanatory-box h4::after,
-.legal-box h4::after,
-.kpi-box h4::after {
-    transition: transform 0.3s ease;
-}
-
-/* Navigation Components */
-/* Navigation Header */
+/* Nav Header */
 .nav-header {
     padding: var(--spacing-md);
     border-bottom: 1px solid var(--sand-6);
@@ -742,18 +390,15 @@ select {
     color: var(--sand-11);
 }
 
-/* Navigation Content */
+/* Nav Content and Scrollbars */
 .nav-content {
     flex: 1;
     overflow-y: auto;
     padding: var(--spacing-md);
-
-    /* Firefox scrollbar */
     scrollbar-width: thin;
     scrollbar-color: var(--sand-8) var(--sand-3);
 }
 
-/* WebKit scrollbar styles */
 .nav-content::-webkit-scrollbar {
     width: 8px;
 }
@@ -773,6 +418,7 @@ select {
     background-color: var(--sand-9);
 }
 
+/* Nav Links Base Styles */
 .nav-content ul {
     list-style: none;
     padding: 0;
@@ -784,28 +430,6 @@ select {
     position: relative;
 }
 
-/* Create continuous line for level 3 items */
-.nav-content a[style*="padding-left: 2rem"] {
-    position: relative;
-}
-
-/* Add the line to the container of level 3 items */
-.nav-content a[style*="padding-left: 2rem"]::before {
-    content: '';
-    position: absolute;
-    left: 1rem;
-    /* Align with level 2 text */
-    top: calc(-1 * var(--spacing-xs));
-    /* Extend up to cover the gap */
-    height: calc(100% + var(--spacing-xs) * 2);
-    /* Cover the full height plus gaps */
-    width: 1px;
-    background-color: var(--sand-6);
-    z-index: 0;
-    /* Ensure line is behind text */
-}
-
-/* Precise spacing system for different nesting levels */
 .nav-content a {
     display: block;
     padding: var(--spacing-xs) 0;
@@ -818,28 +442,44 @@ select {
     font-size: 0.9rem;
     line-height: 1.4;
     position: relative;
-    /* Ensure text is above lines */
     z-index: 1;
 }
 
-/* Font sizes for different levels */
+/* Nav Link Hierarchy and Spacing */
 .nav-content a[style*="padding-left: 0"] {
     font-size: 1rem;
     color: var(--sand-11);
     padding: var(--spacing-sm) 0;
     font-weight: 500;
+    margin-top: var(--spacing-md);
 }
 
 .nav-content a[style*="padding-left: 1rem"] {
     font-size: 0.9rem;
     padding: var(--spacing-xs) 0;
+    margin-top: calc(var(--spacing-xs) * 0.5);
 }
 
 .nav-content a[style*="padding-left: 2rem"] {
     font-size: 0.8rem;
     padding: calc(var(--spacing-xs) * 0.8) 0;
+    margin-top: calc(var(--spacing-xs) * 0.5);
+    position: relative;
 }
 
+/* Level 3 Item Connector Lines */
+.nav-content a[style*="padding-left: 2rem"]::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: calc(-1 * var(--spacing-xs));
+    height: calc(100% + var(--spacing-xs) * 2);
+    width: 1px;
+    background-color: var(--sand-6);
+    z-index: 0;
+}
+
+/* Nav Link States */
 .nav-content a:hover {
     color: var(--sand-11);
 }
@@ -848,29 +488,18 @@ select {
     font-weight: 600;
 }
 
-/* Add spacing above h2-level items to create sections */
-.nav-content a[style*="padding-left: 0"] {
-    margin-top: var(--spacing-md);
-}
-
-/* First h2 item doesn't need top margin */
+/* First h2 item spacing reset */
 .nav-content li:first-child a[style*="padding-left: 0"] {
     margin-top: 0;
 }
 
-/* Tighter spacing for h3 and h4 items */
-.nav-content a[style*="padding-left: 1rem"],
-.nav-content a[style*="padding-left: 2rem"] {
-    margin-top: calc(var(--spacing-xs) * 0.5);
-}
-
-/* Navigation Footer */
+/* Nav Footer */
 .nav-footer {
     padding: var(--spacing-md);
     border-top: 1px solid var(--sand-6);
 }
 
-/* Navigation Toggle Button */
+/* Nav Toggle */
 .nav-toggle {
     position: fixed;
     top: var(--spacing-md);
@@ -900,38 +529,10 @@ select {
     color: var(--sand-11);
 }
 
-/* Breakpoints are set in stone. NEVER add any other breakpoints in this file. */
-
-/* Breakpoint: Mobile First (default) */
-/* On mobile, content takes up full width and side navigation starts collapsed. */
-.side-nav {
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-    width: min(350px, 90vw);
-}
-
-.side-nav.is-open {
-    transform: translateX(0);
-}
-
-/* Breakpoint: Tablet and up (≥768px) */
-/* On tablet and up, the navigation is always visible and on the right side of the screen, content has a max width and is centered in the rest of the screen. */
+/* Nav Responsive */
 @media screen and (min-width: 768px) {
-    body {
-        display: grid;
-        grid-template-columns: 1fr var(--side-nav-width);
-        gap: var(--spacing-xl);
-    }
-
-    .main-content {
-        place-self: center start;
-        width: min(var(--content-max-width), 100%);
-        margin-inline: auto;
-    }
-
     .side-nav {
         transform: translateX(0);
-        width: var(--side-nav-width);
     }
 
     .nav-toggle {
@@ -939,15 +540,379 @@ select {
     }
 }
 
-/* Breakpoint: Desktop (≥1280px) */
-/* On desktop, the content has a max width and is centered in the rest of the screen. The nav is no longer on the right side of the screen, it now floats in the center, towards the right of the content. */
 @media screen and (min-width: 1280px) {
-    body {
-        max-width: calc(var(--content-max-width) + var(--side-nav-width) + var(--spacing-xl));
-        margin-inline: auto;
-    }
-
     .side-nav {
         right: calc((100% - (var(--content-max-width) + var(--side-nav-width) + var(--spacing-xl))) / 2);
     }
+}
+
+/* ==========================================================================
+   Content Boxes
+   ========================================================================== */
+
+/* Box Base Styles */
+.disclaimer-box,
+.explanatory-box,
+.legal-box {
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin-bottom: var(--spacing-lg);
+    border-radius: 4px;
+    overflow: hidden;
+    font-family: var(--font-sans);
+}
+
+/* Box Headers */
+.disclaimer-box h4,
+.explanatory-box h4,
+.legal-box h4 {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.1rem;
+    line-height: 1;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Box Icons and Chevrons */
+.disclaimer-box h4::before,
+.explanatory-box h4::before,
+.legal-box h4::before {
+    content: "";
+    display: block;
+    width: 1.1rem;
+    height: 1.1rem;
+    flex-shrink: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.disclaimer-box h4::after,
+.explanatory-box h4::after,
+.legal-box h4::after {
+    content: '';
+    position: absolute;
+    right: var(--spacing-md);
+    width: 1.1rem;
+    height: 1.1rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    transition: transform 0.3s ease;
+}
+
+/* Box Variants */
+/* Legal Box */
+.legal-box {
+    background-color: color-mix(in srgb, var(--green-9) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--green-9) 20%, transparent);
+}
+
+.legal-box h4 {
+    color: var(--green-12);
+    background-color: color-mix(in srgb, var(--green-9) 15%, transparent);
+}
+
+.legal-box h4::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2330a46c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z'/%3E%3Cpath d='m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z'/%3E%3Cpath d='M7 21h10'/%3E%3Cpath d='M12 3v18'/%3E%3Cpath d='M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2'/%3E%3C/svg%3E");
+}
+
+.legal-box h4::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2330a46c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Explanatory Box */
+.explanatory-box {
+    background-color: color-mix(in srgb, var(--blue-9) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--blue-9) 20%, transparent);
+}
+
+.explanatory-box h4 {
+    color: var(--blue-12);
+    background-color: color-mix(in srgb, var(--blue-9) 15%, transparent);
+}
+
+.explanatory-box h4::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%230090ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 16v-4'/%3E%3Cpath d='M12 8h.01'/%3E%3C/svg%3E");
+}
+
+.explanatory-box h4::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%230090ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Disclaimer Box */
+.disclaimer-box {
+    background-color: color-mix(in srgb, var(--red-9) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--red-9) 20%, transparent);
+}
+
+.disclaimer-box h4 {
+    color: var(--red-12);
+    background-color: color-mix(in srgb, var(--red-9) 15%, transparent);
+}
+
+.disclaimer-box h4::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23e5484d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z'/%3E%3Cpath d='M12 9v4'/%3E%3Cpath d='M12 17h.01'/%3E%3C/svg%3E");
+}
+
+.disclaimer-box h4::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23e5484d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Box Content Spacing */
+.disclaimer-box>*:not(h4),
+.explanatory-box>*:not(h4),
+.legal-box>*:not(h4) {
+    padding: 0 var(--spacing-md);
+    transition: max-height 0.3s ease-out;
+}
+
+/* Box States */
+.disclaimer-box.collapsed>*:not(h4),
+.explanatory-box.collapsed>*:not(h4),
+.legal-box.collapsed>*:not(h4) {
+    display: none;
+}
+
+.disclaimer-box.collapsed h4::after,
+.explanatory-box.collapsed h4::after,
+.legal-box.collapsed h4::after {
+    transform: rotate(-90deg);
+}
+
+/* Box Content Margins */
+.disclaimer-box>*:not(h4):first-of-type,
+.explanatory-box>*:not(h4):first-of-type,
+.legal-box>*:not(h4):first-of-type {
+    margin-top: var(--spacing-md);
+}
+
+.disclaimer-box>*:not(h4):last-child,
+.explanatory-box>*:not(h4):last-child,
+.legal-box>*:not(h4):last-child {
+    margin-bottom: var(--spacing-md);
+}
+
+/* Box Lists */
+.disclaimer-box ul,
+.disclaimer-box ol,
+.explanatory-box ul,
+.explanatory-box ol,
+.legal-box ul,
+.legal-box ol {
+    padding-left: calc(var(--spacing-md) + 1.5rem);
+    padding-right: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Box Nested Lists */
+.disclaimer-box ul ul,
+.disclaimer-box ul ol,
+.disclaimer-box ol ul,
+.disclaimer-box ol ol,
+.explanatory-box ul ul,
+.explanatory-box ul ol,
+.explanatory-box ol ul,
+.explanatory-box ol ol,
+.legal-box ul ul,
+.legal-box ul ol,
+.legal-box ol ul,
+.legal-box ol ol {
+    padding-left: 1.5rem;
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Box List Items */
+.disclaimer-box li,
+.explanatory-box li,
+.legal-box li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.disclaimer-box li:last-child,
+.explanatory-box li:last-child,
+.legal-box li:last-child {
+    margin-bottom: 0;
+}
+
+/* Box Paragraphs */
+.disclaimer-box p,
+.explanatory-box p,
+.legal-box p {
+    margin-bottom: var(--spacing-md);
+}
+
+/* Dark Theme Box Chevrons */
+:root[data-theme="dark"] .legal-box h4::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%233dd68c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="dark"] .explanatory-box h4::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2370b8ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="dark"] .disclaimer-box h4::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ff9592' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   Theme Selector
+   ========================================================================== */
+
+/* Theme selector styles */
+.theme-select-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+}
+
+.theme-select-wrapper select {
+    width: 100%;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    padding-right: var(--spacing-xl);
+    border: 1px solid var(--divider-color);
+    border-radius: 4px;
+    background: var(--background-color);
+    color: var(--text-color);
+    appearance: none;
+    cursor: pointer;
+}
+
+.theme-icon {
+    position: absolute;
+    right: var(--spacing-sm);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.2em;
+    height: 1.2em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    color: var(--text-color);
+    display: none;
+}
+
+/* Show icon based on selected value */
+#theme-select[value="system"]~.system-icon,
+#theme-select[value="light"]~.light-icon,
+#theme-select[value="dark"]~.dark-icon {
+    opacity: 1;
+}
+
+[data-theme="light"] .light-icon,
+[data-theme="dark"] .dark-icon {
+    display: block;
+}
+
+/* ==========================================================================
+   Keyboard Shortcuts
+   ========================================================================== */
+
+/* Keyboard shortcuts */
+.keyboard-shortcuts {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) 0;
+    justify-content: start;
+}
+
+.shortcut-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: none;
+    background: none;
+    color: var(--text-color);
+    font-size: 0.9em;
+    text-align: left;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.shortcut-btn:hover {
+    color: var(--sand-11);
+}
+
+.shortcut-btn kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.6em;
+    height: 1.6em;
+    background-color: var(--sand-3);
+    border: 1px solid var(--divider-color);
+    border-radius: 3px;
+    padding: 0 0.4em;
+    font-size: 0.8em;
+    font-family: var(--font-sans);
+    line-height: 1;
+}
+
+/* ==========================================================================
+   Font Usage Rules
+   ========================================================================== */
+
+/* Font Usage Rules
+ * 1. Default font is serif (--font-serif) for all text content
+ * 2. Sans-serif (--font-sans) is used ONLY in:
+ *    - Navigation elements (.side-nav)
+ *    - Special boxes:
+ *      - Legal boxes (.legal-box)
+ *      - Explanatory boxes (.explanatory-box)
+ *      - Disclaimer boxes (.disclaimer-box)
+ *      - KPI boxes (.kpi-box)
+ *      - Glossary elements (.glossary)
+ *      - Recital elements (.recital-box)
+ */
+
+/* UI Elements - Sans-serif */
+.side-nav *,
+.legal-box *,
+.explanatory-box *,
+.disclaimer-box * {
+    font-family: var(--font-sans);
+}
+
+/* Dark Mode Link Colors */
+@media (prefers-color-scheme: dark) {
+    a:hover {
+        color: var(--sand-11);
+    }
+}
+
+body.dark-mode a:hover {
+    color: var(--sand-11);
+}
+
+/* Light Mode Link Colors */
+body.light-mode a:hover {
+    color: var(--sand-11);
+}
+
+/* Glossary and Recitals sections */
+.glossary,
+.recitals-full {
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+    padding-inline: var(--spacing-md);
+}
+
+.glossary h2,
+.recitals-full h2,
+.glossary-list,
+.recital {
+    width: 100%;
+    max-width: var(--content-max-width);
 }
