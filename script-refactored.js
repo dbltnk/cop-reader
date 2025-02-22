@@ -475,10 +475,3 @@ prefersDark.addEventListener('change', (e) => {
         setTheme(e.matches ? 'dark' : 'light');
     }
 });
-
-// Handle keyboard shortcut for theme toggle
-document.addEventListener('keydown', (e) => {
-    if (e.key === '3') {
-        themeToggle.click();
-    }
-});
