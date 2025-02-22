@@ -271,6 +271,30 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
             requestAnimationFrame(updateActiveNavItem);
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            e.preventDefault();
+
+            // Get all headlines in order
+            const headlines = Array.from(elements.mainContent.querySelectorAll('h2, h3, h4'))
+                .filter(heading => !heading.closest(CONFIG.EXCLUDED_CONTAINERS));
+
+            // Find current headline
+            const scrollPosition = window.scrollY + window.innerHeight / CONFIG.SCROLL_TRIGGER_POSITION;
+            const currentIndex = headlines.findIndex(heading =>
+                heading.getBoundingClientRect().top + window.scrollY > scrollPosition
+            ) - 1;
+
+            // Calculate target index
+            const targetIndex = e.key === 'ArrowRight'
+                ? Math.min(currentIndex + 1, headlines.length - 1)
+                : Math.max(currentIndex - 1, 0);
+
+            // Scroll to target
+            if (targetIndex !== currentIndex && headlines[targetIndex]) {
+                headlines[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                history.pushState(null, '', `#${headlines[targetIndex].id}`);
+                requestAnimationFrame(updateActiveNavItem);
+            }
         }
     });
 
