@@ -1,295 +1,165 @@
-// Shared state for navigation
-let previousPosition = null;
-let lastJumpKey = null;
+// Configuration constants
+const CONFIG = {
+    MOBILE_BREAKPOINT: '768px',
+    SCROLL_DEBOUNCE_MS: 100,
+    SCREEN_READER_CLEANUP_MS: 1000,
+    INDENT_PER_LEVEL: 1,
+    SCROLL_TRIGGER_POSITION: 3, // Divider for window.innerHeight
+    SPECIAL_SECTIONS: ['glossary', 'recitals-full'],
+    EXCLUDED_CONTAINERS: '.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital-box',
+    BOX_SELECTORS: '.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital-box',
+    TOAST_DURATION: 2000, // Duration in ms for toast notifications
+    NAV_MANUAL_SCROLL_TIMEOUT: 2000, // Time to wait after manual nav scroll before auto-scrolling
+};
 
-// Function to update active navigation item
-function updateActiveNavItem(target) {
-    const navContent = document.getElementById('nav-content');
-    const allNavLinks = navContent.querySelectorAll('a');
-
-    // Get all headlines
-    const headlines = Array.from(document.querySelectorAll('h2, h3, h4'))
-        .filter(heading => !heading.closest('.kpi-box, .explanatory-box, .legal-box, .disclaimer-box'));
-
-    // Get the middle of the viewport
-    const viewportMiddle = window.scrollY + (window.innerHeight / 3);
-
-    // Find all headlines above viewport middle
-    const activeHeadlines = headlines.filter(headline => {
-        const headlinePosition = headline.getBoundingClientRect().top + window.scrollY;
-        return headlinePosition <= viewportMiddle;
-    });
-
-    // Get the last headline (most recent one above viewport middle)
-    let activeHeadline = activeHeadlines[activeHeadlines.length - 1];
-
-    // If we're at the very top of the page, use the first headline
-    if (!activeHeadline && headlines.length > 0) {
-        activeHeadline = headlines[0];
+// Toast notification system
+function showToast(message) {
+    let container = document.querySelector('.toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
     }
 
-    // Remove all active classes first
-    allNavLinks.forEach(link => {
-        link.classList.remove('active-deepest');
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    container.appendChild(toast);
+
+    // Trigger reflow
+    toast.offsetHeight;
+
+    // Show the toast
+    requestAnimationFrame(() => {
+        toast.classList.add('show');
     });
 
-    if (activeHeadline) {
-        const targetId = activeHeadline.id;
-        const targetLink = navContent.querySelector(`a[href="#${targetId}"]`);
+    // Remove the toast after duration
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 200);
+    }, CONFIG.TOAST_DURATION);
+}
 
-        if (targetLink) {
-            // Helper function to check if a link is visible in the navigation
-            const isLinkVisible = (link) => {
-                // Check if the link itself is visible
-                const style = window.getComputedStyle(link);
-                if (style.display === 'none') return false;
+// Heading anchor system
+function initializeHeadingAnchors() {
+    // Get all headlines in main content, excluding those in special boxes
+    const headlines = Array.from(document.querySelectorAll('.main-content h2, .main-content h3, .main-content h4, .main-content h5'))
+        .filter(heading => !heading.closest(CONFIG.EXCLUDED_CONTAINERS));
 
-                // Check if any parent ul is hidden
-                let parent = link.closest('ul');
-                while (parent && parent !== navContent) {
-                    const style = window.getComputedStyle(parent);
-                    if (style.display === 'none') return false;
-                    parent = parent.parentElement.closest('ul');
-                }
+    // Keep track of used IDs to ensure uniqueness
+    const usedIds = new Set();
 
-                // Check if it's in the viewport
-                const rect = link.getBoundingClientRect();
-                const navRect = navContent.getBoundingClientRect();
-                return rect.top >= navRect.top && rect.bottom <= navRect.bottom;
-            };
+    headlines.forEach(heading => {
+        // Generate base ID from text content
+        let baseId = heading.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
-            // Find the deepest visible link in the hierarchy
-            let currentLink = targetLink;
-            let visibleLink = null;
-
-            // First check if target link itself is visible
-            if (isLinkVisible(targetLink)) {
-                visibleLink = targetLink;
-            } else {
-                // If not, traverse up the hierarchy to find the closest visible parent
-                let parent = targetLink.closest('li').parentElement.closest('li');
-                while (parent && !visibleLink) {
-                    const parentLink = parent.querySelector('a');
-                    if (parentLink && isLinkVisible(parentLink)) {
-                        visibleLink = parentLink;
-                        break;
-                    }
-                    parent = parent.parentElement.closest('li');
-                }
-            }
-
-            // If we found a visible link, highlight it
-            if (visibleLink) {
-                visibleLink.classList.add('active-deepest');
-            }
+        // Ensure unique ID
+        let uniqueId = baseId;
+        let counter = 1;
+        while (usedIds.has(uniqueId)) {
+            uniqueId = `${baseId}-${++counter}`;
         }
-    }
-}
+        usedIds.add(uniqueId);
 
-// Helper function to get the navigation level of a link
-function getNavLevel(link) {
-    let level = 0;
-    let parent = link.closest('li');
-    while (parent) {
-        level++;
-        parent = parent.parentElement.closest('li');
-    }
-    return level;
-}
+        // Set the unique ID
+        heading.id = uniqueId;
 
-// Function to scroll element into view
-function scrollToElement(element, savePrevious = true, updateNav = true) {
-    if (!element) return;
+        // Create anchor wrapper
+        const anchor = document.createElement('a');
+        anchor.className = 'heading-anchor';
+        anchor.href = `#${uniqueId}`;
 
-    if (savePrevious) {
-        previousPosition = window.scrollY;
-    }
+        // Move the heading's content into the anchor
+        const headingContent = heading.textContent;
+        heading.textContent = '';
 
-    // Simple offset for headlines
-    const offset = 20;
+        // Add Lucide anchor icon
+        const icon = document.createElement('i');
+        icon.setAttribute('data-lucide', 'anchor');
+        icon.className = 'anchor-icon';
+        anchor.appendChild(icon);
 
-    // Get the element's position relative to the viewport and add current scroll position
-    const elementRect = element.getBoundingClientRect();
-    const absoluteTop = window.pageYOffset + elementRect.top;
-    const position = absoluteTop - offset;
+        // Add text
+        const text = document.createElement('span');
+        text.textContent = headingContent;
+        anchor.appendChild(text);
 
-    // Prevent focus from causing scroll
-    element.style.scrollMarginTop = offset + 'px';
+        // Add click handler
+        anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = new URL(window.location.href);
+            url.hash = uniqueId;
+            navigator.clipboard.writeText(url.toString())
+                .then(() => {
+                    showToast('Link copied to clipboard');
+                    // Update URL without scrolling
+                    history.pushState(null, '', url.toString());
+                })
+                .catch(() => showToast('Failed to copy link'));
+        });
 
-    window.scrollTo({
-        top: position,
-        behavior: 'smooth'
+        // Replace heading content with anchor
+        heading.appendChild(anchor);
     });
 
-    // Update navigation after scrolling if requested
-    if (updateNav) {
-        setTimeout(() => updateActiveNavItem(element), 100);
-    }
-
-    // Announce to screen readers
-    const announcement = document.createElement('div');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.setAttribute('class', 'sr-only');
-    announcement.textContent = element.textContent;
-    document.body.appendChild(announcement);
-    setTimeout(() => announcement.remove(), 300);
-
-    // Only apply focus and visual feedback for interactive elements
-    if (element.tagName === 'BUTTON' || element.tagName === 'A' ||
-        element.getAttribute('role') === 'button' ||
-        element.getAttribute('tabindex') === '0') {
-        requestAnimationFrame(() => {
-            element.setAttribute('tabindex', '-1');
-            element.focus({ preventScroll: true });
-            element.classList.add('keyboard-highlight');
-            setTimeout(() => element.classList.remove('keyboard-highlight'), 300);
-        });
-    }
-}
-
-// Function to detect if the device is a mobile device
-function isMobileDevice() {
-    // Prioritize pointer type check as it's most reliable for touch interfaces, but also ensure small screen
-    if (window.matchMedia('(pointer: coarse)').matches && window.matchMedia('(max-width: 760px)').matches) {
-        return true;
-    }
-
-    // Secondary check: Touch capability, plus small screen
-    if (('ontouchstart' in window || navigator.maxTouchPoints > 0) && window.matchMedia('(max-width: 760px)').matches) {
-        return true;
-    }
-
-    // Tertiary check: User Agent
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        return true;
-    }
-
-    // Final check: Screen size
-    return window.matchMedia('(max-width: 760px)').matches;
-}
-
-// Add box icons
-function addBoxIcons() {
-    // Icon configuration for each box type
-    const boxIcons = {
-        'legal-box': { icon: 'scale', label: 'Legal text', collapsible: true },
-        'explanatory-box': { icon: 'lightbulb', label: 'Explanation', collapsible: true },
-        'recital': { icon: 'info', label: 'Recital', collapsible: true },
-        'kpi-box': { icon: 'goal', label: 'Key Performance Indicator', collapsible: true },
-        'disclaimer-box': { icon: 'triangle-alert', label: 'Important disclaimer', collapsible: true }
-    };
-
-    // Process each box type
-    Object.entries(boxIcons).forEach(([boxClass, { icon, label, collapsible }]) => {
-        document.querySelectorAll(`.${boxClass}`).forEach(box => {
-            const heading = box.querySelector('h4, h5');
-            if (heading) {
-                // Create header content wrapper if it doesn't exist
-                let headerContent = heading.querySelector('.header-content');
-                if (!headerContent) {
-                    headerContent = document.createElement('div');
-                    headerContent.className = 'header-content';
-
-                    // Move existing content into the wrapper
-                    while (heading.firstChild) {
-                        headerContent.appendChild(heading.firstChild);
-                    }
-                }
-
-                // Create icon element
-                const iconWrapper = document.createElement('span');
-                iconWrapper.className = 'box-icon';
-                iconWrapper.setAttribute('aria-hidden', 'true');
-
-                const iconElement = document.createElement('i');
-                iconElement.setAttribute('data-lucide', icon);
-
-                iconWrapper.appendChild(iconElement);
-
-                // Add arrow for collapsible boxes
-                if (collapsible) {
-                    const arrowSpan = document.createElement('span');
-                    arrowSpan.className = 'toggle-arrow';
-                    arrowSpan.textContent = '▼';
-                    headerContent.appendChild(arrowSpan);
-                }
-
-                // Insert icon at the start of the header content
-                headerContent.insertBefore(iconWrapper, headerContent.firstChild);
-                heading.appendChild(headerContent);
-
-                // Update ARIA label to include the box type
-                const existingLabel = heading.getAttribute('aria-label') || heading.textContent;
-                heading.setAttribute('aria-label', `${label}: ${existingLabel}`);
-
-                // Wrap content for explanatory boxes
-                if (boxClass === 'explanatory-box') {
-                    const content = document.createElement('div');
-                    content.className = 'explanatory-content';
-                    while (box.lastChild !== heading) {
-                        content.appendChild(box.lastChild);
-                    }
-                    box.appendChild(content);
-                }
-            }
-        });
-    });
-
-    // Recreate Lucide icons
+    // Initialize new Lucide icons
     lucide.createIcons();
-}
-
-// Function to toggle a collapsible box
-function toggleBox(box, force = null) {
-    const isExpanded = force !== null ? force : box.getAttribute('aria-expanded') === 'true';
-    const newState = force !== null ? force : !isExpanded;
-
-    box.setAttribute('aria-expanded', newState);
-    box.classList.toggle('collapsed', !newState);
-}
-
-// Function to toggle all boxes
-function toggleAllBoxes(force = null) {
-    const boxes = document.querySelectorAll('.kpi-box, .explanatory-box, .disclaimer-box, .legal-box');
-    boxes.forEach(box => {
-        toggleBox(box, force);
-    });
 }
 
 // Navigation functionality
 document.addEventListener('DOMContentLoaded', () => {
-    // Add box icons
-    addBoxIcons();
+    // Initialize Lucide icons
+    lucide.createIcons();
 
-    const nav = document.querySelector('.side-nav');
-    const toggle = document.querySelector('.nav-toggle');
-    const navContent = document.getElementById('nav-content');
-    const mainContent = document.querySelector('.main-content');
-    const mediaQuery = window.matchMedia('(min-width: 1024px)');
-
-    // Navigation text mapping
-    const navTextMap = {
-        'Opening statement by the Chairs and Vice-Chairs': 'Introduction',
-        'Key features of the development process of the Code include:': 'Introduction',
-        'Drafting plan, principles, and assumptions': 'Introduction',
-        'Below are some high-level principles we follow when drafting the Code:': 'Introduction',
-        'The Objectives of the Code are as follows:': null // Setting to null will exclude this item
+    // Cache DOM elements
+    const elements = {
+        nav: document.querySelector('.side-nav'),
+        toggle: document.querySelector('.nav-toggle'),
+        navContent: document.getElementById('nav-content'),
+        mainContent: document.querySelector('.main-content'),
+        boxes: document.querySelectorAll(CONFIG.BOX_SELECTORS)
     };
 
-    // Enhanced observer callback for navigation highlighting
-    const observerCallback = (entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                updateActiveNavItem(entry.target);
-            }
-        });
-    };
+    // Debounce utility
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
 
-    // Create a more precise observer for navigation
-    const observer = new IntersectionObserver(observerCallback, {
-        rootMargin: '-20% 0px -70% 0px',
-        threshold: [0, 0.1, 0.5, 1]  // Observe at multiple thresholds for better accuracy
-    });
+    // Function to toggle menu
+    function toggleMenu(force = null) {
+        const isExpanded = force !== null ? force : elements.toggle.getAttribute('aria-expanded') === 'true';
+        const newState = force !== null ? force : !isExpanded;
+
+        elements.toggle.setAttribute('aria-expanded', newState);
+        elements.nav.classList.toggle('is-open', newState);
+
+        // Announce to screen readers
+        announceToScreenReader(`Navigation menu ${newState ? 'opened' : 'closed'}`);
+
+        // Prevent body scroll when nav is open on mobile
+        if (window.matchMedia(`(max-width: ${CONFIG.MOBILE_BREAKPOINT})`).matches) {
+            document.body.style.overflow = newState ? 'hidden' : '';
+        }
+    }
+
+    // Helper function for screen reader announcements
+    function announceToScreenReader(message) {
+        const announcement = document.createElement('div');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.setAttribute('class', 'sr-only');
+        announcement.textContent = message;
+        document.body.appendChild(announcement);
+        setTimeout(() => announcement.remove(), CONFIG.SCREEN_READER_CLEANUP_MS);
+    }
 
     // Build navigation from content
     function buildNavigation() {
@@ -298,1095 +168,591 @@ document.addEventListener('DOMContentLoaded', () => {
         navList.setAttribute('aria-label', 'Document sections');
 
         // Get all headlines, excluding those in special boxes
-        const headlines = Array.from(mainContent.querySelectorAll('h2, h3, h4'))
-            .filter(heading => !heading.closest('.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital'));
-
-        // Create a stack to keep track of parent lists at each level
-        const listStack = {
-            1: navList, // h2 level
-            2: null,    // h3 level
-            3: null     // h4 level
-        };
-
-        // Keep track of used IDs to ensure uniqueness
-        const usedIds = new Map();
+        const headlines = Array.from(elements.mainContent.querySelectorAll('h2, h3, h4'))
+            .filter(heading => !heading.closest(CONFIG.EXCLUDED_CONTAINERS));
 
         // Process each headline
         headlines.forEach(heading => {
-            // Get heading level (2 for h2, 3 for h3, etc.)
             const level = parseInt(heading.tagName[1]) - 1;
 
-            // Create base ID from text content
-            const baseId = heading.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
-
-            // Create unique ID for the heading if it doesn't have one
+            // Create unique ID if needed
             if (!heading.id) {
-                let uniqueId = baseId;
-                if (usedIds.has(baseId)) {
-                    // If this base ID was used before, increment its counter
-                    const count = usedIds.get(baseId) + 1;
-                    usedIds.set(baseId, count);
-                    uniqueId = `${baseId}-${count}`;
-                } else {
-                    // First time seeing this base ID
-                    usedIds.set(baseId, 1);
-                }
-                heading.id = uniqueId;
+                heading.id = heading.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
             }
 
-            // Create list item and link
             const li = document.createElement('li');
-            li.setAttribute('role', 'none');
             const link = document.createElement('a');
             link.href = `#${heading.id}`;
-            link.setAttribute('role', 'menuitem');
 
-            // Transform text for H3 and H4
+            // Transform text for navigation
             let text = heading.textContent.trim();
-            if (level > 1) { // H3 and H4
-                text = text.replace(/^Measure\s+/i, 'M');
-                text = text.replace(/^Commitment\s+/i, 'C');
-            }
+            text = text.replace(/^Measure\s+(\d+\.\d+)/i, 'M$1');
+            text = text.replace(/^Commitment\s+(\d+)/i, 'C$1');
             link.textContent = text;
 
+            link.style.paddingLeft = `${(level - 1) * CONFIG.INDENT_PER_LEVEL}rem`;
+
             li.appendChild(link);
-
-            // Create a new sublist if this heading might have children
-            if (level < 3) {
-                const subList = document.createElement('ul');
-                subList.setAttribute('role', 'menu');
-                subList.setAttribute('aria-label', `Subsections of ${link.textContent}`);
-                li.appendChild(subList);
-                listStack[level + 1] = subList;
-            }
-
-            // Add the list item to the appropriate parent list
-            listStack[level].appendChild(li);
-
-            // Observe this heading for intersection
-            observer.observe(heading);
+            navList.appendChild(li);
         });
 
-        // Add special sections (Glossary and Recitals) at the end
-        const specialSections = [
-            { selector: '.glossary', text: 'Glossary', id: 'glossary' },
-            { selector: '.recitals-full', text: 'Recitals', id: 'recitals-full' }
-        ];
-
-        specialSections.forEach(({ selector, text, id }) => {
-            const section = document.querySelector(selector);
+        // Add special sections
+        CONFIG.SPECIAL_SECTIONS.forEach(id => {
+            const section = document.getElementById(id);
             if (section) {
-                // Ensure the section has the correct ID
-                section.id = id;
-
                 const li = document.createElement('li');
-                li.setAttribute('role', 'none');
                 const link = document.createElement('a');
                 link.href = `#${id}`;
-                link.setAttribute('role', 'menuitem');
-                link.textContent = text;
+                link.textContent = id === 'glossary' ? 'Glossary' :
+                    id === 'recitals-full' ? 'Recitals' : id;
                 li.appendChild(link);
                 navList.appendChild(li);
-                observer.observe(section);
             }
         });
 
-        // Clear and update navigation
-        while (navContent.children.length > 1) { // Keep the nav header
-            navContent.removeChild(navContent.lastChild);
-        }
-        navContent.appendChild(navList);
+        elements.navContent.innerHTML = '';
+        elements.navContent.appendChild(navList);
     }
 
-    // Build initial navigation
-    buildNavigation();
+    // Update active navigation item
+    let lastNavScrollTime = 0;
+    let isUpdatingNav = false;
 
-    // Function to add anchor links to headlines
-    function addAnchorLinks() {
-        // Only select headlines that are not inside boxes
-        const headlines = mainContent.querySelectorAll('h2:not(.kpi-box *, .explanatory-box *, .legal-box *, .disclaimer-box *, .recital *), h3:not(.kpi-box *, .explanatory-box *, .legal-box *, .disclaimer-box *, .recital *), h4:not(.kpi-box *, .explanatory-box *, .legal-box *, .disclaimer-box *, .recital *), h5:not(.kpi-box *, .explanatory-box *, .legal-box *, .disclaimer-box *, .recital *)');
-        const feedback = document.createElement('div');
-        feedback.className = 'copy-feedback';
-        document.body.appendChild(feedback);
+    function updateActiveNavItem() {
+        if (isUpdatingNav) return;
+        isUpdatingNav = true;
 
-        // Keep track of used IDs to ensure uniqueness
-        const usedIds = new Map(); // Map to track both IDs and their counts
+        requestAnimationFrame(() => {
+            const scrollPosition = window.scrollY + window.innerHeight / CONFIG.SCROLL_TRIGGER_POSITION;
 
-        headlines.forEach(headline => {
-            // Skip if headline is inside a box
-            if (headline.closest('.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital')) {
-                return;
-            }
+            const headlines = Array.from(elements.mainContent.querySelectorAll('h2, h3, h4'))
+                .filter(heading => !heading.closest(CONFIG.EXCLUDED_CONTAINERS))
+                .map(heading => ({
+                    element: heading,
+                    position: heading.getBoundingClientRect().top + window.scrollY
+                }))
+                .filter(item => item.position <= scrollPosition);
 
-            // Create base ID from text content
-            const baseId = headline.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            const activeHeadline = headlines[headlines.length - 1];
+            let activeLink = null;
 
-            // If no ID exists, create a unique one
-            if (!headline.id) {
-                let uniqueId = baseId;
-                if (usedIds.has(baseId)) {
-                    // If this base ID was used before, increment its counter
-                    const count = usedIds.get(baseId) + 1;
-                    usedIds.set(baseId, count);
-                    uniqueId = `${baseId}-${count}`;
-                } else {
-                    // First time seeing this base ID
-                    usedIds.set(baseId, 1);
-                }
-                headline.id = uniqueId;
-            }
-
-            // Track the ID even if it already existed
-            if (!usedIds.has(headline.id)) {
-                usedIds.set(headline.id, 1);
-            }
-
-            // Create anchor link
-            const anchor = document.createElement('a');
-            anchor.className = 'anchor-link';
-            anchor.setAttribute('aria-label', 'Copy link to this section');
-            anchor.href = `#${headline.id}`;
-
-            // Add Lucide icon
-            const icon = document.createElement('i');
-            icon.setAttribute('data-lucide', 'anchor');
-            anchor.appendChild(icon);
-
-            // Function to handle copying
-            const copyLink = (e) => {
-                e.preventDefault();
-                const url = new URL(window.location.href);
-                url.hash = headline.id;
-                navigator.clipboard.writeText(url.toString()).then(() => {
-                    feedback.textContent = 'Link copied to clipboard!';
-                    feedback.classList.add('active');
-                    setTimeout(() => feedback.classList.remove('active'), 2000);
-                }).catch(() => {
-                    feedback.textContent = 'Failed to copy link. Please try again.';
-                    feedback.classList.add('active');
-                    setTimeout(() => feedback.classList.remove('active'), 2000);
-                });
-            };
-
-            // Add click handler to both headline and anchor
-            headline.addEventListener('click', copyLink);
-            anchor.addEventListener('click', copyLink);
-
-            // Insert anchor at the start of the headline
-            headline.insertBefore(anchor, headline.firstChild);
-        });
-
-        // Create Lucide icons
-        lucide.createIcons();
-    }
-
-    // Add anchor links after building navigation
-    addAnchorLinks();
-
-    // Function to toggle menu
-    function toggleMenu(force = null) {
-        const isExpanded = force !== null ? force : toggle.getAttribute('aria-expanded') === 'true';
-        const newState = force !== null ? force : !isExpanded;
-
-        toggle.setAttribute('aria-expanded', newState);
-        nav.classList.toggle('active', newState);
-
-        // Announce to screen readers
-        const announcement = document.createElement('div');
-        announcement.setAttribute('aria-live', 'polite');
-        announcement.setAttribute('class', 'sr-only');
-        announcement.textContent = `Navigation menu ${newState ? 'opened' : 'closed'}`;
-        document.body.appendChild(announcement);
-        setTimeout(() => announcement.remove(), 1000);
-    }
-
-    // Close menu
-    function closeMenu() {
-        toggleMenu(false);
-    }
-
-    // Open menu
-    function openMenu() {
-        toggleMenu(true);
-    }
-
-    // Toggle navigation
-    toggle.addEventListener('click', () => toggleMenu());
-
-    // Close navigation when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!nav.contains(e.target) && !toggle.contains(e.target)) {
-            closeMenu();
-        }
-    });
-
-    // Handle keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeMenu();
-        }
-    });
-
-    // Set initial state based on screen size
-    if (mediaQuery.matches) {
-        openMenu(); // Start open on desktop
-    }
-
-    // Handle resize events - only set initial state when changing between mobile/desktop
-    let wasDesktop = mediaQuery.matches;
-    mediaQuery.addEventListener('change', (e) => {
-        if (e.matches !== wasDesktop) {
-            toggleMenu(e.matches); // Open on desktop, close on mobile
-            wasDesktop = e.matches;
-        }
-    });
-
-    // Hide headline and commitment shortcuts on mobile
-    if (isMobileDevice()) {
-        const keyboardShortcuts = document.querySelector('.keyboard-shortcuts');
-        const shortcutsList = keyboardShortcuts.querySelector('ul');
-        if (shortcutsList) {
-            // Hide headline and commitment rows
-            Array.from(shortcutsList.children).forEach(item => {
-                if (item.textContent.toLowerCase().includes('headline') ||
-                    item.textContent.toLowerCase().includes('commitment')) {
-                    item.style.display = 'none';
+            elements.navContent.querySelectorAll('a').forEach(link => {
+                link.classList.remove('active');
+                if (activeHeadline && link.getAttribute('href') === `#${activeHeadline.element.id}`) {
+                    link.classList.add('active');
+                    activeLink = link;
                 }
             });
-        }
+
+            // Auto-scroll nav if user hasn't manually scrolled recently
+            if (activeLink && Date.now() - lastNavScrollTime > CONFIG.NAV_MANUAL_SCROLL_TIMEOUT) {
+                const navContainer = elements.navContent;
+                const linkRect = activeLink.getBoundingClientRect();
+                const containerRect = navContainer.getBoundingClientRect();
+
+                if (linkRect.top < containerRect.top || linkRect.bottom > containerRect.bottom) {
+                    activeLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+
+            isUpdatingNav = false;
+        });
     }
 
-    // Add click handler to navigation links
-    navContent.addEventListener('click', (e) => {
+    // Track manual nav scrolling
+    elements.navContent.addEventListener('scroll', () => {
+        lastNavScrollTime = Date.now();
+    });
+
+    // Handle scroll without debounce
+    window.addEventListener('scroll', updateActiveNavItem, { passive: true });
+
+    // Update keyboard navigation to ensure nav highlighting
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            requestAnimationFrame(updateActiveNavItem);
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            e.preventDefault();
+
+            // Get all headlines in order
+            const headlines = Array.from(elements.mainContent.querySelectorAll('h2, h3, h4'))
+                .filter(heading => !heading.closest(CONFIG.EXCLUDED_CONTAINERS));
+
+            // Find current headline
+            const scrollPosition = window.scrollY + window.innerHeight / CONFIG.SCROLL_TRIGGER_POSITION;
+            const currentIndex = headlines.findIndex(heading =>
+                heading.getBoundingClientRect().top + window.scrollY > scrollPosition
+            ) - 1;
+
+            // Calculate target index
+            const targetIndex = e.key === 'ArrowRight'
+                ? Math.min(currentIndex + 1, headlines.length - 1)
+                : Math.max(currentIndex - 1, 0);
+
+            // Scroll to target
+            if (targetIndex !== currentIndex && headlines[targetIndex]) {
+                headlines[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                history.pushState(null, '', `#${headlines[targetIndex].id}`);
+                requestAnimationFrame(updateActiveNavItem);
+            }
+        }
+    });
+
+    // Update scroll to top to ensure nav highlighting
+    function scrollToTop() {
+        // Reset nav scroll first
+        elements.navContent.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        requestAnimationFrame(updateActiveNavItem);
+    }
+
+    // Event Listeners
+    elements.toggle.addEventListener('click', () => toggleMenu());
+
+    document.addEventListener('click', (e) => {
+        if (!elements.nav.contains(e.target) && !elements.toggle.contains(e.target)) {
+            toggleMenu(false);
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            toggleMenu(false);
+        } else if (e.key === '0') {
+            toggleMenu();
+        }
+    });
+
+    // Handle navigation link clicks
+    elements.navContent.addEventListener('click', (e) => {
         const link = e.target.closest('a');
         if (link) {
             e.preventDefault();
             const targetId = link.getAttribute('href').substring(1);
             const targetElement = document.getElementById(targetId);
             if (targetElement) {
-                // Prevent any default scrolling
-                e.preventDefault();
-                scrollToElement(targetElement);
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Update URL without scrolling
+                history.pushState(null, '', `#${targetId}`);
+                toggleMenu(false);
             }
         }
     });
 
-    // Handle initial state and URL hash
-    function handleInitialState() {
-        if (window.location.hash) {
-            const escapedHash = window.location.hash.replace(/\./g, '\\.');
-            const targetElement = document.querySelector(escapedHash);
-            if (targetElement) {
-                setTimeout(() => {
-                    scrollToElement(targetElement, false);
-                }, 100);
-            }
-        } else {
-            updateActiveNavItem(document.querySelector('h1, h2, h3, h4'));
-        }
-    }
+    // Initialize
+    initializeHeadingAnchors();
+    buildNavigation();
+    updateActiveNavItem();
 
-    // Call initial state handler after building navigation
-    handleInitialState();
+    // Handle responsive behavior
+    const mediaQuery = window.matchMedia(`(min-width: ${CONFIG.MOBILE_BREAKPOINT})`);
 
-    // Add scroll handler with debounce
-    let scrollTimeout;
-    window.addEventListener('scroll', () => {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-            updateActiveNavItem();
-        }, 100);
-    });
+    // Set initial state
+    toggleMenu(mediaQuery.matches);
 
-    // Add click handlers to collapsible boxes
-    document.querySelectorAll('.kpi-box, .explanatory-box, .disclaimer-box, .legal-box').forEach(box => {
-        const header = box.querySelector('h4, h5');
-        if (header) {
-            // Initialize aria-expanded attribute
-            box.setAttribute('aria-expanded', 'true');
-            header.addEventListener('click', () => {
-                toggleBox(box);
-            });
+    // Handle resize
+    mediaQuery.addEventListener('change', (e) => {
+        toggleMenu(e.matches);
+        if (e.matches) {
+            document.body.style.overflow = ''; // Ensure scroll is enabled
         }
     });
-});
 
-// Dark mode functionality
-function setDarkMode(isDark) {
-    document.body.classList.toggle('dark-mode', isDark);
-}
-
-// Check system preference
-if (window.matchMedia) {
-    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setDarkMode(darkModeMediaQuery.matches);
-    darkModeMediaQuery.addEventListener('change', e => setDarkMode(e.matches));
-}
-
-// Recitals functionality
-document.addEventListener('DOMContentLoaded', () => {
-    const recitals = document.querySelectorAll('.main-content .recital');
-    const recitalsFullSection = document.querySelector('.recitals-full');
-    let recitalsExpanded = true;
-
-    // Clear any existing recitals in the full section
-    while (recitalsFullSection.children.length > 1) { // Keep the h2
-        recitalsFullSection.removeChild(recitalsFullSection.lastChild);
-    }
-
-    // Clone each recital to the full section
-    recitals.forEach((recital, index) => {
-        const number = index + 1;
-
-        // Add header if it doesn't exist in original recital
-        let originalHeader = recital.querySelector('h4');
-        if (!originalHeader) {
-            originalHeader = document.createElement('h4');
-            recital.insertBefore(originalHeader, recital.firstChild);
-        }
-
-        // Create header content wrapper
-        const headerContent = document.createElement('div');
-        headerContent.className = 'header-content';
-
-        // Create icon element
-        const iconWrapper = document.createElement('span');
-        iconWrapper.className = 'box-icon';
-        iconWrapper.setAttribute('aria-hidden', 'true');
-
-        const iconElement = document.createElement('i');
-        iconElement.setAttribute('data-lucide', 'quote');
-
-        iconWrapper.appendChild(iconElement);
-        headerContent.appendChild(iconWrapper);
-
-        // Create text node for recital number
-        const textNode = document.createTextNode(`Recital ${number}`);
-        headerContent.appendChild(textNode);
-
-        // Create arrow span
-        const arrowSpan = document.createElement('span');
-        arrowSpan.className = 'toggle-arrow';
-        arrowSpan.textContent = '▼';
-        headerContent.appendChild(arrowSpan);
-
-        // Clear header and add new content
-        originalHeader.textContent = '';
-        originalHeader.appendChild(headerContent);
-        originalHeader.dataset.recitalNumber = number;
-
-        const recitalClone = recital.cloneNode(true);
-        const recitalId = `in-text-recital-${number}`;
-        recital.id = recitalId;
-
-        // Modify the clone for the summary section
-        recitalClone.classList.add('full-section-recital');
-        const header = recitalClone.querySelector('h4');
-        header.textContent = '';
-        header.dataset.recitalNumber = number;
-
-        // Create header content for the summary section
-        const summaryHeaderContent = document.createElement('div');
-        summaryHeaderContent.className = 'header-content';
-
-        // Create icon element for summary
-        const summaryIconWrapper = document.createElement('span');
-        summaryIconWrapper.className = 'box-icon';
-        summaryIconWrapper.setAttribute('aria-hidden', 'true');
-
-        const summaryIconElement = document.createElement('i');
-        summaryIconElement.setAttribute('data-lucide', 'quote');
-
-        summaryIconWrapper.appendChild(summaryIconElement);
-        summaryHeaderContent.appendChild(summaryIconWrapper);
-
-        // Create text node for recital number in summary
-        const summaryTextNode = document.createTextNode(`Recital ${number}`);
-        summaryHeaderContent.appendChild(summaryTextNode);
-
-        // Add the header content to the summary header
-        header.appendChild(summaryHeaderContent);
-
-        // Create a link wrapper
-        const linkWrapper = document.createElement('a');
-        linkWrapper.href = `#${recitalId}`;
-        linkWrapper.classList.add('recital-link');
-
-        // Move recital content inside the link
-        while (recitalClone.firstChild) {
-            linkWrapper.appendChild(recitalClone.firstChild);
-        }
-        recitalClone.appendChild(linkWrapper);
-
-        recitalsFullSection.appendChild(recitalClone);
-    });
-
-    // Create Lucide icons
-    lucide.createIcons();
-
-    // Function to toggle a single recital
-    function toggleRecital(recital, force = null) {
-        const isExpanded = force !== null ? force : recital.getAttribute('aria-expanded') === 'true';
+    // Function to toggle a single box
+    function toggleBox(box, force = null) {
+        const isExpanded = force !== null ? force : box.getAttribute('aria-expanded') === 'true';
         const newState = force !== null ? force : !isExpanded;
 
-        recital.setAttribute('aria-expanded', newState);
-        recital.classList.toggle('collapsed', !newState);
+        box.setAttribute('aria-expanded', newState);
+        box.classList.toggle('collapsed', !newState);
 
-        const content = recital.querySelector('[id^="recital-"]');
-        if (content) {
-            content.style.display = newState ? 'block' : 'none';
-        }
-    }
-
-    // Add click handlers to main content recitals only
-    document.querySelectorAll('.recital:not(.full-section-recital)').forEach(recital => {
-        const header = recital.querySelector('h4');
-        header.addEventListener('click', () => {
-            toggleRecital(recital);
-        });
-    });
-
-    // Handle clicks on recital links in summary section
-    document.querySelectorAll('.recital-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const targetId = link.getAttribute('href').substring(1);
-            const targetRecital = document.getElementById(targetId);
-            if (targetRecital) {
-                // Ensure the target recital is expanded
-                toggleRecital(targetRecital, true);
-                // Smooth scroll with offset
-                e.preventDefault();
-                const offset = 100;
-                const targetPosition = targetRecital.getBoundingClientRect().top + window.pageYOffset - offset;
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-                // Visual feedback
-                targetRecital.classList.add('highlight');
-                setTimeout(() => targetRecital.classList.remove('highlight'), 2000);
+        // Get the content element (everything after the header)
+        const header = box.querySelector('h4, h5') || box.querySelector('::before');
+        const content = Array.from(box.children).filter(child => {
+            // For recital boxes, we want all elements except the pseudo-elements
+            if (box.classList.contains('recital-box')) {
+                return true;
             }
-        });
-    });
-
-    // Global recital toggle (keyboard shortcut '4')
-    document.addEventListener('keydown', (e) => {
-        if (e.key === '4') {
-            e.preventDefault();
-            recitalsExpanded = !recitalsExpanded;
-            document.querySelectorAll('.recital:not(.full-section-recital)').forEach(recital => {
-                toggleRecital(recital, recitalsExpanded);
-            });
-        }
-    });
-});
-
-// Glossary functionality
-document.addEventListener('DOMContentLoaded', () => {
-    // Extract all glossary terms
-    const glossaryList = document.querySelector('.glossary-list');
-    const glossaryTerms = document.querySelectorAll('.glossary-term');
-    const tooltip = document.createElement('div');
-    tooltip.className = 'glossary-tooltip';
-    document.body.appendChild(tooltip);
-
-    // Create map of terms and their IDs
-    const termMap = new Map();
-    let termCounter = 1;
-
-    // Helper function to escape special regex characters
-    function escapeRegExp(string) {
-        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    }
-
-    // Helper function to create a valid ID from a term
-    function createValidId(term) {
-        return term.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    }
-
-    // First pass: create the map of terms
-    glossaryList.querySelectorAll('dt').forEach(term => {
-        const originalTerm = term.textContent.trim();
-        const id = term.id.replace('term-', '');
-        termMap.set(originalTerm.toLowerCase(), {
-            id: id,
-            originalTerm: originalTerm,
-            number: termCounter++,
-            definition: term.nextElementSibling.textContent
-        });
-    });
-
-    // Function to automatically tag glossary terms in text
-    function autoTagGlossaryTerms(element) {
-        // Skip if element is in excluded areas
-        if (element.closest('.glossary, .side-nav, .nav-content, a, code, pre')) {
-            return;
-        }
-
-        // Process each text-containing element separately
-        const textElements = element.querySelectorAll('p, li');  // Removed h1, h2, h3, h4, h5, h6 from selection
-        textElements.forEach(textElement => {
-            // Track which terms have been tagged in this specific element
-            const taggedTerms = new Set();
-
-            const walker = document.createTreeWalker(
-                textElement,
-                NodeFilter.SHOW_TEXT,
-                {
-                    acceptNode: function (node) {
-                        // Skip if parent is in excluded elements
-                        if (node.parentElement.closest('.glossary, .side-nav, .nav-content, a, code, pre')) {
-                            return NodeFilter.FILTER_REJECT;
-                        }
-                        return NodeFilter.FILTER_ACCEPT;
-                    }
-                }
-            );
-
-            const nodesToReplace = [];
-            while (walker.nextNode()) {
-                nodesToReplace.push(walker.currentNode);
-            }
-
-            nodesToReplace.forEach(textNode => {
-                let text = textNode.nodeValue;
-                let newHtml = text;
-
-                // Sort terms by length (longest first) to handle overlapping terms
-                const sortedTerms = Array.from(termMap.keys())
-                    .sort((a, b) => b.length - a.length)
-                    .map(term => ({
-                        term: term,
-                        info: termMap.get(term)
-                    }));
-
-                // Create a temporary div to hold the HTML while we process it
-                const tempDiv = document.createElement('div');
-                tempDiv.textContent = text;
-                let currentHtml = tempDiv.innerHTML;
-
-                // Process each term
-                sortedTerms.forEach(({ term, info }) => {
-                    // Skip if this term has already been tagged in this element
-                    if (taggedTerms.has(term)) {
-                        return;
-                    }
-
-                    const escapedTerm = escapeRegExp(term);
-                    // Match whole words only, accounting for word boundaries and spaces
-                    const regex = new RegExp(`(?<=^|[^a-zA-Z0-9-])${escapedTerm}(?=$|[^a-zA-Z0-9-])`, 'gi');
-
-                    // Only replace the first occurrence
-                    let hasReplaced = false;
-                    currentHtml = currentHtml.replace(regex, (match) => {
-                        if (hasReplaced) {
-                            return match; // Return unchanged for subsequent matches
-                        }
-                        hasReplaced = true;
-                        taggedTerms.add(term); // Mark this term as tagged
-                        return `<a href="#term-${info.id}" class="glossary-term">${match}<span class="glossary-ref">${info.number}</span></a>`;
-                    });
-                });
-
-                if (currentHtml !== tempDiv.innerHTML) {
-                    const fragment = document.createRange().createContextualFragment(currentHtml);
-                    textNode.parentNode.replaceChild(fragment, textNode);
-                }
-            });
-        });
-    }
-
-    // Apply auto-tagging to main content
-    const mainContent = document.querySelector('.main-content');
-    autoTagGlossaryTerms(mainContent);
-
-    // Function to add event listeners to glossary terms
-    function addGlossaryTermListeners() {
-        const allGlossaryTerms = document.querySelectorAll('.glossary-term');
-        const isDeviceMobile = isMobileDevice();
-        let touchStartTime = 0;
-        let touchStartTarget = null;
-
-        allGlossaryTerms.forEach(term => {
-            if (isDeviceMobile) {
-                // Mobile-only handlers
-                term.addEventListener('touchstart', (e) => {
-                    touchStartTime = Date.now();
-                    touchStartTarget = e.target;
-                }, { passive: true });
-
-                term.addEventListener('touchend', (e) => {
-                    const touchDuration = Date.now() - touchStartTime;
-                    // Only handle quick taps (less than 300ms) and ensure it's the same target
-                    if (touchDuration < 300 && e.target === touchStartTarget) {
-                        e.preventDefault();
-                        e.stopPropagation();
-
-                        // Toggle tooltip
-                        if (currentTerm === term) {
-                            hideTooltip();
-                        } else {
-                            showTooltip(term);
-                        }
-                    }
-                    touchStartTarget = null;
-                });
-
-                // Prevent any click events on mobile
-                term.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }, { capture: true });
-            } else {
-                // Desktop-only hover handler
-                term.addEventListener('mouseenter', () => {
-                    showTooltip(term);
-                });
-
-                term.addEventListener('mouseleave', () => {
-                    hideTooltip();
-                });
-
-                // Prevent default click behavior on desktop
-                term.addEventListener('click', (e) => {
-                    e.preventDefault();
-                });
-            }
+            // For other boxes, exclude the header
+            return child !== header;
         });
 
-        // Document click handler only for mobile
-        if (isDeviceMobile) {
-            document.addEventListener('click', (e) => {
-                // Only hide if clicking outside tooltip and term
-                if (currentTerm && !e.target.closest('.glossary-term, .glossary-tooltip')) {
-                    hideTooltip();
-                }
-            }, { capture: true });
-
-            // Prevent scroll-triggered touches from activating tooltips
-            let isScrolling;
-            document.addEventListener('scroll', () => {
-                window.clearTimeout(isScrolling);
-                isScrolling = setTimeout(() => {
-                    touchStartTarget = null;
-                }, 100);
-            }, { passive: true });
-        }
-    }
-
-    // Add event listeners after creating the terms
-    addGlossaryTermListeners();
-
-    let currentTerm = null;
-
-    function showTooltip(term) {
-        const termId = term.getAttribute('href').substring(6);
-        // Don't do anything if this term is already showing
-        if (currentTerm === term) {
-            return;
-        }
-
-        // Only hide existing tooltip if we're showing a different one
-        if (currentTerm) {
-            hideTooltip();
-        }
-
-        // Find the term info by ID
-        const termInfo = Array.from(termMap.values()).find(info => info.id === termId);
-
-        if (termInfo) {
-            currentTerm = term;
-
-            // Set up ARIA relationships
-            const tooltipId = `tooltip-${termId}`;
-            tooltip.id = tooltipId;
-            term.setAttribute('aria-describedby', tooltipId);
-
-            tooltip.innerHTML = `
-                    <div class="glossary-tooltip-header" role="tooltip">
-                        <span class="glossary-tooltip-term" id="tooltip-term-${termId}">${termInfo.originalTerm} [${termInfo.number}]</span>
-                    </div>
-                    <div class="glossary-tooltip-content" role="definition" aria-labelledby="tooltip-term-${termId}">
-                        ${termInfo.definition}
-                    </div>
-                `;
-
-            tooltip.setAttribute('role', 'tooltip');
-            tooltip.classList.add('active');
-            positionTooltip(term);
-
-            // Announce to screen readers
-            const announcement = document.createElement('div');
-            announcement.setAttribute('aria-live', 'polite');
-            announcement.setAttribute('class', 'sr-only');
-            announcement.textContent = `Glossary definition for ${termInfo.originalTerm}: ${termInfo.definition}`;
-            document.body.appendChild(announcement);
-            setTimeout(() => announcement.remove(), 1000);
-        }
-    }
-
-    function hideTooltip() {
-        if (currentTerm) {
-            currentTerm.removeAttribute('aria-describedby');
-        }
-        tooltip.classList.remove('active');
-        currentTerm = null;
-    }
-
-    function positionTooltip(term) {
-        // On mobile, we don't need to calculate position since it's fixed at bottom
-        if (isMobileDevice()) {
-            return;
-        }
-
-        // Only calculate position for desktop
-        const rect = term.getBoundingClientRect();
-        const tooltipWidth = 300; // Fixed width for calculation
-        const windowWidth = window.innerWidth;
-
-        // Calculate the best position
-        let left = rect.right + 10; // Default: 10px to the right of the term
-
-        // If tooltip would overflow right edge, try left side of term
-        if (left + tooltipWidth > windowWidth - 20) {
-            left = rect.left - tooltipWidth - 10;
-        }
-
-        // If both right and left overflow, center on screen
-        if (left < 20) {
-            left = Math.max(20, (windowWidth - tooltipWidth) / 2);
-        }
-
-        const top = rect.top + window.scrollY - 10;
-
-        // Batch the style updates
-        requestAnimationFrame(() => {
-            tooltip.style.position = 'absolute';
-            tooltip.style.top = `${top}px`;
-            tooltip.style.left = `${left}px`;
-            tooltip.style.right = 'auto';
-            tooltip.style.marginRight = '0';
-        });
-    }
-
-    // Update tooltip position on scroll and resize
-    window.addEventListener('scroll', () => {
-        if (currentTerm) {
-            positionTooltip(currentTerm);
-        }
-    });
-
-    window.addEventListener('resize', () => {
-        if (currentTerm) {
-            positionTooltip(currentTerm);
-        }
-    });
-});
-
-// Theme handling
-const themeSelect = document.getElementById('theme-select');
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-// Load saved theme preference
-const savedTheme = localStorage.getItem('theme') || 'system';
-themeSelect.value = savedTheme;
-themeSelect.setAttribute('value', savedTheme);
-
-function setTheme(theme) {
-    // First remove any existing theme classes
-    document.body.classList.remove('light-mode', 'dark-mode');
-
-    if (theme === 'system') {
-        // For system theme, apply dark mode based on system preference
-        if (prefersDark.matches) {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.add('light-mode');
-        }
-    } else {
-        // For explicit theme choice, apply the selected theme
-        document.body.classList.add(`${theme}-mode`);
-    }
-
-    // Announce theme change to screen readers
-    const announcement = document.createElement('div');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.setAttribute('class', 'sr-only');
-    announcement.textContent = `Theme changed to ${theme === 'system' ? 'system default' : theme} mode`;
-    document.body.appendChild(announcement);
-    setTimeout(() => announcement.remove(), 1000);
-}
-
-// Initialize theme
-setTheme(savedTheme);
-
-// Handle theme changes
-themeSelect.addEventListener('change', (e) => {
-    const theme = e.target.value;
-    themeSelect.setAttribute('value', theme); // Update value attribute
-    themeSelect.setAttribute('aria-label', `Current theme: ${theme}`);
-    setTheme(theme);
-    localStorage.setItem('theme', theme);
-});
-
-// Handle system theme changes
-prefersDark.addEventListener('change', (e) => {
-    if (themeSelect.value === 'system') {
-        setTheme('system');
-    }
-});
-
-// Keyboard Navigation
-document.addEventListener('DOMContentLoaded', () => {
-    const mainContent = document.querySelector('.main-content');
-    const nav = document.querySelector('.side-nav');
-    const toggle = document.querySelector('.nav-toggle');
-
-    // Add click handlers for shortcut buttons
-    document.querySelectorAll('.shortcut-btn').forEach(button => {
-        // Add descriptive ARIA labels
-        const key = button.dataset.key;
-        const action = button.textContent.replace(/[↑↓←→]|\d/g, '').trim();
-        button.setAttribute('aria-label', `Press ${key} to ${action}`);
-
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Create a synthetic keyboard event
-            const keyEvent = new KeyboardEvent('keydown', {
-                key: button.dataset.key,
-                bubbles: true,
-                cancelable: true
-            });
-            // Dispatch the event to trigger the existing keyboard handler
-            document.dispatchEvent(keyEvent);
-
-            // Announce action to screen readers
-            const announcement = document.createElement('div');
-            announcement.setAttribute('aria-live', 'polite');
-            announcement.setAttribute('class', 'sr-only');
-            announcement.textContent = `Executing keyboard shortcut: ${action}`;
-            document.body.appendChild(announcement);
-            setTimeout(() => announcement.remove(), 1000);
-        });
-    });
-
-    // Store previous positions for jump-back functionality
-    let navigationDepthLevel = 3; // Track navigation depth level (3 = all, 2 = commitments+sections, 1 = commitments only)
-
-    // Helper function to find next/previous element
-    function findNextPrevElement(selector, forward = true, startElement = null) {
-        const elements = Array.from(mainContent.querySelectorAll(selector));
-        if (!elements.length) return null;
-
-        if (!startElement) {
-            return forward ? elements[0] : elements[elements.length - 1];
-        }
-
-        const currentIndex = elements.indexOf(startElement);
-        if (currentIndex === -1) {
-            const currentY = startElement.getBoundingClientRect().top;
-            const nextElement = forward
-                ? elements.find(el => el.getBoundingClientRect().top > currentY)
-                : elements.reverse().find(el => el.getBoundingClientRect().top < currentY);
-            return nextElement || (forward ? elements[0] : elements[elements.length - 1]);
-        }
-
-        const nextIndex = forward ? currentIndex + 1 : currentIndex - 1;
-        return elements[nextIndex] || (forward ? elements[0] : elements[elements.length - 1]);
-    }
-
-    // Helper function to toggle navigation depth
-    function toggleNavigationDepth() {
-        // Cycle through levels: 3 -> 2 -> 1 -> 3
-        navigationDepthLevel = navigationDepthLevel > 1 ? navigationDepthLevel - 1 : 3;
-
-        // Get all navigation sublists
-        const navLists = document.querySelectorAll('#nav-content ul ul');
-
-        navLists.forEach(list => {
-            const depth = getListDepth(list);
-            list.style.display = depth <= navigationDepthLevel ? 'block' : 'none';
+        content.forEach(el => {
+            el.style.display = newState ? 'block' : 'none';
         });
 
         // Announce to screen readers
-        const announcement = document.createElement('div');
-        announcement.setAttribute('aria-live', 'polite');
-        announcement.setAttribute('class', 'sr-only');
-        announcement.textContent = `Navigation depth level ${navigationDepthLevel}`;
-        document.body.appendChild(announcement);
-        setTimeout(() => announcement.remove(), 1000);
+        const boxType = box.classList.contains('recital-box') ?
+            `Recital ${box.getAttribute('data-recital')}` :
+            header?.textContent;
+        announceToScreenReader(`${boxType} ${newState ? 'expanded' : 'collapsed'}`);
     }
 
-    // Helper function to get the depth of a list in the navigation
-    function getListDepth(list) {
-        let depth = 0;
-        let parent = list;
-        while (parent && parent.tagName === 'UL') {
-            depth++;
-            parent = parent.parentElement.closest('ul');
-        }
-        return depth;
+    // Function to toggle all boxes
+    function toggleAllBoxes(force = null) {
+        elements.boxes.forEach(box => toggleBox(box, force));
     }
 
-    // Keyboard event handler
-    document.addEventListener('keydown', (e) => {
-        // Ignore if user is typing in an input
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    // Initialize boxes
+    elements.boxes.forEach(box => {
+        const header = box.querySelector('h4, h5');
+        const isRecital = box.classList.contains('recital-box');
 
-        const activeElement = document.activeElement;
-        const key = e.key.toLowerCase();
+        // Initialize aria-expanded attribute
+        box.setAttribute('aria-expanded', 'true');
 
-        // Handle return to previous position for number keys
-        if (['1', '2', '3'].includes(key) && key === lastJumpKey && previousPosition !== null) {
-            e.preventDefault();
-            window.scrollTo({
-                top: previousPosition,
-                behavior: 'smooth'
-            });
-            previousPosition = null;
-            lastJumpKey = null;
-            return;
-        }
-
-        switch (key) {
-            case 'arrowup':
-            case 'arrowdown':
-                e.preventDefault();
-                // Include all headlines, including those in boxes
-                const nextHeading = findNextPrevElement('h1, h2, h3, h4, h5, .kpi-box h5, .legal-box h4, .explanatory-box h4, .disclaimer-box h4', key === 'arrowdown', activeElement);
-                if (nextHeading) {
-                    scrollToElement(nextHeading);
-                }
-                break;
-
-            case 'arrowleft':
-            case 'arrowright':
-                e.preventDefault();
-                const commitmentSelector = 'h2[id^="commitment"], h3[id^="commitment"]';
-                const nextCommitment = findNextPrevElement(commitmentSelector, key === 'arrowright', activeElement);
-                scrollToElement(nextCommitment);
-                break;
-
-            case '1':
-                e.preventDefault();
-                previousPosition = window.scrollY;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                lastJumpKey = '1';
-                break;
-
-            case '2':
-                e.preventDefault();
-                const glossary = document.querySelector('.glossary');
-                scrollToElement(glossary);
-                lastJumpKey = '2';
-                break;
-
-            case '3':
-                e.preventDefault();
-                const recitalsSection = document.querySelector('.recitals-full');
-                scrollToElement(recitalsSection);
-                lastJumpKey = '3';
-                break;
-
-            case '4':
-                e.preventDefault();
-                toggleAllBoxes();
-                break;
-
-            case '5':
-                e.preventDefault();
-                toggleNavigationDepth();
-                break;
-
-            case '0':
-                e.preventDefault();
-                if (nav.classList.contains('active')) {
-                    nav.classList.remove('active');
-                    toggle.setAttribute('aria-expanded', 'false');
-                } else {
-                    nav.classList.add('active');
-                    toggle.setAttribute('aria-expanded', 'true');
-                }
-                break;
-
-            case 'escape':
-                if (nav.classList.contains('active')) {
-                    nav.classList.remove('active');
-                    toggle.setAttribute('aria-expanded', 'false');
-                }
-                // Close any open tooltips
-                document.querySelectorAll('.glossary-tooltip.active').forEach(tooltip => {
-                    tooltip.classList.remove('active');
-                });
-                break;
+        if (isRecital) {
+            // For recital boxes, make the entire box clickable
+            box.addEventListener('click', () => toggleBox(box));
+        } else if (header) {
+            // For other boxes, make the header clickable
+            header.style.cursor = 'pointer';
+            header.addEventListener('click', () => toggleBox(box));
         }
     });
 
-    // Add styles for keyboard navigation
-    const style = document.createElement('style');
-    style.textContent = `
-            .keyboard-highlight {
-                outline: 3px solid #1971c2;
-                outline-offset: 4px;
-                border-radius: 2px;
-            }
-            .sr-only {
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                padding: 0;
-                margin: -1px;
-                overflow: hidden;
-                clip: rect(0, 0, 0, 0);
-                border: 0;
-            }
-            @media (prefers-color-scheme: dark) {
-                .keyboard-highlight {
-                    outline-color: #4fc3f7;
-                }
-            }
-        `;
-    document.head.appendChild(style);
+    // Add keyboard shortcut for toggling all boxes
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '2') {
+            e.preventDefault();
+            toggleAllBoxes();
+        } else if (e.key === '1') {
+            scrollToTop();
+        } else if (e.key === '3') {
+            themeToggle.click();
+        }
+    });
+
+    // Add click handler for "To top" button
+    document.querySelector('.shortcut-btn[data-key="1"]').addEventListener('click', scrollToTop);
 });
 
-// Keyboard shortcuts collapse functionality
-const collapseToggle = document.querySelector('.collapse-toggle');
-const shortcutsContent = document.getElementById('keyboard-shortcuts-content');
-const shortcutsHeader = document.querySelector('.keyboard-shortcuts-header');
+// Theme handling
+const themeToggle = document.getElementById('theme-toggle');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-// Load saved state
-const isExpanded = localStorage.getItem('keyboardShortcutsExpanded') !== 'false';
-collapseToggle.setAttribute('aria-expanded', isExpanded);
-shortcutsContent.classList.toggle('collapsed', !isExpanded);
+// Load saved theme preference or use system preference
+const savedTheme = localStorage.getItem('theme');
+const systemTheme = prefersDark.matches ? 'dark' : 'light';
+const currentTheme = savedTheme || systemTheme;
 
-collapseToggle.setAttribute('aria-label', 'Toggle keyboard shortcuts visibility');
-shortcutsContent.setAttribute('role', 'region');
-shortcutsContent.setAttribute('aria-label', 'Keyboard shortcuts list');
+function setTheme(theme) {
+    // Set the theme
+    document.documentElement.setAttribute('data-theme', theme);
 
-// Function to toggle shortcuts
-function toggleShortcuts() {
-    const isCurrentlyExpanded = collapseToggle.getAttribute('aria-expanded') === 'true';
-    const newExpandedState = !isCurrentlyExpanded;
-
-    collapseToggle.setAttribute('aria-expanded', newExpandedState);
-    shortcutsContent.classList.toggle('collapsed', !newExpandedState);
-
-    // Save state
-    localStorage.setItem('keyboardShortcutsExpanded', newExpandedState);
+    // Store the theme preference
+    localStorage.setItem('theme', theme);
 
     // Announce to screen readers
     const announcement = document.createElement('div');
     announcement.setAttribute('aria-live', 'polite');
     announcement.setAttribute('class', 'sr-only');
-    announcement.textContent = `Keyboard shortcuts ${newExpandedState ? 'expanded' : 'collapsed'}`;
+    announcement.textContent = `Theme changed to ${theme} mode`;
     document.body.appendChild(announcement);
     setTimeout(() => announcement.remove(), 1000);
 }
 
-// Add click handlers to both the toggle button and the header
-collapseToggle.addEventListener('click', (e) => {
-    e.stopPropagation(); // Prevent double-triggering from header click
-    toggleShortcuts();
+// Initialize theme
+setTheme(currentTheme);
+
+// Handle theme toggle
+themeToggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
 });
 
-shortcutsHeader.addEventListener('click', toggleShortcuts); 
+// Handle system theme changes when no saved preference
+prefersDark.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+        setTheme(e.matches ? 'dark' : 'light');
+    }
+});
+
+// Glossary term marking
+document.addEventListener('DOMContentLoaded', () => {
+    // Helper function to escape special regex characters
+    function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // Helper function to create plural variations
+    function getTermVariations(term) {
+        const variations = [term];
+        // Simple plural rules - can be expanded
+        if (term.endsWith('y')) {
+            variations.push(term.slice(0, -1) + 'ies');
+        } else if (term.endsWith('s')) {
+            variations.push(term + 'es');
+        } else {
+            variations.push(term + 's');
+        }
+        return variations;
+    }
+
+    // Build glossary index
+    const glossaryTerms = new Map();
+    let termCounter = 1;
+
+    document.querySelectorAll('.glossary-list dt').forEach(term => {
+        const termText = term.textContent.trim();
+        const variations = getTermVariations(termText);
+
+        variations.forEach(variant => {
+            glossaryTerms.set(variant.toLowerCase(), {
+                number: termCounter,
+                originalTerm: termText
+            });
+        });
+        termCounter++;
+    });
+
+    // Function to mark terms in a text node
+    function markTermsInNode(textNode) {
+        if (!textNode.nodeValue.trim()) return;
+
+        // Skip if we're in a headline or already processed node
+        const parent = textNode.parentElement;
+        if (parent.closest('h1, h2, h3, h4, h5, h6, .glossary-marked, .glossary')) {
+            return;
+        }
+
+        let text = textNode.nodeValue;
+        let html = text;
+        let hasChanges = false;
+
+        // Sort terms by length (longest first) to handle overlapping terms
+        const sortedTerms = Array.from(glossaryTerms.keys())
+            .sort((a, b) => b.length - a.length);
+
+        // Track which terms we've marked in this text node
+        const markedTerms = new Set();
+
+        sortedTerms.forEach(term => {
+            if (markedTerms.has(term)) return;
+
+            const escapedTerm = escapeRegExp(term);
+            const regex = new RegExp(`(?<=^|[^a-zA-Z0-9-])${escapedTerm}(?=$|[^a-zA-Z0-9-])`, 'gi');
+
+            // Only replace first occurrence
+            html = html.replace(regex, (match) => {
+                if (markedTerms.has(term)) return match;
+
+                const info = glossaryTerms.get(term.toLowerCase());
+                markedTerms.add(term);
+                hasChanges = true;
+
+                return `<span class="glossary-marked" data-glossary-number="${info.number}">${match}</span>`;
+            });
+        });
+
+        if (hasChanges) {
+            const fragment = document.createRange().createContextualFragment(html);
+            textNode.parentNode.replaceChild(fragment, textNode);
+        }
+    }
+
+    // Process all text nodes in the main content
+    function processContent(root) {
+        const walker = document.createTreeWalker(
+            root,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode: (node) => {
+                    // Skip if parent is already processed or in excluded elements
+                    if (node.parentElement.closest('.glossary-marked, script, style, .glossary')) {
+                        return NodeFilter.FILTER_REJECT;
+                    }
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            }
+        );
+
+        const nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach(markTermsInNode);
+    }
+
+    // Initial processing
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+        processContent(mainContent);
+    }
+
+    // Create popup element
+    const popup = document.createElement('div');
+    popup.className = 'glossary-popup';
+    popup.innerHTML = `
+        <div class="glossary-popup-header">
+            <span class="glossary-popup-term"></span>
+        </div>
+        <div class="glossary-popup-definition"></div>
+    `;
+    document.body.appendChild(popup);
+
+    // Track current popup state
+    let currentTerm = null;
+    let isHovering = false;
+    let isClickShown = false;
+
+    // Helper to get term definition
+    function getTermDefinition(number) {
+        const dt = document.querySelector(`.glossary-list dt:nth-child(${2 * number - 1})`);
+        const dd = document.querySelector(`.glossary-list dt:nth-child(${2 * number - 1}) + dd`);
+        return {
+            term: dt?.textContent.trim(),
+            definition: dd?.textContent.trim()
+        };
+    }
+
+    // Helper to position popup
+    function positionPopup(target) {
+        const rect = target.getBoundingClientRect();
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+        if (isMobile) {
+            // Mobile positioning is handled by CSS
+            return;
+        }
+
+        // Calculate available space
+        const spaceRight = window.innerWidth - rect.right - 16; // 16px buffer
+        const spaceLeft = rect.left - 16;
+
+        // Default to right positioning
+        let left = rect.right + 8;
+
+        // If not enough space on right, try left
+        if (spaceRight < 300 && spaceLeft > 300) {
+            left = rect.left - 308; // 300px + 8px gap
+        }
+        // If neither side has space, center above/below
+        else if (spaceRight < 300 && spaceLeft < 300) {
+            left = Math.max(16, Math.min(
+                window.innerWidth - 316,
+                rect.left + (rect.width - 300) / 2
+            ));
+        }
+
+        // Position relative to viewport and adjust for scroll
+        popup.style.position = 'absolute';
+        popup.style.left = `${left}px`;
+        popup.style.top = `${rect.top + window.scrollY}px`; // Add scrollY since we're using absolute positioning
+    }
+
+    // Helper to hide popup
+    function hidePopup(force = false) {
+        if (force || (!isHovering && !isClickShown)) {
+            popup.classList.remove('show');
+            currentTerm = null;
+            isClickShown = false;
+        }
+    }
+
+    // Helper to show popup
+    function showPopup(target, fromClick = false) {
+        const number = parseInt(target.dataset.glossaryNumber);
+        if (!number) return;
+
+        const { term, definition } = getTermDefinition(number);
+        if (!term || !definition) return;
+
+        popup.querySelector('.glossary-popup-term').textContent = term;
+        popup.querySelector('.glossary-popup-definition').textContent = definition;
+
+        positionPopup(target);
+        popup.classList.add('show');
+        currentTerm = target;
+        if (fromClick) {
+            isClickShown = true;
+        }
+    }
+
+    // Check if device has hover capability
+    const hasHover = window.matchMedia('(hover: hover)').matches;
+
+    // Click handlers for all devices
+    document.addEventListener('click', (e) => {
+        const term = e.target.closest('.glossary-marked');
+
+        if (term) {
+            if (currentTerm === term) {
+                isHovering = false; // Reset hover state on click
+                hidePopup(true); // Force hide on direct term click
+            } else {
+                isHovering = false; // Reset hover state on click
+                isClickShown = true; // Set click state before showing
+                showPopup(term, true);
+            }
+            e.stopPropagation();
+        } else {
+            isHovering = false; // Reset hover state on outside click
+            hidePopup(true); // Force hide on outside click
+        }
+    });
+
+    // Event handlers for hover
+    if (hasHover) {
+        document.addEventListener('mouseover', (e) => {
+            const term = e.target.closest('.glossary-marked');
+            if (term && !isClickShown) { // Don't show on hover if shown by click
+                isHovering = true;
+                showPopup(term, false);
+            }
+        });
+
+        document.addEventListener('mouseout', (e) => {
+            const term = e.target.closest('.glossary-marked');
+            if (term) {
+                isHovering = false;
+                if (!isClickShown) { // Only hide if not shown by click
+                    setTimeout(hidePopup, 100);
+                }
+            }
+        });
+    }
+
+    // Handle scroll and resize
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (currentTerm) {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                if (currentTerm) {
+                    positionPopup(currentTerm);
+                }
+            }, 100);
+        }
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+        if (currentTerm) {
+            positionPopup(currentTerm);
+        }
+    });
+
+    // Optional: Handle dynamically added content
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            mutation.addedNodes.forEach(node => {
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    processContent(node);
+                }
+            });
+        });
+    });
+
+    if (mainContent) {
+        observer.observe(mainContent, {
+            childList: true,
+            subtree: true
+        });
+    }
+});
