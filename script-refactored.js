@@ -271,6 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', debouncedUpdateActiveNavItem);
 
     // Initialize
+    initializeHeadingAnchors();
     buildNavigation();
     updateActiveNavItem();
 
@@ -348,9 +349,6 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleAllBoxes();
         }
     });
-
-    // Initialize heading anchors
-    initializeHeadingAnchors();
 });
 
 // Theme handling
