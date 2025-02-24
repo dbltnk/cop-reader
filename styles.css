@@ -658,7 +658,7 @@ select {
 /* KPI Box specific styles */
 .kpi-box {
     border-left: 1px solid var(--sand-6);
-    padding-left: var(--spacing-md);
+    padding: var(--spacing-md);
     font-size: 0.9rem;
     line-height: 1.4;
     font-family: var(--font-serif);
@@ -682,21 +682,13 @@ select {
 
 .kpi-box .kpi-list li {
     position: relative;
-    padding-left: calc(1.1rem + var(--spacing-md));
-    /* Aligns with the target icon */
+    padding-left: 0;
     margin-bottom: var(--spacing-sm);
 }
 
+/* Remove the bullet point */
 .kpi-box .kpi-list li::before {
-    content: '';
-    position: absolute;
-    left: 1.1rem;
-    /* Same as icon width */
-    top: 0.7em;
-    width: 4px;
-    height: 4px;
-    background-color: var(--sand-9);
-    border-radius: 50%;
+    display: none;
 }
 
 .kpi-box .kpi-target {
@@ -713,10 +705,6 @@ select {
     color: var(--sand-11);
 }
 
-:root[data-theme="dark"] .kpi-box .kpi-list li::before {
-    background-color: var(--sand-9);
-}
-
 /* Mobile optimizations */
 @media (max-width: 760px) {
     .kpi-box {
@@ -727,12 +715,27 @@ select {
 /* Box Headers */
 .disclaimer-box h4,
 .explanatory-box h4,
-.legal-box h4,
-.kpi-box h5 {
+.legal-box h4 {
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
     padding: var(--spacing-md);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.1rem;
+    line-height: 1;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* KPI box header specific styles */
+.kpi-box h5 {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: 0;
     font-family: var(--font-sans);
     font-weight: 600;
     font-size: 1.1rem;
