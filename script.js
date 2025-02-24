@@ -423,15 +423,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === '2') {
             e.preventDefault();
             toggleAllBoxes();
-        } else if (e.key === '1') {
-            scrollToTop();
         } else if (e.key === '3') {
+            scrollToTop();
+        } else if (e.key === '1') {
             themeToggle.click();
         }
     });
 
     // Add click handler for "To top" button
-    document.querySelector('.shortcut-btn[data-key="1"]').addEventListener('click', scrollToTop);
+    document.querySelector('.shortcut-btn[data-key="3"]').addEventListener('click', scrollToTop);
 });
 
 // Theme handling
