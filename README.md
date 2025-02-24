@@ -8,7 +8,9 @@ This is being developed by Alexander Zacherl (alexander.zacherl@googlemail.com) 
 
 This project uses [Lucide Icons](https://lucide.dev/), which is licensed under the ISC License. Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
 
-This project uses [Source Serif 4](https://github.com/adobe-fonts/source-serif) and [Source Sans 3](https://github.com/adobe-fonts/source-sans) fonts, which are licensed under the SIL Open Font License, Version 1.1. Copyright 2014-2023 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.
+This project uses [Source Serif 4](https://github.com/adobe-fonts/source-serif) font, which is licensed under the SIL Open Font License, Version 1.1, Copyright 2014-2023 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.
+
+This project uses [IBM Plex Sans](https://github.com/IBM/plex) font, which is licensed under the SIL Open Font License, Version 1.1, Copyright © 2017 IBM Corp. with Reserved Font Name "Plex".
 
 The color system is based on [Radix Colors](https://www.radix-ui.com/colors), which is licensed under the MIT License. Copyright (c) 2022 WorkOS.
 
