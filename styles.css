@@ -842,6 +842,7 @@ select {
     align-items: center;
     gap: var(--spacing-md);
     padding: var(--spacing-md);
+    padding-right: calc(var(--spacing-md) * 2 + 1.1rem);
     font-family: var(--font-sans);
     line-height: 1;
     margin: 0;
@@ -891,6 +892,8 @@ select {
     content: '';
     position: absolute;
     right: var(--spacing-md);
+    top: 50%;
+    transform: translateY(-50%);
     width: 1.1rem;
     height: 1.1rem;
     background-size: contain;
