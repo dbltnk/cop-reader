@@ -322,7 +322,9 @@ strong {
     counter-reset: list;
 }
 
-.main-content ol>li::before {
+/* Default numbered list styling */
+.main-content ol:not([type])>li::before,
+.main-content ol[type="1"]>li::before {
     content: counter(list) ".";
     counter-increment: list;
     position: absolute;
@@ -331,11 +333,98 @@ strong {
     font-feature-settings: "tnum";
 }
 
+/* Alphabetical lowercase list styling */
+.main-content ol[type="a"]>li::before {
+    content: counter(list, lower-alpha) ".";
+    counter-increment: list;
+    position: absolute;
+    left: 0;
+    color: var(--sand-9);
+    font-feature-settings: "tnum";
+}
+
+/* Alphabetical uppercase list styling */
+.main-content ol[type="A"]>li::before {
+    content: counter(list, upper-alpha) ".";
+    counter-increment: list;
+    position: absolute;
+    left: 0;
+    color: var(--sand-9);
+    font-feature-settings: "tnum";
+}
+
+/* Roman lowercase list styling */
+.main-content ol[type="i"]>li::before {
+    content: counter(list, lower-roman) ".";
+    counter-increment: list;
+    position: absolute;
+    left: 0;
+    color: var(--sand-9);
+    font-feature-settings: "tnum";
+}
+
+/* Roman uppercase list styling */
+.main-content ol[type="I"]>li::before {
+    content: counter(list, upper-roman) ".";
+    counter-increment: list;
+    position: absolute;
+    left: 0;
+    color: var(--sand-9);
+    font-feature-settings: "tnum";
+}
+
 /* Box ordered list styles */
-.legal-box ol>li::before,
-.explanatory-box ol>li::before,
-.disclaimer-box ol>li::before {
+.legal-box ol:not([type])>li::before,
+.legal-box ol[type="1"]>li::before,
+.explanatory-box ol:not([type])>li::before,
+.explanatory-box ol[type="1"]>li::before,
+.disclaimer-box ol:not([type])>li::before,
+.disclaimer-box ol[type="1"]>li::before {
     content: counter(list) ".";
+    counter-increment: list;
+    position: absolute;
+    left: 0;
+    font-feature-settings: "tnum";
+}
+
+/* Box ordered list - alphabetical lowercase */
+.legal-box ol[type="a"]>li::before,
+.explanatory-box ol[type="a"]>li::before,
+.disclaimer-box ol[type="a"]>li::before {
+    content: counter(list, lower-alpha) ".";
+    counter-increment: list;
+    position: absolute;
+    left: 0;
+    font-feature-settings: "tnum";
+}
+
+/* Box ordered list - alphabetical uppercase */
+.legal-box ol[type="A"]>li::before,
+.explanatory-box ol[type="A"]>li::before,
+.disclaimer-box ol[type="A"]>li::before {
+    content: counter(list, upper-alpha) ".";
+    counter-increment: list;
+    position: absolute;
+    left: 0;
+    font-feature-settings: "tnum";
+}
+
+/* Box ordered list - roman lowercase */
+.legal-box ol[type="i"]>li::before,
+.explanatory-box ol[type="i"]>li::before,
+.disclaimer-box ol[type="i"]>li::before {
+    content: counter(list, lower-roman) ".";
+    counter-increment: list;
+    position: absolute;
+    left: 0;
+    font-feature-settings: "tnum";
+}
+
+/* Box ordered list - roman uppercase */
+.legal-box ol[type="I"]>li::before,
+.explanatory-box ol[type="I"]>li::before,
+.disclaimer-box ol[type="I"]>li::before {
+    content: counter(list, upper-roman) ".";
     counter-increment: list;
     position: absolute;
     left: 0;
