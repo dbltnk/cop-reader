@@ -1396,6 +1396,8 @@ body.light-mode a:hover {
     color: var(--sand-10);
     min-width: 1.8em;
     text-align: center;
+    position: relative;
+    top: -2px;
 }
 
 .glossary-list dd {
