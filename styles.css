@@ -532,7 +532,9 @@ select {
     position: fixed;
     top: 0;
     right: 0;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
+    padding-bottom: env(safe-area-inset-bottom);
     display: flex;
     flex-direction: column;
     z-index: 1000;
@@ -566,6 +568,7 @@ select {
     padding: var(--spacing-md);
     scrollbar-width: thin;
     scrollbar-color: var(--sand-8) var(--sand-3);
+    -webkit-overflow-scrolling: touch;
 }
 
 .nav-content::-webkit-scrollbar {
@@ -1269,7 +1272,7 @@ select {
     display: grid;
     grid-template-columns: repeat(2, auto);
     gap: var(--spacing-xs);
-    padding: var(--spacing-sm) 0;
+    padding: 0;
     justify-content: start;
 }
 
@@ -1284,7 +1287,7 @@ select {
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-xs);
-    padding: var(--spacing-xs) var(--spacing-sm);
+    padding: calc(var(--spacing-xs) * 0.5) var(--spacing-sm);
     border: none;
     background: none;
     color: var(--text-color);
