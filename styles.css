@@ -838,6 +838,7 @@ select {
 .legal-box>*:not(h4) {
     padding: 0 var(--spacing-md);
     transition: max-height 0.3s ease-out;
+    margin-top: calc(var(--spacing-md) * -0.5);
 }
 
 /* Box States */
@@ -859,7 +860,7 @@ select {
 .disclaimer-box>*:not(h4):first-of-type,
 .explanatory-box>*:not(h4):first-of-type,
 .legal-box>*:not(h4):first-of-type {
-    margin-top: var(--spacing-md);
+    padding-top: calc(var(--spacing-md) * 0.5);
 }
 
 .disclaimer-box>*:not(h4):last-child,
