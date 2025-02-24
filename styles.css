@@ -1148,6 +1148,13 @@ select {
     justify-content: start;
 }
 
+/* Hide arrow key navigation on small screens */
+@media (max-width: 768px) {
+    .shortcut-btn[data-key="ArrowLeft"] {
+        display: none;
+    }
+}
+
 .shortcut-btn {
     display: inline-flex;
     align-items: center;
