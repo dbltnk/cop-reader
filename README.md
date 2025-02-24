@@ -54,16 +54,8 @@ Note: This is a simple web abb built quickly by an amateur with most code writte
 
 - [ ] Explanation box headline can overap with chevron, on mobile (probably others as well)
 - [ ] Glossary summary numbers slightly below headers
-- [ ] Buttons in nav are not fully visible on mobile, 2nd line cut off
-- [ ] Nav bar not perfectly styled, lines and selected
-- [ ] Disable tne arrow keys UI element on mobile
-- [ ] Remove the all caps formatting
-- [ ] Collapsable nav items?
-- [ ] Collapse them by default?
+- [~] Buttons in nav are not fully visible on mobile, 2nd line cut off
+- [ ] Nav bar not perfectly styled, lines and selected bookmark
 - [ ] Add proper favicon
 - [ ] Accessibility text color contrast check
-- [ ] Style the flowcharts
-- [ ] Animation polish for recitals
 - [ ] Check key nav against screenreader and accessibility guidelines
-- [ ] Finalize fonts
-- [ ] Finalize colors
