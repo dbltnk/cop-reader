@@ -566,6 +566,41 @@ select {
 
 .nav-content a.active {
     font-weight: 600;
+    position: relative;
+    padding-left: 1.5em;
+    /* Make space for the icon */
+}
+
+/* Bookmark icon for active items */
+.nav-content a.active::after {
+    content: '';
+    width: 1em;
+    height: 1em;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23cfceca' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.7;
+}
+
+/* Special handling for h4 items (padding-left: 2rem) */
+.nav-content a[style*="padding-left: 2rem"].active {
+    padding-left: 2rem;
+    /* Reset padding for h4 items */
+}
+
+.nav-content a[style*="padding-left: 2rem"].active::before {
+    width: 0;
+    /* Hide the connector line when active */
+}
+
+.nav-content a[style*="padding-left: 2rem"].active::after {
+    left: 0.7rem;
+    /* Adjust to align with where the line would be */
 }
 
 /* First h2 item spacing reset */
