@@ -1447,6 +1447,9 @@ body.light-mode a:hover {
     position: relative;
     top: -0.1em;
     font-feature-settings: "tnum";
+    text-decoration: none;
+    display: inline-block;
+    /* This prevents the underline from continuing through the number */
 }
 
 /* Dark mode adjustments */
