@@ -223,7 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
         isUpdatingNav = true;
 
         requestAnimationFrame(() => {
-            const scrollPosition = window.scrollY + window.innerHeight / CONFIG.SCROLL_TRIGGER_POSITION;
+            // Use a smaller offset from the top of the viewport
+            const scrollPosition = window.scrollY + 100; // 100px offset from top
 
             const headlines = Array.from(elements.mainContent.querySelectorAll('h2, h3, h4'))
                 .filter(heading => !heading.closest(CONFIG.EXCLUDED_CONTAINERS))
