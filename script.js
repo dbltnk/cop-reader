@@ -762,3 +762,115 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Article linking functionality
+document.addEventListener('DOMContentLoaded', () => {
+    // Helper function to escape special regex characters
+    function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // Function to mark articles in a text node
+    function markArticlesInNode(textNode) {
+        if (!textNode.nodeValue.trim()) return;
+
+        // Skip if we're in a headline or already processed node
+        const parent = textNode.parentElement;
+        if (parent.closest('h1, h2, h3, h4, h5, h6, .ai-act-link, .glossary')) {
+            return;
+        }
+
+        let text = textNode.nodeValue;
+        // Matches article references from the AI Act, handling:
+        // ✓ Single articles: "Article 78 AI Act"
+        // ✓ Multiple articles: "Articles 53 and 55 AI Act"
+        // ✓ Articles with paragraphs: "Article 51(1) AI Act"
+        // ✓ Complex combinations: "Articles 51(1), 52 and 53(4) AI Act"
+        // ✓ Line breaks: "Articles 53 and 55 AI\n    Act"
+        // Does NOT match:
+        // ✗ Other directives: "Article 4(3) of Directive (EU) 2019/790"
+        // ✗ Standalone references: "Article 78" (without "AI Act")
+        const regex = /Articles?\s+(\d+(?:\(\d+\))?(?:(?:\s*,\s*|\s+and\s+)\d+(?:\(\d+\))?)*|\d+(?:\(\d+\))?(?:(?:\s*,\s*|\s+and\s+)\d+(?:\(\d+\))?)*)(?=(?:(?!\bDirective\s*\(EU\)).)*?\bAI\s+Act\b)/gi;
+        let match;
+        let lastIndex = 0;
+        let fragments = [];
+
+        while ((match = regex.exec(text)) !== null) {
+            // Add text before the match
+            if (match.index > lastIndex) {
+                fragments.push(document.createTextNode(text.slice(lastIndex, match.index)));
+            }
+
+            // Create the link element
+            const link = document.createElement('a');
+            link.className = 'ai-act-link';
+
+            // Get the first article number for the link
+            const firstArticleNumber = match[1].split(/[\s,]+/)[0].split('(')[0];
+            link.href = `https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689&qid=1740494199959#art_${firstArticleNumber}`;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.textContent = match[0];
+            fragments.push(link);
+
+            lastIndex = regex.lastIndex;
+        }
+
+        // Add remaining text
+        if (lastIndex < text.length) {
+            fragments.push(document.createTextNode(text.slice(lastIndex)));
+        }
+
+        // Only replace if we found matches
+        if (fragments.length > 0) {
+            const container = document.createDocumentFragment();
+            fragments.forEach(fragment => container.appendChild(fragment));
+            textNode.parentNode.replaceChild(container, textNode);
+        }
+    }
+
+    // Process all text nodes in the main content
+    function processContent(root) {
+        const walker = document.createTreeWalker(
+            root,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode: (node) => {
+                    // Skip if parent is already processed or in excluded elements
+                    if (node.parentElement.closest('.ai-act-link, script, style, .glossary')) {
+                        return NodeFilter.FILTER_REJECT;
+                    }
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            }
+        );
+
+        const nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach(markArticlesInNode);
+    }
+
+    // Initial processing
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+        processContent(mainContent);
+    }
+
+    // Optional: Handle dynamically added content
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            mutation.addedNodes.forEach(node => {
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    processContent(node);
+                }
+            });
+        });
+    });
+
+    if (mainContent) {
+        observer.observe(mainContent, {
+            childList: true,
+            subtree: true
+        });
+    }
+});
