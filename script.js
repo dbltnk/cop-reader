@@ -790,11 +790,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // ✓ Line breaks: "Articles 53 and 55 AI\n    Act"
         // ✓ Recitals: "Recital 116 AI Act"
         // ✓ Mixed references: "Article 56(1)(3), Recital 1, and Recital 116 AI Act"
+        // ✓ Annexes: "Annex XI AI Act"
+        // ✓ Annex sections: "Annex XI, Section 2 AI Act"
+        // ✓ Annex points: "Annex XI, Section 2, point 1 AI Act"
+        // ✓ Mixed references with Annexes: "Article 56(1)(3), Recital 1, and Annex XI AI Act"
         // ✓ Handles any whitespace: Line feeds, tabs, multiple spaces anywhere
         // Does NOT match:
         // ✗ Other directives: "Article 4(3) of Directive (EU) 2019/790"
         // ✗ Standalone references: "Article 78" (without "AI Act")
-        const regex = /(?:Articles?\s+(\d+(?:\s*\(\s*\d+\s*\))*(?:(?:\s*,\s*|\s+and\s+)\d+(?:\s*\(\s*\d+\s*\))*)*|\d+(?:\s*\(\s*\d+\s*\))*(?:(?:\s*,\s*|\s+and\s+)\d+(?:\s*\(\s*\d+\s*\))*)*)|Recitals?\s+(\d+))(?=(?:(?!\bDirective\s*\(EU\)).)*?\bAI[\s\n\r]+Act\b)/gi;
+        const regex = /(?:Articles?\s+(\d+(?:\s*\(\s*\d+\s*\))*(?:\s*,\s*|\s+and\s+)\d+(?:\s*\(\s*\d+\s*\))*|\d+(?:\s*\(\s*\d+\s*\))*)|Recitals?\s+(\d+)|Annex\s+([IVX]+)(?:\s*,\s*Section\s+(\d+)(?:\s*,\s*point\s+(\d+\.?))?)?)\s*(?=\s+(?:(?!\bDirective\s*\(EU\)).)*?\bAI[\s\n\r]+Act\b)/gi;
         let match;
         let lastIndex = 0;
         let fragments = [];
@@ -809,13 +813,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const link = document.createElement('a');
             link.className = 'ai-act-link';
 
-            // Determine if this is an Article or Recital reference
-            const isRecital = match[0].toLowerCase().startsWith('recital');
-
-            if (isRecital) {
+            // Determine the type of reference and create appropriate link
+            if (match[0].toLowerCase().startsWith('recital')) {
                 // Get the recital number
                 const recitalNumber = match[2];
                 link.href = `https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689&qid=1740494199959#rct_${recitalNumber}`;
+            } else if (match[0].toLowerCase().startsWith('annex')) {
+                // Get the annex number in roman numerals
+                const annexNumber = match[3];
+                link.href = `https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689&qid=1740494199959#anx_${annexNumber}`;
             } else {
                 // Get the first article number for the link
                 const firstArticleNumber = match[1].split(/[\s,]+/)[0].split('(')[0];
