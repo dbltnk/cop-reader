@@ -76,7 +76,7 @@ function initializeHeadingAnchors() {
 
         // Add Lucide anchor icon
         const icon = document.createElement('i');
-        icon.setAttribute('data-lucide', 'anchor');
+        icon.setAttribute('data-lucide', 'link');
         icon.className = 'anchor-icon';
         anchor.appendChild(icon);
 
