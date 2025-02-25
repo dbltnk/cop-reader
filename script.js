@@ -432,6 +432,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add click handler for "To top" button
     document.querySelector('.shortcut-btn[data-key="3"]').addEventListener('click', scrollToTop);
+
+    // Add click handler for "Toggle boxes" button
+    document.querySelector('.shortcut-btn[data-key="2"]').addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleAllBoxes();
+    });
 });
 
 // Theme handling
