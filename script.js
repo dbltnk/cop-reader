@@ -785,12 +785,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // ✓ Single articles: "Article 78 AI Act"
         // ✓ Multiple articles: "Articles 53 and 55 AI Act"
         // ✓ Articles with paragraphs: "Article 51(1) AI Act"
+        // ✓ Articles with multiple levels: "Article 56(1)(3) AI Act"
         // ✓ Complex combinations: "Articles 51(1), 52 and 53(4) AI Act"
         // ✓ Line breaks: "Articles 53 and 55 AI\n    Act"
+        // ✓ Recitals: "Recital 116 AI Act"
+        // ✓ Mixed references: "Article 56(1)(3), Recital 1, and Recital 116 AI Act"
+        // ✓ Handles any whitespace: Line feeds, tabs, multiple spaces anywhere
         // Does NOT match:
         // ✗ Other directives: "Article 4(3) of Directive (EU) 2019/790"
         // ✗ Standalone references: "Article 78" (without "AI Act")
-        const regex = /Articles?\s+(\d+(?:\(\d+\))?(?:(?:\s*,\s*|\s+and\s+)\d+(?:\(\d+\))?)*|\d+(?:\(\d+\))?(?:(?:\s*,\s*|\s+and\s+)\d+(?:\(\d+\))?)*)(?=(?:(?!\bDirective\s*\(EU\)).)*?\bAI\s+Act\b)/gi;
+        const regex = /(?:Articles?\s+(\d+(?:\s*\(\s*\d+\s*\))*(?:(?:\s*,\s*|\s+and\s+)\d+(?:\s*\(\s*\d+\s*\))*)*|\d+(?:\s*\(\s*\d+\s*\))*(?:(?:\s*,\s*|\s+and\s+)\d+(?:\s*\(\s*\d+\s*\))*)*)|Recitals?\s+(\d+))(?=(?:(?!\bDirective\s*\(EU\)).)*?\bAI[\s\n\r]+Act\b)/gi;
         let match;
         let lastIndex = 0;
         let fragments = [];
@@ -805,9 +809,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const link = document.createElement('a');
             link.className = 'ai-act-link';
 
-            // Get the first article number for the link
-            const firstArticleNumber = match[1].split(/[\s,]+/)[0].split('(')[0];
-            link.href = `https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689&qid=1740494199959#art_${firstArticleNumber}`;
+            // Determine if this is an Article or Recital reference
+            const isRecital = match[0].toLowerCase().startsWith('recital');
+
+            if (isRecital) {
+                // Get the recital number
+                const recitalNumber = match[2];
+                link.href = `https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689&qid=1740494199959#rct_${recitalNumber}`;
+            } else {
+                // Get the first article number for the link
+                const firstArticleNumber = match[1].split(/[\s,]+/)[0].split('(')[0];
+                link.href = `https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689&qid=1740494199959#art_${firstArticleNumber}`;
+            }
+
             link.target = '_blank';
             link.rel = 'noopener noreferrer';
             link.textContent = match[0];
