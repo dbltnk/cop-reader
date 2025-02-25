@@ -32,6 +32,8 @@ Note: This is a simple web abb built quickly by an amateur with most code writte
 - [x] Find a good default template for accessible text rendering 
 - [x] Client-side scipting for accessibility and usability features (below)
 - [x] Host static site on GitHub pages
+- [ ] Accessibility text color contrast check
+- [ ] Check key nav against screenreader and accessibility guidelines
 - [ ] Human and automated QA to prevent any differences to the official PDF
 - [ ] Figure out more long term hosting solution and domain
 
@@ -43,19 +45,9 @@ Note: This is a simple web abb built quickly by an amateur with most code writte
 - [x] Table of contents in a side bar left (desktop) or menu (mobile)
 - [x] Dark and light mode, following the device default (user configurable, save any changes locally)
 - [x] Full support for browser-based search functions (no search provided by the web app itself)
-- [ ] Any referencs to the AI Act or other legal documents provide links to the official documents on the web
+- [x] Any referencs to the AI Act or other legal documents provide links to the official documents on the web
 - [x] Glossary at the end, all terms from the glossary are highlighted in the document itself and show their definition on-hover and (desktop) or on-tap (mobile), with a direct link to jump to the glossary
 - [x] Recitals are shown in-line by default, but can also be shown just at the end of the document (user configurable, save any changes locally)
 - [x] Keyboard navigation
 - [~] Full screenreader support
 - [~] Full support for [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/)
-
-## Known issues & unsorted notes
-
-- [ ] Explanation box headline can overap with chevron, on mobile (probably others as well)
-- [ ] Glossary summary numbers slightly below headers
-- [~] Buttons in nav are not fully visible on mobile, 2nd line cut off
-- [ ] Nav bar not perfectly styled, lines and selected bookmark
-- [ ] Add proper favicon
-- [ ] Accessibility text color contrast check
-- [ ] Check key nav against screenreader and accessibility guidelines
