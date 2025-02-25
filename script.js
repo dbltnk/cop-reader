@@ -786,6 +786,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // ✓ Multiple articles: "Articles 53 and 55 AI Act"
         // ✓ Articles with paragraphs: "Article 51(1) AI Act"
         // ✓ Articles with multiple levels: "Article 56(1)(3) AI Act"
+        // ✓ Articles with points: "Article 53(1), point (a) AI Act"
         // ✓ Complex combinations: "Articles 51(1), 52 and 53(4) AI Act"
         // ✓ Line breaks: "Articles 53 and 55 AI\n    Act"
         // ✓ Recitals: "Recital 116 AI Act"
@@ -798,7 +799,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Does NOT match:
         // ✗ Other directives: "Article 4(3) of Directive (EU) 2019/790"
         // ✗ Standalone references: "Article 78" (without "AI Act")
-        const regex = /(?:Articles?\s+(\d+(?:\s*\(\s*\d+\s*\))*(?:\s*,\s*|\s+and\s+)\d+(?:\s*\(\s*\d+\s*\))*|\d+(?:\s*\(\s*\d+\s*\))*)|Recitals?\s+(\d+)|Annex\s+([IVX]+)(?:\s*,\s*Section\s+(\d+)(?:\s*,\s*point\s+(\d+\.?))?)?)\s*(?=\s+(?:(?!\bDirective\s*\(EU\)).)*?\bAI[\s\n\r]+Act\b)/gi;
+        const regex = /(?:Articles?\s+(\d+(?:\s*\(\s*\d+\s*\))*(?:\s*,\s*(?:point\s*\([a-z]\))?|\s+and\s+)\d+(?:\s*\(\s*\d+\s*\))*(?:\s*,\s*(?:point\s*\([a-z]\))?)*|\d+(?:\s*\(\s*\d+\s*\))*(?:\s*,\s*(?:point\s*\([a-z]\))?)*)|Recitals?\s+(\d+)|Annex\s+([IVX]+)(?:\s*,\s*Section\s+(\d+)(?:\s*,\s*point\s+(\d+\.?))?)?)\s*(?=\s+(?:(?!\bDirective\s*\(EU\)).)*?\bAI[\s\n\r]+Act\b)/gi;
         let match;
         let lastIndex = 0;
         let fragments = [];
