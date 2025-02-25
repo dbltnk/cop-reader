@@ -307,11 +307,11 @@ a {
 }
 
 :root[data-theme="dark"] .main-content a[href^="#"]:not(.heading-anchor):not(.nav-content *) {
-    text-decoration-color: var(--sand-7);
+    text-decoration-color: var(--sand-10);
 }
 
 :root[data-theme="dark"] .ai-act-link {
-    text-decoration-color: var(--sand-7);
+    text-decoration-color: var(--sand-10);
 }
 
 :root[data-theme="dark"] .ai-act-link::before {
@@ -1477,7 +1477,7 @@ body.light-mode a:hover {
 .glossary-marked {
     text-decoration: underline;
     text-decoration-thickness: 0.5px;
-    text-decoration-color: var(--sand-8);
+    text-decoration-color: var(--sand-10);
     text-underline-offset: 0.2em;
     position: relative;
     /* Ensure inline positioning */
@@ -1504,7 +1504,7 @@ body.light-mode a:hover {
 
 /* Dark mode adjustments */
 :root[data-theme="dark"] .glossary-marked {
-    text-decoration-color: var(--sand-7);
+    text-decoration-color: var(--sand-10);
 }
 
 :root[data-theme="dark"] .glossary-marked::after {
