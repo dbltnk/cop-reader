@@ -426,6 +426,7 @@ strong {
 }
 
 .main-content ol[type="a"]>li,
+.main-content ol[type="A"]>li,
 .main-content ol[type="i"]>li,
 .main-content ol[type="I"]>li {
     margin-bottom: var(--main-spacing-sm);
@@ -1479,7 +1480,6 @@ body.light-mode a:hover {
     max-width: var(--content-max-width);
     margin-inline: auto;
     padding: var(--spacing-xl) var(--spacing-md);
-    background: var(--sand-2);
 }
 
 .glossary h2 {
@@ -1534,10 +1534,6 @@ body.light-mode a:hover {
     margin-top: 0;
 }
 
-/* Dark mode adjustments */
-:root[data-theme="dark"] .glossary {
-    background: var(--sand-3);
-}
 
 /* ==========================================================================
    Glossary Terms
