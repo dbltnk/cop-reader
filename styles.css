@@ -757,9 +757,25 @@ select {
 .nav-content a[style*="padding-left: 2rem"]::before {
     content: '';
     position: absolute;
-    left: 1rem;
-    top: calc(-1 * var(--spacing-xs));
-    height: calc(100% + var(--spacing-xs) * 2);
+    left: 1.1rem;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    background-color: var(--sand-6);
+    z-index: 0;
+}
+
+/* Add a continuous line for groups of level 3 items */
+.nav-content li:has(a[style*="padding-left: 2rem"]) {
+    position: relative;
+}
+
+.nav-content li:has(a[style*="padding-left: 2rem"])+li:has(a[style*="padding-left: 2rem"])::before {
+    content: '';
+    position: absolute;
+    left: 1.1rem;
+    top: -0.5rem;
+    bottom: 100%;
     width: 1px;
     background-color: var(--sand-6);
     z-index: 0;
