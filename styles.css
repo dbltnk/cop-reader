@@ -1712,8 +1712,12 @@ body.light-mode a:hover {
 
 .heading-anchor .anchor-icon {
     color: var(--sand-9);
-    width: 1em;
-    height: 1em;
+    width: 0.75em;
+    height: 0.75em;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .heading-anchor:hover .anchor-icon {
