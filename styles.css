@@ -1390,14 +1390,32 @@ select {
     display: grid;
     grid-template-columns: repeat(2, auto);
     gap: var(--spacing-xs);
-    padding: 0;
+    padding: var(--spacing-sm);
     justify-content: start;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--background-color);
+    border-top: 1px solid var(--sand-6);
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure content doesn't get hidden behind the fixed shortcuts bar */
+.main-content {
+    padding-bottom: calc(var(--spacing-xl) * 2);
 }
 
 /* Hide arrow key navigation on small screens */
 @media (max-width: 768px) {
     .shortcut-btn[data-key="ArrowLeft"] {
         display: none;
+    }
+
+    .keyboard-shortcuts {
+        justify-content: center;
+        grid-template-columns: repeat(3, auto);
     }
 }
 
