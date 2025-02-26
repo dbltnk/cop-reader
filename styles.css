@@ -919,11 +919,27 @@ select {
 
 /* KPI Box specific styles */
 .kpi-box {
-    border-left: 1px solid var(--sand-6);
+    position: relative;
     padding: var(--spacing-md);
     font-size: 0.9rem;
     line-height: 1.4;
     font-family: var(--font-serif);
+}
+
+/* Left border for KPI box using pseudo-element for more precise control */
+.kpi-box::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: var(--spacing-sm);
+    bottom: var(--spacing-md);
+    width: 1px;
+    background-color: var(--sand-6);
+}
+
+/* Adjust line height for collapsed state to match expanded state appearance */
+.kpi-box.collapsed::before {
+    bottom: var(--spacing-sm);
 }
 
 /* Override the font-family for all KPI box elements to ensure serif is used */
@@ -959,12 +975,8 @@ select {
 }
 
 /* Dark mode adjustments */
-:root[data-theme="dark"] .kpi-box {
-    border-left-color: var(--sand-6);
-}
-
-:root[data-theme="dark"] .kpi-box .kpi-target {
-    color: var(--sand-11);
+:root[data-theme="dark"] .kpi-box::before {
+    background-color: var(--sand-6);
 }
 
 /* Mobile optimizations */
