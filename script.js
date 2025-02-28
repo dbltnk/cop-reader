@@ -406,8 +406,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const header = box.querySelector('h4, h5');
         const isRecital = box.classList.contains('recital-box');
 
-        // Initialize aria-expanded attribute
-        box.setAttribute('aria-expanded', 'true');
+        // Initialize aria-expanded attribute to false (collapsed)
+        box.setAttribute('aria-expanded', 'false');
+        box.classList.add('collapsed');
+
+        // Hide content initially
+        const content = Array.from(box.children).filter(child => {
+            if (isRecital) return true;
+            return child !== header;
+        });
+        content.forEach(el => el.style.display = 'none');
 
         if (isRecital) {
             // For recital boxes, make the entire box clickable
