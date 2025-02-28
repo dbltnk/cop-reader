@@ -723,8 +723,14 @@ select {
 /* On desktop (≥1280px): content centered, nav floats to the right */
 @media screen and (min-width: 1280px) {
     body {
-        max-width: calc(var(--content-max-width) + var(--side-nav-width) + var(--spacing-xl));
+        max-width: calc(var(--content-max-width) + var(--side-nav-width) + var(--spacing-xl) + calc(var(--spacing-xxl) * 3));
         margin-inline: auto;
+        grid-template-columns: 1fr calc(var(--spacing-xxl) * 3) var(--side-nav-width);
+    }
+
+    /* Adjust nav position to account for new grid layout */
+    .side-nav {
+        right: max(calc((100% - (var(--content-max-width) + var(--side-nav-width) + var(--spacing-xl) + calc(var(--spacing-xxl) * 3))) / 2), var(--spacing-md));
     }
 }
 
@@ -750,6 +756,40 @@ select {
     z-index: 1000;
     transform: translateX(100%);
     transition: transform 0.3s ease;
+}
+
+/* On desktop (≥1280px): floating nav with shadow and rounded corners */
+@media screen and (min-width: 1280px) {
+    .side-nav {
+        top: var(--spacing-xxl);
+        bottom: var(--spacing-xxl);
+        height: auto;
+        min-height: auto;
+        border-radius: 12px;
+        box-shadow: 4px 21px 24px rgba(0, 0, 0, 0.12);
+        border: 1px solid var(--divider-color);
+        overflow: hidden;
+        /* Ensure no content breaks the rounded corners */
+    }
+
+    /* Ensure nav content doesn't overflow rounded corners */
+    .nav-content {
+        border-radius: 0;
+    }
+
+    .nav-header {
+        border-radius: 12px 12px 0 0;
+    }
+
+    .nav-footer {
+        border-radius: 0 0 12px 12px;
+        overflow: hidden;
+        /* Ensure keyboard shortcuts don't break the rounded corners */
+    }
+
+    .keyboard-shortcuts {
+        border-radius: 0 0 12px 12px;
+    }
 }
 
 .side-nav.is-open {
@@ -985,7 +1025,7 @@ select {
 
 @media screen and (min-width: 1280px) {
     .side-nav {
-        right: calc((100% - (var(--content-max-width) + var(--side-nav-width) + var(--spacing-xl))) / 2);
+        right: max(calc((100% - (var(--content-max-width) + var(--side-nav-width) + var(--spacing-xl) + calc(var(--spacing-xxl) * 3))) / 2), var(--spacing-md));
     }
 }
 
