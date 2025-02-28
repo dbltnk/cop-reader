@@ -578,11 +578,12 @@ select {
     align-items: center;
     justify-content: center;
     gap: var(--spacing-xs);
-    background: var(--brown-5);
+    background: var(--brown-3);
     margin-bottom: var(--main-spacing-lg);
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     position: relative;
+    overflow: hidden;
 }
 
 /* Hacky solution to extend header background to the right */
@@ -591,19 +592,25 @@ select {
     position: absolute;
     top: 0;
     right: -9999px;
-    /* Extend far to the right */
     bottom: 0;
     width: 9999px;
-    /* Large width to ensure coverage */
     background: inherit;
-    z-index: -1;
+    z-index: 0;
+    /* Changed from -1 to 0 */
+}
+
+/* Header content needs to be above the background and letters */
+.main-header>*:not(.decorative-letter) {
+    position: relative;
+    z-index: 2;
+    /* Above the letters */
 }
 
 :root[data-theme="dark"] .main-header {
     background: var(--brown-5);
 }
 
-.main-header img {
+.main-header img:not(.decorative-letter) {
     width: 36px;
     height: 36px;
 }
@@ -624,6 +631,54 @@ select {
     margin: 0;
     text-align: center;
     color: var(--sand-11);
+}
+
+/* Override the global img max-width for decorative letters */
+.decorative-letter {
+    position: absolute;
+    z-index: 1;
+    opacity: 1;
+    height: calc(420px * 1.2);
+    width: auto;
+}
+
+.decorative-letter.c {
+    left: -20px;
+}
+
+.decorative-letter.o {
+    left: 40%;
+    bottom: -150px;
+    transform: translateY(42%) scale(0.67);
+}
+
+.decorative-letter.p {
+    right: -50px;
+}
+
+/* Set images for both light and dark mode */
+:root[data-theme="light"] .decorative-letter.c {
+    content: url('c-light.png');
+}
+
+:root[data-theme="light"] .decorative-letter.o {
+    content: url('o-light.png');
+}
+
+:root[data-theme="light"] .decorative-letter.p {
+    content: url('p-light.png');
+}
+
+:root[data-theme="dark"] .decorative-letter.c {
+    content: url('c-dark.png');
+}
+
+:root[data-theme="dark"] .decorative-letter.o {
+    content: url('o-dark.png');
+}
+
+:root[data-theme="dark"] .decorative-letter.p {
+    content: url('p-dark.png');
 }
 
 /* Medium screens only */
@@ -651,6 +706,20 @@ select {
         font-size: 0.8em;
         margin: 0.2em 0;
         line-height: 0.7;
+    }
+
+    .decorative-letter.c {
+        left: -250px;
+    }
+
+    .decorative-letter.o {
+        left: 40%;
+        bottom: -150px;
+        transform: translateY(42%) scale(0.67);
+    }
+
+    .decorative-letter.p {
+        right: -200px;
     }
 }
 
