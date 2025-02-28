@@ -620,6 +620,10 @@ select {
     color: var(--sand-11);
 }
 
+.main-header h1 i {
+    margin-left: -0.15em;
+}
+
 /* Override the global img max-width for decorative letters */
 .decorative-letter {
     position: absolute;
