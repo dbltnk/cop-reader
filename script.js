@@ -6,8 +6,8 @@ const CONFIG = {
     INDENT_PER_LEVEL: 1,
     SCROLL_TRIGGER_POSITION: 3, // Divider for window.innerHeight
     SPECIAL_SECTIONS: ['glossary', 'recitals-full'],
-    EXCLUDED_CONTAINERS: '.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital-box',
-    BOX_SELECTORS: '.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital-box',
+    EXCLUDED_CONTAINERS: '.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital-box, .faq-box',
+    BOX_SELECTORS: '.kpi-box, .explanatory-box, .legal-box, .disclaimer-box, .recital-box, .faq-box',
     TOAST_DURATION: 2000, // Duration in ms for toast notifications
     NAV_MANUAL_SCROLL_TIMEOUT: 2000, // Time to wait after manual nav scroll before auto-scrolling
 };
