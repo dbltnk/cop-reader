@@ -827,15 +827,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (match[0].toLowerCase().startsWith('recital')) {
                 // Get the recital number
                 const recitalNumber = match[2];
-                link.href = `https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689&qid=1740494199959#rct_${recitalNumber}`;
+                link.href = `https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689#rct_${recitalNumber}`;
             } else if (match[0].toLowerCase().startsWith('annex')) {
                 // Get the annex number in roman numerals
                 const annexNumber = match[3];
-                link.href = `https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689&qid=1740494199959#anx_${annexNumber}`;
+                link.href = `https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689#anx_${annexNumber}`;
             } else {
                 // Get the first article number for the link
                 const firstArticleNumber = match[1].split(/[\s,]+/)[0].split('(')[0];
-                link.href = `https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689&qid=1740494199959#art_${firstArticleNumber}`;
+                link.href = `https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689#art_${firstArticleNumber}`;
             }
 
             link.target = '_blank';
