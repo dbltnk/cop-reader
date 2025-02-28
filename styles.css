@@ -579,7 +579,7 @@ select {
     justify-content: center;
     gap: var(--spacing-xs);
     background: var(--brown-3);
-    margin-bottom: var(--main-spacing-lg);
+    margin-bottom: var(--main-spacing-xl);
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     position: relative;
