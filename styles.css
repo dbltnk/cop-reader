@@ -586,19 +586,6 @@ select {
     overflow: hidden;
 }
 
-/* Hacky solution to extend header background to the right */
-.main-header::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: -9999px;
-    bottom: 0;
-    width: 9999px;
-    background: inherit;
-    z-index: 0;
-    /* Changed from -1 to 0 */
-}
-
 /* Header content needs to be above the background and letters */
 .main-header>*:not(.decorative-letter) {
     position: relative;
@@ -2024,4 +2011,31 @@ body.light-mode a:hover {
 
 .heading-anchor:hover .anchor-icon {
     color: var(--sand-11);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.main-footer {
+    width: 100vw;
+    height: 106px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--brown-3);
+    margin-top: var(--main-spacing-lg);
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    position: relative;
+    overflow: hidden;
+}
+
+:root[data-theme="dark"] .main-footer {
+    background: var(--brown-5);
+}
+
+.main-footer img:not(.decorative-letter) {
+    width: 36px;
+    height: 36px;
 }
