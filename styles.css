@@ -868,14 +868,62 @@ select {
     padding: var(--spacing-md);
     border-bottom: 1px solid var(--sand-6);
     font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    color: var(--sand-11);
 }
 
+
 .nav-header .box-icon {
+    float: left;
+    margin-right: var(--spacing-sm);
+}
+
+/* Nav Shortcuts inside header */
+.nav-header .nav-shortcuts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    justify-content: space-between;
+}
+
+.nav-shortcut {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    font-weight: normal;
     color: var(--sand-11);
+    text-decoration: none;
+    padding: 3px 6px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.nav-shortcut:hover {
+    background-color: var(--sand-4);
+}
+
+.nav-shortcut.active {
+    background-color: var(--sand-5);
+    font-weight: 600;
+}
+
+.shortcut-icon {
+    width: 12px;
+    height: 12px;
+    color: var(--sand-9);
+}
+
+:root[data-theme="dark"] .nav-header .nav-shortcuts {
+    border-color: var(--sand-5);
+}
+
+:root[data-theme="dark"] .nav-shortcut:hover {
+    background-color: var(--sand-3);
+}
+
+:root[data-theme="dark"] .nav-shortcut.active {
+    background-color: var(--sand-4);
 }
 
 /* Nav Content and Scrollbars */

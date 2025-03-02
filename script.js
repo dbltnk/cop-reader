@@ -347,6 +347,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Handle shortcut link clicks (nav-header shortcuts)
+    document.querySelector('.nav-shortcuts').addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link) {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Update URL without scrolling
+                history.pushState(null, '', `#${targetId}`);
+                toggleMenu(false);
+            }
+        }
+    });
+
     // Initialize
     initializeHeadingAnchors();
     buildNavigation();
